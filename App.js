@@ -47,6 +47,7 @@ export default class App extends React.Component {
             showsUserLocation={true}
             showsCompass={true}
             toolbarEnabled={false} // Hide map buttons on marker press
+            minZoomLevel={13}
             //mapType={"hybrid"}
             mapType={"none"}
             style={styles.mapStyle}
