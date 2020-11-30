@@ -47,7 +47,8 @@ export default class App extends React.Component {
             showsUserLocation={true}
             showsCompass={true}
             toolbarEnabled={false} // Hide map buttons on marker press
-            minZoomLevel={13}
+            minZoomLevel={14}
+            maxZoomLevel={19}
             //mapType={"hybrid"}
             mapType={"none"}
             style={styles.mapStyle}
@@ -77,7 +78,7 @@ export default class App extends React.Component {
                 { latitude: 44.5225, longitude: -80.35403 },
                 { latitude: 44.52267, longitude: -80.35444 },
               ]}
-              strokeColor="blue"
+              strokeColor={"blue"}
               strokeWidth={3}
             />
             <Polyline
@@ -95,7 +96,7 @@ export default class App extends React.Component {
                 { latitude: 44.52152, longitude: -80.35577 },
                 { latitude: 44.52212, longitude: -80.3557 },
               ]}
-              strokeColor="yellow"
+              strokeColor={"yellow"}
               strokeWidth={3}
             />
             <Polyline
