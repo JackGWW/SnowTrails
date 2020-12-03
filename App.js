@@ -1,7 +1,19 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 
-import MapView, { Polyline, Marker, UrlTile } from "react-native-maps";
+import MapView, {
+  Polyline,
+  Marker,
+  UrlTile,
+  LocalTile,
+} from "react-native-maps";
+
+import RidgeRun from "./src/components/trails/RidgeRun";
+import SpeedRocket from "./src/components/trails/SpeedRocket";
+import SwitchForward from "./src/components/trails/SwitchForward";
+import Hike1 from "./src/components/trails/Hike1";
+import Hike2 from "./src/components/trails/Hike2";
+import HikeAround from "./src/components/trails/HikeAround";
 
 export default class App extends React.Component {
   constructor() {
@@ -63,69 +75,13 @@ export default class App extends React.Component {
               flipY={false}
               zIndex={-3}
             />
-            <Polyline
-              coordinates={[
-                { latitude: 44.5229, longitude: -80.34874 },
-                { latitude: 44.5227, longitude: -80.34923 },
-                { latitude: 44.52262, longitude: -80.34953 },
-                { latitude: 44.52241, longitude: -80.35004 },
-                { latitude: 44.52221, longitude: -80.35071 },
-                { latitude: 44.52203, longitude: -80.35127 },
-                { latitude: 44.5218, longitude: -80.35189 },
-                { latitude: 44.52195, longitude: -80.35221 },
-                { latitude: 44.52252, longitude: -80.3529 },
-                { latitude: 44.52242, longitude: -80.35367 },
-                { latitude: 44.5225, longitude: -80.35403 },
-                { latitude: 44.52267, longitude: -80.35444 },
-              ]}
-              strokeColor={"blue"}
-              strokeWidth={3}
-            />
-            <Polyline
-              coordinates={[
-                { latitude: 44.52299, longitude: -80.35639 },
-                { latitude: 44.52368, longitude: -80.35656 },
-                { latitude: 44.52421, longitude: -80.35697 },
-                { latitude: 44.52479, longitude: -80.35901 },
-                { latitude: 44.524, longitude: -80.360239 },
-                { latitude: 44.52172, longitude: -80.35946 },
-                { latitude: 44.52097, longitude: -80.3588 },
-                { latitude: 44.52076, longitude: -80.35721 },
-                { latitude: 44.52177, longitude: -80.35783 },
-                { latitude: 44.52183, longitude: -80.35736 },
-                { latitude: 44.52152, longitude: -80.35577 },
-                { latitude: 44.52212, longitude: -80.3557 },
-              ]}
-              strokeColor={"yellow"}
-              strokeWidth={3}
-            />
-            <Polyline
-              coordinates={[
-                { latitude: 44.52465, longitude: -80.34969},
-                { latitude: 44.52451, longitude: -80.35019},
-                { latitude: 44.52451, longitude: -80.35084},
-                { latitude: 44.52424, longitude: -80.35094},
-                { latitude: 44.52409, longitude: -80.35147},
-                { latitude: 44.52393, longitude: -80.35164},
-                { latitude: 44.52388, longitude: -80.35213},
-                { latitude: 44.52461, longitude: -80.3536},
-                { latitude: 44.52423, longitude: -80.35434},
-                { latitude: 44.52393, longitude: -80.35434},
-                { latitude: 44.52377, longitude: -80.35465},
-                { latitude: 44.52416, longitude: -80.35566},
-                { latitude: 44.52414, longitude: -80.35659},
-                { latitude: 44.52379, longitude: -80.35722},
-                { latitude: 44.52256, longitude: -80.36009},
-                { latitude: 44.52331, longitude: -80.36155},
-                { latitude: 44.52397, longitude: -80.36116},
-                { latitude: 44.52694, longitude: -80.36192},
-                { latitude: 44.52822, longitude: -80.36294},
-                { latitude: 44.52976, longitude: -80.36519},
-                { latitude: 44.53004, longitude: -80.36721},
-              ]}
-              strokeColor="red"
-              strokeWidth={3}
-            />
+            <RidgeRun />
+            <SpeedRocket />
+            <SwitchForward />
+            <Hike1 />
+            <Hike2 />
+            <HikeAround />
+
             {/* <Marker
               coordinate={{ latitude: 44.5227, longitude: -80.35 }}
               image={require("./assets/trailMarkers/circle40.png")}
