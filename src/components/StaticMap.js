@@ -24,10 +24,10 @@ export default function StaticMap() {
       cropHeight={styles.windowHeight}
       imageWidth={styles.map.width}
       imageHeight={styles.map.height}
-      minScale={0.12}
-      maxScale={2}
-      // minScale={0.05}
-      // maxScale={1}
+      //minScale={0.12}
+      //maxScale={2}
+      minScale={0.05}
+      maxScale={1}
       centerOn={{
         // x: 200,
         // y: 0,
