@@ -1,22 +1,30 @@
 import React from "react";
-import { View, Image, StyleSheet, ScrollView  } from "react-native";
+import { Image, StyleSheet, Dimensions } from "react-native";
+import ImageZoom from 'react-native-image-pan-zoom';
 
 const styles = StyleSheet.create({
-    container: {
-      paddingTop: 50,
-    },
-    map: {
-        width: 2021,
-        height: 3182
-    }
-  });
-  
+  container: {
+  },
+  map: {
+    width: 3182,
+    height: 2021
+  }
+});
 
 export default function StaticMap() {
+
   return (
-    <ScrollView style={styles.container}>
-      <Image style={styles.map} source={require('../../assets/trailMap.png')} />
-    </ScrollView>
-  );
+    <ImageZoom cropWidth={Dimensions.get('window').width}
+      cropHeight={Dimensions.get('window').height}
+      imageWidth={styles.map.width}
+      imageHeight={styles.map.height}
+      enableCenterFocus={false}
+      minScale={0.1}
+      maxScale={2}
+    >
+      <Image style={styles.map}
+        source={require('../../assets/trailMap.png')} />
+    </ImageZoom>
+  )
 }
 
