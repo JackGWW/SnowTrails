@@ -1,7 +1,7 @@
 import React from "react";
 import { Marker } from "react-native-maps";
 
-export default circle40 = (props) => {
+export default circle30 = (props) => {
     return (
         <Marker
             coordinate={props.location}
