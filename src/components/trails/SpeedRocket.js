@@ -3,7 +3,7 @@ import { Polyline } from "react-native-maps";
 import trail from "../../../data/json/SpeedRocket.json"
 
 
-const ShowTrail = () => {
+const ShowTrail = (props) => {
   return (
     <Polyline
       coordinates={trail}

@@ -2,7 +2,7 @@ import React from "react";
 import { Polyline } from "react-native-maps";
 import trail from "../../../data/json/SwitchForward.json"
 
-const ShowTrail = () => {
+const ShowTrail = (props) => {
   return (
     <Polyline
       coordinates={trail}
