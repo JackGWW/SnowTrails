@@ -34,7 +34,10 @@ export default class LiveMap extends React.Component {
       // Only when using Google Maps.
       zoom: 15,
     };
-    this.state = { initialCamera: initialCamera };
+    this.state = {
+      initialCamera: initialCamera,
+      longitudeDelta: 0.011
+    };
   }
 
   mapSetup() {
@@ -48,6 +51,10 @@ export default class LiveMap extends React.Component {
       longitude: -80.370155,
     };
     this.mapView.setMapBoundaries(northEastLimit, southWestLimit);
+  }
+
+  updateRegion(region) {
+    this.setState({longitudeDelta: region.longitudeDelta})
   }
 
   render() {
@@ -67,6 +74,7 @@ export default class LiveMap extends React.Component {
             style={styles.mapStyle}
             ref={(ref) => (this.mapView = ref)}
             onMapReady={this.mapSetup.bind(this)} //Initialize map boundaries when the map loads
+            onRegionChangeComplete={region => this.updateRegion(region)}
           >
             {/* <LocalTile
               pathTemplate={"./assets/tiles/{z}/{x}/{y}.png"}
@@ -83,14 +91,9 @@ export default class LiveMap extends React.Component {
             <RidgeRun />
             <SpeedRocket />
             <SwitchForward />
-            <Hike1 />
+            <Hike1 longitudeDelta={this.state.longitudeDelta} />
             <Hike2 />
             <HikeAround />
-
-            {/* <Marker
-              coordinate={{ latitude: 44.5227, longitude: -80.35 }}
-              image={require("./assets/trailMarkers/circle40.png")}
-            /> */}
           </MapView>
         }
       </View>

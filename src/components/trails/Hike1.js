@@ -1,13 +1,14 @@
 import React from "react";
-import { Polyline, Marker } from "react-native-maps";
+import { Polyline } from "react-native-maps";
 import trail from "../../../data/json/Hike1.json"
+import CircleMarker from "./markers/CircleMarker"
 
-const ShowTrail = () => {
+const ShowTrail = (props) => {
   return (
     <>
-      <Marker
-        coordinate={{ latitude: 44.5227, longitude: -80.35 }}
-        image={require("../../../assets/trailMarkers/circle40.png")}
+      <CircleMarker
+        longitudeDelta={props.longitudeDelta}
+        location={{ latitude: 44.5227, longitude: -80.35 }}
       />
       <Polyline
         coordinates={trail}
