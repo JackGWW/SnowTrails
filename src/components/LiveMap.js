@@ -16,6 +16,7 @@ import Hike1 from "./trails/Hike1";
 import Hike2 from "./trails/Hike2";
 import HikeAround from "./trails/HikeAround";
 import LostLoop from "./trails/LostLoop";
+import EnchantedForest from "./trails/EnchantedForest";
 import FarmRoad from "./trails/FarmRoad";
 
 export default class LiveMap extends React.Component {
@@ -97,6 +98,7 @@ export default class LiveMap extends React.Component {
             <Hike2  longitudeDelta={this.state.longitudeDelta}/>
             <HikeAround longitudeDelta={this.state.longitudeDelta}/>
             <LostLoop longitudeDelta={this.state.longitudeDelta}/>
+            <EnchantedForest longitudeDelta={this.state.longitudeDelta}/>
             <FarmRoad longitudeDelta={this.state.longitudeDelta}/>
           </MapView>
         }
