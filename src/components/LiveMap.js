@@ -89,9 +89,9 @@ export default class LiveMap extends React.Component {
               flipY={false}
               zIndex={-3}
             />
-            <RidgeRun longitudeDelta={this.state.longitudeDelta}/>
-            <SpeedRocket longitudeDelta={this.state.longitudeDelta}/>
-            <SwitchForward longitudeDelta={this.state.longitudeDelta} />
+            {/* <RidgeRun longitudeDelta={this.state.longitudeDelta}/> */}
+            {/* <SpeedRocket longitudeDelta={this.state.longitudeDelta}/> */}
+            {/* <SwitchForward longitudeDelta={this.state.longitudeDelta} /> */}
             <Hike1 longitudeDelta={this.state.longitudeDelta} />
             <Hike2  longitudeDelta={this.state.longitudeDelta}/>
             <HikeAround longitudeDelta={this.state.longitudeDelta}/>
