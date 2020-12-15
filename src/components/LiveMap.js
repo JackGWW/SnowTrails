@@ -1,16 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import MapView, {
-  Marker,
   UrlTile,
-  LocalTile,
-  Callout
 } from "react-native-maps";
 
 // Polyline components for each trail
-import RidgeRun from "./trails/RidgeRun";
-import SpeedRocket from "./trails/SpeedRocket";
-import SwitchForward from "./trails/SwitchForward";
 import Hike1 from "./trails/Hike1";
 import Hike2 from "./trails/Hike2";
 import HikeAround from "./trails/HikeAround";
@@ -73,17 +67,13 @@ export default class LiveMap extends React.Component {
             toolbarEnabled={false} // Hide map buttons on marker press
             minZoomLevel={14}
             maxZoomLevel={19}
-            //mapType={"hybrid"}
             mapType={"none"}
             style={styles.mapStyle}
             ref={(ref) => (this.mapView = ref)}
             onMapReady={this.mapSetup.bind(this)} //Initialize map boundaries when the map loads
             onRegionChangeComplete={region => this.updateRegion(region)}
           >
-            {/* <LocalTile
-              pathTemplate={"./assets/tiles/{z}/{x}/{y}.png"}
-              tileSize={512}
-            /> */}
+
             <UrlTile
               urlTemplate={
                 "https://tile.thunderforest.com/landscape/{z}/{x}/{y}@2x.png?apikey=b5fc3b88cf204ad8b1381b659cc07391"
@@ -92,9 +82,6 @@ export default class LiveMap extends React.Component {
               flipY={false}
               zIndex={-3}
             />
-            {/* <RidgeRun longitudeDelta={this.state.longitudeDelta}/> */}
-            {/* <SpeedRocket longitudeDelta={this.state.longitudeDelta}/> */}
-            {/* <SwitchForward longitudeDelta={this.state.longitudeDelta} /> */}
             <Hike1 longitudeDelta={this.state.longitudeDelta} />
             <Hike2  longitudeDelta={this.state.longitudeDelta}/>
             <HikeAround longitudeDelta={this.state.longitudeDelta}/>
@@ -103,12 +90,6 @@ export default class LiveMap extends React.Component {
             <EnchantedForest longitudeDelta={this.state.longitudeDelta}/>
             <FarmRoad longitudeDelta={this.state.longitudeDelta}/>
             <Zink longitudeDelta={this.state.longitudeDelta}/>
-            {/* <Marker
-              title={"Switchback"}
-              description={"5km up"}
-              coordinate={{ latitude: 44.5237, longitude: -80.35 }}
-
-            /> */}
           </MapView>
         }
       </View>
