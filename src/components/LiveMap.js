@@ -1,11 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
-
-
 import MapView, {
   Marker,
   UrlTile,
   LocalTile,
+  Callout
 } from "react-native-maps";
 
 // Polyline components for each trail
@@ -19,6 +18,7 @@ import LostLoop from "./trails/LostLoop";
 import BackBowl from "./trails/BackBowl";
 import EnchantedForest from "./trails/EnchantedForest";
 import FarmRoad from "./trails/FarmRoad";
+import Zink from "./trails/Zink";
 
 export default class LiveMap extends React.Component {
   constructor() {
@@ -102,6 +102,13 @@ export default class LiveMap extends React.Component {
             <BackBowl longitudeDelta={this.state.longitudeDelta}/>
             <EnchantedForest longitudeDelta={this.state.longitudeDelta}/>
             <FarmRoad longitudeDelta={this.state.longitudeDelta}/>
+            <Zink longitudeDelta={this.state.longitudeDelta}/>
+            {/* <Marker
+              title={"Switchback"}
+              description={"5km up"}
+              coordinate={{ latitude: 44.5237, longitude: -80.35 }}
+
+            /> */}
           </MapView>
         }
       </View>
