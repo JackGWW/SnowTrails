@@ -1,32 +1,48 @@
 import React from "react";
-import Diamond20 from "./Diamond20"
-import Diamond30 from "./Diamond30"
-import Diamond40 from "./Diamond40"
-import Diamond50 from "./Diamond50"
-import Diamond60 from "./Diamond60"
+import { Marker } from "react-native-maps";
 
-export default DiamondMarker = (props) => {
+export default class diamondMarker extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     //As the screen zooms out, make the icons smaller
-    const delta = props.longitudeDelta
-    //console.log(delta)
-    switch (true) {
-        case (delta < 0.002):
-            //console.log(60)
-            return <Diamond60 location={props.location} />
-        case (delta < 0.0055):
-            //console.log(50)
-            return <Diamond50 location={props.location} />
-        case (delta < 0.0105):
-            //console.log(40)
-            return <Diamond40 location={props.location} />
-        case (delta < 0.019):
-            //console.log(30)
-            return <Diamond30 location={props.location} />
-        default:
-            //console.log(20)
-            return <Diamond20 location={props.location} />
+    getIcon() {
+        delta = this.props.longitudeDelta
+        switch (true) {
+            case (delta < 0.002):
+                return require("../../../../assets/trailMarkers/diamond60.png");
+            case (delta < 0.0055):
+                return require("../../../../assets/trailMarkers/diamond50.png");
+            case (delta < 0.0105):
+                return require("../../../../assets/trailMarkers/diamond40.png");
+            case (delta < 0.019):
+                return require("../../../../assets/trailMarkers/diamond30.png");
+            default:
+                return require("../../../../assets/trailMarkers/diamond20.png");
+        }
+    }
+
+    displayTrailName() {
+        this.marker.showCallout()
+        setTimeout(function () { this.marker.hideCallout() }.bind(this), 5 * 1000)
+    }
+
+    render() {
+        icon = this.getIcon()
+        return (
+            <Marker
+                coordinate={this.props.location}
+                image={icon}
+                title={this.props.trailName}
+                description={this.props.trailDescription}
+                ref={ref => {this.marker = ref;}}
+            />
+        );
     }
 };
+
+
 
 
 
