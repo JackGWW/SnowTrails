@@ -12,6 +12,8 @@ const ShowTrail = (props) => {
       <CircleMarker
         longitudeDelta={props.longitudeDelta}
         location={{ latitude: 44.5227, longitude: -80.35 }}
+        trailName={"Switchback"}
+        trailDescription={"1.07km"}
         ref={childRef}
       />
       <Polyline

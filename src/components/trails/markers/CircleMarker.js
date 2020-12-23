@@ -1,40 +1,54 @@
-import React, { forwardRef, useRef, useImperativeHandle } from "react";
-import Circle20 from "./Circle20"
-import Circle30 from "./Circle30"
-import Circle40 from "./Circle40"
-import Circle50 from "./Circle50"
-import Circle60 from "./Circle60"
+import React from "react";
+import { Marker } from "react-native-maps";
 
-export default circleMarker = forwardRef((props, ref) => {
-    //As the screen zooms out, make the icons smaller
-    const delta = props.longitudeDelta
-    const childRef = useRef();
-
-    useImperativeHandle(ref, () => ({
-        displayTrailName() {
-            console.log("Child1")
-            childRef.current.displayTrailName()
-        }
-    }));
-
-    switch (true) {
-        case (delta < 0.002):
-            //console.log(60)
-            return <Circle60 location={props.location} ref={childRef} />
-        case (delta < 0.0055):
-            //console.log(50)
-            return <Circle50 location={props.location} ref={childRef} />
-        case (delta < 0.0105):
-            //console.log(40)
-            return <Circle40 location={props.location} ref={childRef} />
-        case (delta < 0.019):
-            //console.log(30)
-            return <Circle30 location={props.location} ref={childRef} />
-        default:
-            //console.log(20)
-            return <Circle20 location={props.location} ref={childRef} />
+export default class circleMarker extends React.Component {
+    constructor(props) {
+        super(props);
     }
-});
+
+    //As the screen zooms out, make the icons smaller
+    getIcon() {
+        delta = this.props.longitudeDelta
+        switch (true) {
+            case (delta < 0.002):
+                console.log(60)
+                return require("../../../../assets/trailMarkers/circle60.png");
+            case (delta < 0.0055):
+                console.log(50)
+                return require("../../../../assets/trailMarkers/circle50.png");
+            case (delta < 0.0105):
+                console.log(40)
+                return require("../../../../assets/trailMarkers/circle40.png");
+            case (delta < 0.019):
+                console.log(30)
+                return require("../../../../assets/trailMarkers/circle30.png");
+            default:
+                console.log(20)
+                return require("../../../../assets/trailMarkers/circle20.png");
+        }
+    }
+
+    displayTrailName() {
+        this.marker.showCallout()
+        setTimeout(function () { this.marker.hideCallout() }.bind(this), 5 * 1000)
+    }
+
+    render() {
+        icon = this.getIcon()
+        console.log(this.props.calloutOffset)
+        return (
+            <Marker
+                coordinate={this.props.location}
+                image={icon}
+                title={this.props.trailName}
+                description={this.props.trailDescription}
+                ref={ref => {this.marker = ref;}}
+            />
+        );
+    }
+};
+
+
 
 
 
