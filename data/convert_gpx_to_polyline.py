@@ -5,7 +5,6 @@ This script expects your input GPX to be located in a subdir named 'gpx'
 
 Command line args:
 1 (required): file name, without file expension
-2 (optional): color to set polyline to
 """
 
 import os
@@ -15,17 +14,18 @@ import csv
 import sys
 import json
 
+inputDir = "processedGpx"
 outputdir = "json"
 os.path.exists(outputdir) or os.makedirs(outputdir)
 
 # put your GPX file in a subdir named 'gpx'
 fileName = sys.argv[1]
 try:
-    gpx_file = open(os.path.join("gpx", fileName + ".gpx"), "r")
+    gpx_file = open(os.path.join(inputDir, fileName + ".gpx"), "r")
     gpx = gpxpy.parse(gpx_file)
 except IOError:
     print("Couldn't open the input GPX file name " +
-          fileName + ". Ensure it's in the 'gpx' dir.")
+          fileName + ". Ensure it's in the '" + inputDir + "' dir.")
     exit(-1)
 
 # Creat object to write to json file
