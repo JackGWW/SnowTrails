@@ -1,13 +1,13 @@
 import React from "react";
 import { Polyline } from "react-native-maps";
-import trail from "../../../data/json/EnchantedForest.json"
+import trail from "../../../data/json/Switchback.json"
 
 
 const ShowTrail = (props) => {
   return (
     <Polyline
       coordinates={trail}
-      strokeColor={"yellow"} //Maroon
+      strokeColor={"#FFFF00"}
       strokeWidth={3}
     />
   );
