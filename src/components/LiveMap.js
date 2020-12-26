@@ -5,14 +5,13 @@ import MapView, {
 } from "react-native-maps";
 
 // Polyline components for each trail
-import Hike1 from "./trails/Hike1";
-import Hike2 from "./trails/Hike2";
-import HikeAround from "./trails/HikeAround";
-import LostLoop from "./trails/LostLoop";
-import BackBowl from "./trails/BackBowl";
+import AlpineExpress from "./trails/AlpineExpress";
 import EnchantedForest from "./trails/EnchantedForest";
-import FarmRoad from "./trails/FarmRoad";
-import Zink from "./trails/Zink";
+import ForestGump from "./trails/ForestGump";
+import ForestLane from "./trails/ForestLane";
+import LoversLoop from "./trails/LoversLoop";
+import SkiAcross from "./trails/SkiAcross";
+import Switchback from "./trails/Switchback";
 
 export default class LiveMap extends React.Component {
   constructor() {
@@ -83,14 +82,13 @@ export default class LiveMap extends React.Component {
               flipY={false}
               zIndex={-3}
             />
-            <Hike1 longitudeDelta={this.state.longitudeDelta} />
-            <Hike2  longitudeDelta={this.state.longitudeDelta}/>
-            <HikeAround longitudeDelta={this.state.longitudeDelta}/>
-            <LostLoop longitudeDelta={this.state.longitudeDelta}/>
-            <BackBowl longitudeDelta={this.state.longitudeDelta}/>
+            <AlpineExpress longitudeDelta={this.state.longitudeDelta} />
             <EnchantedForest longitudeDelta={this.state.longitudeDelta}/>
-            <FarmRoad longitudeDelta={this.state.longitudeDelta}/>
-            <Zink longitudeDelta={this.state.longitudeDelta}/>
+            <ForestGump  longitudeDelta={this.state.longitudeDelta}/>
+            <ForestLane longitudeDelta={this.state.longitudeDelta}/>
+            <LoversLoop longitudeDelta={this.state.longitudeDelta}/>
+            <SkiAcross longitudeDelta={this.state.longitudeDelta}/>
+            <Switchback longitudeDelta={this.state.longitudeDelta}/>
           </MapView>
         }
       </View>
