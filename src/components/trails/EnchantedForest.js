@@ -7,7 +7,7 @@ const ShowTrail = (props) => {
   return (
     <Polyline
       coordinates={trail}
-      strokeColor={"yellow"} //Maroon
+      strokeColor={"yellow"}
       strokeWidth={3}
     />
   );
