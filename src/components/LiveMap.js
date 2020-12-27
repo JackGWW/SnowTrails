@@ -6,8 +6,9 @@ import MapView, {
 
 // Polyline components for each trail
 import AlpineExpress from "./trails/AlpineExpress";
-import EnchantedForest from "./trails/EnchantedForest";
+import Backbowl from "./trails/Backbowl";
 import BruceTrail from "./trails/BruceTrail";
+import EnchantedForest from "./trails/EnchantedForest";
 import FarmRoad from "./trails/FarmRoad"
 import ForestGump from "./trails/ForestGump";
 import ForestLane from "./trails/ForestLane";
@@ -90,8 +91,9 @@ export default class LiveMap extends React.Component {
               zIndex={-3}
             />
             <AlpineExpress longitudeDelta={this.state.longitudeDelta} />
-            <EnchantedForest longitudeDelta={this.state.longitudeDelta}/>
+            <Backbowl longitudeDelta={this.state.longitudeDelta}/>
             <BruceTrail longitudeDelta={this.state.longitudeDelta}/>
+            <EnchantedForest longitudeDelta={this.state.longitudeDelta}/>
             <FarmRoad longitudeDelta={this.state.longitudeDelta}/>
             <ForestGump  longitudeDelta={this.state.longitudeDelta}/>
             <ForestLane longitudeDelta={this.state.longitudeDelta}/>
