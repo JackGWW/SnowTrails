@@ -13,6 +13,7 @@ import ForestGump from "./trails/ForestGump";
 import ForestLane from "./trails/ForestLane";
 import LoversLoop from "./trails/LoversLoop";
 import OverTheHill from "./trails/OverTheHill";
+import RidgeRun from "./trails/RidgeRun";
 import SkiAcross from "./trails/SkiAcross";
 import RobinsRun from "./trails/RobinsRun";
 import Switchback from "./trails/Switchback";
@@ -94,6 +95,7 @@ export default class LiveMap extends React.Component {
             <ForestLane longitudeDelta={this.state.longitudeDelta}/>
             <LoversLoop longitudeDelta={this.state.longitudeDelta}/>
             <OverTheHill longitudeDelta={this.state.longitudeDelta}/>
+            <RidgeRun longitudeDelta={this.state.longitudeDelta}/>
             <RobinsRun longitudeDelta={this.state.longitudeDelta}/>
             <SkiAcross longitudeDelta={this.state.longitudeDelta}/>
             <Switchback longitudeDelta={this.state.longitudeDelta}/>
