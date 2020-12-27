@@ -11,6 +11,7 @@ import BruceTrail from "./trails/BruceTrail";
 import FarmRoad from "./trails/FarmRoad"
 import ForestGump from "./trails/ForestGump";
 import ForestLane from "./trails/ForestLane";
+import LostLoop from "./trails/LostLoop";
 import LoversLoop from "./trails/LoversLoop";
 import OverTheHill from "./trails/OverTheHill";
 import RidgeRun from "./trails/RidgeRun";
@@ -94,6 +95,7 @@ export default class LiveMap extends React.Component {
             <FarmRoad longitudeDelta={this.state.longitudeDelta}/>
             <ForestGump  longitudeDelta={this.state.longitudeDelta}/>
             <ForestLane longitudeDelta={this.state.longitudeDelta}/>
+            <LostLoop longitudeDelta={this.state.longitudeDelta}/>
             <LoversLoop longitudeDelta={this.state.longitudeDelta}/>
             <OverTheHill longitudeDelta={this.state.longitudeDelta}/>
             <RidgeRun longitudeDelta={this.state.longitudeDelta}/>
