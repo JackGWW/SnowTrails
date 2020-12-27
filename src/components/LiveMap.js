@@ -19,7 +19,9 @@ import RidgeRun from "./trails/RidgeRun";
 import RobinsRun from "./trails/RobinsRun";
 import Shortcut from "./trails/Shortcut";
 import SkiAcross from "./trails/SkiAcross";
+import SweetSteeps from "./trails/SweetSteeps";
 import Switchback from "./trails/Switchback";
+import TheGlades from "./trails/TheGlades";
 import WalkingPaths from "./trails/WalkingPaths";
 
 export default class LiveMap extends React.Component {
@@ -105,7 +107,9 @@ export default class LiveMap extends React.Component {
             <RobinsRun longitudeDelta={this.state.longitudeDelta}/>
             <Shortcut longitudeDelta={this.state.longitudeDelta}/>
             <SkiAcross longitudeDelta={this.state.longitudeDelta}/>
+            <SweetSteeps longitudeDelta={this.state.longitudeDelta}/>
             <Switchback longitudeDelta={this.state.longitudeDelta}/>
+            <TheGlades longitudeDelta={this.state.longitudeDelta}/>
             <WalkingPaths longitudeDelta={this.state.longitudeDelta}/>
           </MapView>
         }
