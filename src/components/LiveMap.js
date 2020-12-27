@@ -16,10 +16,11 @@ import LostLoop from "./trails/LostLoop";
 import LoversLoop from "./trails/LoversLoop";
 import OverTheHill from "./trails/OverTheHill";
 import RidgeRun from "./trails/RidgeRun";
-import SkiAcross from "./trails/SkiAcross";
 import RobinsRun from "./trails/RobinsRun";
-import Switchback from "./trails/Switchback";
 import Shortcut from "./trails/Shortcut";
+import SkiAcross from "./trails/SkiAcross";
+import Switchback from "./trails/Switchback";
+import WalkingPaths from "./trails/WalkingPaths";
 
 export default class LiveMap extends React.Component {
   constructor() {
@@ -105,6 +106,7 @@ export default class LiveMap extends React.Component {
             <Shortcut longitudeDelta={this.state.longitudeDelta}/>
             <SkiAcross longitudeDelta={this.state.longitudeDelta}/>
             <Switchback longitudeDelta={this.state.longitudeDelta}/>
+            <WalkingPaths longitudeDelta={this.state.longitudeDelta}/>
           </MapView>
         }
       </View>
