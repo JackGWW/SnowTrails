@@ -15,37 +15,31 @@ const ShowTrail = (props) => {
         longitudeDelta={props.longitudeDelta}
         location={{ latitude: 44.51242, longitude: -80.35317 }}
         trailName={"Bruce Trail"}
-        ref={childRef}
       />
       <SquareMarker
         longitudeDelta={props.longitudeDelta}
         location={{ latitude: 44.51212, longitude: -80.35817 }}
         trailName={"Bruce Trail"}
-        ref={childRef}
       /> 
       <DiamondMarker
         longitudeDelta={props.longitudeDelta}
         location={{ latitude: 44.51365, longitude: -80.36035 }}
         trailName={"Bruce Trail"}
-        ref={childRef}
       />
       <DiamondMarker
         longitudeDelta={props.longitudeDelta}
         location={{ latitude: 44.51310, longitude: -80.36267 }}
         trailName={"Bruce Trail"}
-        ref={childRef}
       />
       <DiamondMarker
         longitudeDelta={props.longitudeDelta}
         location={{ latitude: 44.51424, longitude: -80.36599 }}
         trailName={"Bruce Trail"}
-        ref={childRef}
       />
       <CircleMarker
         longitudeDelta={props.longitudeDelta}
         location={{ latitude: 44.51570, longitude: -80.36428 }}
         trailName={"Bruce Trail"}
-        ref={childRef}
       />
       <CircleMarker
         longitudeDelta={props.longitudeDelta}
@@ -57,7 +51,6 @@ const ShowTrail = (props) => {
         longitudeDelta={props.longitudeDelta}
         location={{ latitude: 44.52393, longitude: -80.37550 }}
         trailName={"Bruce Trail"}
-        ref={childRef}
       />
       <Polyline
         coordinates={trail}
