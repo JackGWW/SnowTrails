@@ -37,6 +37,7 @@ export default class diamondMarker extends React.Component {
                 title={this.props.trailName}
                 description={this.props.trailDescription}
                 ref={ref => {this.marker = ref;}}
+                tracksViewChanges={false}
             />
         );
     }
