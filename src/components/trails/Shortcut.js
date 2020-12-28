@@ -11,7 +11,7 @@ const ShowTrail = (props) => {
     <>
       <DiamondMarker
         longitudeDelta={props.longitudeDelta}
-        location={{ latitude: 44.52233, longitude: -80.35464 }}
+        location={{ latitude: 44.52249, longitude: -80.35468 }}
         trailName={"Shortcut"}
         ref={childRef}
       />
