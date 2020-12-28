@@ -11,7 +11,7 @@ const ShowTrail = (props) => {
     <>
       <CircleMarker
         longitudeDelta={props.longitudeDelta}
-        location={{ latitude: 44.52713, longitude: -80.36438 }}
+        location={{ latitude: 44.52726, longitude: -80.36444 }}
         trailName={"The Glades"}
         ref={childRef}
       />
