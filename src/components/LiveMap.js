@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { StyleSheet, View, Dimensions, StatusBar } from "react-native";
 import MapView, {
   UrlTile,
 } from "react-native-maps";
@@ -65,6 +65,12 @@ export default class LiveMap extends React.Component {
             ref={(ref) => (this.mapView = ref)}
             onMapReady={this.mapSetup.bind(this)} //Initialize map boundaries when the map loads
             onRegionChangeComplete={region => this.updateRegion(region)}
+            mapPadding={{
+              top: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight,
+              right: 0,
+              bottom: 0,
+              left: 0
+            }}
           >
 
             <UrlTile
@@ -93,7 +99,7 @@ const styles = StyleSheet.create({
   },
   mapStyle: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    height: Dimensions.get("window").height - 0 ,
   },
   map: {
     flex: 1,
