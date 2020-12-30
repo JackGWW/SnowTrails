@@ -49,7 +49,7 @@ export default ShowTrail;
 
 trail_and_marker_template = Template("""import React, { useRef } from "react";
 import { Polyline } from "react-native-maps";
-import Marker from "./../markers/Marker"
+import Marker from "../markers/Marker"
 import trail from "../../../data/json/${filename}.json"
 
 const ShowTrail = (props) => {

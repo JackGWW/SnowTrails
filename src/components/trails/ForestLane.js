@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Polyline } from "react-native-maps";
-import Marker from "./../markers/Marker"
+import Marker from "../markers/Marker"
 import trail from "../../../data/json/ForestLane.json"
 
 const ShowTrail = (props) => {
