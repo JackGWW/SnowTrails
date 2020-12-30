@@ -4,26 +4,8 @@ import MapView, {
   UrlTile,
 } from "react-native-maps";
 
-// Polyline components for each trail
-import AlpineExpress from "./trails/AlpineExpress";
-import Backbowl from "./trails/Backbowl";
-import BlueBird from "./trails/BlueBird";
-import BruceTrail from "./trails/BruceTrail";
-import EnchantedForest from "./trails/EnchantedForest";
-import FarmRoad from "./trails/FarmRoad"
-import ForestGump from "./trails/ForestGump";
-import ForestLane from "./trails/ForestLane";
-import LostLoop from "./trails/LostLoop";
-import LoversLoop from "./trails/LoversLoop";
-import OverTheHill from "./trails/OverTheHill";
-import RidgeRun from "./trails/RidgeRun";
-import RobinsRun from "./trails/RobinsRun";
-import Shortcut from "./trails/Shortcut";
-import SkiAcross from "./trails/SkiAcross";
-import SweetSteeps from "./trails/SweetSteeps";
-import Switchback from "./trails/Switchback";
-import TheGlades from "./trails/TheGlades";
-import WalkingPaths from "./trails/WalkingPaths";
+// Polyline components for all trails
+import AllTrails from "./trails/AllTrails"
 
 export default class LiveMap extends React.Component {
   constructor() {
@@ -94,25 +76,7 @@ export default class LiveMap extends React.Component {
               flipY={false}
               zIndex={-3}
             />
-            <AlpineExpress longitudeDelta={this.state.longitudeDelta} />
-            <Backbowl longitudeDelta={this.state.longitudeDelta}/>
-            <BlueBird longitudeDelta={this.state.longitudeDelta}/>
-            <BruceTrail longitudeDelta={this.state.longitudeDelta}/>
-            <EnchantedForest longitudeDelta={this.state.longitudeDelta}/>
-            <FarmRoad longitudeDelta={this.state.longitudeDelta}/>
-            <ForestGump  longitudeDelta={this.state.longitudeDelta}/>
-            <ForestLane longitudeDelta={this.state.longitudeDelta}/>
-            <LostLoop longitudeDelta={this.state.longitudeDelta}/>
-            <LoversLoop longitudeDelta={this.state.longitudeDelta}/>
-            <OverTheHill longitudeDelta={this.state.longitudeDelta}/>
-            <RidgeRun longitudeDelta={this.state.longitudeDelta}/>
-            <RobinsRun longitudeDelta={this.state.longitudeDelta}/>
-            <Shortcut longitudeDelta={this.state.longitudeDelta}/>
-            <SkiAcross longitudeDelta={this.state.longitudeDelta}/>
-            <SweetSteeps longitudeDelta={this.state.longitudeDelta}/>
-            <Switchback longitudeDelta={this.state.longitudeDelta}/>
-            <TheGlades longitudeDelta={this.state.longitudeDelta}/>
-            <WalkingPaths longitudeDelta={this.state.longitudeDelta}/>
+            <AllTrails longitudeDelta={this.state.longitudeDelta} />
           </MapView>
         }
       </View>
