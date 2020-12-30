@@ -70,13 +70,13 @@ def generate_markers(data):
         if num == 0:
             markers_code.append(linked_marker_template.substitute(
                 latitude=marker["latitude"],
-                longitude=marker["latitude"],
+                longitude=marker["longitude"],
                 name=data["name"],
                 shape=marker["symbol"]))
         else:
             markers_code.append(simple_marker_template.substitute(
                 latitude=marker["latitude"],
-                longitude=marker["latitude"],
+                longitude=marker["longitude"],
                 name=data["name"],
                 shape=marker["symbol"]))
 
