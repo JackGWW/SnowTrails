@@ -2,7 +2,6 @@ import React from "react";
 import { Polyline } from "react-native-maps";
 import trail from "../../../data/json/LoversLoop.json"
 
-
 const ShowTrail = (props) => {
   return (
     <Polyline

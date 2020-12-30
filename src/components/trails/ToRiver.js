@@ -1,12 +1,12 @@
 import React from "react";
 import { Polyline } from "react-native-maps";
-import trail from "../../../data/json/RidgeRun.json"
+import trail from "../../../data/json/ToRiver.json"
 
 const ShowTrail = (props) => {
   return (
     <Polyline
       coordinates={trail}
-      strokeColor={"blue"}
+      strokeColor={"black"}
       strokeWidth={3}
     />
   );

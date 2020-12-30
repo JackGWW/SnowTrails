@@ -27,11 +27,11 @@ linked_line_template = Template("""      <Polyline
       />
 """)
 
-simple_line_template = Template("""      <Polyline
-        coordinates={trail}
-        strokeColor={"${color}"}
-        strokeWidth={3}
-      />"""
+simple_line_template = Template("""    <Polyline
+      coordinates={trail}
+      strokeColor={"${color}"}
+      strokeWidth={3}
+    />"""
 )
 
 trail_template = Template("""import React from "react";

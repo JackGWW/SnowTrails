@@ -1,30 +1,33 @@
 import React, { useRef } from "react";
 import { Polyline } from "react-native-maps";
-import CircleMarker from "./markers/CircleMarker"
+import Marker from "./../markers/Marker"
 import trail from "../../../data/json/EnchantedForest.json"
-
 
 const ShowTrail = (props) => {
   const childRef = useRef();
 
   return (
     <>
-      <CircleMarker
+      <Marker
         longitudeDelta={props.longitudeDelta}
-        location={{ latitude: 44.51374, longitude: -80.35033 }}
+        location={{latitude: 44.513737885281444, longitude: 44.513737885281444}}
         trailName={"Enchanted Forest"}
-      />
-      <CircleMarker
-        longitudeDelta={props.longitudeDelta}
-        location={{ latitude: 44.51455, longitude: -80.35657 }}
-        trailName={"Enchanted Forest"}
+        shape={"Circle"}
         ref={childRef}
       />
-      <CircleMarker
+      <Marker
         longitudeDelta={props.longitudeDelta}
-        location={{ latitude: 44.51337, longitude: -80.35663 }}
+        location={{latitude: 44.513372434303164, longitude: 44.513372434303164}}
         trailName={"Enchanted Forest"}
+        shape={"Circle"}
       />
+      <Marker
+        longitudeDelta={props.longitudeDelta}
+        location={{latitude: 44.51455411501229, longitude: 44.51455411501229}}
+        trailName={"Enchanted Forest"}
+        shape={"Circle"}
+      />
+
       <Polyline
         coordinates={trail}
         strokeColor={"yellow"}
