@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   },
   mapStyle: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height - 0 ,
+    height: Dimensions.get("window").height,
   },
   map: {
     flex: 1,
