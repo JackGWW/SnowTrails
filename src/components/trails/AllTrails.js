@@ -23,6 +23,7 @@ import SkiAcross from "./SkiAcross"
 import SweetSteeps from "./SweetSteeps"
 import Switchback from "./Switchback"
 import TheGlades from "./TheGlades"
+import ToBruceTrail from "./ToBruceTrail"
 import ToCrossover from "./ToCrossover"
 import ToRiver from "./ToRiver"
 import ToSouth from "./ToSouth"
@@ -58,6 +59,7 @@ const ShowTrail = (props) => {
       <SweetSteeps longitudeDelta={props.longitudeDelta}/>
       <Switchback longitudeDelta={props.longitudeDelta}/>
       <TheGlades longitudeDelta={props.longitudeDelta}/>
+      <ToBruceTrail longitudeDelta={props.longitudeDelta}/>
       <ToCrossover longitudeDelta={props.longitudeDelta}/>
       <ToRiver longitudeDelta={props.longitudeDelta}/>
       <ToSouth longitudeDelta={props.longitudeDelta}/>

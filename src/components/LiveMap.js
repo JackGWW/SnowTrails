@@ -38,8 +38,8 @@ export default class LiveMap extends React.Component {
       longitude: -80.334765,
     };
     southWestLimit = {
-      latitude: 44.502138,
-      longitude: -80.370155,
+      latitude: 44.51135,
+      longitude: -80.38068,
     };
     this.mapView.setMapBoundaries(northEastLimit, southWestLimit);
   }
