@@ -17,11 +17,11 @@ export default class circleMarker extends React.Component {
                 xLarge: require("../../../assets/trailMarkers/circle60.png")
             },
             "Square": {
-                xSmall: require("../../../assets/trailMarkers/square20.png"),
-                small:  require("../../../assets/trailMarkers/square30.png"),
-                medium: require("../../../assets/trailMarkers/square40.png"),
-                large: require("../../../assets/trailMarkers/square50.png"),
-                xLarge: require("../../../assets/trailMarkers/square60.png")
+                xSmall: require("../../../assets/trailMarkers/square15.png"),
+                small:  require("../../../assets/trailMarkers/square20.png"),
+                medium: require("../../../assets/trailMarkers/square30.png"),
+                large: require("../../../assets/trailMarkers/square40.png"),
+                xLarge: require("../../../assets/trailMarkers/square50.png")
             },
             "Diamond": {
                 xSmall: require("../../../assets/trailMarkers/diamond20.png"),
