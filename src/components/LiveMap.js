@@ -60,7 +60,7 @@ export default class LiveMap extends React.Component {
               showsCompass={true}
               toolbarEnabled={false} // Hide map buttons on marker press
               minZoomLevel={14}
-              maxZoomLevel={19}
+              maxZoomLevel={17}
               mapType={"none"}
               style={styles.mapStyle}
               ref={(ref) => (this.mapView = ref)}
