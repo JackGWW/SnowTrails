@@ -117,6 +117,17 @@ print("Removing invalid characters from file: " + gpx_file.readline(3))
 gpx = gpxpy.parse(gpx_file)
 
 
+color_mapping = {
+    "green": "#388E3C",
+    "blue": "#2962FF",
+    "red": "#D50000",
+    "orange": "#FF9100",
+    "yellow": "#FFEA00",
+    "magenta": "magenta",
+    "black": "#212121"
+}
+
+
 # Parse GPX File, adding all data to nested dictionaries
 # Add trail data, using trail name as the key
 print("\n### PARSING TRAILS ###")
@@ -124,10 +135,11 @@ trail_data = {}
 for track in gpx.tracks:
     name, color = track.name.split("-")
     filename = stripped_name(name)
+    color = color_mapping[color.strip().lower()]
 
     trail_data[filename] = {
         "name": name.strip(),
-        "color": color.strip().lower(),
+        "color": color,
         "segment": track.segments[0],
         "markers": []
     }

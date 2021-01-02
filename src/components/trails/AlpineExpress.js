@@ -24,7 +24,7 @@ const ShowTrail = (props) => {
 
       <Polyline
         coordinates={trail}
-        strokeColor={"green"}
+        strokeColor={"#388E3C"}
         strokeWidth={3}
         tappable={true}
         onPress={() => childRef.current.displayTrailName()}
