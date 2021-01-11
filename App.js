@@ -2,8 +2,9 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { StyleSheet, View, Text, Image, StatusBar } from "react-native";
+import { StyleSheet, View, Text, Image } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import LiveMap from "./src/components/LiveMap";
 import StaticMap from "./src/components/StaticMap";
@@ -66,6 +67,12 @@ export default class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    AsyncStorage.getItem("first_time").then((value) => {
+      this.setState({ showRealApp: !!value, loading: false });
+    });
+  }
+
   _renderItem = ({ item }) => {
     return (
       <View
@@ -74,17 +81,21 @@ export default class App extends React.Component {
           {
             backgroundColor: item.bg,
           },
-        ]}>
+        ]}
+      >
         <Text style={styles.title}>{item.title}</Text>
         <Image source={item.image} style={styles.image} />
         <Text style={styles.text}>{item.text}</Text>
       </View>
     );
   };
+
   _onDone = () => {
     // User finished the introduction. Show real app through
     // navigation or simply by controlling state
-    this.setState({ showRealApp: true });
+    AsyncStorage.setItem("first_time", "true").then(() => {
+      this.setState({ showRealApp: true });
+    });
   };
 
   render() {
