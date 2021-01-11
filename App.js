@@ -29,7 +29,7 @@ export default class App extends React.Component {
             },
           })}
           tabBarOptions={{
-            activeTintColor: "blue",
+            activeTintColor: "#2960AD",
             inactiveTintColor: "gray",
           }}
         >
