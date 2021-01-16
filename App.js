@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width * 0.8,
     height: Dimensions.get("window").height * 0.5,
     marginVertical: 0,
-    resizeMode: "contain"
+    resizeMode: "contain",
   },
   text: {
     color: "rgba(255, 255, 255, 0.8)",
@@ -68,11 +68,13 @@ export default class App extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   AsyncStorage.getItem("first_time").then((value) => {
-  //     this.setState({ showRealApp: !!value, loading: false });
-  //   });
-  // }
+  componentDidMount() {
+    if (!__DEV__) {
+      AsyncStorage.getItem("first_time").then((value) => {
+        this.setState({ showRealApp: !!value, loading: false });
+      });
+    }
+  }
 
   _renderItem = ({ item }) => {
     return (
@@ -85,7 +87,7 @@ export default class App extends React.Component {
         ]}
       >
         <Text style={styles.title}>{item.title}</Text>
-        <Image source={item.image} style={styles.image}  />
+        <Image source={item.image} style={styles.image} />
         <Text style={styles.text}>{item.text}</Text>
       </View>
     );
@@ -100,7 +102,6 @@ export default class App extends React.Component {
   };
 
   render() {
-
     if (this.state.showRealApp) {
       return (
         <NavigationContainer>
