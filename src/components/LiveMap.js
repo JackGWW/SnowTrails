@@ -37,7 +37,7 @@ export default class LiveMap extends React.Component {
 
     northEastLimit = {
       latitude: 44.531269,
-      longitude: -80.334765,
+      longitude: -80.328,
     };
     southWestLimit = {
       latitude: 44.51135,
