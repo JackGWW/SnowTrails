@@ -1,6 +1,8 @@
 import React from "react";
+import AcrossCraigleith from "./AcrossCraigleith"
 import AlpineExpress from "./AlpineExpress"
 import Backbowl from "./Backbowl"
+import Backstairs from "./Backstairs"
 import BlueBird from "./BlueBird"
 import BruceTrail from "./BruceTrail"
 import BruceTrailConnection from "./BruceTrailConnection"
@@ -22,24 +24,29 @@ import RiverRoute from "./RiverRoute"
 import RobinsRun from "./RobinsRun"
 import Shortcut from "./Shortcut"
 import SkiAcross from "./SkiAcross"
+import SouthAscent from "./SouthAscent"
 import SweetSteeps from "./SweetSteeps"
 import TheGlades from "./TheGlades"
 import TheSwitchback from "./TheSwitchback"
 import ToBruceTrail from "./ToBruceTrail"
+import ToCraigleithNorthLodge from "./ToCraigleithNorthLodge"
 import ToCrossover from "./ToCrossover"
 import ToLookoutBench from "./ToLookoutBench"
 import ToRiver from "./ToRiver"
 import ToSouth from "./ToSouth"
 import ToSteeps from "./ToSteeps"
 import ToSweetSteeps from "./ToSweetSteeps"
+import TopTraverse from "./TopTraverse"
 import Woodpecker from "./Woodpecker"
 
 
 const ShowTrail = (props) => {
   return (
     <>
+      <AcrossCraigleith longitudeDelta={props.longitudeDelta}/>
       <AlpineExpress longitudeDelta={props.longitudeDelta}/>
       <Backbowl longitudeDelta={props.longitudeDelta}/>
+      <Backstairs longitudeDelta={props.longitudeDelta}/>
       <BlueBird longitudeDelta={props.longitudeDelta}/>
       <BruceTrail longitudeDelta={props.longitudeDelta}/>
       <BruceTrailConnection longitudeDelta={props.longitudeDelta}/>
@@ -61,16 +68,19 @@ const ShowTrail = (props) => {
       <RobinsRun longitudeDelta={props.longitudeDelta}/>
       <Shortcut longitudeDelta={props.longitudeDelta}/>
       <SkiAcross longitudeDelta={props.longitudeDelta}/>
+      <SouthAscent longitudeDelta={props.longitudeDelta}/>
       <SweetSteeps longitudeDelta={props.longitudeDelta}/>
       <TheGlades longitudeDelta={props.longitudeDelta}/>
       <TheSwitchback longitudeDelta={props.longitudeDelta}/>
       <ToBruceTrail longitudeDelta={props.longitudeDelta}/>
+      <ToCraigleithNorthLodge longitudeDelta={props.longitudeDelta}/>
       <ToCrossover longitudeDelta={props.longitudeDelta}/>
       <ToLookoutBench longitudeDelta={props.longitudeDelta}/>
       <ToRiver longitudeDelta={props.longitudeDelta}/>
       <ToSouth longitudeDelta={props.longitudeDelta}/>
       <ToSteeps longitudeDelta={props.longitudeDelta}/>
       <ToSweetSteeps longitudeDelta={props.longitudeDelta}/>
+      <TopTraverse longitudeDelta={props.longitudeDelta}/>
       <Woodpecker longitudeDelta={props.longitudeDelta}/>
     </>
   )
