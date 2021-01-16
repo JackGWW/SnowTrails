@@ -2,7 +2,7 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, Image, Dimensions } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -14,16 +14,16 @@ const Tab = createBottomTabNavigator();
 const slides = [
   {
     key: "Welcome",
-    title: "Title 1",
-    text: "Description.\nSay something cool",
+    title: "Welcome to SnowTrails!",
+    text: "Snowshoe trail map for Alpine & Craighleith.",
     image: require("./assets/trailMarkers/circle.png"),
-    bg: "#59b2ab",
+    bg: "#308DDE",
   },
   {
     key: "Disclaimer",
-    title: "Title 2",
-    text: "Other cool stuff",
-    image: require("./assets/trailMarkers/diamond.png"),
+    title: "Disclaimer",
+    text: "These tails are on private property.\nUse at your own risk.",
+    image: require("./assets/disclaimer.png"),
     bg: "#febe29",
   },
   {
@@ -43,9 +43,10 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
   },
   image: {
-    width: 400,
-    height: 400,
-    marginVertical: 32,
+    width: Dimensions.get("window").width * 0.8,
+    height: Dimensions.get("window").height * 0.5,
+    marginVertical: 0,
+    resizeMode: "contain"
   },
   text: {
     color: "rgba(255, 255, 255, 0.8)",
@@ -67,11 +68,11 @@ export default class App extends React.Component {
     };
   }
 
-  componentDidMount() {
-    AsyncStorage.getItem("first_time").then((value) => {
-      this.setState({ showRealApp: !!value, loading: false });
-    });
-  }
+  // componentDidMount() {
+  //   AsyncStorage.getItem("first_time").then((value) => {
+  //     this.setState({ showRealApp: !!value, loading: false });
+  //   });
+  // }
 
   _renderItem = ({ item }) => {
     return (
@@ -84,7 +85,7 @@ export default class App extends React.Component {
         ]}
       >
         <Text style={styles.title}>{item.title}</Text>
-        <Image source={item.image} style={styles.image} />
+        <Image source={item.image} style={styles.image}  />
         <Text style={styles.text}>{item.text}</Text>
       </View>
     );
@@ -99,6 +100,7 @@ export default class App extends React.Component {
   };
 
   render() {
+
     if (this.state.showRealApp) {
       return (
         <NavigationContainer>
@@ -117,7 +119,7 @@ export default class App extends React.Component {
               },
             })}
             tabBarOptions={{
-              activeTintColor: "#2960AD",
+              activeTintColor: "#308DDE",
               inactiveTintColor: "gray",
             }}
           >
