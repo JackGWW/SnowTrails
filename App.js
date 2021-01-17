@@ -28,8 +28,8 @@ const slides = [
   },
   {
     key: "Tap",
-    title: "Tap Trails",
-    text: "Tap on trails or markers to see the trail name.",
+    title: "Tip: Tap on Trails",
+    text: "Tap on trails or difficulty markers to see the trail name.",
     image: require("./assets/touchTrail.png"),
     bg: "#B030DE",
   },
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     color: "rgba(255, 255, 255, 0.8)",
     textAlign: "center",
     fontSize: 18,
-    marginHorizontal: 5,
+    marginHorizontal: 10,
 
   },
   title: {
