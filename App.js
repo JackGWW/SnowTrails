@@ -14,8 +14,8 @@ const Tab = createBottomTabNavigator();
 const slides = [
   {
     key: "Welcome",
-    title: "Welcome to SnowTrails!",
-    text: "Snowshoe trail map for Alpine & Craighleith.",
+    title: "Welcome!",
+    text: "Enjoy using SnowTrails, your snowshoe trail map for Alpine & Craigleith.",
     image: require("./assets/trailMarkers/circle.png"),
     bg: "#308DDE",
   },
@@ -24,14 +24,14 @@ const slides = [
     title: "Disclaimer",
     text: "These tails are on private property.\nUse at your own risk.",
     image: require("./assets/disclaimer.png"),
-    bg: "#febe29",
+    bg: "#DF9313",
   },
   {
-    key: "TapTrails",
-    title: "Title 2",
-    text: "Other cool stuff",
-    image: require("./assets/trailMarkers/diamond.png"),
-    bg: "#22bcb5",
+    key: "Tap",
+    title: "Tap Trails",
+    text: "Tap on trails or markers to see the trail name.",
+    image: require("./assets/touchTrail.png"),
+    bg: "#B030DE",
   },
 ];
 
@@ -51,9 +51,12 @@ const styles = StyleSheet.create({
   text: {
     color: "rgba(255, 255, 255, 0.8)",
     textAlign: "center",
+    fontSize: 18,
+    marginHorizontal: 5,
+
   },
   title: {
-    fontSize: 22,
+    fontSize: 26,
     color: "white",
     textAlign: "center",
   },
