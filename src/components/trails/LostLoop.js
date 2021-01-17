@@ -17,7 +17,7 @@ const ShowTrail = (props) => {
       />
       <Marker
         longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.52661835588515, longitude: -80.36921789869666}}
+        location={{latitude: 44.52674156986177, longitude: -80.36906501278281}}
         trailName={"Lost Loop"}
         shape={"Circle"}
       />

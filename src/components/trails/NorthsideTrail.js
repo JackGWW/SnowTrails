@@ -10,7 +10,7 @@ const ShowTrail = (props) => {
     <>
       <Marker
         longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.52344773337245, longitude: -80.35017136484385}}
+        location={{latitude: 44.52341009862721, longitude: -80.35001814365387}}
         trailName={"Northside Trail"}
         shape={"Square"}
         ref={childRef}
