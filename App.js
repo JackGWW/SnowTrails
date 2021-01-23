@@ -16,8 +16,8 @@ const slides = [
     key: "Welcome",
     title: "Welcome!",
     text: "Enjoy using SnowTrails, your snowshoe trail map for Alpine & Craigleith.",
-    image: require("./assets/trailMarkers/circle.png"),
-    bg: "#308DDE",
+    image: require("./assets/doubleSnowshoe.png"),
+    bg: "#1679F3",
   },
   {
     key: "Disclaimer",
@@ -97,8 +97,7 @@ export default class App extends React.Component {
   };
 
   _onDone = () => {
-    // User finished the introduction. Show real app through
-    // navigation or simply by controlling state
+    // User finished the introduction. Show real app 
     AsyncStorage.setItem("first_time", "true").then(() => {
       this.setState({ showRealApp: true });
     });
@@ -123,7 +122,7 @@ export default class App extends React.Component {
               },
             })}
             tabBarOptions={{
-              activeTintColor: "#308DDE",
+              activeTintColor: "#1679F3",
               inactiveTintColor: "gray",
             }}
           >
