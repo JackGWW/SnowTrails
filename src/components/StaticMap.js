@@ -8,10 +8,8 @@ const styles = StyleSheet.create({
   windowWidth: Dimensions.get('window').width,
   windowHeight: Dimensions.get('window').height,
   map: {
-    // width: 3182,
-    // height: 2021,
-    width: 7991,
-    height: 5079,
+    width: 799,
+    height: 507,
   },
 });
 
@@ -24,23 +22,17 @@ export default function StaticMap() {
       cropHeight={styles.windowHeight}
       imageWidth={styles.map.width}
       imageHeight={styles.map.height}
-      //minScale={0.12}
-      //maxScale={2}
-      minScale={0.05}
-      maxScale={1}
+      minScale={0.5}
+      maxScale={8}
       centerOn={{
-        // x: 200,
-        // y: 0,
-        // scale: 0.33,
-        x: 450,
+        x: 45,
         y: 0,
-        scale: 0.13,
+        scale: 1.3,
         duration: 200,
       }}
     >
       <Image
         style={styles.map}
-        //source={require('../../assets/trailMap.png')}
         source={require('../../assets/trailMapLarge.png')}
       />
     </ImageZoom>
