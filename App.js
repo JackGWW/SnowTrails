@@ -5,9 +5,16 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet, View, Text, Image, Dimensions } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Sentry from 'sentry-expo';
 
 import LiveMap from "./src/components/LiveMap";
 import StaticMap from "./src/components/StaticMap";
+
+Sentry.init({
+  dsn: "https://b8aeee3910554706876c9c506e83b871@o513818.ingest.sentry.io/5616317",
+  enableInExpoDevelopment: true,
+  debug: true, // Sentry will try to print out useful debugging information if something goes wrong with sending an event. Set this to `false` in production.
+});
 
 const Tab = createBottomTabNavigator();
 
