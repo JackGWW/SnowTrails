@@ -31,12 +31,20 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.jgwwilliams.snowtrails",
-      "buildNumber": "1.0.0"
+      "buildNumber": "1.0.0",
+      "config": {
+          "googleMapsApiKey": "AIzaSyDwiFWcgGSy2wKw3oZgoUGrS25fYKhHF4A"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon_foreground.png",
         "backgroundColor": "#1679F3"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDyxf__edqt0S_bxIHi193JraImCgI02jA"
+        }
       },
       "icon": "./assets/icon.png",
       "package": "com.jgwwilliams.SnowTrails",
