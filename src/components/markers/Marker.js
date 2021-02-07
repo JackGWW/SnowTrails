@@ -1,5 +1,6 @@
 import React from "react";
 import { Marker } from "react-native-maps";
+import { Image } from 'react-native';
 
 export default class circleMarker extends React.Component {
     constructor(props) {
@@ -11,21 +12,21 @@ export default class circleMarker extends React.Component {
         icons = {
             "Circle": {
                 xSmall: require("../../../assets/trailMarkers/circle20.png"),
-                small:  require("../../../assets/trailMarkers/circle30.png"),
+                small: require("../../../assets/trailMarkers/circle30.png"),
                 medium: require("../../../assets/trailMarkers/circle40.png"),
                 large: require("../../../assets/trailMarkers/circle50.png"),
                 xLarge: require("../../../assets/trailMarkers/circle60.png")
             },
             "Square": {
                 xSmall: require("../../../assets/trailMarkers/square15.png"),
-                small:  require("../../../assets/trailMarkers/square20.png"),
+                small: require("../../../assets/trailMarkers/square20.png"),
                 medium: require("../../../assets/trailMarkers/square30.png"),
                 large: require("../../../assets/trailMarkers/square40.png"),
                 xLarge: require("../../../assets/trailMarkers/square50.png")
             },
             "Diamond": {
                 xSmall: require("../../../assets/trailMarkers/diamond20.png"),
-                small:  require("../../../assets/trailMarkers/diamond30.png"),
+                small: require("../../../assets/trailMarkers/diamond30.png"),
                 medium: require("../../../assets/trailMarkers/diamond40.png"),
                 large: require("../../../assets/trailMarkers/diamond50.png"),
                 xLarge: require("../../../assets/trailMarkers/diamond60.png")
@@ -56,12 +57,13 @@ export default class circleMarker extends React.Component {
         return (
             <Marker
                 coordinate={this.props.location}
-                image={icon}
                 title={this.props.trailName}
                 description={this.props.trailDescription}
-                ref={ref => {this.marker = ref;}}
+                ref={ref => { this.marker = ref; }}
                 tracksViewChanges={false}
-            />
+            >
+                <Image source={icon} style={{ height: 15, width: 15 }} />
+            </Marker>
         );
     }
 };
