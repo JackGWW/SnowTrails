@@ -8,43 +8,61 @@ export default class circleMarker extends React.Component {
     }
 
     //As the screen zooms out, make the icons smaller
+    getSize(){
+        delta = this.props.longitudeDelta
+        var size;
+        switch (true) {
+            case (delta < 0.0025):
+                size = 35
+                break
+            case (delta < 0.003):
+                size = 32
+                break
+            case (delta < 0.0035):
+                size = 29
+                break
+            case (delta < 0.0042):
+                size = 26
+                break    
+            case (delta < 0.005):
+                size = 23
+                break
+            case (delta < 0.0065):
+                size = 20
+                break    
+            case (delta < 0.008):
+                size = 18
+                break
+            case (delta < 0.01):
+                size = 16
+                break
+            case (delta < 0.0119):
+                size = 14
+                break
+            case (delta < 0.0187):
+                size = 11
+                break
+            case (delta < 0.02):
+                size = 10
+                break
+            case (delta < 0.025):
+                size = 9
+                break
+            default:
+                size = 8;
+                break
+        }
+        console.log(delta, size)
+        return size
+    }
+
     getIcon(shape) {
         icons = {
-            "Circle": {
-                xSmall: require("../../../assets/trailMarkers/circle20.png"),
-                small: require("../../../assets/trailMarkers/circle30.png"),
-                medium: require("../../../assets/trailMarkers/circle40.png"),
-                large: require("../../../assets/trailMarkers/circle50.png"),
-                xLarge: require("../../../assets/trailMarkers/circle60.png")
-            },
-            "Square": {
-                xSmall: require("../../../assets/trailMarkers/square15.png"),
-                small: require("../../../assets/trailMarkers/square20.png"),
-                medium: require("../../../assets/trailMarkers/square30.png"),
-                large: require("../../../assets/trailMarkers/square40.png"),
-                xLarge: require("../../../assets/trailMarkers/square50.png")
-            },
-            "Diamond": {
-                xSmall: require("../../../assets/trailMarkers/diamond20.png"),
-                small: require("../../../assets/trailMarkers/diamond30.png"),
-                medium: require("../../../assets/trailMarkers/diamond40.png"),
-                large: require("../../../assets/trailMarkers/diamond50.png"),
-                xLarge: require("../../../assets/trailMarkers/diamond60.png")
-            },
+            "Circle": require("../../../assets/trailMarkers/circle.png"),
+            "Square": require("../../../assets/trailMarkers/square.png"),
+            "Diamond": require("../../../assets/trailMarkers/diamond.png")
         }
-        delta = this.props.longitudeDelta
-        switch (true) {
-            case (delta < 0.002):
-                return icons[shape].xLarge;
-            case (delta < 0.0055):
-                return icons[shape].large;
-            case (delta < 0.0105):
-                return icons[shape].medium;
-            case (delta < 0.019):
-                return icons[shape].small;
-            default:
-                return icons[shape].xSmall;
-        }
+        return icons[shape];
     }
 
     displayTrailName() {
@@ -54,6 +72,7 @@ export default class circleMarker extends React.Component {
 
     render() {
         icon = this.getIcon(this.props.shape)
+        size = this.getSize()
         return (
             <Marker
                 coordinate={this.props.location}
@@ -61,8 +80,9 @@ export default class circleMarker extends React.Component {
                 description={this.props.trailDescription}
                 ref={ref => { this.marker = ref; }}
                 tracksViewChanges={false}
+                key={ size } // Key update is required to get android to redraw the image at a different size
             >
-                <Image source={icon} style={{ height: 15, width: 15 }} />
+                <Image source={icon} style={{ height: size, width: size }} />
             </Marker>
         );
     }
