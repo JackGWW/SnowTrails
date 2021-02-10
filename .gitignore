@@ -14,3 +14,4 @@ web-build/
 package-lock.json
 *.pyc
 *.lock
+data/.expo/README.md
