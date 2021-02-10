@@ -48,7 +48,7 @@
       },
       "icon": "./assets/icon.png",
       "package": "com.jgwwilliams.SnowTrails",
-      "versionCode": 4,
+      "versionCode": 5,
       "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"] 
 
     },
