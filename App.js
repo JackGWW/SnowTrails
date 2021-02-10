@@ -29,7 +29,7 @@ const slides = [
   {
     key: "Disclaimer",
     title: "Disclaimer",
-    text: "These tails are on private property.\nUse at your own risk.",
+    text: "Many of these tails are on private property.\nUse at your own risk.",
     image: require("./assets/disclaimer.png"),
     bg: "#DF9313",
   },
