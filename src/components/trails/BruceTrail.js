@@ -17,13 +17,13 @@ const ShowTrail = (props) => {
       />
       <Marker
         longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.51238177716732, longitude: -80.35320905037224}}
+        location={{latitude: 44.51246618293226, longitude: -80.35316219553351}}
         trailName={"Bruce Trail"}
         shape={"Circle"}
       />
       <Marker
         longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.52225314453244, longitude: -80.37697409279644}}
+        location={{latitude: 44.522331012412906, longitude: -80.37698993459344}}
         trailName={"Bruce Trail"}
         shape={"Circle"}
       />
@@ -71,7 +71,7 @@ const ShowTrail = (props) => {
       />
       <Marker
         longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.51998617500067, longitude: -80.36669285036623}}
+        location={{latitude: 44.52007527463138, longitude: -80.36667801439762}}
         trailName={"Bruce Trail"}
         shape={"Circle"}
       />
@@ -83,7 +83,7 @@ const ShowTrail = (props) => {
       />
       <Marker
         longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.518146431073546, longitude: -80.37598452530801}}
+        location={{latitude: 44.518202506005764, longitude: -80.37597899325192}}
         trailName={"Bruce Trail"}
         shape={"Circle"}
       />

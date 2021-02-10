@@ -52,7 +52,6 @@ export default class circleMarker extends React.Component {
                 size = 8;
                 break
         }
-        console.log(delta, size)
         return size
     }
 

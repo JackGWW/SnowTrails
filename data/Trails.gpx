@@ -4,11 +4,11 @@
     <link href="http://www.garmin.com">
       <text>Garmin International</text>
     </link>
-    <time>2021-01-18T06:35:04Z</time>
+    <time>2021-02-10T05:21:34Z</time>
     <bounds maxlat="44.52979207970202" maxlon="-80.32884394749999" minlat="44.50787172652781" minlon="-80.377974389120936" />
   </metadata>
 
-  <wpt lat="44.518799297511578" lon="-80.347986873239279">
+  <wpt lat="44.51894162222743" lon="-80.347921410575509">
     <time>2021-01-01T01:06:41Z</time>
     <name>Alpine Express</name>
     <sym>Diamond, Blue</sym>
@@ -26,7 +26,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.516646321862936" lon="-80.350636728107929">
+  <wpt lat="44.516800381243229" lon="-80.350612504407763">
     <time>2021-01-01T18:50:15Z</time>
     <name>Alpine Express (2)</name>
     <sym>Square, Blue</sym>
@@ -44,7 +44,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.525292590260506" lon="-80.367403049021959">
+  <wpt lat="44.525374146178365" lon="-80.367394331842661">
     <time>2021-01-01T01:36:34Z</time>
     <name>Back bowl</name>
     <sym>Circle, Blue</sym>
@@ -98,7 +98,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.51238177716732" lon="-80.353209050372243">
+  <wpt lat="44.512466182932258" lon="-80.353162195533514">
     <time>2020-12-28T02:57:33Z</time>
     <name>Bruce Trail (1)</name>
     <sym>Circle, Blue</sym>
@@ -116,7 +116,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.522253144532442" lon="-80.376974092796445">
+  <wpt lat="44.522331012412906" lon="-80.376989934593439">
     <time>2021-01-01T01:44:00Z</time>
     <name>Bruce Trail (10)</name>
     <sym>Circle, Blue</sym>
@@ -260,7 +260,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.519986175000668" lon="-80.366692850366235">
+  <wpt lat="44.520075274631381" lon="-80.366678014397621">
     <time>2020-12-28T03:09:47Z</time>
     <name>Bruce Trail (7)</name>
     <sym>Circle, Blue</sym>
@@ -296,7 +296,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.518146431073546" lon="-80.375984525308013">
+  <wpt lat="44.518202506005764" lon="-80.37597899325192">
     <time>2021-01-01T01:43:13Z</time>
     <name>Bruce Trail (9)</name>
     <sym>Circle, Blue</sym>
@@ -350,7 +350,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.514454873278737" lon="-80.36384635604918">
+  <wpt lat="44.514505080878735" lon="-80.363841746002436">
     <time>2021-01-01T01:38:30Z</time>
     <name>Deer Run</name>
     <sym>Circle, Blue</sym>
@@ -368,7 +368,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.516521347686648" lon="-80.362268378958106">
+  <wpt lat="44.516552109271288" lon="-80.362262846902013">
     <time>2021-01-01T01:39:11Z</time>
     <name>Downward Dog</name>
     <sym>Diamond, Blue</sym>
@@ -386,7 +386,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.516290258616209" lon="-80.361404288560152">
+  <wpt lat="44.516359409317374" lon="-80.361407306045294">
     <time>2021-01-01T01:39:42Z</time>
     <name>Downward Dog (2)</name>
     <sym>Square, Blue</sym>
@@ -404,7 +404,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.51366881839931" lon="-80.350574869662523">
+  <wpt lat="44.513733359053731" lon="-80.350553747266531">
     <time>2020-12-28T00:08:38Z</time>
     <name>Enchanted Forest</name>
     <sym>Circle, Blue</sym>
@@ -440,7 +440,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.514554115012288" lon="-80.356574049219489">
+  <wpt lat="44.514601808041334" lon="-80.356551585718989">
     <time>2020-12-28T00:09:33Z</time>
     <name>Enchanted Forest(2)</name>
     <sym>Circle, Blue</sym>
@@ -494,7 +494,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.513644091784954" lon="-80.353308543562889">
+  <wpt lat="44.513692623004317" lon="-80.353300413116813">
     <time>2020-12-27T21:33:14Z</time>
     <name>Forest Gump</name>
     <sym>Circle, Blue</sym>
@@ -584,7 +584,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.515756415203214" lon="-80.349360415711999">
+  <wpt lat="44.515851465985179" lon="-80.349327810108662">
     <time>2021-01-01T18:49:45Z</time>
     <name>Lover's Loop (2)</name>
     <sym>Square, Blue</sym>
@@ -602,7 +602,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.52341009862721" lon="-80.35001814365387">
+  <wpt lat="44.523475812748075" lon="-80.350004145875573">
     <time>2021-01-01T01:29:03Z</time>
     <name>Northside Trail</name>
     <sym>Square, Blue</sym>
@@ -728,7 +728,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.514978155493736" lon="-80.359074538573623">
+  <wpt lat="44.515025932341814" lon="-80.359414173290133">
     <time>2020-12-28T02:53:14Z</time>
     <name>Robin's Run</name>
     <sym>Diamond, Blue</sym>
@@ -746,7 +746,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.522408880293369" lon="-80.354777555912733">
+  <wpt lat="44.522471660748124" lon="-80.354749141260982">
     <time>2020-12-28T03:57:50Z</time>
     <name>Shortcut</name>
     <sym>Diamond, Blue</sym>
@@ -800,7 +800,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.518662923946977" lon="-80.347213139757514">
+  <wpt lat="44.518705504015088" lon="-80.347187658771873">
     <time>2021-01-01T18:48:44Z</time>
     <name>The Switchback</name>
     <sym>Square, Blue</sym>
@@ -818,7 +818,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.51583880931139" lon="-80.350664472207427">
+  <wpt lat="44.5159228798002" lon="-80.350703531876206">
     <time>2021-01-01T18:47:15Z</time>
     <name>The Switchback(2)</name>
     <sym>Circle, Blue</sym>
@@ -854,7 +854,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.523432226851583" lon="-80.368665615096688">
+  <wpt lat="44.523502299562097" lon="-80.368653209879994">
     <time>2021-01-01T01:35:53Z</time>
     <name>Woodpecker</name>
     <sym>Circle, Blue</sym>

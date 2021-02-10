@@ -10,14 +10,14 @@ const ShowTrail = (props) => {
     <>
       <Marker
         longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.51866292394698, longitude: -80.34721313975751}}
+        location={{latitude: 44.51870550401509, longitude: -80.34718765877187}}
         trailName={"The Switchback"}
         shape={"Square"}
         ref={childRef}
       />
       <Marker
         longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.51583880931139, longitude: -80.35066447220743}}
+        location={{latitude: 44.5159228798002, longitude: -80.3507035318762}}
         trailName={"The Switchback"}
         shape={"Circle"}
       />
