@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Dimensions, StatusBar, Image } from "react-native";
-import MapView, { UrlTile } from "react-native-maps";
+import MapView, { UrlTile, PROVIDER_GOOGLE } from "react-native-maps";
 import Spinner from "react-native-loading-spinner-overlay";
 
 // Polyline components for all trails
@@ -73,6 +73,7 @@ export default class LiveMap extends React.Component {
           ref={(ref) => (this.mapView = ref)}
           onMapReady={this.mapSetup.bind(this)} //Initialize map boundaries when the map loads
           onRegionChangeComplete={(region) => this.updateRegion(region)}
+          provider={PROVIDER_GOOGLE}
           mapPadding={{
             top: Platform.OS === "ios" ? 20 : StatusBar.currentHeight,
             right: 0,
