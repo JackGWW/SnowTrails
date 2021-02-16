@@ -5,13 +5,14 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet, View, Text, Image, Dimensions } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Sentry from 'sentry-expo';
+import * as Sentry from "sentry-expo";
 
 import LiveMap from "./src/components/LiveMap";
 import StaticMap from "./src/components/StaticMap";
 
 Sentry.init({
-  dsn: "https://b8aeee3910554706876c9c506e83b871@o513818.ingest.sentry.io/5616317",
+  dsn:
+    "https://b8aeee3910554706876c9c506e83b871@o513818.ingest.sentry.io/5616317",
   enableInExpoDevelopment: true,
   debug: true, // Sentry will try to print out useful debugging information if something goes wrong with sending an event. Set this to `false` in production.
 });
@@ -22,14 +23,16 @@ const slides = [
   {
     key: "Welcome",
     title: "Welcome!",
-    text: "Enjoy using SnowTrails, your snowshoe trail map for Alpine & Craigleith.",
+    text:
+      "Enjoy using SnowTrails, your snowshoe trail map for Alpine & Craigleith.",
     image: require("./assets/doubleSnowshoe.png"),
     bg: "#1679F3",
   },
   {
     key: "Disclaimer",
     title: "Disclaimer",
-    text: "Many of these tails are on private property.\nUse at your own risk.",
+    text:
+      "Many of the tails are on private ski club property and limit usage to members only. Alpine and Craigleith Ski Clubs assume no liability for users of the snowshoe trails. Use at your own risk.\n\nThe ski clubs do not maintain the trails and provide no warranties regarding the trails, their condition, trail markings or the accuracy of any maps or this app.",
     image: require("./assets/disclaimer.png"),
     bg: "#DF9313",
   },
@@ -51,8 +54,8 @@ const styles = StyleSheet.create({
   },
   image: {
     width: Dimensions.get("window").width * 0.8,
-    height: Dimensions.get("window").height * 0.5,
-    marginVertical: 0,
+    height: Dimensions.get("window").height * 0.3,
+    marginVertical: 36,
     resizeMode: "contain",
   },
   text: {
@@ -60,7 +63,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 18,
     marginHorizontal: 10,
-
   },
   title: {
     fontSize: 26,
@@ -75,6 +77,10 @@ export default class App extends React.Component {
 
     this.state = {
       showRealApp: false,
+      nextLabel: "Next",
+      showNextButton: true,
+      showPrevButton: true,
+      disclaimerShown: false,
     };
   }
 
@@ -103,8 +109,27 @@ export default class App extends React.Component {
     );
   };
 
+  updateCurrentSlide = (index, lastIndex) => {
+    // If it's on the disclaimer slide, change the next button to "I Agree"
+    if (index === 1) {
+      this.setState({ nextLabel: "I Agree" });
+      
+      // Hide the next button for 3 seconds the first time the disclaimer is shown
+      if (!this.state.disclaimerShown) {
+        this.setState({ showNextButton: false, showPrevButton: false });
+        setTimeout(() => {
+          this.setState({ showNextButton: true, showPrevButton: true });
+        }, 3000);
+        this.setState({ disclaimerShown: true });
+      }
+    } else {
+      this.setState({ nextLabel: "Next" });
+      this.setState({ showNextButton: true, showPrevButton: true });
+    }
+  };
+
   _onDone = () => {
-    // User finished the introduction. Show real app 
+    // User finished the introduction. Show real app
     AsyncStorage.setItem("first_time", "true").then(() => {
       this.setState({ showRealApp: true });
     });
@@ -143,9 +168,13 @@ export default class App extends React.Component {
         <AppIntroSlider
           showPrevButton={true}
           renderItem={this._renderItem}
+          onSlideChange={this.updateCurrentSlide}
           data={slides}
           onDone={this._onDone}
           onSkip={this._onDone}
+          nextLabel={this.state.nextLabel}
+          showNextButton={this.state.showNextButton}
+          showPrevButton={this.state.showPrevButton}
         />
       );
     }
