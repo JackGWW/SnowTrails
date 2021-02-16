@@ -32,9 +32,19 @@ export default class LiveMap extends React.Component {
     };
   }
 
+  async enableLocationPermissions() {
+    let { status } = await Location.requestPermissionsAsync();
+    if (status !== 'granted') {
+      console.log('Location permission was denied');
+    }
+  }
+
   mapSetup() {
     // Set map boundaries to the area containing the trails
     this.setState({ spinner: false });
+
+    // Ask for location permissions
+    this.enableLocationPermissions()
 
     northEastLimit = {
       latitude: 44.531,
