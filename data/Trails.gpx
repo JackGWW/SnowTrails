@@ -4,7 +4,7 @@
     <link href="http://www.garmin.com">
       <text>Garmin International</text>
     </link>
-    <time>2021-02-10T05:21:34Z</time>
+    <time>2021-02-16T03:35:00Z</time>
     <bounds maxlat="44.52979207970202" maxlon="-80.32884394749999" minlat="44.50787172652781" minlon="-80.377974389120936" />
   </metadata>
 
@@ -152,7 +152,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.512955099344254" lon="-80.365903107449412">
+  <wpt lat="44.513102620840073" lon="-80.36579062230885">
     <time>2021-01-01T18:45:58Z</time>
     <name>Bruce Trail (12)</name>
     <sym>Diamond, Blue</sym>
@@ -224,7 +224,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.514241386204958" lon="-80.365989189594984">
+  <wpt lat="44.515379397198558" lon="-80.365089392289519">
     <time>2020-12-28T03:08:32Z</time>
     <name>Bruce Trail (5)</name>
     <sym>Diamond, Blue</sym>
@@ -242,7 +242,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.515698412433267" lon="-80.364281544461846">
+  <wpt lat="44.515752978622913" lon="-80.364319263026118">
     <time>2020-12-28T03:09:04Z</time>
     <name>Bruce Trail (6)</name>
     <sym>Circle, Blue</sym>
