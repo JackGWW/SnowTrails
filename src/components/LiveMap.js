@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View, Dimensions, StatusBar, Image } from "react-native";
 import MapView, { UrlTile, PROVIDER_GOOGLE } from "react-native-maps";
 import Spinner from "react-native-loading-spinner-overlay";
+import * as Location from 'expo-location';
 
 // Polyline components for all trails
 import AllTrails from "./trails/AllTrails";
