@@ -34,6 +34,9 @@
       "buildNumber": "1.0.0",
       "config": {
           "googleMapsApiKey": "AIzaSyDwiFWcgGSy2wKw3oZgoUGrS25fYKhHF4A"
+      },
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "This app uses the users location to show their current location on a trail map"
       }
     },
     "android": {
@@ -49,7 +52,7 @@
       "icon": "./assets/icon.png",
       "package": "com.jgwwilliams.SnowTrails",
       "versionCode": 8,
-      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"] 
+      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION", "FOREGROUND_SERVICE"] 
 
     },
     "web": {
