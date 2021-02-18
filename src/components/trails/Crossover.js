@@ -13,6 +13,7 @@ const ShowTrail = (props) => {
         location={{latitude: 44.52254072763026, longitude: -80.36524596624076}}
         trailName={"Crossover"}
         shape={"Square"}
+        key={"610506"}
         ref={childRef}
       />
       <Marker
@@ -20,6 +21,7 @@ const ShowTrail = (props) => {
         location={{latitude: 44.52450175769627, longitude: -80.36655555479228}}
         trailName={"Crossover"}
         shape={"Square"}
+        key={"096014"}
       />
 
       <Polyline

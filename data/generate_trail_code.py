@@ -72,13 +72,15 @@ def generate_markers(data):
                 latitude=marker["latitude"],
                 longitude=marker["longitude"],
                 name=data["name"],
-                shape=marker["symbol"]))
+                shape=marker["symbol"],
+                key=str(marker["latitude"] + marker["longitude"]).split('.')[1][-6:]))
         else:
             markers_code.append(simple_marker_template.substitute(
                 latitude=marker["latitude"],
                 longitude=marker["longitude"],
                 name=data["name"],
-                shape=marker["symbol"]))
+                shape=marker["symbol"],
+                key=str(marker["latitude"] + marker["longitude"]).split('.')[1][-6:]))
 
     return ''.join(markers_code)
 
@@ -103,6 +105,7 @@ def create_trail_code(data, filename):
             trail=generate_trail(data),
             filename=filename
         )
+
 
 def write_code_to_file(code, filename):
     outPath = os.path.join(code_output_dir, filename + ".js")
@@ -177,7 +180,7 @@ all_imports = []
 all_components = []
 for filename, values in trail_data.items():
     write_segment_to_json_file(values["segment"], filename)
-    
+
     code = create_trail_code(values, filename)
     write_code_to_file(code, filename)
 
@@ -193,4 +196,3 @@ code = all_trails_template.substitute(
     components=''.join(all_components)
 )
 write_code_to_file(code, "AllTrails")
-

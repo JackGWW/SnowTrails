@@ -79,7 +79,7 @@ export default class circleMarker extends React.Component {
                 description={this.props.trailDescription}
                 ref={ref => { this.marker = ref; }}
                 tracksViewChanges={false}
-                key={ size } // Key update is required to get android to redraw the image at a different size
+                key={ this.props.key + this.props.longitudeDelta } // Key update is required to get android to redraw the image at a different size
             >
                 <Image source={icon} style={{ height: size, width: size }} />
             </Marker>

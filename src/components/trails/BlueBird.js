@@ -13,6 +13,7 @@ const ShowTrail = (props) => {
         location={{latitude: 44.52601636759937, longitude: -80.36271957680583}}
         trailName={"Blue Bird"}
         shape={"Circle"}
+        key={"920646"}
         ref={childRef}
       />
 

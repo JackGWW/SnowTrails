@@ -5,6 +5,7 @@ linked_marker_template = Template("""      <Marker
         location={{latitude: ${latitude}, longitude: ${longitude}}}
         trailName={"${name}"}
         shape={"${shape}"}
+        key={"${key}"}
         ref={childRef}
       />
 """)
@@ -14,6 +15,7 @@ simple_marker_template = Template("""      <Marker
         location={{latitude: ${latitude}, longitude: ${longitude}}}
         trailName={"${name}"}
         shape={"${shape}"}
+        key={"${key}"}
       />
 """)
 
