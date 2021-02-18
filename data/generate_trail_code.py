@@ -73,14 +73,14 @@ def generate_markers(data):
                 longitude=marker["longitude"],
                 name=data["name"],
                 shape=marker["symbol"],
-                key=str(marker["latitude"] + marker["longitude"]).split('.')[1][-6:]))
+                id=str(marker["latitude"] + marker["longitude"]).split('.')[1][-6:]))
         else:
             markers_code.append(simple_marker_template.substitute(
                 latitude=marker["latitude"],
                 longitude=marker["longitude"],
                 name=data["name"],
                 shape=marker["symbol"],
-                key=str(marker["latitude"] + marker["longitude"]).split('.')[1][-6:]))
+                id=str(marker["latitude"] + marker["longitude"]).split('.')[1][-6:]))
 
     return ''.join(markers_code)
 

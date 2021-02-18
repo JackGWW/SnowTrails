@@ -13,7 +13,7 @@ const ShowTrail = (props) => {
         location={{latitude: 44.523475812748075, longitude: -80.35000414587557}}
         trailName={"Northside Trail"}
         shape={"Square"}
-        key={"331275"}
+        id={"331275"}
         ref={childRef}
       />
       <Marker
@@ -21,7 +21,7 @@ const ShowTrail = (props) => {
         location={{latitude: 44.52389775775373, longitude: -80.3563383501023}}
         trailName={"Northside Trail"}
         shape={"Circle"}
-        key={"348576"}
+        id={"348576"}
       />
 
       <Polyline
