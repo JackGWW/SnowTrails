@@ -4,7 +4,7 @@
     <link href="http://www.garmin.com">
       <text>Garmin International</text>
     </link>
-    <time>2021-02-16T03:35:00Z</time>
+    <time>2021-02-22T02:40:07Z</time>
     <bounds maxlat="44.52979207970202" maxlon="-80.32884394749999" minlat="44.50787172652781" minlon="-80.377974389120936" />
   </metadata>
 
@@ -62,6 +62,60 @@
     </extensions>
   </wpt>
 
+  <wpt lat="44.516432918608189" lon="-80.3465835750103">
+    <time>2021-02-22T01:23:49Z</time>
+    <name>Backstairs</name>
+    <sym>Diamond, Blue</sym>
+    <type>user</type>
+    <extensions>
+      <gpxx:WaypointExtension>
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+      <wptx1:WaypointExtension>
+        <wptx1:DisplayMode>SymbolAndName</wptx1:DisplayMode>
+      </wptx1:WaypointExtension>
+      <ctx:CreationTimeExtension>
+        <ctx:CreationTime>2021-02-22T01:23:49Z</ctx:CreationTime>
+      </ctx:CreationTimeExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="44.513524901121855" lon="-80.34594789147377">
+    <time>2021-02-22T01:22:53Z</time>
+    <name>Backstairs (2)</name>
+    <sym>Square, Blue</sym>
+    <type>user</type>
+    <extensions>
+      <gpxx:WaypointExtension>
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+      <wptx1:WaypointExtension>
+        <wptx1:DisplayMode>SymbolAndName</wptx1:DisplayMode>
+      </wptx1:WaypointExtension>
+      <ctx:CreationTimeExtension>
+        <ctx:CreationTime>2021-02-22T01:22:53Z</ctx:CreationTime>
+      </ctx:CreationTimeExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="44.517841581255198" lon="-80.344746178016067">
+    <time>2021-02-22T01:23:54Z</time>
+    <name>Backstairs (3)</name>
+    <sym>Square, Blue</sym>
+    <type>user</type>
+    <extensions>
+      <gpxx:WaypointExtension>
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+      <wptx1:WaypointExtension>
+        <wptx1:DisplayMode>SymbolAndName</wptx1:DisplayMode>
+      </wptx1:WaypointExtension>
+      <ctx:CreationTimeExtension>
+        <ctx:CreationTime>2021-02-22T01:23:54Z</ctx:CreationTime>
+      </ctx:CreationTimeExtension>
+    </extensions>
+  </wpt>
+
   <wpt lat="44.526016367599368" lon="-80.36271957680583">
     <time>2020-12-28T04:01:51Z</time>
     <name>Blue Bird</name>
@@ -98,7 +152,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.512466182932258" lon="-80.353162195533514">
+  <wpt lat="44.512483952566981" lon="-80.353147527202964">
     <time>2020-12-28T02:57:33Z</time>
     <name>Bruce Trail (1)</name>
     <sym>Circle, Blue</sym>
@@ -494,7 +548,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.513692623004317" lon="-80.353300413116813">
+  <wpt lat="44.513731263577938" lon="-80.353284906595945">
     <time>2020-12-27T21:33:14Z</time>
     <name>Forest Gump</name>
     <sym>Circle, Blue</sym>
@@ -764,6 +818,60 @@
     </extensions>
   </wpt>
 
+  <wpt lat="44.509601332247257" lon="-80.331536969169974">
+    <time>2021-02-22T02:18:55Z</time>
+    <name>South Ascent</name>
+    <sym>Diamond, Blue</sym>
+    <type>user</type>
+    <extensions>
+      <gpxx:WaypointExtension>
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+      <wptx1:WaypointExtension>
+        <wptx1:DisplayMode>SymbolAndName</wptx1:DisplayMode>
+      </wptx1:WaypointExtension>
+      <ctx:CreationTimeExtension>
+        <ctx:CreationTime>2021-02-22T02:18:55Z</ctx:CreationTime>
+      </ctx:CreationTimeExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="44.50843364931643" lon="-80.334387486800551">
+    <time>2021-02-22T02:18:54Z</time>
+    <name>South Ascent (1)</name>
+    <sym>Diamond, Blue</sym>
+    <type>user</type>
+    <extensions>
+      <gpxx:WaypointExtension>
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+      <wptx1:WaypointExtension>
+        <wptx1:DisplayMode>SymbolAndName</wptx1:DisplayMode>
+      </wptx1:WaypointExtension>
+      <ctx:CreationTimeExtension>
+        <ctx:CreationTime>2021-02-22T02:18:54Z</ctx:CreationTime>
+      </ctx:CreationTimeExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="44.512205505743623" lon="-80.329202357679605">
+    <time>2021-02-22T02:18:44Z</time>
+    <name>South Ascent (2)</name>
+    <sym>Square, Blue</sym>
+    <type>user</type>
+    <extensions>
+      <gpxx:WaypointExtension>
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+      <wptx1:WaypointExtension>
+        <wptx1:DisplayMode>SymbolAndName</wptx1:DisplayMode>
+      </wptx1:WaypointExtension>
+      <ctx:CreationTimeExtension>
+        <ctx:CreationTime>2021-02-22T02:18:44Z</ctx:CreationTime>
+      </ctx:CreationTimeExtension>
+    </extensions>
+  </wpt>
+
   <wpt lat="44.52706309966743" lon="-80.358916372060776">
     <time>2020-12-28T03:51:18Z</time>
     <name>Sweet Steeps</name>
@@ -850,6 +958,60 @@
       </wptx1:WaypointExtension>
       <ctx:CreationTimeExtension>
         <ctx:CreationTime>2021-01-01T18:41:47Z</ctx:CreationTime>
+      </ctx:CreationTimeExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="44.509754721075296" lon="-80.342316348105669">
+    <time>2021-02-22T01:59:28Z</time>
+    <name>Top Traverse</name>
+    <sym>Circle, Blue</sym>
+    <type>user</type>
+    <extensions>
+      <gpxx:WaypointExtension>
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+      <wptx1:WaypointExtension>
+        <wptx1:DisplayMode>SymbolAndName</wptx1:DisplayMode>
+      </wptx1:WaypointExtension>
+      <ctx:CreationTimeExtension>
+        <ctx:CreationTime>2021-02-22T01:59:28Z</ctx:CreationTime>
+      </ctx:CreationTimeExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="44.508072137832642" lon="-80.337473871186376">
+    <time>2021-02-22T01:59:22Z</time>
+    <name>Top Traverse (1)</name>
+    <sym>Circle, Blue</sym>
+    <type>user</type>
+    <extensions>
+      <gpxx:WaypointExtension>
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+      <wptx1:WaypointExtension>
+        <wptx1:DisplayMode>SymbolAndName</wptx1:DisplayMode>
+      </wptx1:WaypointExtension>
+      <ctx:CreationTimeExtension>
+        <ctx:CreationTime>2021-02-22T01:59:22Z</ctx:CreationTime>
+      </ctx:CreationTimeExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="44.511623214930296" lon="-80.346238072961569">
+    <time>2021-02-22T01:59:32Z</time>
+    <name>Top Traverse (2)</name>
+    <sym>Circle, Blue</sym>
+    <type>user</type>
+    <extensions>
+      <gpxx:WaypointExtension>
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+      <wptx1:WaypointExtension>
+        <wptx1:DisplayMode>SymbolAndName</wptx1:DisplayMode>
+      </wptx1:WaypointExtension>
+      <ctx:CreationTimeExtension>
+        <ctx:CreationTime>2021-02-22T01:59:32Z</ctx:CreationTime>
       </ctx:CreationTimeExtension>
     </extensions>
   </wpt>
