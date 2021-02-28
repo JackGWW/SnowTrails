@@ -32,7 +32,7 @@ const slides = [
     key: "Disclaimer",
     title: "Disclaimer",
     text:
-      "Many of the trails are on private ski club property and limit usage to members only. Alpine and Craigleith Ski Clubs assume no liability for users of the snowshoe trails. Use at your own risk.\n\nThe ski clubs do not maintain the trails and provide no warranties regarding the trails, their condition, trail markings or the accuracy of any maps or this app.",
+      "Many of the trails shown are on private property.  Trails on the property of Alpine and Craigleith Ski Clubs may only be used by members of those clubs.\n\nAlpine and Craigleith Ski Clubs do not maintain the trails and assume no liability to users of the trails or this app, whether for trail condition, trail markings, map accuracy, app function or any other matter whatsoever.  Users of the trails and this app do so at their own risk.",
     image: require("./assets/disclaimer.png"),
     bg: "#DF9313",
   },
