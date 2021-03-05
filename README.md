@@ -26,10 +26,39 @@ Mauris commodo quis imperdiet massa tincidunt nunc pulvinar. Turpis egestas inte
 
 Diam in arcu cursus euismod quis viverra nibh cras. Scelerisque eleifend donec pretium vulputate sapien nec sagittis. Feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper. Augue eget arcu dictum varius duis at consectetur lorem. Tellus at urna condimentum mattis pellentesque. Purus sit amet luctus venenatis lectus. Ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant. Volutpat odio facilisis mauris sit amet massa vitae tortor condimentum. Tincidunt ornare massa eget egestas purus. Gravida neque convallis a cras semper auctor neque vitae tempus.
 
-# Privacy Policy
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-
-
 # Support 
-"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
+If you encounter any issues while using this app, please either contact the developer directly or file an issue on the GitHub code repository.
 
+Developer email: <jack@jackw.ca>
+
+Issues page: <https://github.com/JackGWW/SnowTrails/issues>
+
+# Privacy Policy
+
+Jack Williams built the SnowTrails app as a Free app. This SERVICE is provided by Jack Williams at no cost and is intended for use as is.
+
+This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.
+
+If you choose to use my Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that I collect is used for providing and improving the Service. I will not use or share your information with anyone except as described in this Privacy Policy.
+
+The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which is accessible at SnowTrails unless otherwise defined in this Privacy Policy.
+
+**Information Collection and Use**
+
+For a better experience, while using our Service, I may require you to provide us with certain personally identifiable information, including but not limited to Device ID. The information that I request will be retained on your device and is not collected by me in any way.
+
+The app does use third party services that may collect information used to identify you.
+
+Link to privacy policy of third party service providers used by the app
+
+*   [Google Play Services](https://www.google.com/policies/privacy/)
+*   [Expo](https://expo.io/privacy)
+*   [Mapbox](https://www.mapbox.com/legal/privacy)
+
+**Log Data**
+
+I want to inform you that whenever you use my Service, in a case of an error in the app I collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing my Service, the time and date of your use of the Service, and other statistics.
+
+**Children’s Privacy**
+
+These Services do not address anyone under the age of 13. I do not knowingly collect personally identifiable information from children under 13 years of age. In the case I discover that a child under 13 has provided me with personal information, I immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact me so that I will be able to do necessary actions.
