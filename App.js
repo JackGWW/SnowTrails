@@ -53,9 +53,9 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
   },
   image: {
-    width: Dimensions.get("window").width * 0.8,
+    width: Dimensions.get("window").width * 0.7,
     height: Dimensions.get("window").height * 0.4,
-    marginVertical: 24,
+    marginVertical: 0,
     resizeMode: "contain",
   },
   text: {
