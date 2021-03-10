@@ -31,7 +31,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.jgwwilliams.snowtrails",
-      "buildNumber": "1.0.2",
+      "buildNumber": "1.0.3",
       "config": {
           "googleMapsApiKey": "AIzaSyDwiFWcgGSy2wKw3oZgoUGrS25fYKhHF4A"
       },
@@ -51,7 +51,7 @@
       },
       "icon": "./assets/icon.png",
       "package": "com.jgwwilliams.SnowTrails",
-      "versionCode": 11,
+      "versionCode": 12,
       "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION", "FOREGROUND_SERVICE"] 
 
     },
