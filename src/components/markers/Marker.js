@@ -23,7 +23,7 @@ export default class circleMarker extends React.Component {
                 tracksViewChanges={false}
                 key={ markerKey } // Key update is required to get android to redraw the image at a different size
             >
-               { this.props.image }
+               { this.props.icon }
             </Marker>
         );
     }

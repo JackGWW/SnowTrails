@@ -4,7 +4,7 @@ linked_marker_template = Template("""      <Marker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: ${latitude}, longitude: ${longitude}}}
         trailName={"${name}"}
-        icon=props.markerImages[{"${shape}"}]
+        icon={props.markerImages["${shape}"]}
         id={"${id}"}
         ref={childRef}
       />
@@ -14,7 +14,7 @@ simple_marker_template = Template("""      <Marker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: ${latitude}, longitude: ${longitude}}}
         trailName={"${name}"}
-        icon=props.markerImages[{"${shape}"}]
+        icon={props.markerImages["${shape}"]}
         id={"${id}"}
       />
 """)

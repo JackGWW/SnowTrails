@@ -12,7 +12,7 @@ const ShowTrail = (props) => {
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.51870550401509, longitude: -80.34718765877187}}
         trailName={"The Switchback"}
-        shape={"Square"}
+        icon={props.markerImages["Square"]}
         id={"756784"}
         ref={childRef}
       />
@@ -20,7 +20,7 @@ const ShowTrail = (props) => {
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.5159228798002, longitude: -80.3507035318762}}
         trailName={"The Switchback"}
-        shape={"Circle"}
+        icon={props.markerImages["Circle"]}
         id={"076006"}
       />
 

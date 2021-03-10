@@ -12,7 +12,7 @@ const ShowTrail = (props) => {
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.51373335905373, longitude: -80.35055374726653}}
         trailName={"Enchanted Forest"}
-        shape={"Circle"}
+        icon={props.markerImages["Circle"]}
         id={"882128"}
         ref={childRef}
       />
@@ -20,14 +20,14 @@ const ShowTrail = (props) => {
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.5133447740227, longitude: -80.35672266036272}}
         trailName={"Enchanted Forest"}
-        shape={"Circle"}
+        icon={props.markerImages["Circle"]}
         id={"634002"}
       />
       <Marker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.514601808041334, longitude: -80.35655158571899}}
         trailName={"Enchanted Forest"}
-        shape={"Circle"}
+        icon={props.markerImages["Circle"]}
         id={"677655"}
       />
 

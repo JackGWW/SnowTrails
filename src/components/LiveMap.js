@@ -64,9 +64,9 @@ export default class LiveMap extends React.Component {
   getMarkerImages() {
     let delta = this.state.longitudeDelta
     
-    let circleIcon =  require("../../../assets/trailMarkers/circle.png")
-    let squareIcon =  require("../../../assets/trailMarkers/square.png")
-    let diamondIcon = require("../../../assets/trailMarkers/diamond.png")
+    let circleIcon =  require("../../assets/trailMarkers/circle.png")
+    let squareIcon =  require("../../assets/trailMarkers/square.png")
+    let diamondIcon = require("../../assets/trailMarkers/diamond.png")
   
     let size;
     //As the screen zooms out, make the icons smaller

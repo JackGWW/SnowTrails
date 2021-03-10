@@ -5,14 +5,13 @@ import trail from "../../../data/json/AlpineExpress.json"
 
 const ShowTrail = (props) => {
   const childRef = useRef();
-
   return (
     <>
       <Marker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.51894162222743, longitude: -80.34792141057551}}
         trailName={"Alpine Express"}
-        shape={"Diamond"}
+        icon={props.markerImages["Diamond"]}
         id={"834808"}
         ref={childRef}
       />
@@ -20,7 +19,7 @@ const ShowTrail = (props) => {
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.51680038124323, longitude: -80.35061250440776}}
         trailName={"Alpine Express"}
-        shape={"Square"}
+        icon={props.markerImages["Square"]}
         id={"164535"}
       />
 
