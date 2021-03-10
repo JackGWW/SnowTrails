@@ -14,7 +14,7 @@ Sentry.init({
   dsn:
     "https://b8aeee3910554706876c9c506e83b871@o513818.ingest.sentry.io/5616317",
   enableInExpoDevelopment: true,
-  debug: true, // Sentry will try to print out useful debugging information if something goes wrong with sending an event. Set this to `false` in production.
+  debug: false,
 });
 
 const Tab = createBottomTabNavigator();
@@ -24,7 +24,7 @@ const slides = [
     key: "Welcome",
     title: "Welcome!",
     text:
-      "Enjoy using SnowTrails, your snowshoe trail map for Alpine & Craigleith.",
+      "Enjoy using SnowTrails, your snowshoe trail map for Alpine & Craigleith Ski Clubs.",
     image: require("./assets/doubleSnowshoe.png"),
     bg: "#1679F3",
   },
@@ -32,7 +32,7 @@ const slides = [
     key: "Disclaimer",
     title: "Disclaimer",
     text:
-      "Many of the trails shown are on private property.  Trails on the property of Alpine and Craigleith Ski Clubs may only be used by members of those clubs.\n\nAlpine and Craigleith Ski Clubs do not maintain the trails and assume no liability to users of the trails or this app, whether for trail condition, trail markings, map accuracy, app function or any other matter whatsoever.  Users of the trails and this app do so at their own risk.",
+    "Many of the trails shown are on private property. Trails on Alpine and Craigleith Ski Club property may only be used by club members.\n\nAlpine and Craigleith Ski Clubs do not maintain the trails and assume no liability to users of the trails or this app, whether for trail condition, trail markings, map accuracy or any other matter whatsoever.  Users of the trails and this app do so at their own risk.",
     image: require("./assets/disclaimer.png"),
     bg: "#DF9313",
   },
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: Dimensions.get("window").width * 0.7,
-    height: Dimensions.get("window").height * 0.4,
+    height: Dimensions.get("window").height * 0.35,
     marginVertical: 0,
     resizeMode: "contain",
   },
