@@ -61,6 +61,63 @@ export default class LiveMap extends React.Component {
     this.setState({ longitudeDelta: region.longitudeDelta });
   }
 
+  getMarkerImages() {
+    let delta = this.state.longitudeDelta
+    
+    let circleIcon =  require("../../../assets/trailMarkers/circle.png")
+    let squareIcon =  require("../../../assets/trailMarkers/square.png")
+    let diamondIcon = require("../../../assets/trailMarkers/diamond.png")
+  
+    let size;
+    //As the screen zooms out, make the icons smaller
+    switch (true) {
+        case (delta < 0.0025):
+            size = 35
+            break
+        case (delta < 0.003):
+            size = 32
+            break
+        case (delta < 0.0035):
+            size = 29
+            break
+        case (delta < 0.0042):
+            size = 26
+            break    
+        case (delta < 0.005):
+            size = 23
+            break
+        case (delta < 0.0065):
+            size = 20
+            break    
+        case (delta < 0.008):
+            size = 18
+            break
+        case (delta < 0.01):
+            size = 16
+            break
+        case (delta < 0.0119):
+            size = 14
+            break
+        case (delta < 0.0187):
+            size = 11
+            break
+        case (delta < 0.02):
+            size = 10
+            break
+        case (delta < 0.025):
+            size = 9
+            break
+        default:
+            size = 8;
+            break
+    }
+    return {
+      "Circle": <Image source={circleIcon} style={{ height: size, width: size }} />,
+      "Square": <Image source={squareIcon} style={{ height: size, width: size }} />,
+      "Diamond": <Image source={diamondIcon} style={{ height: size, width: size }} />,
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -101,7 +158,7 @@ export default class LiveMap extends React.Component {
             flipY={false}
             zIndex={-3}
           />
-          <AllTrails longitudeDelta={this.state.longitudeDelta} />
+          <AllTrails longitudeDelta={this.state.longitudeDelta.toFixed(5)} markerImages={this.getMarkerImages()} />
         </MapView>
         <View style={styles.legendContainer}>
           <Image
