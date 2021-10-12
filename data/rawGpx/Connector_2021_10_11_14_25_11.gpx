@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx creator="SkiTracks 2.5.2.2" version="1.1"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://www.topografix.com/GPX/1/1" 
+xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" 
+xmlns:corecoders="http://www.corecoders.com/xmlschemas/GPX">
+<metadata>
+<link href="http://www.corecoders.com">
+<text>Core Coders Ltd</text>
+</link>
+<time>2021-10-11T20:33:13Z</time>
+<bounds maxlat="44.5227560" maxlon="-80.3662290" minlat="44.5213070" minlon="-80.3681880"/>
+<extensions>
+<corecoders:timezone>GMT-4</corecoders:timezone>
+</extensions>
+</metadata>
+<trk>
+<name>Day 2 - 2021/2022</name>
+<desc>The Georgian Peaks Club</desc>
+<type>skiing</type>
+<trkseg>
+<trkpt lat="44.5213500" lon="-80.3680340"><ele>437.13</ele><time>2021-10-11T18:25:11Z</time></trkpt>
+<trkpt lat="44.5213070" lon="-80.3680850"><ele>438.09</ele><time>2021-10-11T18:25:32Z</time></trkpt>
+<trkpt lat="44.5213250" lon="-80.3681880"><ele>440.86</ele><time>2021-10-11T18:25:47Z</time></trkpt>
+<trkpt lat="44.5213460" lon="-80.3681310"><ele>440.40</ele><time>2021-10-11T18:26:06Z</time></trkpt>
+<trkpt lat="44.5213570" lon="-80.3680700"><ele>439.12</ele><time>2021-10-11T18:26:27Z</time></trkpt>
+<trkpt lat="44.5213990" lon="-80.3680350"><ele>439.44</ele><time>2021-10-11T18:26:38Z</time></trkpt>
+<trkpt lat="44.5214360" lon="-80.3679970"><ele>438.77</ele><time>2021-10-11T18:27:04Z</time></trkpt>
+<trkpt lat="44.5214840" lon="-80.3679670"><ele>438.94</ele><time>2021-10-11T18:27:14Z</time></trkpt>
+<trkpt lat="44.5215140" lon="-80.3678880"><ele>435.74</ele><time>2021-10-11T18:27:30Z</time></trkpt>
+<trkpt lat="44.5215450" lon="-80.3678040"><ele>436.26</ele><time>2021-10-11T18:27:47Z</time></trkpt>
+<trkpt lat="44.5215280" lon="-80.3677450"><ele>436.05</ele><time>2021-10-11T18:28:02Z</time></trkpt>
+<trkpt lat="44.5215330" lon="-80.3678150"><ele>435.91</ele><time>2021-10-11T18:28:10Z</time></trkpt>
+<trkpt lat="44.5215600" lon="-80.3678650"><ele>436.35</ele><time>2021-10-11T18:28:16Z</time></trkpt>
+<trkpt lat="44.5215960" lon="-80.3679030"><ele>436.78</ele><time>2021-10-11T18:28:21Z</time></trkpt>
+<trkpt lat="44.5216410" lon="-80.3678750"><ele>436.47</ele><time>2021-10-11T18:28:32Z</time></trkpt>
+<trkpt lat="44.5216890" lon="-80.3678570"><ele>434.12</ele><time>2021-10-11T18:28:37Z</time></trkpt>
+<trkpt lat="44.5217340" lon="-80.3678380"><ele>433.19</ele><time>2021-10-11T18:28:43Z</time></trkpt>
+<trkpt lat="44.5217820" lon="-80.3678020"><ele>432.34</ele><time>2021-10-11T18:28:52Z</time></trkpt>
+<trkpt lat="44.5218000" lon="-80.3677380"><ele>432.14</ele><time>2021-10-11T18:29:00Z</time></trkpt>
+<trkpt lat="44.5218250" lon="-80.3676750"><ele>431.76</ele><time>2021-10-11T18:29:06Z</time></trkpt>
+<trkpt lat="44.5218370" lon="-80.3676120"><ele>431.68</ele><time>2021-10-11T18:29:14Z</time></trkpt>
+<trkpt lat="44.5218510" lon="-80.3675460"><ele>429.00</ele><time>2021-10-11T18:29:25Z</time></trkpt>
+<trkpt lat="44.5218920" lon="-80.3675060"><ele>428.58</ele><time>2021-10-11T18:29:37Z</time></trkpt>
+<trkpt lat="44.5219200" lon="-80.3674460"><ele>426.55</ele><time>2021-10-11T18:29:46Z</time></trkpt>
+<trkpt lat="44.5219160" lon="-80.3673800"><ele>423.40</ele><time>2021-10-11T18:29:58Z</time></trkpt>
+<trkpt lat="44.5219300" lon="-80.3673200"><ele>422.75</ele><time>2021-10-11T18:30:04Z</time></trkpt>
+<trkpt lat="44.5219160" lon="-80.3672450"><ele>421.16</ele><time>2021-10-11T18:30:14Z</time></trkpt>
+<trkpt lat="44.5219580" lon="-80.3672850"><ele>419.21</ele><time>2021-10-11T18:30:30Z</time></trkpt>
+<trkpt lat="44.5220060" lon="-80.3672850"><ele>417.76</ele><time>2021-10-11T18:30:39Z</time></trkpt>
+<trkpt lat="44.5220390" lon="-80.3672410"><ele>416.84</ele><time>2021-10-11T18:31:05Z</time></trkpt>
+<trkpt lat="44.5220840" lon="-80.3672180"><ele>415.88</ele><time>2021-10-11T18:31:20Z</time></trkpt>
+<trkpt lat="44.5221270" lon="-80.3671680"><ele>415.13</ele><time>2021-10-11T18:31:27Z</time></trkpt>
+<trkpt lat="44.5221520" lon="-80.3671110"><ele>413.47</ele><time>2021-10-11T18:31:34Z</time></trkpt>
+<trkpt lat="44.5221680" lon="-80.3670500"><ele>410.25</ele><time>2021-10-11T18:31:49Z</time></trkpt>
+<trkpt lat="44.5221940" lon="-80.3669980"><ele>409.66</ele><time>2021-10-11T18:32:02Z</time></trkpt>
+<trkpt lat="44.5222330" lon="-80.3669560"><ele>408.39</ele><time>2021-10-11T18:32:16Z</time></trkpt>
+<trkpt lat="44.5222720" lon="-80.3669120"><ele>406.68</ele><time>2021-10-11T18:32:27Z</time></trkpt>
+<trkpt lat="44.5223000" lon="-80.3668620"><ele>406.45</ele><time>2021-10-11T18:32:35Z</time></trkpt>
+<trkpt lat="44.5223350" lon="-80.3668110"><ele>404.95</ele><time>2021-10-11T18:32:50Z</time></trkpt>
+<trkpt lat="44.5223810" lon="-80.3667830"><ele>403.82</ele><time>2021-10-11T18:32:56Z</time></trkpt>
+<trkpt lat="44.5223710" lon="-80.3667180"><ele>403.26</ele><time>2021-10-11T18:33:09Z</time></trkpt>
+<trkpt lat="44.5223840" lon="-80.3666540"><ele>402.05</ele><time>2021-10-11T18:33:14Z</time></trkpt>
+<trkpt lat="44.5224320" lon="-80.3666360"><ele>402.06</ele><time>2021-10-11T18:33:37Z</time></trkpt>
+<trkpt lat="44.5224560" lon="-80.3665700"><ele>401.83</ele><time>2021-10-11T18:33:59Z</time></trkpt>
+<trkpt lat="44.5225070" lon="-80.3665330"><ele>400.22</ele><time>2021-10-11T18:34:03Z</time></trkpt>
+<trkpt lat="44.5225400" lon="-80.3664880"><ele>399.04</ele><time>2021-10-11T18:34:15Z</time></trkpt>
+<trkpt lat="44.5226090" lon="-80.3663860"><ele>398.86</ele><time>2021-10-11T18:35:29Z</time></trkpt>
+<trkpt lat="44.5226430" lon="-80.3663380"><ele>397.89</ele><time>2021-10-11T18:35:43Z</time></trkpt>
+<trkpt lat="44.5226720" lon="-80.3662830"><ele>397.32</ele><time>2021-10-11T18:35:54Z</time></trkpt>
+<trkpt lat="44.5227190" lon="-80.3662710"><ele>397.67</ele><time>2021-10-11T18:36:00Z</time></trkpt>
+</trkseg>
+</trk>
+</gpx>
