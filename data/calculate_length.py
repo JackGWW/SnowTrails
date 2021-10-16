@@ -173,8 +173,8 @@ def print_distance(trailName):
 
 
 
-# Azure API Key
-subscription_key = "ILRxDomtGnEOiCpR8aEfOXG_13ywISdRoJzvtEyig7E"
+# Azure API Key - ADD HERE
+subscription_key = ""
 
 # Load GPX Trail File
 p = Path(__file__).with_name('Trails.gpx')
@@ -196,7 +196,8 @@ except (IOError, ValueError):
 for track in gpx.tracks:
     trail_name = track.name.split('-')[0].strip()
     print_distance(trail_name)
-    
+
+print()
 print("################# DETAILED INFO #####################")
 for track in gpx.tracks:
     trail_name = track.name.split('-')[0].strip()
