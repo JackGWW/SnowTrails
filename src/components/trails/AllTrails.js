@@ -45,47 +45,47 @@ import Woodpecker from "./Woodpecker"
 const ShowTrail = (props) => {
   return (
     <>
-      <AcrossCraigleith longitudeDelta={props.longitudeDelta}/>
-      <AlpineExpress longitudeDelta={props.longitudeDelta}/>
-      <Backbowl longitudeDelta={props.longitudeDelta}/>
-      <Backstairs longitudeDelta={props.longitudeDelta}/>
-      <BlueBird longitudeDelta={props.longitudeDelta}/>
-      <BruceTrail longitudeDelta={props.longitudeDelta}/>
-      <BruceTrailConnection longitudeDelta={props.longitudeDelta}/>
-      <Connector longitudeDelta={props.longitudeDelta}/>
-      <Crossover longitudeDelta={props.longitudeDelta}/>
-      <DeerRun longitudeDelta={props.longitudeDelta}/>
-      <DownwardDog longitudeDelta={props.longitudeDelta}/>
-      <EnchantedForest longitudeDelta={props.longitudeDelta}/>
-      <FarmRoad longitudeDelta={props.longitudeDelta}/>
-      <FeelingLazy longitudeDelta={props.longitudeDelta}/>
-      <ForestGump longitudeDelta={props.longitudeDelta}/>
-      <ForestLane longitudeDelta={props.longitudeDelta}/>
-      <LoreeForest longitudeDelta={props.longitudeDelta}/>
-      <LostLoop longitudeDelta={props.longitudeDelta}/>
-      <LoversLoop longitudeDelta={props.longitudeDelta}/>
-      <NorthsideTrail longitudeDelta={props.longitudeDelta}/>
-      <OverTheHill longitudeDelta={props.longitudeDelta}/>
-      <RidgeRun longitudeDelta={props.longitudeDelta}/>
-      <RidgeToRidge longitudeDelta={props.longitudeDelta}/>
-      <RiverRoute longitudeDelta={props.longitudeDelta}/>
-      <RobinsRun longitudeDelta={props.longitudeDelta}/>
-      <Shortcut longitudeDelta={props.longitudeDelta}/>
-      <SkiAcross longitudeDelta={props.longitudeDelta}/>
-      <SouthAscent longitudeDelta={props.longitudeDelta}/>
-      <SweetSteeps longitudeDelta={props.longitudeDelta}/>
-      <TheGlades longitudeDelta={props.longitudeDelta}/>
-      <TheSwitchback longitudeDelta={props.longitudeDelta}/>
-      <ToBruceTrail longitudeDelta={props.longitudeDelta}/>
-      <ToCraigleithNorthLodge longitudeDelta={props.longitudeDelta}/>
-      <ToCrossover longitudeDelta={props.longitudeDelta}/>
-      <ToLookoutBench longitudeDelta={props.longitudeDelta}/>
-      <ToRiver longitudeDelta={props.longitudeDelta}/>
-      <ToSouth longitudeDelta={props.longitudeDelta}/>
-      <ToSteeps longitudeDelta={props.longitudeDelta}/>
-      <ToSweetSteeps longitudeDelta={props.longitudeDelta}/>
-      <TopTraverse longitudeDelta={props.longitudeDelta}/>
-      <Woodpecker longitudeDelta={props.longitudeDelta}/>
+      <AcrossCraigleith longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <AlpineExpress longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <Backbowl longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <Backstairs longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <BlueBird longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <BruceTrail longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <BruceTrailConnection longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <Connector longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <Crossover longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <DeerRun longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <DownwardDog longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <EnchantedForest longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <FarmRoad longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <FeelingLazy longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <ForestGump longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <ForestLane longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <LoreeForest longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <LostLoop longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <LoversLoop longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <NorthsideTrail longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <OverTheHill longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <RidgeRun longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <RidgeToRidge longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <RiverRoute longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <RobinsRun longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <Shortcut longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <SkiAcross longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <SouthAscent longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <SweetSteeps longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <TheGlades longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <TheSwitchback longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <ToBruceTrail longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <ToCraigleithNorthLodge longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <ToCrossover longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <ToLookoutBench longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <ToRiver longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <ToSouth longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <ToSteeps longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <ToSweetSteeps longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <TopTraverse longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <Woodpecker longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
     </>
   )
 }
