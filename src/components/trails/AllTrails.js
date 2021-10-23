@@ -20,8 +20,8 @@ import LostLoop from "./LostLoop"
 import LoversLoop from "./LoversLoop"
 import NorthsideTrail from "./NorthsideTrail"
 import OverTheHill from "./OverTheHill"
+import RR from "./RR"
 import RidgeRun from "./RidgeRun"
-import RidgeToRidge from "./RidgeToRidge"
 import RiverRoute from "./RiverRoute"
 import RobinsRun from "./RobinsRun"
 import Shortcut from "./Shortcut"
@@ -66,8 +66,8 @@ const ShowTrail = (props) => {
       <LoversLoop longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <NorthsideTrail longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <OverTheHill longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <RR longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <RidgeRun longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
-      <RidgeToRidge longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <RiverRoute longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <RobinsRun longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <Shortcut longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>

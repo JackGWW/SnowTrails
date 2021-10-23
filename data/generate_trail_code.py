@@ -127,6 +127,7 @@ color_mapping = {
     "orange": "#FF9100",
     "yellow": "#FFEA00",
     "magenta": "magenta",
+    "pink": "magenta",
     "black": "#212121"
 }
 
