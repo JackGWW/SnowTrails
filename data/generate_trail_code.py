@@ -23,9 +23,9 @@ from code_templates import *
 
 
 # Script Parameters
-gpx_filepath = os.path.join("Trails.gpx")
-json_output_dir = os.path.join("json")
-code_output_dir = os.path.join("..", "src", "components", "trails")
+gpx_filepath = os.path.join(os.path.dirname(__file__), "Trails.gpx")
+json_output_dir = os.path.join(os.path.dirname(__file__), "json")
+code_output_dir = os.path.join(os.path.dirname(__file__), "..", "src", "components", "trails")
 
 
 # Utility functions

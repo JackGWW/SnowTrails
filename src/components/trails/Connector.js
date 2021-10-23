@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Polyline } from "react-native-maps";
 import Marker from "../markers/Marker"
-import trail from "../../../data/json/AlpineExpress.json"
+import trail from "../../../data/json/Connector.json"
 
 const ShowTrail = (props) => {
   const childRef = useRef();
@@ -10,18 +10,11 @@ const ShowTrail = (props) => {
     <>
       <Marker
         longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.51894162222743, longitude: -80.34792141057551}}
-        trailName={"Alpine Express"}
-        icon={props.markerImages["Diamond"]}
-        id={"834808"}
-        ref={childRef}
-      />
-      <Marker
-        longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.51680038124323, longitude: -80.35061250440776}}
-        trailName={"Alpine Express"}
+        location={{latitude: 44.52190512791276, longitude: -80.36701857112348}}
+        trailName={"Connector"}
         icon={props.markerImages["Square"]}
-        id={"164535"}
+        id={"321072"}
+        ref={childRef}
       />
 
       <Polyline

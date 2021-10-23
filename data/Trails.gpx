@@ -4,7 +4,7 @@
     <link href="http://www.garmin.com">
       <text>Garmin International</text>
     </link>
-    <time>2021-10-23T22:05:33Z</time>
+    <time>2021-10-23T22:19:57Z</time>
     <bounds maxlat="44.52979207970202" maxlon="-80.32884394749999" minlat="44.50787172652781" minlon="-80.377974389120936" />
   </metadata>
 
@@ -7770,10 +7770,10 @@
   </trk>
 
   <trk>
-    <name>Ridge To Ridge</name>
+    <name>Ridge To Ridge - Green</name>
     <extensions>
       <gpxx:TrackExtension>
-        <gpxx:DisplayColor>DarkGray</gpxx:DisplayColor>
+        <gpxx:DisplayColor>Green</gpxx:DisplayColor>
       </gpxx:TrackExtension>
     </extensions>
     <trkseg>
