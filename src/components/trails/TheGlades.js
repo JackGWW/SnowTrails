@@ -12,6 +12,7 @@ const ShowTrail = (props) => {
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.527416145429015, longitude: -80.36455605179071}}
         trailName={"The Glades"}
+        trailDescription={"568m  -  39m\u2191 1m\u2193"}
         icon={props.markerImages["Circle"]}
         id={"063617"}
         ref={childRef}

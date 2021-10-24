@@ -12,6 +12,7 @@ const ShowTrail = (props) => {
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.523475812748075, longitude: -80.35000414587557}}
         trailName={"Northside Trail"}
+        trailDescription={"1.27km  -  169m\u2191 20m\u2193"}
         icon={props.markerImages["Square"]}
         id={"331275"}
         ref={childRef}
@@ -20,6 +21,7 @@ const ShowTrail = (props) => {
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.52389775775373, longitude: -80.3563383501023}}
         trailName={"Northside Trail"}
+        trailDescription={"1.27km  -  169m\u2191 20m\u2193"}
         icon={props.markerImages["Circle"]}
         id={"348576"}
       />

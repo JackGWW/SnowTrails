@@ -12,6 +12,7 @@ const ShowTrail = (props) => {
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.51894162222743, longitude: -80.34792141057551}}
         trailName={"Alpine Express"}
+        trailDescription={"893m  -  147m\u2191 1m\u2193"}
         icon={props.markerImages["Diamond"]}
         id={"834808"}
         ref={childRef}
@@ -20,6 +21,7 @@ const ShowTrail = (props) => {
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.51680038124323, longitude: -80.35061250440776}}
         trailName={"Alpine Express"}
+        trailDescription={"893m  -  147m\u2191 1m\u2193"}
         icon={props.markerImages["Square"]}
         id={"164535"}
       />

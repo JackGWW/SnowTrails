@@ -89,6 +89,17 @@ def get_distance_2d(trail):
     return total_distance
 
 
+def get_trail_data(trail_name):
+    trail = get_track(gpx, trail_name)
+    load_cache(trail)
+    trail_data = {
+        "distance": get_distance_3d(trail),
+        "elevation_data": get_elevation_range(trail)
+    }
+    
+    return trail_data
+
+
 def get_distance_3d(trail):
     prev = None
     cur = None
@@ -167,20 +178,22 @@ def print_distance(trailName):
     print(f"{trailName}: {round(dist_3d, 1)}m")
 
 
+# Load GPX Trail File
+p = Path(__file__).with_name('Trails.gpx')
+gpx_file = p.open('r')
+gpx_file.readline(3) # Remove invalid characters from file
+gpx = gpxpy.parse(gpx_file)
+
+# Load elevation cache
+try:
+    elevation_cache = json.load(open(file_path, 'r'))
+except (IOError, ValueError):
+    print(f"Elevation cache file could not be found at: {file_path}")
+    elevation_cache = {}
+
+
 if __name__ == '__main__':
-    # Load GPX Trail File
-    p = Path(__file__).with_name('Trails.gpx')
-    gpx_file = p.open('r')
-    gpx_file.readline(3) # Remove invalid characters from file
-    gpx = gpxpy.parse(gpx_file)
-
-    # Load elevation cache
-    try:
-        elevation_cache = json.load(open(file_path, 'r'))
-    except (IOError, ValueError):
-        print(f"Elevation cache file could not be found at: {file_path}")
-        elevation_cache = {}
-
+    
     # Print just distances
     for track in gpx.tracks:
         trail_name = track.name.split('-')[0].strip()

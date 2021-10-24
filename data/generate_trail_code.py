@@ -4,6 +4,7 @@ import shutil
 import sys
 import gpxpy
 import json
+from calculate_length import get_trail_data
 from code_templates import *
 
 # Script reads a GPX file with all the trail and marker data. From this data it generates all the required code for React-native-maps
@@ -27,6 +28,10 @@ gpx_filepath = os.path.join(os.path.dirname(__file__), "Trails.gpx")
 json_output_dir = os.path.join(os.path.dirname(__file__), "json")
 code_output_dir = os.path.join(os.path.dirname(__file__), "..", "src", "components", "trails")
 
+
+# Cached trail distance
+distance_cache_file_name = 'trail_distance_cache.json'
+distance_cache_file_path = os.path.join(os.path.dirname(__file__), distance_cache_file_name)
 
 # Utility functions
 def stripped_name(name):
@@ -63,8 +68,36 @@ def write_segment_to_json_file(segment, filename):
         print("Wrote json file to {}".format(outPath))
 
 
+def update_distance_cache(trail_name):
+    distance_data = get_trail_data(trail_name)
+        
+    distance = distance_data.get("distance")
+    elv_gain = distance_data.get("elevation_data").get("gain")
+    elv_descent = distance_data.get("elevation_data").get("descent")
+    
+    distance_cache[trail_name] = {}
+    if distance > 1000:
+        distance_cache[trail_name]["distance"] = f"{round(distance/1000, 2)}km"
+    else:
+        distance_cache[trail_name]["distance"] = f"{int(round(distance, 0))}m"
+    distance_cache[trail_name]["elv_gain"] = f"{int(round(elv_gain, 0))}m"
+    distance_cache[trail_name]["elv_descent"] = f"{int(round(elv_descent, 0))}m"
+    
+    json.dump(distance_cache, open(distance_cache_file_path, 'w'))
+
+
 def generate_markers(data):
-    print("Generating markers for " + data["name"])
+    trail_name = data["name"]
+    print("Generating markers for " + trail_name)
+
+    # Get distance data
+    if trail_name not in distance_cache:
+        update_distance_cache(trail_name)
+    
+    distance = distance_cache.get(trail_name).get("distance")
+    elv_gain = distance_cache.get(trail_name).get("elv_gain")
+    elv_descent = distance_cache.get(trail_name).get("elv_descent")
+
     markers_code = []
     for num, marker in enumerate(data["markers"]):
         if num == 0:
@@ -72,6 +105,9 @@ def generate_markers(data):
                 latitude=marker["latitude"],
                 longitude=marker["longitude"],
                 name=data["name"],
+                distance=distance,
+                elv_gain=elv_gain,
+                elv_descent=elv_descent,
                 shape=marker["symbol"],
                 id=str(marker["latitude"] + marker["longitude"]).split('.')[1][-6:]))
         else:
@@ -79,6 +115,9 @@ def generate_markers(data):
                 latitude=marker["latitude"],
                 longitude=marker["longitude"],
                 name=data["name"],
+                distance=distance,
+                elv_gain=elv_gain,
+                elv_descent=elv_descent,
                 shape=marker["symbol"],
                 id=str(marker["latitude"] + marker["longitude"]).split('.')[1][-6:]))
 
@@ -118,6 +157,18 @@ def write_code_to_file(code, filename):
 gpx_file = open(gpx_filepath, "r")
 print("Removing invalid characters from file: " + gpx_file.readline(3))
 gpx = gpxpy.parse(gpx_file)
+
+# Load distance cache
+use_cache = False
+if use_cache:
+    try:
+        distance_cache = json.load(open(distance_cache_file_path, 'r'))
+    except (IOError, ValueError):
+        print(f"Elevation cache file could not be found at: {distance_cache_file_path}")
+        distance_cache = {}
+else:
+    distance_cache = {}
+
 
 
 color_mapping = {
