@@ -4,7 +4,7 @@
     <link href="http://www.garmin.com">
       <text>Garmin International</text>
     </link>
-    <time>2021-10-24T00:16:05Z</time>
+    <time>2021-10-25T19:13:26Z</time>
     <bounds maxlat="44.52979207970202" maxlon="-80.32884394749999" minlat="44.50787172652781" minlon="-80.377974389120936" />
   </metadata>
 
@@ -112,6 +112,24 @@
       </wptx1:WaypointExtension>
       <ctx:CreationTimeExtension>
         <ctx:CreationTime>2021-02-22T01:23:54Z</ctx:CreationTime>
+      </ctx:CreationTimeExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="44.512541284784675" lon="-80.363342016935349">
+    <time>2021-10-25T19:09:26Z</time>
+    <name>Bench</name>
+    <sym>Picnic Area</sym>
+    <type>user</type>
+    <extensions>
+      <gpxx:WaypointExtension>
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+      <wptx1:WaypointExtension>
+        <wptx1:DisplayMode>SymbolAndName</wptx1:DisplayMode>
+      </wptx1:WaypointExtension>
+      <ctx:CreationTimeExtension>
+        <ctx:CreationTime>2021-10-25T19:09:26Z</ctx:CreationTime>
       </ctx:CreationTimeExtension>
     </extensions>
   </wpt>
@@ -10321,6 +10339,29 @@
       <trkpt lat="44.514473397284746" lon="-80.352325262501836" />
       <trkpt lat="44.514451436698437" lon="-80.352334901690483" />
       <trkpt lat="44.514429476112127" lon="-80.352338086813688" />
+    </trkseg>
+  </trk>
+
+  <trk>
+    <name>To Bench - Black</name>
+    <extensions>
+      <gpxx:TrackExtension>
+        <gpxx:DisplayColor>Black</gpxx:DisplayColor>
+      </gpxx:TrackExtension>
+    </extensions>
+    <trkseg>
+      <trkpt lat="44.512405833229423" lon="-80.36354192532599" />
+      <trkpt lat="44.512398121878505" lon="-80.363516863435507" />
+      <trkpt lat="44.512410024181008" lon="-80.363494316115975" />
+      <trkpt lat="44.512424692511559" lon="-80.363473445177078" />
+      <trkpt lat="44.51243651099503" lon="-80.363450897857547" />
+      <trkpt lat="44.51244967058301" lon="-80.363424997776747" />
+      <trkpt lat="44.51246433891356" lon="-80.363404043018818" />
+      <trkpt lat="44.512482527643442" lon="-80.363387195393443" />
+      <trkpt lat="44.512501554563642" lon="-80.363372946158051" />
+      <trkpt lat="44.512519827112556" lon="-80.363356098532677" />
+      <trkpt lat="44.512538770213723" lon="-80.363341765478253" />
+      <trkpt lat="44.512557042762637" lon="-80.363324917852879" />
     </trkseg>
   </trk>
 
