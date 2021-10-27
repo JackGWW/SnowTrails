@@ -30,6 +30,7 @@ import SouthAscent from "./SouthAscent"
 import SweetSteeps from "./SweetSteeps"
 import TheGlades from "./TheGlades"
 import TheSwitchback from "./TheSwitchback"
+import ToBench from "./ToBench"
 import ToBruceTrail from "./ToBruceTrail"
 import ToCraigleithNorthLodge from "./ToCraigleithNorthLodge"
 import ToCrossover from "./ToCrossover"
@@ -76,6 +77,7 @@ const ShowTrail = (props) => {
       <SweetSteeps longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <TheGlades longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <TheSwitchback longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <ToBench longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <ToBruceTrail longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <ToCraigleithNorthLodge longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <ToCrossover longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>

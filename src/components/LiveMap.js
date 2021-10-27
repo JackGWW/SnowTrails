@@ -6,6 +6,8 @@ import * as Location from 'expo-location';
 
 // Polyline components for all trails
 import AllTrails from "./trails/AllTrails";
+import Marker from "./markers/Marker"
+
 
 export default class LiveMap extends React.Component {
   constructor() {
@@ -67,6 +69,8 @@ export default class LiveMap extends React.Component {
     let circleIcon =  require("../../assets/trailMarkers/circle.png")
     let squareIcon =  require("../../assets/trailMarkers/square.png")
     let diamondIcon = require("../../assets/trailMarkers/diamond.png")
+    let benchIcon = require("../../assets/trailMarkers/bench.png")
+
   
     let size;
     //As the screen zooms out, make the icons smaller
@@ -115,10 +119,13 @@ export default class LiveMap extends React.Component {
       "Circle": <Image source={circleIcon} style={{ height: size, width: size }} />,
       "Square": <Image source={squareIcon} style={{ height: size, width: size }} />,
       "Diamond": <Image source={diamondIcon} style={{ height: size, width: size }} />,
+      "Bench": <Image source={benchIcon} style={{ height: size * 1.2, width: size * 1.2 }} />,
     }
   }
 
   render() {
+    markerImages = this.getMarkerImages()
+    longitudeDelta = this.state.longitudeDelta.toFixed(5)
     return (
       <View style={styles.container}>
         <Spinner
@@ -157,7 +164,15 @@ export default class LiveMap extends React.Component {
             flipY={false}
             zIndex={-3}
           />
-          <AllTrails longitudeDelta={this.state.longitudeDelta.toFixed(5)} markerImages={this.getMarkerImages()} />
+          <AllTrails longitudeDelta={longitudeDelta} markerImages={markerImages} />
+          <Marker
+            longitudeDelta={longitudeDelta}
+            location={{latitude: 44.512641029432416, longitude: -80.363259455189109}}
+            trailName={"The Bench"}
+            trailDescription={"Lookout point"}
+            icon={markerImages["Bench"]}
+            id={"542683"}
+          />
         </MapView>
         <View style={styles.legendContainer}>
           <Image
