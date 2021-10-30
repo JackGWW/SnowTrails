@@ -39,7 +39,7 @@ const slides = [
   {
     key: "Tap",
     title: "Tip: Tap on Trails",
-    text: "Tap on trails or difficulty markers to see the trail name.",
+    text: "Tap on trails or difficulty markers to see detailed trail info.",
     image: require("./assets/touchTrail.png"),
     bg: "#B030DE",
   },
