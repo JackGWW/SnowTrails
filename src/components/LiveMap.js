@@ -35,7 +35,8 @@ export default class LiveMap extends React.Component {
       hiddenMarkerLongitude: -80.353,
       hiddenMarkerName: "",
       hiddenMarkerDescription: "",
-      coordinateMapping: require('../../data/coordinate_mapping.json')
+      coordinateMapping: require('../../data/coordinate_mapping.json'),
+      trailMapping: require('../../data/trail_mapping.json')
     };
   }
 
@@ -69,11 +70,12 @@ export default class LiveMap extends React.Component {
   }
 
   updateHiddenMarker(coordinateKey){
-    trailInfo = this.state.coordinateMapping[coordinateKey]
+    coordinateInfo = this.state.coordinateMapping[coordinateKey]
+    trailInfo = this.state.trailMapping[coordinateInfo.trail]
     
     this.setState({ 
-      hiddenMarkerLatitude: trailInfo.latitude,
-      hiddenMarkerLongitude: trailInfo.longitude,
+      hiddenMarkerLatitude: coordinateInfo.lat,
+      hiddenMarkerLongitude: coordinateInfo.lon,
       hiddenMarkerName: trailInfo.name,
       hiddenMarkerDescription: trailInfo.description,
     });

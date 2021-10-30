@@ -17,8 +17,11 @@ gpx_file.readline(3) # Remove invalid characters from file
 gpx = gpxpy.parse(gpx_file)
 
 
-file_name = 'coordinate_mapping.json'
-file_path = path.join(path.dirname(__file__), file_name)
+trail_file_name = 'trail_mapping.json'
+trail_file_path = path.join(path.dirname(__file__), trail_file_name)
+
+coord_file_name = 'coordinate_mapping.json'
+coord_file_path = path.join(path.dirname(__file__), coord_file_name)
 
 
 def update_distance_cache(trail_name, distance_cache):
@@ -44,12 +47,14 @@ def get_coordinate(point, lat_deminals, long_decimals):
 
 
 def generate_coordinate_mapping(distance_cache):
-    mapping = {}
+    gps_mapping = {}
+    trail_mapping = {}
+    trail_num = 0
 
     # Print just distances
     for track in gpx.tracks:
         trail_name = track.name.split('-')[0].strip()
-
+        
         if trail_name not in distance_cache:
             update_distance_cache(trail_name, distance_cache)
 
@@ -57,21 +62,28 @@ def generate_coordinate_mapping(distance_cache):
         elv_gain = distance_cache.get(trail_name).get("elv_gain")
         elv_descent = distance_cache.get(trail_name).get("elv_descent")
 
+        trail_mapping[trail_num] = {
+            "name": trail_name,
+            "description": f"{distance}  -  {elv_gain}\u2191 {elv_descent}\u2193"
+        }
+       
         for point in track.segments[0].points:
             details = {
-                "name": trail_name,
-                "description": f"{distance}  -  {elv_gain}\u2191 {elv_descent}\u2193",
-                "latitude": point.latitude,
-                "longitude": point.longitude
+                "trail": trail_num,
+                "lat": point.latitude,
+                "lon": point.longitude
             }
             
-            mapping[get_coordinate(point, 3, 3)] = details
-            mapping[get_coordinate(point, 3, 4)] = details
-            mapping[get_coordinate(point, 4, 3)] = details
-            mapping[get_coordinate(point, 4, 4)] = details
-            
+            gps_mapping[get_coordinate(point, 3, 3)] = details
+            gps_mapping[get_coordinate(point, 3, 4)] = details
+            gps_mapping[get_coordinate(point, 4, 3)] = details
+            gps_mapping[get_coordinate(point, 4, 4)] = details
+
+        trail_num += 1        
        
-    json.dump(mapping, open(file_path, 'w'))
+    json.dump(trail_mapping, open(trail_file_path, 'w'))
+    json.dump(gps_mapping, open(coord_file_path, 'w'))
+
 
 if __name__ == '__main__':
   
