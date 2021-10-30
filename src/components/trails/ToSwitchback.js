@@ -1,6 +1,6 @@
 import React from "react";
 import { Polyline } from "react-native-maps";
-import trail from "../../../data/json/SkiAcross.json"
+import trail from "../../../data/json/ToSwitchback.json"
 
 const ShowTrail = (props) => {
   return (

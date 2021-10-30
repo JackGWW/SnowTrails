@@ -25,7 +25,6 @@ import RidgeRun from "./RidgeRun"
 import RiverRoute from "./RiverRoute"
 import RobinsRun from "./RobinsRun"
 import Shortcut from "./Shortcut"
-import SkiAcross from "./SkiAcross"
 import SouthAscent from "./SouthAscent"
 import SweetSteeps from "./SweetSteeps"
 import TheGlades from "./TheGlades"
@@ -39,6 +38,7 @@ import ToRiver from "./ToRiver"
 import ToSouth from "./ToSouth"
 import ToSteeps from "./ToSteeps"
 import ToSweetSteeps from "./ToSweetSteeps"
+import ToSwitchback from "./ToSwitchback"
 import TopTraverse from "./TopTraverse"
 import Woodpecker from "./Woodpecker"
 
@@ -72,7 +72,6 @@ const ShowTrail = (props) => {
       <RiverRoute longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <RobinsRun longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <Shortcut longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
-      <SkiAcross longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <SouthAscent longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <SweetSteeps longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <TheGlades longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
@@ -86,6 +85,7 @@ const ShowTrail = (props) => {
       <ToSouth longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <ToSteeps longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <ToSweetSteeps longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <ToSwitchback longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <TopTraverse longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <Woodpecker longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
     </>
