@@ -5,6 +5,7 @@ import sys
 import gpxpy
 import json
 from calculate_length import get_trail_data
+from generate_coordinate_mapping import generate_coordinate_mapping
 from code_templates import *
 
 # Script reads a GPX file with all the trail and marker data. From this data it generates all the required code for React-native-maps
@@ -248,3 +249,6 @@ code = all_trails_template.substitute(
     components=''.join(all_components)
 )
 write_code_to_file(code, "AllTrails")
+
+# Generate coordinate mapping
+generate_coordinate_mapping(distance_cache)

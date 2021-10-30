@@ -26,8 +26,6 @@ linked_line_template = Template("""      <Polyline
         coordinates={trail}
         strokeColor={"${color}"}
         strokeWidth={3}
-        tappable={true}
-        onPress={() => childRef.current.displayTrailName()}
       />
 """)
 

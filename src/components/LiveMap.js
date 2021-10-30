@@ -12,7 +12,7 @@ import Marker from "./markers/Marker"
 export default class LiveMap extends React.Component {
   constructor() {
     super();
-
+    
     var initialCamera = {
       center: {
         latitude: 44.519949,
@@ -31,6 +31,11 @@ export default class LiveMap extends React.Component {
       initialCamera: initialCamera,
       longitudeDelta: 0.011,
       spinner: true,
+      hiddenMarkerLatitude: 44.518,
+      hiddenMarkerLongitude: -80.353,
+      hiddenMarkerName: "",
+      hiddenMarkerDescription: "",
+      coordinateMapping: require('../../data/coordinate_mapping.json')
     };
   }
 
@@ -63,6 +68,20 @@ export default class LiveMap extends React.Component {
     this.setState({ longitudeDelta: region.longitudeDelta });
   }
 
+  updateHiddenMarker(coordinateKey){
+    trailInfo = this.state.coordinateMapping[coordinateKey]
+    
+    this.setState({ 
+      hiddenMarkerLatitude: trailInfo.latitude,
+      hiddenMarkerLongitude: trailInfo.longitude,
+      hiddenMarkerName: trailInfo.name,
+      hiddenMarkerDescription: trailInfo.description,
+    });
+
+    // Give marker time to update before displaying
+    setTimeout(() => {  this.child.displayTrailName(false) }, 10);  
+  }
+
   getMarkerImages() {
     let delta = this.state.longitudeDelta
     
@@ -70,7 +89,7 @@ export default class LiveMap extends React.Component {
     let squareIcon =  require("../../assets/trailMarkers/square.png")
     let diamondIcon = require("../../assets/trailMarkers/diamond.png")
     let benchIcon = require("../../assets/trailMarkers/bench.png")
-
+    let invisibleIcon = require("../../assets/trailMarkers/invisible.png")
   
     let size;
     //As the screen zooms out, make the icons smaller
@@ -120,12 +139,18 @@ export default class LiveMap extends React.Component {
       "Square": <Image source={squareIcon} style={{ height: size, width: size }} />,
       "Diamond": <Image source={diamondIcon} style={{ height: size, width: size }} />,
       "Bench": <Image source={benchIcon} style={{ height: size * 1.2, width: size * 1.2 }} />,
+      "Invisible": <Image source={invisibleIcon} style={{ height: 1, width: 1 }} />,
     }
+  }
+  
+  getCoordinateKey(coordinate, latDecimals, longDecimals){
+    return coordinate.latitude.toFixed(latDecimals) + "," + coordinate.longitude.toFixed(longDecimals)
   }
 
   render() {
     markerImages = this.getMarkerImages()
     longitudeDelta = this.state.longitudeDelta.toFixed(5)
+
     return (
       <View style={styles.container}>
         <Spinner
@@ -135,6 +160,7 @@ export default class LiveMap extends React.Component {
           animation={"fade"}
           overlayColor={"rgba(0, 0, 0, 0.5)"}
         />
+        
         <MapView
           initialCamera={this.state.initialCamera}
           provider={"google"} // Always use GoogleMaps (instead of MapKit on iOS)
@@ -155,6 +181,33 @@ export default class LiveMap extends React.Component {
             bottom: 0,
             left: 0,
           }}
+          onPress={ (event) => {
+            coordinate = event.nativeEvent.coordinate         
+            
+            coordinateKey = this.getCoordinateKey(coordinate, 4, 4)
+            if (coordinateKey in this.state.coordinateMapping){
+              this.updateHiddenMarker(coordinateKey)
+              return
+            }
+            
+            coordinateKey = this.getCoordinateKey(coordinate, 4, 3)
+            if (coordinateKey in this.state.coordinateMapping){
+              this.updateHiddenMarker(coordinateKey)
+              return
+            }
+
+            coordinateKey = this.getCoordinateKey(coordinate, 3, 4)
+            if (coordinateKey in this.state.coordinateMapping){
+              this.updateHiddenMarker(coordinateKey)
+              return
+            }
+
+            coordinateKey = this.getCoordinateKey(coordinate, 3, 3)
+            if (coordinateKey in this.state.coordinateMapping){
+              this.updateHiddenMarker(coordinateKey)
+              return
+            }
+          }}
         >
           <UrlTile
             urlTemplate={
@@ -171,9 +224,19 @@ export default class LiveMap extends React.Component {
             trailName={"The Bench"}
             trailDescription={"Lookout point"}
             icon={markerImages["Bench"]}
-            id={"542683"}
+            id={"6"}
+          />
+          <Marker
+            longitudeDelta={"0"}
+            location={{latitude: this.state.hiddenMarkerLatitude, longitude: this.state.hiddenMarkerLongitude}}
+            trailName={this.state.hiddenMarkerName}
+            trailDescription={this.state.hiddenMarkerDescription}
+            icon={markerImages["Invisible"]}
+            id={"12"}
+            ref={child => {this.child = child}}
           />
         </MapView>
+
         <View style={styles.legendContainer}>
           <Image
             source={require("../../assets/legend.png")}

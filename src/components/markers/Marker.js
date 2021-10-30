@@ -1,15 +1,23 @@
 import React from "react";
 import { Marker } from "react-native-maps";
-import { Image } from 'react-native';
 
 export default class circleMarker extends React.Component {
     constructor(props) {
         super(props);
     }
 
-    displayTrailName() {
+    displayTrailName(autoHide=true) {
         this.marker.showCallout()
-        setTimeout(function () { this.marker.hideCallout() }.bind(this), 5 * 1000)
+        
+        if (autoHide) {
+            setTimeout(function () { 
+                try { 
+                    this.marker.hideCallout()
+                } catch (e) {
+                    console.log(e)
+                } 
+            }.bind(this), 5 * 1000)
+        }
     }
 
     render() {

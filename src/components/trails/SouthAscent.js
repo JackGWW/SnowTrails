@@ -38,8 +38,6 @@ const ShowTrail = (props) => {
         coordinates={trail}
         strokeColor={"#212121"}
         strokeWidth={3}
-        tappable={true}
-        onPress={() => childRef.current.displayTrailName()}
       />
     </>
   );
