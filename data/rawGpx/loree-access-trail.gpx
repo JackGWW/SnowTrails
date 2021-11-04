@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+<name>Loree Access Trail Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+Loree Access Trail
+</name>
+<trkseg>
+<trkpt lat="44.51293" lon="-80.37512">
+<ele>425.3</ele>
+<time>2021-11-04T15:01:35-07:00</time>
+</trkpt>
+<trkpt lat="44.51667" lon="-80.37605">
+<ele>436.6</ele>
+<time>2021-11-04T15:01:36-07:00</time>
+</trkpt>
+<trkpt lat="44.51818" lon="-80.37638">
+<ele>440</ele>
+<time>2021-11-04T15:01:37-07:00</time>
+</trkpt>
+<trkpt lat="44.51837" lon="-80.37642">
+<ele>439.8</ele>
+<time>2021-11-04T15:01:38-07:00</time>
+</trkpt>
+<trkpt lat="44.51996" lon="-80.37678">
+<ele>439</ele>
+<time>2021-11-04T15:01:39-07:00</time>
+</trkpt>
+<trkpt lat="44.52114" lon="-80.37695">
+<ele>440</ele>
+<time>2021-11-04T15:01:40-07:00</time>
+</trkpt>
+<trkpt lat="44.52207" lon="-80.37725">
+<ele>437.3</ele>
+<time>2021-11-04T15:01:41-07:00</time>
+</trkpt>
+<trkpt lat="44.52243" lon="-80.3774">
+<ele>436.6</ele>
+<time>2021-11-04T15:01:42-07:00</time>
+</trkpt>
+<trkpt lat="44.5229" lon="-80.3776">
+<ele>436</ele>
+<time>2021-11-04T15:01:43-07:00</time>
+</trkpt>
+<trkpt lat="44.52389" lon="-80.37773">
+<ele>435.8</ele>
+<time>2021-11-04T15:01:44-07:00</time>
+</trkpt>
+<trkpt lat="44.52479" lon="-80.37802">
+<ele>432.2</ele>
+<time>2021-11-04T15:01:45-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>

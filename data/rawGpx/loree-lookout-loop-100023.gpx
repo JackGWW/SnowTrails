@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+<name>Loree Lookout Loop Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+Loree Lookout Loop
+</name>
+<trkseg>
+<trkpt lat="44.52792" lon="-80.38327">
+<ele>409.7</ele>
+<time>2021-11-04T15:01:19-07:00</time>
+</trkpt>
+<trkpt lat="44.52807" lon="-80.38341">
+<ele>410.3</ele>
+<time>2021-11-04T15:01:20-07:00</time>
+</trkpt>
+<trkpt lat="44.52817" lon="-80.38344">
+<ele>410.3</ele>
+<time>2021-11-04T15:01:21-07:00</time>
+</trkpt>
+<trkpt lat="44.52826" lon="-80.3834">
+<ele>410.3</ele>
+<time>2021-11-04T15:01:22-07:00</time>
+</trkpt>
+<trkpt lat="44.52838" lon="-80.38342">
+<ele>409.2</ele>
+<time>2021-11-04T15:01:23-07:00</time>
+</trkpt>
+<trkpt lat="44.52849" lon="-80.38329">
+<ele>408.3</ele>
+<time>2021-11-04T15:01:24-07:00</time>
+</trkpt>
+<trkpt lat="44.52851" lon="-80.38337">
+<ele>409.2</ele>
+<time>2021-11-04T15:01:25-07:00</time>
+</trkpt>
+<trkpt lat="44.52847" lon="-80.38345">
+<ele>409.2</ele>
+<time>2021-11-04T15:01:26-07:00</time>
+</trkpt>
+<trkpt lat="44.52847" lon="-80.38352">
+<ele>409.2</ele>
+<time>2021-11-04T15:01:27-07:00</time>
+</trkpt>
+<trkpt lat="44.52849" lon="-80.38363">
+<ele>407.4</ele>
+<time>2021-11-04T15:01:28-07:00</time>
+</trkpt>
+<trkpt lat="44.52851" lon="-80.38374">
+<ele>407.4</ele>
+<time>2021-11-04T15:01:29-07:00</time>
+</trkpt>
+<trkpt lat="44.52851" lon="-80.38382">
+<ele>407.4</ele>
+<time>2021-11-04T15:01:30-07:00</time>
+</trkpt>
+<trkpt lat="44.52853" lon="-80.38385">
+<ele>407.4</ele>
+<time>2021-11-04T15:01:31-07:00</time>
+</trkpt>
+<trkpt lat="44.52856" lon="-80.3839">
+<ele>404.3</ele>
+<time>2021-11-04T15:01:32-07:00</time>
+</trkpt>
+<trkpt lat="44.52861" lon="-80.38407">
+<ele>404.3</ele>
+<time>2021-11-04T15:01:33-07:00</time>
+</trkpt>
+<trkpt lat="44.52861" lon="-80.38418">
+<ele>400.9</ele>
+<time>2021-11-04T15:01:34-07:00</time>
+</trkpt>
+<trkpt lat="44.52867" lon="-80.38441">
+<ele>395</ele>
+<time>2021-11-04T15:01:35-07:00</time>
+</trkpt>
+<trkpt lat="44.52869" lon="-80.38477">
+<ele>390.6</ele>
+<time>2021-11-04T15:01:36-07:00</time>
+</trkpt>
+<trkpt lat="44.52873" lon="-80.38499">
+<ele>390.6</ele>
+<time>2021-11-04T15:01:37-07:00</time>
+</trkpt>
+<trkpt lat="44.52882" lon="-80.38527">
+<ele>389.4</ele>
+<time>2021-11-04T15:01:38-07:00</time>
+</trkpt>
+<trkpt lat="44.5289" lon="-80.3854">
+<ele>374</ele>
+<time>2021-11-04T15:01:39-07:00</time>
+</trkpt>
+<trkpt lat="44.52889" lon="-80.38547">
+<ele>374</ele>
+<time>2021-11-04T15:01:40-07:00</time>
+</trkpt>
+<trkpt lat="44.52885" lon="-80.38551">
+<ele>387</ele>
+<time>2021-11-04T15:01:41-07:00</time>
+</trkpt>
+<trkpt lat="44.52878" lon="-80.38547">
+<ele>387</ele>
+<time>2021-11-04T15:01:42-07:00</time>
+</trkpt>
+<trkpt lat="44.52873" lon="-80.38543">
+<ele>387</ele>
+<time>2021-11-04T15:01:43-07:00</time>
+</trkpt>
+<trkpt lat="44.52865" lon="-80.38537">
+<ele>387</ele>
+<time>2021-11-04T15:01:44-07:00</time>
+</trkpt>
+<trkpt lat="44.52859" lon="-80.38525">
+<ele>393.3</ele>
+<time>2021-11-04T15:01:45-07:00</time>
+</trkpt>
+<trkpt lat="44.52855" lon="-80.38526">
+<ele>393.3</ele>
+<time>2021-11-04T15:01:46-07:00</time>
+</trkpt>
+<trkpt lat="44.5285" lon="-80.38526">
+<ele>393.3</ele>
+<time>2021-11-04T15:01:47-07:00</time>
+</trkpt>
+<trkpt lat="44.52844" lon="-80.38518">
+<ele>393.3</ele>
+<time>2021-11-04T15:01:48-07:00</time>
+</trkpt>
+<trkpt lat="44.52831" lon="-80.38514">
+<ele>389.1</ele>
+<time>2021-11-04T15:01:49-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>

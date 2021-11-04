@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+<name>Crack Addict Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+Crack Addict
+</name>
+<trkseg>
+<trkpt lat="44.52491" lon="-80.37958">
+<ele>429.7</ele>
+<time>2021-11-04T15:01:22-07:00</time>
+</trkpt>
+<trkpt lat="44.52497" lon="-80.37975">
+<ele>429.6</ele>
+<time>2021-11-04T15:01:23-07:00</time>
+</trkpt>
+<trkpt lat="44.52503" lon="-80.37991">
+<ele>428.8</ele>
+<time>2021-11-04T15:01:24-07:00</time>
+</trkpt>
+<trkpt lat="44.52504" lon="-80.38004">
+<ele>428.1</ele>
+<time>2021-11-04T15:01:25-07:00</time>
+</trkpt>
+<trkpt lat="44.52501" lon="-80.38014">
+<ele>428.1</ele>
+<time>2021-11-04T15:01:26-07:00</time>
+</trkpt>
+<trkpt lat="44.52492" lon="-80.38022">
+<ele>429.5</ele>
+<time>2021-11-04T15:01:27-07:00</time>
+</trkpt>
+<trkpt lat="44.52491" lon="-80.3803">
+<ele>429.1</ele>
+<time>2021-11-04T15:01:28-07:00</time>
+</trkpt>
+<trkpt lat="44.52494" lon="-80.38031">
+<ele>429.1</ele>
+<time>2021-11-04T15:01:29-07:00</time>
+</trkpt>
+<trkpt lat="44.52495" lon="-80.38033">
+<ele>429.1</ele>
+<time>2021-11-04T15:01:30-07:00</time>
+</trkpt>
+<trkpt lat="44.52488" lon="-80.38047">
+<ele>429.1</ele>
+<time>2021-11-04T15:01:31-07:00</time>
+</trkpt>
+<trkpt lat="44.52485" lon="-80.38058">
+<ele>427</ele>
+<time>2021-11-04T15:01:32-07:00</time>
+</trkpt>
+<trkpt lat="44.52483" lon="-80.38064">
+<ele>427</ele>
+<time>2021-11-04T15:01:33-07:00</time>
+</trkpt>
+<trkpt lat="44.52482" lon="-80.38074">
+<ele>427</ele>
+<time>2021-11-04T15:01:34-07:00</time>
+</trkpt>
+<trkpt lat="44.52481" lon="-80.38083">
+<ele>427</ele>
+<time>2021-11-04T15:01:35-07:00</time>
+</trkpt>
+<trkpt lat="44.52481" lon="-80.38088">
+<ele>423.1</ele>
+<time>2021-11-04T15:01:36-07:00</time>
+</trkpt>
+<trkpt lat="44.52482" lon="-80.38093">
+<ele>423.1</ele>
+<time>2021-11-04T15:01:37-07:00</time>
+</trkpt>
+<trkpt lat="44.52483" lon="-80.38109">
+<ele>423.1</ele>
+<time>2021-11-04T15:01:38-07:00</time>
+</trkpt>
+<trkpt lat="44.52478" lon="-80.38157">
+<ele>415.9</ele>
+<time>2021-11-04T15:01:39-07:00</time>
+</trkpt>
+<trkpt lat="44.52478" lon="-80.3818">
+<ele>413.5</ele>
+<time>2021-11-04T15:01:40-07:00</time>
+</trkpt>
+<trkpt lat="44.52479" lon="-80.38197">
+<ele>412</ele>
+<time>2021-11-04T15:01:41-07:00</time>
+</trkpt>
+<trkpt lat="44.52484" lon="-80.38212">
+<ele>412</ele>
+<time>2021-11-04T15:01:42-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>
