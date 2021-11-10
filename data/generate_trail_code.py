@@ -35,9 +35,11 @@ distance_cache_file_name = 'trail_distance_cache.json'
 distance_cache_file_path = os.path.join(os.path.dirname(__file__), distance_cache_file_name)
 
 # Utility functions
-def stripped_name(name):
-    stripped_name = ''.join(c for c in name if c.isalpha())
-    return stripped_name
+def stripped_name(name, include_nums = False):
+    if include_nums:
+        return ''.join(c for c in name if c.isalnum())
+    else:
+        return ''.join(c for c in name if c.isalpha())
 
 
 def delete_dir(dir_path):
@@ -177,7 +179,7 @@ print("\n### PARSING TRAILS ###")
 trail_data = {}
 for track in gpx.tracks:
     name, color = track.name.split("-")
-    filename = stripped_name(name)
+    filename = stripped_name(name, True)
     color = color_mapping[color.strip().lower()]
 
     trail_data[filename] = {
