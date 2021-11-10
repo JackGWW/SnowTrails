@@ -4,8 +4,6 @@ import Marker from "../markers/Marker"
 import trail from "../../../data/json/ForestGump.json"
 
 const ShowTrail = (props) => {
-  const childRef = useRef();
-
   return (
     <>
       <Marker
@@ -15,7 +13,6 @@ const ShowTrail = (props) => {
         trailDescription={"324m  -  5m\u2191 8m\u2193"}
         icon={props.markerImages["Circle"]}
         id={"301801"}
-        ref={childRef}
       />
 
       <Polyline

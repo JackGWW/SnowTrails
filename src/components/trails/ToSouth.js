@@ -4,11 +4,12 @@ import trail from "../../../data/json/ToSouth.json"
 
 const ShowTrail = (props) => {
   return (
-    <Polyline
-      coordinates={trail}
-      strokeColor={"#212121"}
-      strokeWidth={3}
-    />
+      <Polyline
+        coordinates={trail}
+        strokeColor={"#212121"}
+        strokeWidth={3}
+      />
+
   );
 };
 

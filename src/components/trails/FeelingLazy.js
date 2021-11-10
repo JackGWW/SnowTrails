@@ -4,8 +4,6 @@ import Marker from "../markers/Marker"
 import trail from "../../../data/json/FeelingLazy.json"
 
 const ShowTrail = (props) => {
-  const childRef = useRef();
-
   return (
     <>
       <Marker
@@ -15,7 +13,6 @@ const ShowTrail = (props) => {
         trailDescription={"170m  -  29m\u2191 2m\u2193"}
         icon={props.markerImages["Diamond"]}
         id={"905893"}
-        ref={childRef}
       />
 
       <Polyline

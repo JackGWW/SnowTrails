@@ -4,8 +4,6 @@ import Marker from "../markers/Marker"
 import trail from "../../../data/json/EnchantedForest.json"
 
 const ShowTrail = (props) => {
-  const childRef = useRef();
-
   return (
     <>
       <Marker
@@ -15,7 +13,6 @@ const ShowTrail = (props) => {
         trailDescription={"1.31km  -  35m\u2191 31m\u2193"}
         icon={props.markerImages["Circle"]}
         id={"882128"}
-        ref={childRef}
       />
       <Marker
         longitudeDelta={props.longitudeDelta}

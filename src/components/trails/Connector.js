@@ -4,8 +4,6 @@ import Marker from "../markers/Marker"
 import trail from "../../../data/json/Connector.json"
 
 const ShowTrail = (props) => {
-  const childRef = useRef();
-
   return (
     <>
       <Marker
@@ -15,7 +13,6 @@ const ShowTrail = (props) => {
         trailDescription={"241m  -  45m\u2191 0m\u2193"}
         icon={props.markerImages["Square"]}
         id={"321072"}
-        ref={childRef}
       />
 
       <Polyline

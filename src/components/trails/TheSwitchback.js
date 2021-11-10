@@ -4,8 +4,6 @@ import Marker from "../markers/Marker"
 import trail from "../../../data/json/TheSwitchback.json"
 
 const ShowTrail = (props) => {
-  const childRef = useRef();
-
   return (
     <>
       <Marker
@@ -15,7 +13,6 @@ const ShowTrail = (props) => {
         trailDescription={"988m  -  157m\u2191 10m\u2193"}
         icon={props.markerImages["Square"]}
         id={"756784"}
-        ref={childRef}
       />
       <Marker
         longitudeDelta={props.longitudeDelta}

@@ -4,8 +4,6 @@ import Marker from "../markers/Marker"
 import trail from "../../../data/json/NorthsideTrail.json"
 
 const ShowTrail = (props) => {
-  const childRef = useRef();
-
   return (
     <>
       <Marker
@@ -15,7 +13,6 @@ const ShowTrail = (props) => {
         trailDescription={"1.27km  -  169m\u2191 20m\u2193"}
         icon={props.markerImages["Square"]}
         id={"331275"}
-        ref={childRef}
       />
       <Marker
         longitudeDelta={props.longitudeDelta}

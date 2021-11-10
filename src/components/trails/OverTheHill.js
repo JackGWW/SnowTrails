@@ -4,26 +4,15 @@ import Marker from "../markers/Marker"
 import trail from "../../../data/json/OverTheHill.json"
 
 const ShowTrail = (props) => {
-  const childRef = useRef();
-
   return (
     <>
       <Marker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.521359633654356, longitude: -80.35730939358473}}
         trailName={"Over The Hill"}
-        trailDescription={"1.06km  -  154m\u2191 7m\u2193"}
+        trailDescription={"443m  -  85m\u2191 7m\u2193"}
         icon={props.markerImages["Diamond"]}
         id={"993037"}
-        ref={childRef}
-      />
-      <Marker
-        longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.52064583078027, longitude: -80.36255847662687}}
-        trailName={"Over The Hill"}
-        trailDescription={"1.06km  -  154m\u2191 7m\u2193"}
-        icon={props.markerImages["Square"]}
-        id={"846605"}
       />
 
       <Polyline

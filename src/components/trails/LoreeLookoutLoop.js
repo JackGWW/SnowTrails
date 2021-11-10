@@ -1,0 +1,16 @@
+import React from "react";
+import { Polyline } from "react-native-maps";
+import trail from "../../../data/json/LoreeLookoutLoop.json"
+
+const ShowTrail = (props) => {
+  return (
+      <Polyline
+        coordinates={trail}
+        strokeColor={"#388E3C"}
+        strokeWidth={3}
+      />
+
+  );
+};
+
+export default ShowTrail;

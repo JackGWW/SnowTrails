@@ -4,8 +4,6 @@ import Marker from "../markers/Marker"
 import trail from "../../../data/json/LostLoop.json"
 
 const ShowTrail = (props) => {
-  const childRef = useRef();
-
   return (
     <>
       <Marker
@@ -15,7 +13,6 @@ const ShowTrail = (props) => {
         trailDescription={"1.49km  -  68m\u2191 24m\u2193"}
         icon={props.markerImages["Circle"]}
         id={"516831"}
-        ref={childRef}
       />
       <Marker
         longitudeDelta={props.longitudeDelta}
