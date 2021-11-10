@@ -16,6 +16,22 @@ file_name = 'elevation_cache.json'
 file_path = path.join(path.dirname(__file__), file_name)
 
 
+def load_batch_to_cache(reversed_coords, cur_coordinates):
+    points = '|'.join(reversed_coords)
+    
+    url = f'https://atlas.microsoft.com/elevation/point/json?subscription-key={subscription_key}&api-version=1.0&points={points}'
+    response = requests.get(url)
+
+    data = json.loads(response.text).get("data")
+
+    # Update cache with new data
+    for index, elevation_point in enumerate(data):
+        elevation = elevation_point.get("elevationInMeter")
+        elevation_cache[cur_coordinates[index]] = elevation
+
+    print(f"Added {len(cur_coordinates)} coordinate locations to the cache")
+
+
 def load_cache(trail, batch_size=100):  
     cur_coordinates = []
     reversed_coords = []
@@ -34,22 +50,14 @@ def load_cache(trail, batch_size=100):
         reversed_coords.append(f"{point.longitude},{point.latitude}")
 
         # Process each batch
-        if len(cur_coordinates) == batch_size or total_count == len(all_points):
-            points = '|'.join(reversed_coords)
-            
-            url = f'https://atlas.microsoft.com/elevation/point/json?subscription-key={subscription_key}&api-version=1.0&points={points}'
-            response = requests.get(url)
-
-            data = json.loads(response.text).get("data")
-
-            # Update cache with new data
-            for index, elevation_point in enumerate(data):
-                elevation = elevation_point.get("elevationInMeter")
-                elevation_cache[cur_coordinates[index]] = elevation
-
-            print(f"Added {len(cur_coordinates)} coordinate locations to the cache")
+        if len(cur_coordinates) == batch_size:
+            load_batch_to_cache(reversed_coords, cur_coordinates)
             reversed_coords = []
             cur_coordinates = []        
+
+    # Load any remaining coordinates
+    if cur_coordinates:
+        load_batch_to_cache(reversed_coords, cur_coordinates)
 
     # Write updated cache to disk
     if points_updated:
