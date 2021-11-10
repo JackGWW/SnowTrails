@@ -100,9 +100,8 @@ def generate_markers(data):
     elv_descent = distance_cache.get(trail_name).get("elv_descent")
 
     markers_code = []
-    for num, marker in enumerate(data["markers"]):
-        if num == 0:
-            markers_code.append(linked_marker_template.substitute(
+    for _, marker in enumerate(data["markers"]):
+        markers_code.append(marker_template.substitute(
                 latitude=marker["latitude"],
                 longitude=marker["longitude"],
                 name=data["name"],
@@ -111,27 +110,14 @@ def generate_markers(data):
                 elv_descent=elv_descent,
                 shape=marker["symbol"],
                 id=str(marker["latitude"] + marker["longitude"]).split('.')[1][-6:]))
-        else:
-            markers_code.append(simple_marker_template.substitute(
-                latitude=marker["latitude"],
-                longitude=marker["longitude"],
-                name=data["name"],
-                distance=distance,
-                elv_gain=elv_gain,
-                elv_descent=elv_descent,
-                shape=marker["symbol"],
-                id=str(marker["latitude"] + marker["longitude"]).split('.')[1][-6:]))
-
+      
     return ''.join(markers_code)
 
 
 def generate_trail(data):
     print("Generating trail for " + data["name"])
-    if data["markers"]:
-        return linked_line_template.substitute(color=data["color"])
-    else:
-        return simple_line_template.substitute(color=data["color"])
-
+    return line_template.substitute(color=data["color"])
+    
 
 def create_trail_code(data, filename):
     if data["markers"]:
@@ -180,7 +166,8 @@ color_mapping = {
     "yellow": "#FFEA00",
     "magenta": "magenta",
     "pink": "magenta",
-    "black": "#212121"
+    "black": "#212121",
+    "grey": "#808080"
 }
 
 
