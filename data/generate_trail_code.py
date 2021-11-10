@@ -169,7 +169,7 @@ color_mapping = {
     "magenta": "magenta",
     "pink": "magenta",
     "black": "#212121",
-    "grey": "#808080"
+    "grey": "#989898"
 }
 
 
@@ -189,6 +189,7 @@ for track in gpx.tracks:
         "markers": []
     }
     print(f"Added trail {filename} ({name.strip()}) - color: {color}")
+
 
 # Add marker data
 print("\n### PARSING MARKERS ###")
