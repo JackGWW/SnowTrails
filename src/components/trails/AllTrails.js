@@ -19,6 +19,7 @@ import ForestGump from "./ForestGump"
 import ForestLane from "./ForestLane"
 import GreenTrail from "./GreenTrail"
 import GreenYellowConnector from "./GreenYellowConnector"
+import LightBlueTrail from "./LightBlueTrail"
 import LoreeForest from "./LoreeForest"
 import LoreeLookoutLoop from "./LoreeLookoutLoop"
 import LostLoop from "./LostLoop"
@@ -81,6 +82,7 @@ const ShowTrail = (props) => {
       <ForestLane longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <GreenTrail longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <GreenYellowConnector longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
+      <LightBlueTrail longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <LoreeForest longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <LoreeLookoutLoop longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
       <LostLoop longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>

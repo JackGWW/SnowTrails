@@ -30,6 +30,19 @@ json_output_dir = os.path.join(os.path.dirname(__file__), "json")
 code_output_dir = os.path.join(os.path.dirname(__file__), "..", "src", "components", "trails")
 
 
+color_mapping = {
+    "green": "#388E3C",
+    "blue": "#2962FF",
+    "red": "#D50000",
+    "orange": "#FF9100",
+    "yellow": "#FFEA00",
+    "magenta": "magenta",
+    "pink": "magenta",
+    "black": "#212121",
+    "grey": "#989898",
+    "light blue": "#ADD8E6"
+}
+
 # Cached trail distance
 distance_cache_file_name = 'trail_distance_cache.json'
 distance_cache_file_path = os.path.join(os.path.dirname(__file__), distance_cache_file_name)
@@ -158,19 +171,6 @@ if use_cache:
 else:
     distance_cache = {}
 
-
-
-color_mapping = {
-    "green": "#388E3C",
-    "blue": "#2962FF",
-    "red": "#D50000",
-    "orange": "#FF9100",
-    "yellow": "#FFEA00",
-    "magenta": "magenta",
-    "pink": "magenta",
-    "black": "#212121",
-    "grey": "#989898"
-}
 
 
 # Parse GPX File, adding all data to nested dictionaries
