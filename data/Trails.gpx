@@ -4,7 +4,7 @@
     <link href="http://www.garmin.com">
       <text>Garmin International</text>
     </link>
-    <time>2021-11-11T18:38:50Z</time>
+    <time>2021-11-13T19:33:49Z</time>
     <bounds maxlat="44.534839997068048" maxlon="-80.32884394749999" minlat="44.50787172652781" minlon="-80.397479999810457" />
   </metadata>
 
@@ -746,7 +746,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.527469119057059" lon="-80.38192612119019">
+  <wpt lat="44.527645474299788" lon="-80.381936682388186">
     <time>2021-11-11T18:38:01Z</time>
     <name>Light Blue Trail</name>
     <sym>Square, Blue</sym>
@@ -872,7 +872,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.526652470231056" lon="-80.380260804668069">
+  <wpt lat="44.52782048843801" lon="-80.380525840446353">
     <time>2021-11-10T02:17:27Z</time>
     <name>Orange Trail</name>
     <sym>Diamond, Blue</sym>

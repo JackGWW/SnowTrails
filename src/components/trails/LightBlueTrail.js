@@ -8,16 +8,16 @@ const ShowTrail = (props) => {
     <>
       <Marker
         longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.52746911905706, longitude: -80.38192612119019}}
+        location={{latitude: 44.52764547429979, longitude: -80.38193668238819}}
         trailName={"Light Blue Trail"}
         trailDescription={"326m  -  17m\u2191 20m\u2193"}
         icon={props.markerImages["Square"]}
-        id={"213313"}
+        id={"080884"}
       />
 
       <Polyline
         coordinates={trail}
-        strokeColor={"#ADD8E6"}
+        strokeColor={"#0CE1F1"}
         strokeWidth={3}
       />
     </>
