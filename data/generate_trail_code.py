@@ -40,7 +40,8 @@ color_mapping = {
     "pink": "magenta",
     "black": "#212121",
     "grey": "#989898",
-    "light blue": "#0CE1F1"
+    "light blue": "#0CE1F1",
+    "purple": "#9400D3"
 }
 
 # Cached trail distance
