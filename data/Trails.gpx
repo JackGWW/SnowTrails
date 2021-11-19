@@ -4,7 +4,7 @@
     <link href="http://www.garmin.com">
       <text>Garmin International</text>
     </link>
-    <time>2021-11-16T18:26:24Z</time>
+    <time>2021-11-19T18:41:36Z</time>
     <bounds maxlat="44.534839997068048" maxlon="-80.32884394749999" minlat="44.50787172652781" minlon="-80.397479999810457" />
   </metadata>
 
@@ -929,7 +929,7 @@
   <wpt lat="44.525083964690566" lon="-80.386570366099477">
     <time>2021-11-16T18:26:05Z</time>
     <name>Purple Trail</name>
-    <sym>Circle, Blue</sym>
+    <sym>Square, Blue</sym>
     <type>user</type>
     <extensions>
       <gpxx:WaypointExtension>
@@ -1827,7 +1827,7 @@
     <name>Backbowl - Orange</name>
     <extensions>
       <gpxx:TrackExtension>
-        <gpxx:DisplayColor>Magenta</gpxx:DisplayColor>
+        <gpxx:DisplayColor>DarkYellow</gpxx:DisplayColor>
       </gpxx:TrackExtension>
     </extensions>
     <trkseg>
@@ -5978,7 +5978,7 @@
     <name>Downward Dog - Orange</name>
     <extensions>
       <gpxx:TrackExtension>
-        <gpxx:DisplayColor>Magenta</gpxx:DisplayColor>
+        <gpxx:DisplayColor>DarkYellow</gpxx:DisplayColor>
       </gpxx:TrackExtension>
     </extensions>
     <trkseg>
@@ -6850,7 +6850,7 @@
     <name>Feeling Lazy - Orange</name>
     <extensions>
       <gpxx:TrackExtension>
-        <gpxx:DisplayColor>Magenta</gpxx:DisplayColor>
+        <gpxx:DisplayColor>DarkYellow</gpxx:DisplayColor>
       </gpxx:TrackExtension>
     </extensions>
     <trkseg>
@@ -12304,7 +12304,7 @@
     <name>Sweet Steeps - Orange</name>
     <extensions>
       <gpxx:TrackExtension>
-        <gpxx:DisplayColor>Magenta</gpxx:DisplayColor>
+        <gpxx:DisplayColor>DarkYellow</gpxx:DisplayColor>
       </gpxx:TrackExtension>
     </extensions>
     <trkseg>
@@ -12997,7 +12997,7 @@
     <name>The Glades - Orange</name>
     <extensions>
       <gpxx:TrackExtension>
-        <gpxx:DisplayColor>Magenta</gpxx:DisplayColor>
+        <gpxx:DisplayColor>DarkYellow</gpxx:DisplayColor>
       </gpxx:TrackExtension>
     </extensions>
     <trkseg>
@@ -13220,35 +13220,35 @@
     <name>The Spur - Orange</name>
     <extensions>
       <gpxx:TrackExtension>
-        <gpxx:DisplayColor>Magenta</gpxx:DisplayColor>
+        <gpxx:DisplayColor>DarkYellow</gpxx:DisplayColor>
       </gpxx:TrackExtension>
     </extensions>
     <trkseg>
-      <trkpt lat="44.526290958747268" lon="-80.362585466355085" />
-      <trkpt lat="44.52632088214159" lon="-80.362568451091647" />
-      <trkpt lat="44.526355834677815" lon="-80.36256174556911" />
-      <trkpt lat="44.526389110833406" lon="-80.362551519647241" />
-      <trkpt lat="44.526425153017044" lon="-80.362539365887642" />
-      <trkpt lat="44.526458429172635" lon="-80.362529139965773" />
-      <trkpt lat="44.526491705328226" lon="-80.362518997862935" />
-      <trkpt lat="44.526524981483817" lon="-80.362508855760098" />
-      <trkpt lat="44.526565633714199" lon="-80.362498043105006" />
-      <trkpt lat="44.526606202125549" lon="-80.362487146630883" />
-      <trkpt lat="44.526641154661775" lon="-80.362480441108346" />
-      <trkpt lat="44.526672754436731" lon="-80.362466862425208" />
-      <trkpt lat="44.526707706972957" lon="-80.362460156902671" />
-      <trkpt lat="44.526742156594992" lon="-80.36244448274374" />
-      <trkpt lat="44.526779958978295" lon="-80.36243568174541" />
-      <trkpt lat="44.526813235133886" lon="-80.362425539642572" />
-      <trkpt lat="44.526852127164602" lon="-80.362411290407181" />
-      <trkpt lat="44.526883726939559" lon="-80.362397627905011" />
-      <trkpt lat="44.52691700309515" lon="-80.362387485802174" />
-      <trkpt lat="44.526953129097819" lon="-80.362375248223543" />
-      <trkpt lat="44.52698640525341" lon="-80.362365106120706" />
-      <trkpt lat="44.527019681409001" lon="-80.362354880198836" />
-      <trkpt lat="44.527050694450736" lon="-80.362332332879305" />
-      <trkpt lat="44.527080617845058" lon="-80.362315317615867" />
       <trkpt lat="44.527110541239381" lon="-80.362298218533397" />
+      <trkpt lat="44.527080617845058" lon="-80.362315317615867" />
+      <trkpt lat="44.527050694450736" lon="-80.362332332879305" />
+      <trkpt lat="44.527019681409001" lon="-80.362354880198836" />
+      <trkpt lat="44.52698640525341" lon="-80.362365106120706" />
+      <trkpt lat="44.526953129097819" lon="-80.362375248223543" />
+      <trkpt lat="44.52691700309515" lon="-80.362387485802174" />
+      <trkpt lat="44.526883726939559" lon="-80.362397627905011" />
+      <trkpt lat="44.526852127164602" lon="-80.362411290407181" />
+      <trkpt lat="44.526813235133886" lon="-80.362425539642572" />
+      <trkpt lat="44.526779958978295" lon="-80.36243568174541" />
+      <trkpt lat="44.526742156594992" lon="-80.36244448274374" />
+      <trkpt lat="44.526707706972957" lon="-80.362460156902671" />
+      <trkpt lat="44.526672754436731" lon="-80.362466862425208" />
+      <trkpt lat="44.526641154661775" lon="-80.362480441108346" />
+      <trkpt lat="44.526606202125549" lon="-80.362487146630883" />
+      <trkpt lat="44.526565633714199" lon="-80.362498043105006" />
+      <trkpt lat="44.526524981483817" lon="-80.362508855760098" />
+      <trkpt lat="44.526491705328226" lon="-80.362518997862935" />
+      <trkpt lat="44.526458429172635" lon="-80.362529139965773" />
+      <trkpt lat="44.526425153017044" lon="-80.362539365887642" />
+      <trkpt lat="44.526389110833406" lon="-80.362551519647241" />
+      <trkpt lat="44.526355834677815" lon="-80.36256174556911" />
+      <trkpt lat="44.52632088214159" lon="-80.362568451091647" />
+      <trkpt lat="44.526290958747268" lon="-80.362585466355085" />
     </trkseg>
   </trk>
 
@@ -16012,7 +16012,7 @@
     <name>Woodpecker - Orange</name>
     <extensions>
       <gpxx:TrackExtension>
-        <gpxx:DisplayColor>Magenta</gpxx:DisplayColor>
+        <gpxx:DisplayColor>DarkYellow</gpxx:DisplayColor>
       </gpxx:TrackExtension>
     </extensions>
     <trkseg>
