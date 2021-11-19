@@ -1,5 +1,5 @@
 # SnowTrails
-Mobile snowshoe trail map app for Alpine & Craigleith Ski Clubs.
+Mobile snowshoe trail map app for Alpine, Craigleith & Georgian Peaks Ski Clubs.
 
 ## Screenshots
 <p float="left">
