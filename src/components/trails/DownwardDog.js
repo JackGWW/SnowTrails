@@ -14,14 +14,6 @@ const ShowTrail = (props) => {
         icon={props.markerImages["Diamond"]}
         id={"630725"}
       />
-      <Marker
-        longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.516359409317374, longitude: -80.3614073060453}}
-        trailName={"Downward Dog"}
-        trailDescription={"400m  -  69m\u2191 3m\u2193"}
-        icon={props.markerImages["Square"]}
-        id={"672792"}
-      />
 
       <Polyline
         coordinates={trail}

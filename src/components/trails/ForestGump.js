@@ -8,11 +8,11 @@ const ShowTrail = (props) => {
     <>
       <Marker
         longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.51373126357794, longitude: -80.35328490659595}}
+        location={{latitude: 44.51378314755857, longitude: -80.35327459685504}}
         trailName={"Forest Gump"}
         trailDescription={"324m  -  5m\u2191 8m\u2193"}
         icon={props.markerImages["Circle"]}
-        id={"301801"}
+        id={"296474"}
       />
 
       <Polyline

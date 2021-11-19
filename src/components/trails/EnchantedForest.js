@@ -16,19 +16,11 @@ const ShowTrail = (props) => {
       />
       <Marker
         longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.5133447740227, longitude: -80.35672266036272}}
+        location={{latitude: 44.51386227272451, longitude: -80.35742313601077}}
         trailName={"Enchanted Forest"}
         trailDescription={"1.31km  -  35m\u2191 31m\u2193"}
         icon={props.markerImages["Circle"]}
-        id={"634002"}
-      />
-      <Marker
-        longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.514601808041334, longitude: -80.35655158571899}}
-        trailName={"Enchanted Forest"}
-        trailDescription={"1.31km  -  35m\u2191 31m\u2193"}
-        icon={props.markerImages["Circle"]}
-        id={"677655"}
+        id={"328626"}
       />
 
       <Polyline

@@ -196,7 +196,7 @@ for track in gpx.tracks:
 print("\n### PARSING MARKERS ###")
 for waypoint in gpx.waypoints:
     name = waypoint.name.split('(')[0]
-    filename = stripped_name(name)
+    filename = stripped_name(name, True)
     symbol = waypoint.symbol.split(',')[0]
 
     if filename in trail_data:
