@@ -24,7 +24,7 @@ const slides = [
     key: "Welcome",
     title: "Welcome!",
     text:
-      "Enjoy using SnowTrails, your snowshoe trail map for Alpine & Craigleith Ski Clubs.",
+      "Enjoy using SnowTrails, your snowshoe trail map for Alpine, Craigleith & Georgian Peaks Ski Clubs.",
     image: require("./assets/doubleSnowshoe.png"),
     bg: "#1679F3",
   },
@@ -32,14 +32,14 @@ const slides = [
     key: "Disclaimer",
     title: "Disclaimer",
     text:
-    "Many of the trails shown are on private property. Trails on Alpine and Craigleith Ski Club property may only be used by club members.\n\nAlpine and Craigleith Ski Clubs do not maintain the trails and assume no liability to users of the trails or this app, whether for trail condition, trail markings, map accuracy or any other matter whatsoever.  Users of the trails and this app do so at their own risk.",
+    "Many of the trails shown are on private property. Trails on ski club property may only be used by club members.\n\nAlpine, Craigleith & Georgian Peaks Ski Clubs do not maintain the trails and assume no liability to users of the trails or this app, whether for trail condition, trail markings, map accuracy or any other matter whatsoever.  Users of the trails and this app do so at their own risk.",
     image: require("./assets/disclaimer.png"),
     bg: "#DF9313",
   },
   {
     key: "Tap",
     title: "Tip: Tap on Trails",
-    text: "Tap on trails or difficulty markers to see detailed trail info.",
+    text: "Tap on trails to see detailed trail info.",
     image: require("./assets/touchTrail.png"),
     bg: "#B030DE",
   },
