@@ -33,7 +33,7 @@ export default function StaticMap() {
     >
       <Image
         style={styles.map}
-        source={require('../../assets/trailMapLarge.png')}
+        source={require('../../assets/trailMap.png')}
       />
     </ImageZoom>
   )
