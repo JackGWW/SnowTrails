@@ -33,7 +33,7 @@
       "bundleIdentifier": "com.jgwwilliams.snowtrails",
       "buildNumber": "1.1.0",
       "config": {
-          "googleMapsApiKey": "AIzaSyDwiFWcgGSy2wKw3oZgoUGrS25fYKhHF4A"
+        "googleMapsApiKey": "AIzaSyDwiFWcgGSy2wKw3oZgoUGrS25fYKhHF4A"
       },
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app uses the users location to show their current location on a trail map"
@@ -52,11 +52,17 @@
       "icon": "./assets/icon.png",
       "package": "com.jgwwilliams.SnowTrails",
       "versionCode": 13,
-      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION", "FOREGROUND_SERVICE"] 
-
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "FOREGROUND_SERVICE"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "sentry-expo"
+    ]
   }
 }
