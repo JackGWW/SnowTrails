@@ -41,7 +41,7 @@ export default class LiveMap extends React.Component {
   }
 
   async enableLocationPermissions() {
-    let { status } = await Location.requestPermissionsAsync();
+    let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== 'granted') {
       console.log('Location permission was denied');
     }
