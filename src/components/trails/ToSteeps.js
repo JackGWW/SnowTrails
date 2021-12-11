@@ -5,6 +5,7 @@ import trail from "../../../data/json/ToSteeps.json"
 const ShowTrail = (props) => {
   return (
       <Polyline
+        lineDashPattern={props.trailPattern}
         coordinates={trail}
         strokeColor={"#212121"}
         strokeWidth={3}

@@ -27,6 +27,7 @@ export default class LiveMap extends React.Component {
       // Only when using Google Maps.
       zoom: 15,
     };
+
     this.state = {
       initialCamera: initialCamera,
       longitudeDelta: 0.011,
@@ -36,7 +37,8 @@ export default class LiveMap extends React.Component {
       hiddenMarkerName: "",
       hiddenMarkerDescription: "",
       coordinateMapping: require('../../data/coordinate_mapping.json'),
-      trailMapping: require('../../data/trail_mapping.json')
+      trailMapping: require('../../data/trail_mapping.json'),
+      trailPattern: [0]
     };
   }
 
@@ -53,6 +55,9 @@ export default class LiveMap extends React.Component {
 
     // Ask for location permissions
     this.enableLocationPermissions()
+
+    // TODO: Remove this and set to null from the start once the fix has been added to Expo
+    this.setState({ trailPattern: null })
 
     northEastLimit = {
       latitude: 44.531,
@@ -219,7 +224,7 @@ export default class LiveMap extends React.Component {
             flipY={false}
             zIndex={-3}
           />
-          <AllTrails longitudeDelta={longitudeDelta} markerImages={markerImages} />
+          <AllTrails longitudeDelta={longitudeDelta} markerImages={markerImages} trailPattern={this.state.trailPattern} />
           <Marker
             longitudeDelta={longitudeDelta}
             location={{latitude: 44.512641029432416, longitude: -80.363259455189109}}

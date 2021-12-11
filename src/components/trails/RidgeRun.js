@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Polyline } from "react-native-maps";
 import Marker from "../markers/Marker"
 import trail from "../../../data/json/RidgeRun.json"
@@ -16,6 +16,7 @@ const ShowTrail = (props) => {
       />
 
       <Polyline
+        lineDashPattern={props.trailPattern}
         coordinates={trail}
         strokeColor={"#2962FF"}
         strokeWidth={3}

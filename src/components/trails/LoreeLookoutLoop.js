@@ -5,6 +5,7 @@ import trail from "../../../data/json/LoreeLookoutLoop.json"
 const ShowTrail = (props) => {
   return (
       <Polyline
+        lineDashPattern={props.trailPattern}
         coordinates={trail}
         strokeColor={"#388E3C"}
         strokeWidth={3}

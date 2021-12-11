@@ -5,6 +5,7 @@ import trail from "../../../data/json/ToEastRut.json"
 const ShowTrail = (props) => {
   return (
       <Polyline
+        lineDashPattern={props.trailPattern}
         coordinates={trail}
         strokeColor={"#989898"}
         strokeWidth={3}
