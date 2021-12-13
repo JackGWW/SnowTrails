@@ -241,6 +241,7 @@ export default class LiveMap extends React.Component {
             icon={markerImages["Invisible"]}
             id={"12"}
             ref={child => {this.child = child}}
+            key={this.state.hiddenMarkerLatitude}
           />
         </MapView>
 
