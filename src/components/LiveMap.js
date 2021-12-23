@@ -30,6 +30,7 @@ export default class LiveMap extends React.Component {
 
     this.state = {
       initialCamera: initialCamera,
+      mapPaddingTop: 0,
       longitudeDelta: 0.011,
       spinner: true,
       hiddenMarkerLatitude: 44.518,
@@ -154,12 +155,18 @@ export default class LiveMap extends React.Component {
     return coordinate.latitude.toFixed(latDecimals) + "," + coordinate.longitude.toFixed(longDecimals)
   }
 
+  onLayout = event => {
+    // Move userLocation buttom to bottom right of screen instead of top right
+    let {_, height} = event.nativeEvent.layout
+    this.setState({ mapPaddingTop: height - 55 });
+  }
+
   render() {
     markerImages = this.getMarkerImages()
     longitudeDelta = this.state.longitudeDelta.toFixed(5)
 
     return (
-      <View style={styles.container}>
+      <View style={styles.container} onLayout={this.onLayout}>
         <Spinner
           visible={this.state.spinner}
           textContent={"Loading..."}
@@ -182,13 +189,16 @@ export default class LiveMap extends React.Component {
           onMapReady={this.mapSetup.bind(this)} //Initialize map boundaries when the map loads
           onRegionChangeComplete={(region) => this.updateRegion(region)}
           provider={PROVIDER_GOOGLE}
+          showsCompass={false}
           mapPadding={{
-            top: Platform.OS === "ios" ? 20 : StatusBar.currentHeight,
+            top: this.state.mapPaddingTop,
             right: 0,
             bottom: 0,
             left: 0,
           }}
           onPress={ (event) => {
+            // If map is tapped, check if it is tapped on a trail
+            // If a trail is tapped, show a marker on that trail 
             coordinate = event.nativeEvent.coordinate         
             
             coordinateKey = this.getCoordinateKey(coordinate, 4, 4)
