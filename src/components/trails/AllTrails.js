@@ -55,6 +55,7 @@ import ToSouth from "./ToSouth"
 import ToSteeps from "./ToSteeps"
 import ToSweetSteeps from "./ToSweetSteeps"
 import ToSwitchback from "./ToSwitchback"
+import ToTrailhead from "./ToTrailhead"
 import TopTraverse from "./TopTraverse"
 import Woodpecker from "./Woodpecker"
 import YellowTrail from "./YellowTrail"
@@ -119,6 +120,7 @@ const ShowTrail = (props) => {
       <ToSteeps longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <ToSweetSteeps longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <ToSwitchback longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
+      <ToTrailhead longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <TopTraverse longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <Woodpecker longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <YellowTrail longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
