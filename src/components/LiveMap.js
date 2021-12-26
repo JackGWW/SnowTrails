@@ -61,7 +61,7 @@ export default class LiveMap extends React.Component {
     this.setState({ trailPattern: null })
 
     northEastLimit = {
-      latitude: 44.531,
+      latitude: 44.539,
       longitude: -80.328,
     };
     southWestLimit = {
