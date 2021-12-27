@@ -32,7 +32,7 @@ const slides = [
     key: "Disclaimer",
     title: "Disclaimer",
     text:
-    "Many of the trails shown are on private property. Trails on ski club property may only be used by club members.\n\nAlpine, Craigleith & Georgian Peaks Ski Clubs do not maintain the trails and assume no liability to users of the trails or this app, whether for trail condition, trail markings, map accuracy or any other matter whatsoever.  Users of the trails and this app do so at their own risk.",
+    "Many of the trails shown are on private property. Trails on ski club property may only be used by club members.\n\nAlpine, Craigleith & Georgian Peaks Ski Clubs do not maintain the trails and assume no liability to users of the trails or this app, whether for trail condition, trail markings, map accuracy or any other matter whatsoever. Users of the trails and this app do so at their own risk.",
     image: require("./assets/disclaimer.png"),
     bg: "#DF9313",
   },
