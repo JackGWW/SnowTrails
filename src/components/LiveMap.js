@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Dimensions, StatusBar, Image } from "react-native";
+import { StyleSheet, View, Dimensions, Image, TouchableHighlight } from "react-native";
 import MapView, { UrlTile, PROVIDER_GOOGLE } from "react-native-maps";
 import Spinner from "react-native-loading-spinner-overlay";
 import * as Location from 'expo-location';
@@ -12,7 +12,7 @@ import Marker from "./markers/Marker"
 export default class LiveMap extends React.Component {
   constructor() {
     super();
-    
+
     var initialCamera = {
       center: {
         latitude: 44.519949,
@@ -30,9 +30,10 @@ export default class LiveMap extends React.Component {
 
     this.state = {
       initialCamera: initialCamera,
-      mapPaddingTop: 0,
       longitudeDelta: 0.011,
       spinner: true,
+      currentLatitude: 44.519,
+      currentLongitude: -80.352,
       hiddenMarkerLatitude: 44.518,
       hiddenMarkerLongitude: -80.353,
       hiddenMarkerName: "",
@@ -75,11 +76,18 @@ export default class LiveMap extends React.Component {
     this.setState({ longitudeDelta: region.longitudeDelta });
   }
 
-  updateHiddenMarker(coordinateKey){
+  updateCurrentLocation(coordinate) {
+    this.setState({
+      currentLatitude: coordinate.latitude,
+      currentLongitude: coordinate.longitude
+    });
+  }
+
+  updateHiddenMarker(coordinateKey) {
     coordinateInfo = this.state.coordinateMapping[coordinateKey]
     trailInfo = this.state.trailMapping[coordinateInfo.trail]
-    
-    this.setState({ 
+
+    this.setState({
       hiddenMarkerLatitude: coordinateInfo.lat,
       hiddenMarkerLongitude: coordinateInfo.lon,
       hiddenMarkerName: trailInfo.name,
@@ -87,60 +95,60 @@ export default class LiveMap extends React.Component {
     });
 
     // Give marker time to update before displaying
-    setTimeout(() => {  this.child.displayTrailName(false) }, 10);  
+    setTimeout(() => { this.child.displayTrailName(false) }, 10);
   }
 
   getMarkerImages() {
     let delta = this.state.longitudeDelta
-    
-    let circleIcon =  require("../../assets/trailMarkers/circle.png")
-    let squareIcon =  require("../../assets/trailMarkers/square.png")
+
+    let circleIcon = require("../../assets/trailMarkers/circle.png")
+    let squareIcon = require("../../assets/trailMarkers/square.png")
     let diamondIcon = require("../../assets/trailMarkers/diamond.png")
     let benchIcon = require("../../assets/trailMarkers/bench.png")
     let invisibleIcon = require("../../assets/trailMarkers/invisible.png")
-  
+
     let size;
     //As the screen zooms out, make the icons smaller
     switch (true) {
-        case (delta < 0.0025):
-            size = 35
-            break
-        case (delta < 0.003):
-            size = 32
-            break
-        case (delta < 0.0035):
-            size = 29
-            break
-        case (delta < 0.0042):
-            size = 26
-            break    
-        case (delta < 0.005):
-            size = 23
-            break
-        case (delta < 0.0065):
-            size = 20
-            break    
-        case (delta < 0.008):
-            size = 18
-            break
-        case (delta < 0.01):
-            size = 16
-            break
-        case (delta < 0.0119):
-            size = 14
-            break
-        case (delta < 0.0187):
-            size = 11
-            break
-        case (delta < 0.02):
-            size = 10
-            break
-        case (delta < 0.025):
-            size = 9
-            break
-        default:
-            size = 8;
-            break
+      case (delta < 0.0025):
+        size = 35
+        break
+      case (delta < 0.003):
+        size = 32
+        break
+      case (delta < 0.0035):
+        size = 29
+        break
+      case (delta < 0.0042):
+        size = 26
+        break
+      case (delta < 0.005):
+        size = 23
+        break
+      case (delta < 0.0065):
+        size = 20
+        break
+      case (delta < 0.008):
+        size = 18
+        break
+      case (delta < 0.01):
+        size = 16
+        break
+      case (delta < 0.0119):
+        size = 14
+        break
+      case (delta < 0.0187):
+        size = 11
+        break
+      case (delta < 0.02):
+        size = 10
+        break
+      case (delta < 0.025):
+        size = 9
+        break
+      default:
+        size = 8;
+        break
     }
     return {
       "Circle": <Image source={circleIcon} style={{ height: size, width: size }} />,
@@ -150,15 +158,19 @@ export default class LiveMap extends React.Component {
       "Invisible": <Image source={invisibleIcon} style={{ height: 1, width: 1 }} />,
     }
   }
-  
-  getCoordinateKey(coordinate, latDecimals, longDecimals){
+
+  getCoordinateKey(coordinate, latDecimals, longDecimals) {
     return coordinate.latitude.toFixed(latDecimals) + "," + coordinate.longitude.toFixed(longDecimals)
   }
 
-  onLayout = event => {
-    // Move userLocation buttom to bottom right of screen instead of top right
-    let {_, height} = event.nativeEvent.layout
-    this.setState({ mapPaddingTop: height - 55 });
+  animateToUser() {
+    currentLocation = {
+      center: {
+        latitude: this.state.currentLatitude,
+        longitude: this.state.currentLongitude,
+      }
+    }
+    this.mapView.animateCamera(currentLocation)
   }
 
   render() {
@@ -166,7 +178,7 @@ export default class LiveMap extends React.Component {
     longitudeDelta = this.state.longitudeDelta.toFixed(5)
 
     return (
-      <View style={styles.container} onLayout={this.onLayout}>
+      <View style={styles.container}>
         <Spinner
           visible={this.state.spinner}
           textContent={"Loading..."}
@@ -174,53 +186,50 @@ export default class LiveMap extends React.Component {
           animation={"fade"}
           overlayColor={"rgba(0, 0, 0, 0.5)"}
         />
-        
+
         <MapView
+          ref={(ref) => (this.mapView = ref)}
           initialCamera={this.state.initialCamera}
           provider={"google"} // Always use GoogleMaps (instead of MapKit on iOS)
           showsUserLocation={true}
-          showsCompass={true}
+          followsUserLocation={true}
+          showsCompass={false}
+          showsMyLocationButton={false}
           toolbarEnabled={false} // Hide map buttons on marker press
           minZoomLevel={14}
           maxZoomLevel={18}
           mapType={"none"}
           style={styles.mapStyle}
-          ref={(ref) => (this.mapView = ref)}
-          onMapReady={this.mapSetup.bind(this)} //Initialize map boundaries when the map loads
+          onMapReady={this.mapSetup.bind(this)} // Initialize map boundaries when the map loads
+          onUserLocationChange={(event) => this.updateCurrentLocation(event.nativeEvent.coordinate)}
           onRegionChangeComplete={(region) => this.updateRegion(region)}
           provider={PROVIDER_GOOGLE}
-          showsCompass={false}
-          mapPadding={{
-            top: this.state.mapPaddingTop,
-            right: 0,
-            bottom: 0,
-            left: 0,
-          }}
-          onPress={ (event) => {
+
+          onPress={(event) => {
             // If map is tapped, check if it is tapped on a trail
             // If a trail is tapped, show a marker on that trail 
-            coordinate = event.nativeEvent.coordinate         
-            
+            coordinate = event.nativeEvent.coordinate
+
             coordinateKey = this.getCoordinateKey(coordinate, 4, 4)
-            if (coordinateKey in this.state.coordinateMapping){
+            if (coordinateKey in this.state.coordinateMapping) {
               this.updateHiddenMarker(coordinateKey)
               return
             }
-            
+
             coordinateKey = this.getCoordinateKey(coordinate, 4, 3)
-            if (coordinateKey in this.state.coordinateMapping){
+            if (coordinateKey in this.state.coordinateMapping) {
               this.updateHiddenMarker(coordinateKey)
               return
             }
 
             coordinateKey = this.getCoordinateKey(coordinate, 3, 4)
-            if (coordinateKey in this.state.coordinateMapping){
+            if (coordinateKey in this.state.coordinateMapping) {
               this.updateHiddenMarker(coordinateKey)
               return
             }
 
             coordinateKey = this.getCoordinateKey(coordinate, 3, 3)
-            if (coordinateKey in this.state.coordinateMapping){
+            if (coordinateKey in this.state.coordinateMapping) {
               this.updateHiddenMarker(coordinateKey)
               return
             }
@@ -237,7 +246,7 @@ export default class LiveMap extends React.Component {
           <AllTrails longitudeDelta={longitudeDelta} markerImages={markerImages} trailPattern={this.state.trailPattern} />
           <Marker
             longitudeDelta={longitudeDelta}
-            location={{latitude: 44.512641029432416, longitude: -80.363259455189109}}
+            location={{ latitude: 44.512641029432416, longitude: -80.363259455189109 }}
             trailName={"The Bench"}
             trailDescription={"Lookout point"}
             icon={markerImages["Bench"]}
@@ -245,12 +254,12 @@ export default class LiveMap extends React.Component {
           />
           <Marker
             longitudeDelta={"0"}
-            location={{latitude: this.state.hiddenMarkerLatitude, longitude: this.state.hiddenMarkerLongitude}}
+            location={{ latitude: this.state.hiddenMarkerLatitude, longitude: this.state.hiddenMarkerLongitude }}
             trailName={this.state.hiddenMarkerName}
             trailDescription={this.state.hiddenMarkerDescription}
             icon={markerImages["Invisible"]}
             id={"12"}
-            ref={child => {this.child = child}}
+            ref={child => { this.child = child }}
             key={this.state.hiddenMarkerLatitude}
           />
         </MapView>
@@ -262,6 +271,20 @@ export default class LiveMap extends React.Component {
             resizeMode="contain"
           />
         </View>
+
+        <TouchableHighlight
+          style={styles.locationButtonContainer}
+          activeOpacity={0.5}
+          underlayColor="#A9A9A9"
+          onPress={() => this.animateToUser()} >
+          <>
+            <Image
+              source={require("../../assets/locationIcon.png")}
+              resizeMode="contain"
+              style={styles.locationButton}
+            />
+          </>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -286,7 +309,6 @@ const styles = StyleSheet.create({
   legendContainer: {
     position: "absolute",
     left: 1,
-    right: 0,
     bottom: 1,
     height: 100,
     width: 100,
@@ -302,6 +324,23 @@ const styles = StyleSheet.create({
     height: 80,
     width: 80,
     flexDirection: "row",
+  },
+  locationButtonContainer: {
+    position: "absolute",
+    right: 20,
+    bottom: 20,
+    height: 50,
+    width: 50,
+    borderWidth: 1,
+    borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: "rgba(255, 255, 255, 0.85)",
+  },
+  locationButton: {
+    height: 35,
+    width: 35,
   },
   spinnerTextStyle: {
     color: "#FFF",
