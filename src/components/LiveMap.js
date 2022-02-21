@@ -86,12 +86,18 @@ export default class LiveMap extends React.Component {
   updateHiddenMarker(coordinateKey) {
     coordinateInfo = this.state.coordinateMapping[coordinateKey]
     trailInfo = this.state.trailMapping[coordinateInfo.trail]
+    trailName = trailInfo.name
+    trailDescription = trailInfo.description
 
+    if (trailDescription === ""){
+      trailDescription = null
+    }
+    
     this.setState({
       hiddenMarkerLatitude: coordinateInfo.lat,
       hiddenMarkerLongitude: coordinateInfo.lon,
-      hiddenMarkerName: trailInfo.name,
-      hiddenMarkerDescription: trailInfo.description,
+      hiddenMarkerName: trailName,
+      hiddenMarkerDescription: trailDescription,
     });
 
     // Give marker time to update before displaying

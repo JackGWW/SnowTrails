@@ -44,6 +44,9 @@ color_mapping = {
     "purple": "#9400D3"
 }
 
+# Don't show trail distance for specifc trail
+trail_description_blacklist = ["Bruce Trail", "Cross Country Ski"]
+
 # Cached trail distance
 distance_cache_file_name = 'trail_distance_cache.json'
 distance_cache_file_path = os.path.join(os.path.dirname(__file__), distance_cache_file_name)
@@ -103,6 +106,16 @@ def update_distance_cache(trail_name):
     json.dump(distance_cache, open(distance_cache_file_path, 'w'))
 
 
+def generate_trail_description(trail_name, distance, elv_gain, elv_descent):
+        if trail_name in trail_description_blacklist:
+            return ""
+
+        print(trail_name)
+        trail_description = "{distance}  -  {elv_gain}\\u2191 {elv_descent}\\u2193".format(distance=distance, elv_gain=elv_gain, elv_descent=elv_descent)
+
+        return 'trailDescription={"' + trail_description +'"}'
+
+
 def generate_markers(data):
     trail_name = data["name"]
     print("Generating markers for " + trail_name)
@@ -114,6 +127,7 @@ def generate_markers(data):
     distance = distance_cache.get(trail_name).get("distance")
     elv_gain = distance_cache.get(trail_name).get("elv_gain")
     elv_descent = distance_cache.get(trail_name).get("elv_descent")
+    description = generate_trail_description(trail_name, distance, elv_gain, elv_descent)
 
     markers_code = []
     for _, marker in enumerate(data["markers"]):
@@ -121,9 +135,7 @@ def generate_markers(data):
                 latitude=marker["latitude"],
                 longitude=marker["longitude"],
                 name=data["name"],
-                distance=distance,
-                elv_gain=elv_gain,
-                elv_descent=elv_descent,
+                trailDescription=description,
                 shape=marker["symbol"],
                 id=str(marker["latitude"] + marker["longitude"]).split('.')[1][-6:]))
       
@@ -242,4 +254,4 @@ code = all_trails_template.substitute(
 write_code_to_file(code, "AllTrails")
 
 # Generate coordinate mapping
-generate_coordinate_mapping(distance_cache)
+generate_coordinate_mapping(distance_cache, trail_description_blacklist)

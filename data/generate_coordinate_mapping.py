@@ -46,7 +46,7 @@ def get_coordinate(point, lat_deminals, long_decimals):
     return f"{round(point.latitude, lat_deminals)},{round(point.longitude, long_decimals)}"
 
 
-def generate_coordinate_mapping(distance_cache):
+def generate_coordinate_mapping(distance_cache, trail_description_blacklist=[]):
     gps_mapping = {}
     trail_mapping = {}
     trail_num = 0
@@ -66,9 +66,13 @@ def generate_coordinate_mapping(distance_cache):
         elv_gain = distance_cache.get(trail_name).get("elv_gain")
         elv_descent = distance_cache.get(trail_name).get("elv_descent")
 
+        description = ""
+        if trail_name not in trail_description_blacklist:
+            description = f"{distance}  -  {elv_gain}\u2191 {elv_descent}\u2193"
+        
         trail_mapping[trail_num] = {
             "name": trail_name,
-            "description": f"{distance}  -  {elv_gain}\u2191 {elv_descent}\u2193"
+            "description": description
         }
        
         for point in track.segments[0].points:

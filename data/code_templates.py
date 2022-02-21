@@ -4,7 +4,7 @@ marker_template = Template("""      <Marker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: ${latitude}, longitude: ${longitude}}}
         trailName={"${name}"}
-        trailDescription={"${distance}  -  ${elv_gain}\\u2191 ${elv_descent}\\u2193"}
+        ${trailDescription}
         icon={props.markerImages["${shape}"]}
         id={"${id}"}
       />
