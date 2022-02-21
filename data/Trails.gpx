@@ -4,7 +4,7 @@
     <link href="http://www.garmin.com">
       <text>Garmin International</text>
     </link>
-    <time>2022-02-21T18:58:46Z</time>
+    <time>2022-02-21T20:45:42Z</time>
     <bounds maxlat="44.535191114991903" maxlon="-80.32884394749999" minlat="44.50787172652781" minlon="-80.397479999810457" />
   </metadata>
 
@@ -5325,7 +5325,7 @@
   </trk>
 
   <trk>
-    <name>Cross Country Ski - Red</name>
+    <name>Cross Country Ski Trail - Red</name>
     <extensions>
       <gpxx:TrackExtension>
         <gpxx:DisplayColor>Red</gpxx:DisplayColor>

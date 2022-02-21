@@ -1,11 +1,11 @@
 import React from "react";
 import { Polyline } from "react-native-maps";
-import trail from "../../../data/json/CrossCountrySki.json"
+import trail from "../../../data/json/CrossCountrySkiTrail.json"
 
 const ShowTrail = (props) => {
   return (
       <Polyline
-        lineDashPattern={props.trailPattern}
+        lineDashPattern={[3, 3]}
         coordinates={trail}
         strokeColor={"#D50000"}
         strokeWidth={3}
