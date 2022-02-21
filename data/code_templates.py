@@ -12,7 +12,7 @@ marker_template = Template("""      <Marker
 
 
 line_template = Template("""      <Polyline
-        lineDashPattern={props.trailPattern}
+        lineDashPattern={${line_dash_pattern}}
         coordinates={trail}
         strokeColor={"${color}"}
         strokeWidth={3}

@@ -45,7 +45,10 @@ color_mapping = {
 }
 
 # Don't show trail distance for specifc trail
-trail_description_blacklist = ["Bruce Trail", "Cross Country Ski"]
+trail_description_blacklist = ["Bruce Trail", "Cross Country Ski Trail"]
+
+# Create some trails as dotted lines
+dotted_line_trails = ["Cross Country Ski Trail"]
 
 # Cached trail distance
 distance_cache_file_name = 'trail_distance_cache.json'
@@ -143,8 +146,17 @@ def generate_markers(data):
 
 
 def generate_trail(data):
-    print("Generating trail for " + data["name"])
-    return line_template.substitute(color=data["color"])
+    trail_name = data["name"]
+    print("Generating trail for " + trail_name)
+
+    line_dash_pattern = "props.trailPattern"
+    if trail_name in dotted_line_trails:
+        line_dash_pattern = "[3, 3]"
+
+    return line_template.substitute(
+        color=data["color"],
+        line_dash_pattern=line_dash_pattern
+        )
     
 
 def create_trail_code(data, filename):
