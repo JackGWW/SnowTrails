@@ -40,6 +40,7 @@ color_mapping = {
     "pink": "magenta",
     "black": "#212121",
     "grey": "#989898",
+    "dark grey": "#696969", 
     "light blue": "#0CE1F1",
     "purple": "#9400D3"
 }

@@ -7,7 +7,7 @@ const ShowTrail = (props) => {
       <Polyline
         lineDashPattern={[3, 3]}
         coordinates={trail}
-        strokeColor={"#D50000"}
+        strokeColor={"#696969"}
         strokeWidth={3}
       />
 
