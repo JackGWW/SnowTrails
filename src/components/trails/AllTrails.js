@@ -1,6 +1,7 @@
 import React from "react";
 import AcrossCraigleith from "./AcrossCraigleith"
 import AlpineExpress from "./AlpineExpress"
+import AlpineExpressLink from "./AlpineExpressLink"
 import Backbowl from "./Backbowl"
 import Backstairs from "./Backstairs"
 import BlueBird from "./BlueBird"
@@ -67,6 +68,7 @@ const ShowTrail = (props) => {
     <>
       <AcrossCraigleith longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <AlpineExpress longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
+      <AlpineExpressLink longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <Backbowl longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <Backstairs longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <BlueBird longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
