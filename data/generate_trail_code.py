@@ -1,7 +1,6 @@
 import os
 import glob
 import shutil
-import sys
 import gpxpy
 import json
 from calculate_length import get_trail_data
