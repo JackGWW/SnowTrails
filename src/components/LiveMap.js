@@ -40,7 +40,7 @@ export default class LiveMap extends React.Component {
       hiddenMarkerDescription: "",
       coordinateMapping: require('../../data/coordinate_mapping.json'),
       trailMapping: require('../../data/trail_mapping.json'),
-      trailPattern: [0]
+      trailPattern: null
     };
   }
 
