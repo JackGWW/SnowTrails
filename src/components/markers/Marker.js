@@ -21,7 +21,7 @@ export default class circleMarker extends React.Component {
     }
 
     render() {
-        markerKey = this.props.id + this.props.longitudeDelta
+        let markerKey = this.props.id + this.props.longitudeDelta
         return (
             <Marker
                 coordinate={this.props.location}

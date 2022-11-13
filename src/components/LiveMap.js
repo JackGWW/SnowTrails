@@ -13,7 +13,7 @@ export default class LiveMap extends React.Component {
   constructor() {
     super();
 
-    var initialCamera = {
+    let initialCamera = {
       center: {
         latitude: 44.519949,
         longitude: -80.351933,
@@ -84,10 +84,10 @@ export default class LiveMap extends React.Component {
   }
 
   updateHiddenMarker(coordinateKey) {
-    coordinateInfo = this.state.coordinateMapping[coordinateKey]
-    trailInfo = this.state.trailMapping[coordinateInfo.trail]
-    trailName = trailInfo.name
-    trailDescription = trailInfo.description
+    let coordinateInfo = this.state.coordinateMapping[coordinateKey]
+    let trailInfo = this.state.trailMapping[coordinateInfo.trail]
+    let trailName = trailInfo.name
+    let trailDescription = trailInfo.description
 
     if (trailDescription === ""){
       trailDescription = null
@@ -170,7 +170,7 @@ export default class LiveMap extends React.Component {
   }
 
   animateToUser() {
-    currentLocation = {
+    let currentLocation = {
       center: {
         latitude: this.state.currentLatitude,
         longitude: this.state.currentLongitude,
@@ -180,8 +180,8 @@ export default class LiveMap extends React.Component {
   }
 
   render() {
-    markerImages = this.getMarkerImages()
-    longitudeDelta = this.state.longitudeDelta.toFixed(5)
+    let markerImages = this.getMarkerImages()
+    let longitudeDelta = this.state.longitudeDelta.toFixed(5)
 
     return (
       <View style={styles.container}>
@@ -196,7 +196,7 @@ export default class LiveMap extends React.Component {
         <MapView
           ref={(ref) => (this.mapView = ref)}
           initialCamera={this.state.initialCamera}
-          provider={"google"} // Always use GoogleMaps (instead of MapKit on iOS)
+          provider={PROVIDER_GOOGLE} // Always use GoogleMaps (instead of MapKit on iOS)
           showsUserLocation={true}
           followsUserLocation={true}
           showsCompass={false}
@@ -209,14 +209,13 @@ export default class LiveMap extends React.Component {
           onMapReady={this.mapSetup.bind(this)} // Initialize map boundaries when the map loads
           onUserLocationChange={(event) => this.updateCurrentLocation(event.nativeEvent.coordinate)}
           onRegionChangeComplete={(region) => this.updateRegion(region)}
-          provider={PROVIDER_GOOGLE}
 
           onPress={(event) => {
             // If map is tapped, check if it is tapped on a trail
             // If a trail is tapped, show a marker on that trail 
-            coordinate = event.nativeEvent.coordinate
-
-            coordinateKey = this.getCoordinateKey(coordinate, 4, 4)
+            let coordinate = event.nativeEvent.coordinate
+            
+            let coordinateKey = this.getCoordinateKey(coordinate, 4, 4)
             if (coordinateKey in this.state.coordinateMapping) {
               this.updateHiddenMarker(coordinateKey)
               return
@@ -267,9 +266,11 @@ export default class LiveMap extends React.Component {
             id={"12"}
             ref={child => { this.child = child }}
             key={this.state.hiddenMarkerLatitude}
+            tappable={false}
           />
         </MapView>
 
+        {/* Bottom left, trail rating legend */}
         <View style={styles.legendContainer}>
           <Image
             source={require("../../assets/legend.png")}
@@ -277,7 +278,8 @@ export default class LiveMap extends React.Component {
             resizeMode="contain"
           />
         </View>
-
+        
+        {/* Bottom right, move to current location button */}
         <TouchableHighlight
           style={styles.locationButtonContainer}
           activeOpacity={0.5}
