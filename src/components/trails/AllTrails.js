@@ -10,6 +10,7 @@ import BruceTrail from "./BruceTrail"
 import BruceTrailConnection from "./BruceTrailConnection"
 import BruceTrailLoop from "./BruceTrailLoop"
 import Connector from "./Connector"
+import CrossCountryLoop from "./CrossCountryLoop"
 import CrossCountrySkiTrail from "./CrossCountrySkiTrail"
 import Crossover from "./Crossover"
 import DeerRun from "./DeerRun"
@@ -77,6 +78,7 @@ const ShowTrail = (props) => {
       <BruceTrailConnection longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <BruceTrailLoop longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <Connector longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
+      <CrossCountryLoop longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <CrossCountrySkiTrail longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <Crossover longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <DeerRun longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>

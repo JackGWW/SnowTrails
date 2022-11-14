@@ -45,7 +45,7 @@ color_mapping = {
 }
 
 # Don't show trail distance for specifc trail
-trail_description_blacklist = ["Bruce Trail", "Cross Country Ski Trail"]
+trail_description_blacklist = ["Bruce Trail", "Cross Country Ski Trail", "Cross Country Loop"]
 
 # Create some trails as dotted lines
 dotted_line_trails = ["Cross Country Ski Trail"]
@@ -150,7 +150,7 @@ def generate_trail(data):
     print("Generating trail for " + trail_name)
 
     line_dash_pattern = "props.trailPattern"
-    if trail_name in dotted_line_trails:
+    if "cross country" in trail_name.lower():
         line_dash_pattern = "[3, 3]"
 
     return line_template.substitute(

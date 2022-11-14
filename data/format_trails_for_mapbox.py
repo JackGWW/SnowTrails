@@ -23,9 +23,6 @@ color_mapping = {
     "purple": "#9400D3"
 }
 
-# Store cross country trails differently
-cross_country_trails = ["Cross Country Ski Trail"]
-
 
 # Utility functions
 def show_trail_name(name):
@@ -35,7 +32,7 @@ def show_trail_name(name):
         return "true"
 
 def get_trail_type(name):
-    if name in cross_country_trails:
+    if "cross country" in name.lower():
         return "cross_country"
     else:
         return "snowshoe"
