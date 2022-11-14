@@ -1,5 +1,297 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" version="1.1" creator="gpx.py -- https://github.com/tkrajina/gpxpy">
+  <wpt lat="44.51894162222743" lon="-80.34792141057551">
+    <name>Alpine Express</name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.51680038124323" lon="-80.35061250440776">
+    <name>Alpine Express </name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.525374146178365" lon="-80.36739433184266">
+    <name>Back bowl</name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.51643291860819" lon="-80.3465835750103">
+    <name>Backstairs</name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.513524901121855" lon="-80.34594789147377">
+    <name>Backstairs </name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.5178415812552" lon="-80.34474617801607">
+    <name>Backstairs </name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.512641029432416" lon="-80.36325945518911">
+    <name>Bench</name>
+    <sym>picnic area</sym>
+  </wpt>
+  <wpt lat="44.52601636759937" lon="-80.36271957680583">
+    <name>Blue Bird</name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.52741631306708" lon="-80.39311160333455">
+    <name>Blue Trail</name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.53118355944753" lon="-80.38515642285347">
+    <name>Blue Trail </name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.5294254552573" lon="-80.39206889458">
+    <name>Blue Trail </name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.52388099394739" lon="-80.38510722108185">
+    <name>Blue Trail </name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.52502839267254" lon="-80.38915425539017">
+    <name>Blue Trail </name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.51797074638307" lon="-80.36381995305419">
+    <name>Bruce Trail</name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.512506583705544" lon="-80.35317770205438">
+    <name>Bruce Trail </name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.522331012412906" lon="-80.37698993459344">
+    <name>Bruce Trail </name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.51732969842851" lon="-80.36766196601093">
+    <name>Bruce Trail </name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.51310262084007" lon="-80.36579062230885">
+    <name>Bruce Trail </name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.51208262704313" lon="-80.35794675350189">
+    <name>Bruce Trail </name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.51365230605006" lon="-80.36034800112247">
+    <name>Bruce Trail </name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.51309658586979" lon="-80.36267129704356">
+    <name>Bruce Trail </name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.51537939719856" lon="-80.36508939228952">
+    <name>Bruce Trail </name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.52007527463138" lon="-80.36667801439762">
+    <name>Bruce Trail </name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.5241323672235" lon="-80.37579266354442">
+    <name>Bruce Trail </name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.518202506005764" lon="-80.37597899325192">
+    <name>Bruce Trail </name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.52190512791276" lon="-80.36701857112348">
+    <name>Connector</name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.52254072763026" lon="-80.36524596624076">
+    <name>Crossover</name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.52450175769627" lon="-80.36655555479228">
+    <name>Crossover </name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.514505080878735" lon="-80.36384174600244">
+    <name>Deer Run</name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.51655210927129" lon="-80.36226284690201">
+    <name>Downward Dog</name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.51386227272451" lon="-80.35742313601077">
+    <name>Enchanted Forest</name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.51194843277335" lon="-80.35213071852922">
+    <name>Farm Road</name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.523445973172784" lon="-80.35922013223171">
+    <name>Feeling Lazy</name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.51378314755857" lon="-80.35327459685504">
+    <name>Forest Gump</name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.51316950842738" lon="-80.35527175292373">
+    <name>Forest Lane</name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.52890686690807" lon="-80.38758231326938">
+    <name>Green Trail</name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.525645384564996" lon="-80.38238016888499">
+    <name>Green Trail </name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.52794009819627" lon="-80.38185227662325">
+    <name>Light Blue Trail</name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.524339735507965" lon="-80.36285025067627">
+    <name>Lost Loop</name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.52674156986177" lon="-80.36906501278281">
+    <name>Lost Loop </name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.51765147969127" lon="-80.34795200452209">
+    <name>Lover's Loop</name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.51585146598518" lon="-80.34932781010866">
+    <name>Lover's Loop </name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.523475812748075" lon="-80.35000414587557">
+    <name>Northside Trail</name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.52389775775373" lon="-80.3563383501023">
+    <name>Northside Trail </name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.52782048843801" lon="-80.38052584044635">
+    <name>Orange Trail</name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.53092715702951" lon="-80.38071577437222">
+    <name>Orange Trail </name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.521359633654356" lon="-80.35730939358473">
+    <name>Over The Hill</name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.525083964690566" lon="-80.38657036609948">
+    <name>Purple Trail</name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.519146559759974" lon="-80.36112525500357">
+    <name>R2R</name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.52644736506045" lon="-80.38758407346904">
+    <name>Red Trail</name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.52871609479189" lon="-80.39135039784014">
+    <name>Red Trail </name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.52047006227076" lon="-80.35803811624646">
+    <name>Ridge Run</name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.52064583078027" lon="-80.36255847662687">
+    <name>Ridge Runl </name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.51853836886585" lon="-80.3588873706758">
+    <name>River Route</name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.51615002937615" lon="-80.36024440079927">
+    <name>River Route </name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.515025932341814" lon="-80.35941417329013">
+    <name>Robin's Run</name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.522471660748124" lon="-80.35474914126098">
+    <name>Shortcut</name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.50960133224726" lon="-80.33153696916997">
+    <name>South Ascent</name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.50843364931643" lon="-80.33438748680055">
+    <name>South Ascent </name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.51220550574362" lon="-80.3292023576796">
+    <name>South Ascent </name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.52706309966743" lon="-80.35891637206078">
+    <name>Sweet Steeps</name>
+    <sym>diamond</sym>
+  </wpt>
+  <wpt lat="44.527416145429015" lon="-80.36455605179071">
+    <name>The Glades</name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.51870550401509" lon="-80.34718765877187">
+    <name>The Switchback</name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.5159228798002" lon="-80.3507035318762">
+    <name>The Switchback</name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.52884467318654" lon="-80.3573933802545">
+    <name>To Sweet Steeps</name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.509754721075296" lon="-80.34231634810567">
+    <name>Top Traverse</name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.50807213783264" lon="-80.33747387118638">
+    <name>Top Traverse </name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.511623214930296" lon="-80.34623807296157">
+    <name>Top Traverse </name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.51373335905373" lon="-80.35055374726653">
+    <name>Top Traverse </name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.5235022995621" lon="-80.36865320988">
+    <name>Woodpecker</name>
+    <sym>circle</sym>
+  </wpt>
+  <wpt lat="44.527279268950224" lon="-80.38418881595135">
+    <name>Yellow Trail</name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.524569399654865" lon="-80.38363678380847">
+    <name>Yellow Trail </name>
+    <sym>square</sym>
+  </wpt>
+  <wpt lat="44.53043036162853" lon="-80.38255736231804">
+    <name>YellowTrail </name>
+    <sym>diamond</sym>
+  </wpt>
   <trk>
     <name>Across Craigleith</name>
     <extensions>

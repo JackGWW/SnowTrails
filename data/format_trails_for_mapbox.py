@@ -26,6 +26,8 @@ color_mapping = {
 # Store cross country trails differently
 cross_country_trails = ["Cross Country Ski Trail"]
 
+
+# Utility functions
 def show_trail_name(name):
     if name.startswith("To "):
         return "false"
@@ -38,12 +40,6 @@ def get_trail_type(name):
     else:
         return "snowshoe"
 
-# Utility functions
-def stripped_name(name, include_nums = False):
-    if include_nums:
-        return ''.join(c for c in name if c.isalnum())
-    else:
-        return ''.join(c for c in name if c.isalpha())
 
 
 # Load GPX File
@@ -52,7 +48,7 @@ print("Removing invalid characters from file: " + gpx_file.readline(3))
 gpx = gpxpy.parse(gpx_file)
 
 
-# Convert existing data into formatted data
+# Convert trail data into formatted data
 formatted_gpx = gpxpy.gpx.GPX()
 for track in gpx.tracks:
     name, color = track.name.split("-")
@@ -82,9 +78,25 @@ for track in gpx.tracks:
 
     # Save formatted track
     formatted_gpx.tracks.append(formatted_track)
-    print(f"{name}: {formatted_track}")    
 
 
+# Convert marker data
+for waypoint in gpx.waypoints:
+    name = waypoint.name.split('(')[0]
+    symbol = waypoint.symbol.split(',')[0].lower()
+
+    # Create new waypoint
+    formatted_waypoint = gpxpy.gpx.GPXWaypoint()
+    formatted_waypoint.latitude = waypoint.latitude
+    formatted_waypoint.longitude = waypoint.longitude
+    formatted_waypoint.name = name
+    formatted_waypoint.symbol = symbol
+    
+    # Save formatted waypoint
+    formatted_gpx.waypoints.append(formatted_waypoint)
+
+
+# Write formatted data
 with open(formatted_gpx_filepath, "w") as outfile:
     outfile.write(formatted_gpx.to_xml())
     print("Wrote formatted GPX file to {}".format(formatted_gpx_filepath))
