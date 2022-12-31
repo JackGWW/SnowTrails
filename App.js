@@ -6,16 +6,22 @@ import { StyleSheet, View, Text, Image, Dimensions } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Sentry from "sentry-expo";
+import * as Amplitude from '@amplitude/analytics-react-native';
 
 import LiveMap from "./src/components/LiveMap";
 import StaticMap from "./src/components/StaticMap";
 
+// Setup crash reports
 Sentry.init({
   dsn:
     "https://b8aeee3910554706876c9c506e83b871@o513818.ingest.sentry.io/5616317",
   enableInExpoDevelopment: true,
   debug: false,
 });
+
+// Log app startup
+Amplitude.init("1d4737f626618248997180e48f0bfd02");
+Amplitude.track('App Started')
 
 const Tab = createBottomTabNavigator();
 
