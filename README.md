@@ -1,5 +1,7 @@
 # SnowTrails
-Mobile snowshoe trail map app for Alpine, Craigleith & Georgian Peaks Ski Clubs.
+5-star mobile app with >100 monthly active users. A digital trail map to help you navigate the snowshoe trails around Alpine, Craigleith and Georgian Peaks ski clubs. See your location live as you explore the trails or create your own route through the forest. You can now snowshoe with confidence that you won't get lost, miss a turn, or accidentally take the steepest trail.
+
+Download on [iOS](https://apps.apple.com/ca/app/snowtrails/id1553018641) or [Android](https://play.google.com/store/apps/details?id=com.jgwwilliams.SnowTrails)
 
 ## Screenshots
 <p float="left">
