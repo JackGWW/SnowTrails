@@ -1,7 +1,6 @@
 import React from "react";
 import AcrossCraigleith from "./AcrossCraigleith"
 import AlpineExpress from "./AlpineExpress"
-import AlpineExpressLink from "./AlpineExpressLink"
 import Backbowl from "./Backbowl"
 import Backstairs from "./Backstairs"
 import BlueBird from "./BlueBird"
@@ -23,6 +22,7 @@ import ForestLane from "./ForestLane"
 import GreenTrail from "./GreenTrail"
 import GreenYellowConnector from "./GreenYellowConnector"
 import LightBlueTrail from "./LightBlueTrail"
+import LinkShortcut from "./LinkShortcut"
 import LoreeForest from "./LoreeForest"
 import LoreeLookoutLoop from "./LoreeLookoutLoop"
 import LostLoop from "./LostLoop"
@@ -37,11 +37,13 @@ import RidgeRun from "./RidgeRun"
 import RiverRoute from "./RiverRoute"
 import RobinsRun from "./RobinsRun"
 import Shortcut from "./Shortcut"
+import SkiAcross from "./SkiAcross"
 import SouthAscent from "./SouthAscent"
 import StusLine from "./StusLine"
 import SweetSteeps from "./SweetSteeps"
 import TheEastRut from "./TheEastRut"
 import TheGlades from "./TheGlades"
+import TheLink from "./TheLink"
 import TheSpur from "./TheSpur"
 import TheSwitchback from "./TheSwitchback"
 import TheWestRut from "./TheWestRut"
@@ -57,7 +59,6 @@ import ToRiver from "./ToRiver"
 import ToSouth from "./ToSouth"
 import ToSteeps from "./ToSteeps"
 import ToSweetSteeps from "./ToSweetSteeps"
-import ToSwitchback from "./ToSwitchback"
 import ToTrailhead from "./ToTrailhead"
 import TopTraverse from "./TopTraverse"
 import Woodpecker from "./Woodpecker"
@@ -69,7 +70,6 @@ const ShowTrail = (props) => {
     <>
       <AcrossCraigleith longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <AlpineExpress longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
-      <AlpineExpressLink longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <Backbowl longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <Backstairs longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <BlueBird longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
@@ -91,6 +91,7 @@ const ShowTrail = (props) => {
       <GreenTrail longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <GreenYellowConnector longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <LightBlueTrail longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
+      <LinkShortcut longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <LoreeForest longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <LoreeLookoutLoop longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <LostLoop longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
@@ -105,11 +106,13 @@ const ShowTrail = (props) => {
       <RiverRoute longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <RobinsRun longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <Shortcut longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
+      <SkiAcross longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <SouthAscent longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <StusLine longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <SweetSteeps longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <TheEastRut longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <TheGlades longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
+      <TheLink longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <TheSpur longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <TheSwitchback longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <TheWestRut longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
@@ -125,7 +128,6 @@ const ShowTrail = (props) => {
       <ToSouth longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <ToSteeps longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <ToSweetSteeps longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
-      <ToSwitchback longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <ToTrailhead longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <TopTraverse longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <Woodpecker longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
