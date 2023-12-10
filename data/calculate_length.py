@@ -16,25 +16,26 @@ file_name = 'elevation_cache.json'
 file_path = path.join(path.dirname(__file__), file_name)
 
 
-def load_batch_to_cache(reversed_coords, cur_coordinates):
-    points = '|'.join(reversed_coords)
-    
-    url = f'https://atlas.microsoft.com/elevation/point/json?subscription-key={subscription_key}&api-version=1.0&points={points}'
-    response = requests.get(url)
+def load_batch_to_cache(coordinates):
+    if subscription_key == "":
+        raise Exception("subscription_key must be set to get elevations")
 
-    data = json.loads(response.text).get("data")
+    points = ','.join(coordinates)
+    
+    url = f'http://dev.virtualearth.net/REST/v1/Elevation/List?points={points}&key={subscription_key}'
+
+    response = requests.get(url)
+    data = json.loads(response.text).get("resourceSets")[0].get("resources")[0].get("elevations")
 
     # Update cache with new data
-    for index, elevation_point in enumerate(data):
-        elevation = elevation_point.get("elevationInMeter")
-        elevation_cache[cur_coordinates[index]] = elevation
+    for index, elevation in enumerate(data):
+        elevation_cache[coordinates[index]] = elevation
 
-    print(f"Added {len(cur_coordinates)} coordinate locations to the cache")
+    print(f"Added {len(coordinates)} coordinate locations to the cache")
 
 
-def load_cache(trail, batch_size=100):  
-    cur_coordinates = []
-    reversed_coords = []
+def load_cache(trail, batch_size=2):  
+    coordinates = []
     total_count = 0
     all_points = trail.segments[0].points
     points_updated = False
@@ -46,18 +47,16 @@ def load_cache(trail, batch_size=100):
             continue
         
         points_updated = True
-        cur_coordinates.append(coordinate)
-        reversed_coords.append(f"{point.longitude},{point.latitude}")
+        coordinates.append(coordinate)
 
         # Process each batch
-        if len(cur_coordinates) == batch_size:
-            load_batch_to_cache(reversed_coords, cur_coordinates)
-            reversed_coords = []
-            cur_coordinates = []        
+        if len(coordinates) == batch_size:
+            load_batch_to_cache(coordinates)
+            coordinates = []        
 
     # Load any remaining coordinates
-    if cur_coordinates:
-        load_batch_to_cache(reversed_coords, cur_coordinates)
+    if coordinates:
+        load_batch_to_cache(coordinates)
 
     # Write updated cache to disk
     if points_updated:
