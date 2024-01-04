@@ -30,6 +30,7 @@ import LoversLoop from "./LoversLoop"
 import NorthsideTrail from "./NorthsideTrail"
 import OrangeTrail from "./OrangeTrail"
 import OverTheHill from "./OverTheHill"
+import PinkTrail from "./PinkTrail"
 import PurpleTrail from "./PurpleTrail"
 import R2R from "./R2R"
 import RedTrail from "./RedTrail"
@@ -99,6 +100,7 @@ const ShowTrail = (props) => {
       <NorthsideTrail longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <OrangeTrail longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <OverTheHill longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
+      <PinkTrail longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <PurpleTrail longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <R2R longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
       <RedTrail longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>

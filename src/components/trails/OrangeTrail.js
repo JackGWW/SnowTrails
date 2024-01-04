@@ -10,7 +10,7 @@ const ShowTrail = (props) => {
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.52782048843801, longitude: -80.38052584044635}}
         trailName={"Orange Trail"}
-        trailDescription={"1.12km  -  209m\u2191 12m\u2193"}
+        trailDescription={"1.09km  -  190m\u2191 6m\u2193"}
         icon={props.markerImages["Diamond"]}
         id={"200834"}
       />
@@ -18,7 +18,7 @@ const ShowTrail = (props) => {
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.53092715702951, longitude: -80.38071577437222}}
         trailName={"Orange Trail"}
-        trailDescription={"1.12km  -  209m\u2191 12m\u2193"}
+        trailDescription={"1.09km  -  190m\u2191 6m\u2193"}
         icon={props.markerImages["Diamond"]}
         id={"734271"}
       />
