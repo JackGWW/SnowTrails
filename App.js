@@ -172,7 +172,6 @@ export default class App extends React.Component {
     } else {
       return (
         <AppIntroSlider
-          showPrevButton={true}
           renderItem={this._renderItem}
           onSlideChange={this.updateCurrentSlide}
           data={slides}
