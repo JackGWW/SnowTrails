@@ -28,7 +28,6 @@ export default class CustomMarker extends React.Component {
                 title={this.props.trailName}
                 description={this.props.trailDescription}
                 ref={ref => { this.marker = ref; }}
-                tracksViewChanges={false}
                 tappable={false}
                 key={markerKey} // Key update is required to get android to redraw the image at a different size
             >

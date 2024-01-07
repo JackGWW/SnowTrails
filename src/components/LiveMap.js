@@ -3,15 +3,15 @@ import { StyleSheet, View, Dimensions, TouchableHighlight } from "react-native";
 import MapView, { UrlTile, PROVIDER_GOOGLE } from "react-native-maps";
 import Spinner from "react-native-loading-spinner-overlay";
 import * as Location from 'expo-location';
-import Image from 'expo-image';
+import { Image } from 'expo-image';
 
 // Polyline components for all trails
 import AllTrails from "./trails/AllTrails";
 import CustomMarker from "./markers/CustomMarker"
 
 
-let circleIcon = require("../../assets/trailMarkers/circle.png")
-let squareIcon = require("../../assets/trailMarkers/square.png")
+let circleIcon = require("../../assets/trailMarkers/circle.svg")
+let squareIcon = require("../../assets/trailMarkers/square.svg")
 let diamondIcon = require("../../assets/trailMarkers/diamond.svg")
 let benchIcon = require("../../assets/trailMarkers/bench.png")
 let invisibleIcon = require("../../assets/trailMarkers/invisible.png")
