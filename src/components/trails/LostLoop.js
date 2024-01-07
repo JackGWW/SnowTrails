@@ -1,12 +1,12 @@
 import React from "react";
 import { Polyline } from "react-native-maps";
-import Marker from "../markers/Marker"
+import CustomMarker from "../markers/CustomMarker"
 import trail from "../../../data/json/LostLoop.json"
 
 const ShowTrail = (props) => {
   return (
     <>
-      <Marker
+      <CustomMarker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.524339735507965, longitude: -80.36285025067627}}
         trailName={"Lost Loop"}
@@ -14,7 +14,7 @@ const ShowTrail = (props) => {
         icon={props.markerImages["Circle"]}
         id={"516831"}
       />
-      <Marker
+      <CustomMarker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.52674156986177, longitude: -80.36906501278281}}
         trailName={"Lost Loop"}

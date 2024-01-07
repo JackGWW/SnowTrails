@@ -1,12 +1,12 @@
 import React from "react";
 import { Polyline } from "react-native-maps";
-import Marker from "../markers/Marker"
+import CustomMarker from "../markers/CustomMarker"
 import trail from "../../../data/json/ForestGump.json"
 
 const ShowTrail = (props) => {
   return (
     <>
-      <Marker
+      <CustomMarker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.51378314755857, longitude: -80.35327459685504}}
         trailName={"Forest Gump"}

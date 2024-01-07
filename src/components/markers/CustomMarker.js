@@ -1,21 +1,21 @@
 import React from "react";
 import { Marker } from "react-native-maps";
 
-export default class circleMarker extends React.Component {
+export default class CustomMarker extends React.Component {
     constructor(props) {
         super(props);
     }
 
-    displayTrailName(autoHide=true) {
+    displayTrailName(autoHide = true) {
         this.marker.showCallout()
-        
+
         if (autoHide) {
-            setTimeout(function () { 
-                try { 
+            setTimeout(function () {
+                try {
                     this.marker.hideCallout()
                 } catch (e) {
-                    console.log(e)
-                } 
+                    console.log(e.toString())
+                }
             }.bind(this), 5 * 1000)
         }
     }
@@ -30,15 +30,10 @@ export default class circleMarker extends React.Component {
                 ref={ref => { this.marker = ref; }}
                 tracksViewChanges={false}
                 tappable={false}
-                key={ markerKey } // Key update is required to get android to redraw the image at a different size
+                key={markerKey} // Key update is required to get android to redraw the image at a different size
+                image={this.props.icon}
             >
-               { this.props.icon }
             </Marker>
         );
     }
 };
-
-
-
-
-

@@ -6,7 +6,7 @@ import * as Location from 'expo-location';
 
 // Polyline components for all trails
 import AllTrails from "./trails/AllTrails";
-import Marker from "./markers/Marker"
+import CustomMarker from "./markers/CustomMarker"
 
 
 export default class LiveMap extends React.Component {
@@ -249,7 +249,7 @@ export default class LiveMap extends React.Component {
             zIndex={-3}
           />
           <AllTrails longitudeDelta={longitudeDelta} markerImages={markerImages} trailPattern={this.state.trailPattern} />
-          <Marker
+          <CustomMarker
             longitudeDelta={longitudeDelta}
             location={{ latitude: 44.512641029432416, longitude: -80.363259455189109 }}
             trailName={"The Bench"}
@@ -257,7 +257,7 @@ export default class LiveMap extends React.Component {
             icon={markerImages["Bench"]}
             id={"6"}
           />
-          <Marker
+          <CustomMarker
             longitudeDelta={"0"}
             location={{ latitude: this.state.hiddenMarkerLatitude, longitude: this.state.hiddenMarkerLongitude }}
             trailName={this.state.hiddenMarkerName}

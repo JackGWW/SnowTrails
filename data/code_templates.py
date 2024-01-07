@@ -1,6 +1,6 @@
 from string import Template
 
-marker_template = Template("""      <Marker
+marker_template = Template("""      <CustomMarker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: ${latitude}, longitude: ${longitude}}}
         trailName={"${name}"}
@@ -35,7 +35,7 @@ export default ShowTrail;
 
 trail_and_marker_template = Template("""import React from "react";
 import { Polyline } from "react-native-maps";
-import Marker from "../markers/Marker"
+import CustomMarker from "../markers/CustomMarker"
 import trail from "../../../data/json/${filename}.json"
 
 const ShowTrail = (props) => {

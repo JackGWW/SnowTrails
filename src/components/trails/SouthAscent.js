@@ -1,12 +1,12 @@
 import React from "react";
 import { Polyline } from "react-native-maps";
-import Marker from "../markers/Marker"
+import CustomMarker from "../markers/CustomMarker"
 import trail from "../../../data/json/SouthAscent.json"
 
 const ShowTrail = (props) => {
   return (
     <>
-      <Marker
+      <CustomMarker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.50960133224726, longitude: -80.33153696916997}}
         trailName={"South Ascent"}
@@ -14,7 +14,7 @@ const ShowTrail = (props) => {
         icon={props.markerImages["Diamond"]}
         id={"692272"}
       />
-      <Marker
+      <CustomMarker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.50843364931643, longitude: -80.33438748680055}}
         trailName={"South Ascent"}
@@ -22,7 +22,7 @@ const ShowTrail = (props) => {
         icon={props.markerImages["Diamond"]}
         id={"748412"}
       />
-      <Marker
+      <CustomMarker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.51220550574362, longitude: -80.3292023576796}}
         trailName={"South Ascent"}

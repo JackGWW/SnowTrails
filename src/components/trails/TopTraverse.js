@@ -1,12 +1,12 @@
 import React from "react";
 import { Polyline } from "react-native-maps";
-import Marker from "../markers/Marker"
+import CustomMarker from "../markers/CustomMarker"
 import trail from "../../../data/json/TopTraverse.json"
 
 const ShowTrail = (props) => {
   return (
     <>
-      <Marker
+      <CustomMarker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.509754721075296, longitude: -80.34231634810567}}
         trailName={"Top Traverse"}
@@ -14,7 +14,7 @@ const ShowTrail = (props) => {
         icon={props.markerImages["Circle"]}
         id={"703037"}
       />
-      <Marker
+      <CustomMarker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.50807213783264, longitude: -80.33747387118638}}
         trailName={"Top Traverse"}
@@ -22,7 +22,7 @@ const ShowTrail = (props) => {
         icon={props.markerImages["Circle"]}
         id={"353734"}
       />
-      <Marker
+      <CustomMarker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.511623214930296, longitude: -80.34623807296157}}
         trailName={"Top Traverse"}
@@ -30,7 +30,7 @@ const ShowTrail = (props) => {
         icon={props.markerImages["Circle"]}
         id={"803127"}
       />
-      <Marker
+      <CustomMarker
         longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.51373335905373, longitude: -80.35055374726653}}
         trailName={"Top Traverse"}
