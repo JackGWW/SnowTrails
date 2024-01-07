@@ -4,7 +4,7 @@
     <link href="http://www.garmin.com">
       <text>Garmin International</text>
     </link>
-    <time>2024-01-04T03:16:43Z</time>
+    <time>2024-01-07T19:42:03Z</time>
     <bounds maxlat="44.535191114991903" maxlon="-80.32884394749999" minlat="44.50787172652781" minlon="-80.397479999810457" />
   </metadata>
 
@@ -818,7 +818,7 @@
     </extensions>
   </wpt>
 
-  <wpt lat="44.53092715702951" lon="-80.38071577437222">
+  <wpt lat="44.532023593783379" lon="-80.380640421062708">
     <time>2021-11-10T02:17:27Z</time>
     <name>Orange Trail (1)</name>
     <sym>Diamond, Blue</sym>
@@ -850,6 +850,24 @@
       </wptx1:WaypointExtension>
       <ctx:CreationTimeExtension>
         <ctx:CreationTime>2020-12-28T04:06:24Z</ctx:CreationTime>
+      </ctx:CreationTimeExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="44.529957203194499" lon="-80.381757477298379">
+    <time>2024-01-07T19:41:04Z</time>
+    <name>Pink Trail</name>
+    <sym>Diamond, Blue</sym>
+    <type>user</type>
+    <extensions>
+      <gpxx:WaypointExtension>
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+      <wptx1:WaypointExtension>
+        <wptx1:DisplayMode>SymbolAndName</wptx1:DisplayMode>
+      </wptx1:WaypointExtension>
+      <ctx:CreationTimeExtension>
+        <ctx:CreationTime>2024-01-07T19:41:04Z</ctx:CreationTime>
       </ctx:CreationTimeExtension>
     </extensions>
   </wpt>

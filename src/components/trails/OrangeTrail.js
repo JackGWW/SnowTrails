@@ -16,11 +16,11 @@ const ShowTrail = (props) => {
       />
       <CustomMarker
         longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.53092715702951, longitude: -80.38071577437222}}
+        location={{latitude: 44.53202359378338, longitude: -80.38064042106271}}
         trailName={"Orange Trail"}
         trailDescription={"1.09km  -  190m\u2191 6m\u2193"}
         icon={props.markerImages["Diamond"]}
-        id={"734271"}
+        id={"727933"}
       />
 
       <Polyline
