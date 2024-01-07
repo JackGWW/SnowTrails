@@ -9,6 +9,12 @@ import AllTrails from "./trails/AllTrails";
 import CustomMarker from "./markers/CustomMarker"
 
 
+let circleIcon = require("../../assets/trailMarkers/circle.png")
+let squareIcon = require("../../assets/trailMarkers/square.png")
+let diamondIcon = require("../../assets/trailMarkers/diamond.svg")
+let benchIcon = require("../../assets/trailMarkers/bench.png")
+let invisibleIcon = require("../../assets/trailMarkers/invisible.png")
+
 export default class LiveMap extends React.Component {
   constructor() {
     super();
@@ -107,12 +113,6 @@ export default class LiveMap extends React.Component {
   getMarkerImages() {
     let delta = this.state.longitudeDelta
 
-    let circleIcon = require("../../assets/trailMarkers/circle.png")
-    let squareIcon = require("../../assets/trailMarkers/square.png")
-    let diamondIcon = require("../../assets/trailMarkers/diamond.png")
-    let benchIcon = require("../../assets/trailMarkers/bench.png")
-    let invisibleIcon = require("../../assets/trailMarkers/invisible.png")
-
     let size;
     //As the screen zooms out, make the icons smaller
     switch (true) {
@@ -156,6 +156,7 @@ export default class LiveMap extends React.Component {
         size = 8;
         break
     }
+
     return {
       "Circle": <Image source={circleIcon} style={{ height: size, width: size }} />,
       "Square": <Image source={squareIcon} style={{ height: size, width: size }} />,
@@ -258,7 +259,7 @@ export default class LiveMap extends React.Component {
             id={"6"}
           />
           <CustomMarker
-            longitudeDelta={"0"}
+            longitudeDelta={"0"} // Can be static as the image doesn't change upon zoom change
             location={{ latitude: this.state.hiddenMarkerLatitude, longitude: this.state.hiddenMarkerLongitude }}
             trailName={this.state.hiddenMarkerName}
             trailDescription={this.state.hiddenMarkerDescription}
