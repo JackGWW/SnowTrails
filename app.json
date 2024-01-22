@@ -57,9 +57,6 @@
         "FOREGROUND_SERVICE"
       ]
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
     "plugins": [
       "sentry-expo"
     ],
