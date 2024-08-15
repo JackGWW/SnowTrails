@@ -5,17 +5,6 @@
     "version": "1.4.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "hooks": {
-      "postPublish": [
-        {
-          "file": "sentry-expo/upload-sourcemaps",
-          "config": {
-            "organization": "snowtrails",
-            "project": "snowtrails"
-          }
-        }
-      ]
-    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
