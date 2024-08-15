@@ -151,9 +151,9 @@ export default class App extends React.Component {
                 let iconName;
 
                 if (route.name === "GPS") {
-                  iconName = focused ? "ios-navigate" : "ios-navigate";
+                  iconName = "navigate-outline";
                 } else if (route.name === "Map") {
-                  iconName = focused ? "ios-map" : "ios-map";
+                  iconName = "map-outline";
                 }
 
                 return <Ionicons name={iconName} size={size} color={color} />;
