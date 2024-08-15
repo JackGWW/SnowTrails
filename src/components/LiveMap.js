@@ -283,7 +283,7 @@ export default class LiveMap extends React.Component {
           <Image
             source={require("../../assets/legend.png")}
             style={styles.legend}
-            resizeMode="contain"
+            contentFit="contain"
           />
         </View>
         
@@ -296,7 +296,7 @@ export default class LiveMap extends React.Component {
           <>
             <Image
               source={require("../../assets/locationIcon.png")}
-              resizeMode="contain"
+              contentFit="contain"
               style={styles.locationButton}
             />
           </>
