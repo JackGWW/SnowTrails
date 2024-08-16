@@ -21,7 +21,6 @@
     "expo-device": "~6.0.2",
     "expo-image": "~1.12.13",
     "expo-location": "~17.0.1",
-    "expo-permissions": "~14.2.1",
     "expo-status-bar": "~1.12.1",
     "expo-updates": "~0.25.22",
     "prop-types": "^15.7.2",
