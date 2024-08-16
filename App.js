@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet, View, Text, Image, Dimensions } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Sentry from "sentry-expo";
+import * as Sentry from '@sentry/react-native';
 import * as Amplitude from '@amplitude/analytics-react-native';
 
 import LiveMap from "./src/components/LiveMap";
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor() {
     super();
 
@@ -185,3 +185,5 @@ export default class App extends React.Component {
     }
   }
 }
+
+export default Sentry.wrap(App);

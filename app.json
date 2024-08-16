@@ -47,7 +47,14 @@
       ]
     },
     "plugins": [
-      "sentry-expo"
+      [
+        "@sentry/react-native/expo",
+        {
+          "organization": "snowtrails",
+          "project": "snowtrails",
+          "url": "https://sentry.io/"
+        }
+      ]
     ],
     "extra": {
       "eas": {
