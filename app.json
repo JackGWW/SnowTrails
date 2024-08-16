@@ -2,20 +2,9 @@
   "expo": {
     "name": "SnowTrails",
     "slug": "SnowTrails",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "hooks": {
-      "postPublish": [
-        {
-          "file": "sentry-expo/upload-sourcemaps",
-          "config": {
-            "organization": "snowtrails",
-            "project": "snowtrails"
-          }
-        }
-      ]
-    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -30,7 +19,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.jgwwilliams.snowtrails",
-      "buildNumber": "1.3.0",
+      "buildNumber": "1.4.0",
       "config": {
         "googleMapsApiKey": "AIzaSyDwiFWcgGSy2wKw3oZgoUGrS25fYKhHF4A"
       },
@@ -50,7 +39,7 @@
       },
       "icon": "./assets/icon.png",
       "package": "com.jgwwilliams.SnowTrails",
-      "versionCode": 19,
+      "versionCode": 21,
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
@@ -58,7 +47,14 @@
       ]
     },
     "plugins": [
-      "sentry-expo"
+      [
+        "@sentry/react-native/expo",
+        {
+          "organization": "snowtrails",
+          "project": "snowtrails",
+          "url": "https://sentry.io/"
+        }
+      ]
     ],
     "extra": {
       "eas": {

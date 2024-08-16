@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Dimensions, TouchableHighlight } from "react-native";
-import MapView, { UrlTile, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { UrlTile, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
 import Spinner from "react-native-loading-spinner-overlay";
 import * as Location from 'expo-location';
 import { Image } from 'expo-image';
@@ -184,6 +184,12 @@ export default class LiveMap extends React.Component {
   render() {
     let markerImages = this.getMarkerImages()
     let longitudeDelta = this.state.longitudeDelta.toFixed(5)
+    
+    // Always use GoogleMaps (instead of MapKit on iOS). If using the DEV build, google maps doen't work
+    var mapProvider = PROVIDER_GOOGLE
+    if (__DEV__) {
+      var mapProvider = PROVIDER_DEFAULT
+    }
 
     return (
       <View style={styles.container}>
@@ -198,7 +204,7 @@ export default class LiveMap extends React.Component {
         <MapView
           ref={(ref) => (this.mapView = ref)}
           initialCamera={this.state.initialCamera}
-          provider={PROVIDER_GOOGLE} // Always use GoogleMaps (instead of MapKit on iOS)
+          provider={mapProvider} 
           showsUserLocation={true}
           followsUserLocation={true}
           showsCompass={false}
@@ -277,7 +283,7 @@ export default class LiveMap extends React.Component {
           <Image
             source={require("../../assets/legend.png")}
             style={styles.legend}
-            resizeMode="contain"
+            contentFit="contain"
           />
         </View>
         
@@ -290,7 +296,7 @@ export default class LiveMap extends React.Component {
           <>
             <Image
               source={require("../../assets/locationIcon.png")}
-              resizeMode="contain"
+              contentFit="contain"
               style={styles.locationButton}
             />
           </>
