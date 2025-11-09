@@ -17,6 +17,8 @@ let benchIcon = require("../../assets/trailMarkers/bench.png")
 let invisibleIcon = require("../../assets/trailMarkers/invisible.png")
 
 export default class LiveMap extends React.Component {
+  markerIconCache = new Map();
+
   constructor() {
     super();
 
@@ -115,60 +117,65 @@ export default class LiveMap extends React.Component {
     setTimeout(() => { this.child.displayTrailName(false) }, 10);
   }
 
-  getMarkerImages() {
-    let delta = this.state.longitudeDelta
-
-    let size;
-    //As the screen zooms out, make the icons smaller
+  getMarkerSize(delta) {
+    // As the screen zooms out, make the icons smaller
     switch (true) {
       case (delta < 0.0025):
-        size = 35
-        break
+        return 35
       case (delta < 0.003):
-        size = 32
-        break
+        return 32
       case (delta < 0.0035):
-        size = 29
-        break
+        return 29
       case (delta < 0.0042):
-        size = 26
-        break
+        return 26
       case (delta < 0.005):
-        size = 23
-        break
+        return 23
       case (delta < 0.0065):
-        size = 20
-        break
+        return 20
       case (delta < 0.008):
-        size = 18
-        break
+        return 18
       case (delta < 0.01):
-        size = 16
-        break
+        return 16
       case (delta < 0.0119):
-        size = 14
-        break
+        return 14
       case (delta < 0.0187):
-        size = 11
-        break
+        return 11
       case (delta < 0.02):
-        size = 10
-        break
+        return 10
       case (delta < 0.025):
-        size = 9
-        break
+        return 9
       default:
-        size = 8;
-        break
+        return 8
+    }
+  }
+
+  createIconDescriptor(source, size) {
+    const roundedSize = Math.max(1, Math.round(size));
+    return Object.freeze({
+      source,
+      width: roundedSize,
+      height: roundedSize,
+    });
+  }
+
+  getMarkerImages() {
+    const delta = this.state.longitudeDelta;
+    const size = this.getMarkerSize(delta);
+
+    if (this.markerIconCache.has(size)) {
+      return this.markerIconCache.get(size);
     }
 
-    return {
-      "Circle": <Image source={circleIcon} style={{ height: size, width: size }} />,
-      "Square": <Image source={squareIcon} style={{ height: size, width: size }} />,
-      "Diamond": <Image source={diamondIcon} style={{ height: size, width: size }} />,
-      "Bench": <Image source={benchIcon} style={{ height: size * 1.2, width: size * 1.2 }} />,
-      "Invisible": <Image source={invisibleIcon} style={{ height: 1, width: 1 }} />,
-    }
+    const icons = {
+      "Circle": this.createIconDescriptor(circleIcon, size),
+      "Square": this.createIconDescriptor(squareIcon, size),
+      "Diamond": this.createIconDescriptor(diamondIcon, size),
+      "Bench": this.createIconDescriptor(benchIcon, size * 1.2),
+      "Invisible": this.createIconDescriptor(invisibleIcon, 1),
+    };
+
+    this.markerIconCache.set(size, icons);
+    return icons;
   }
 
   getCoordinateKey(coordinate, latDecimals, longDecimals) {
@@ -259,6 +266,7 @@ export default class LiveMap extends React.Component {
             maximumZ={22}
             flipY={false}
             shouldReplaceMapContent={true}
+            zIndex={-1} // keep tiles underneath custom trails/markers on Google Maps iOS
           />
           <AllTrails longitudeDelta={longitudeDelta} markerImages={markerImages} trailPattern={this.state.trailPattern} />
           <CustomMarker
