@@ -7,7 +7,7 @@ import json
 
 # Script Parameters
 gpx_filepath = os.path.join(os.path.dirname(__file__), "Trails.gpx")
-geojson_output_path = os.path.join(os.path.dirname(__file__), "..", "src", "data", "trails.geojson")
+geojson_output_path = os.path.join(os.path.dirname(__file__), "..", "src", "data", "trails.json")
 
 color_mapping = {
     "green": "#388E3C",

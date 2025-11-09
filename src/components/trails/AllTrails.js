@@ -1,7 +1,6 @@
 import React from "react";
 import Mapbox from "@rnmapbox/maps";
-
-const trails = require("../../data/trails.geojson");
+import trails from "../../data/trails.json";
 
 const AllTrails = () => {
   return (
