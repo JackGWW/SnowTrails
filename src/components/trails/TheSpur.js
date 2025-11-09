@@ -1,14 +1,13 @@
 import React from "react";
-import { Polyline } from "react-native-maps";
+import TrailLine from "./TrailLine";
 import trail from "../../../data/json/TheSpur.json"
 
 const ShowTrail = (props) => {
   return (
-      <Polyline
-        lineDashPattern={props.trailPattern}
+      <TrailLine
+        trailPattern={props.trailPattern}
         coordinates={trail}
-        strokeColor={"#FF9100"}
-        strokeWidth={3}
+        color={"#FF9100"}
       />
 
   );

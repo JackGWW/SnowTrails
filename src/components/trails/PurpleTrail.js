@@ -1,5 +1,5 @@
 import React from "react";
-import { Polyline } from "react-native-maps";
+import TrailLine from "./TrailLine";
 import CustomMarker from "../markers/CustomMarker"
 import trail from "../../../data/json/PurpleTrail.json"
 
@@ -15,11 +15,10 @@ const ShowTrail = (props) => {
         id={"140891"}
       />
 
-      <Polyline
-        lineDashPattern={props.trailPattern}
+      <TrailLine
+        trailPattern={props.trailPattern}
         coordinates={trail}
-        strokeColor={"#9400D3"}
-        strokeWidth={3}
+        color={"#9400D3"}
       />
     </>
   );
