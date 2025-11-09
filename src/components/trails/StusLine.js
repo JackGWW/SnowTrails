@@ -18,7 +18,9 @@ const ShowTrail = (props) => {
           id="StusLine-line"
           style={{
             lineColor: "#989898",
-            lineWidth: 3,
+            lineWidth: ['interpolate', ['linear'], ['zoom'], 14, 2, 16, 3, 18, 5],
+            lineCap: 'round',
+            lineJoin: 'round',
             
           }}
         />

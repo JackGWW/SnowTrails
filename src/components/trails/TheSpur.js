@@ -18,7 +18,9 @@ const ShowTrail = (props) => {
           id="TheSpur-line"
           style={{
             lineColor: "#FF9100",
-            lineWidth: 3,
+            lineWidth: ['interpolate', ['linear'], ['zoom'], 14, 2, 16, 3, 18, 5],
+            lineCap: 'round',
+            lineJoin: 'round',
             
           }}
         />

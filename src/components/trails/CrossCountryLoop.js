@@ -18,7 +18,9 @@ const ShowTrail = (props) => {
           id="CrossCountryLoop-line"
           style={{
             lineColor: "#696969",
-            lineWidth: 3,
+            lineWidth: ['interpolate', ['linear'], ['zoom'], 14, 2, 16, 3, 18, 5],
+            lineCap: 'round',
+            lineJoin: 'round',
             lineDasharray: [3, 3],
           }}
         />
