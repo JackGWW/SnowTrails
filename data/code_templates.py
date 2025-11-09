@@ -11,17 +11,16 @@ marker_template = Template("""      <CustomMarker
 """)
 
 
-line_template = Template("""      <Polyline
-        lineDashPattern={${line_dash_pattern}}
+line_template = Template("""      <TrailLine
+        trailPattern={${line_dash_pattern}}
         coordinates={trail}
-        strokeColor={"${color}"}
-        strokeWidth={3}
+        color={"${color}"}
       />
 """)
 
 
 trail_template = Template("""import React from "react";
-import { Polyline } from "react-native-maps";
+import TrailLine from "./TrailLine";
 import trail from "../../../data/json/${filename}.json"
 
 const ShowTrail = (props) => {
@@ -34,7 +33,7 @@ export default ShowTrail;
 """)
 
 trail_and_marker_template = Template("""import React from "react";
-import { Polyline } from "react-native-maps";
+import TrailLine from "./TrailLine";
 import CustomMarker from "../markers/CustomMarker"
 import trail from "../../../data/json/${filename}.json"
 
@@ -67,3 +66,4 @@ all_trails_import_template = Template("""import ${filename} from "./${filename}"
 
 all_trails_component_template = Template("""      <${filename} longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
 """)
+

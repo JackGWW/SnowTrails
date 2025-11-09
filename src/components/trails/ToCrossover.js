@@ -1,14 +1,13 @@
 import React from "react";
-import { Polyline } from "react-native-maps";
+import TrailLine from "./TrailLine";
 import trail from "../../../data/json/ToCrossover.json"
 
 const ShowTrail = (props) => {
   return (
-      <Polyline
-        lineDashPattern={props.trailPattern}
+      <TrailLine
+        trailPattern={props.trailPattern}
         coordinates={trail}
-        strokeColor={"#2962FF"}
-        strokeWidth={3}
+        color={"#2962FF"}
       />
 
   );
