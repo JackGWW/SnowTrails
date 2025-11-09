@@ -20,3 +20,5 @@ data/.expo/README.md
 .pnp.loader.mjs
 .pnp.cjs
 /ios
+*.ipa
+pc-api-7156336600593486586-385-84e9e682a380.json
