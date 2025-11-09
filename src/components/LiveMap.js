@@ -296,7 +296,7 @@ export default class LiveMap extends React.Component {
           styleURL="https://api.mapbox.com/styles/v1/jackgww/ckixum56n651w19npcrja4rnq?access_token=pk.eyJ1IjoiamFja2d3dyIsImEiOiJja2l4dDZ5bnIxZTh1MnNwZmdxODA4cjU1In0.QruuU5HoAnwNtt0UE45GSg"
           onDidFinishLoadingMap={this.mapSetup.bind(this)}
           onPress={this.onMapPress}
-          onRegionDidChange={this.updateRegion.bind(this)}
+          onMapIdle={this.updateRegion.bind(this)}
           compassEnabled={false}
           scaleBarEnabled={false}
           attributionEnabled={false}
@@ -304,7 +304,7 @@ export default class LiveMap extends React.Component {
         >
           <Mapbox.Terrain
             sourceID="mapbox-dem"
-            exaggeration={1.5}
+            style={{ exaggeration: 1.5 }}
           />
 
           <Mapbox.RasterDemSource
