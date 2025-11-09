@@ -302,17 +302,17 @@ export default class LiveMap extends React.Component {
           attributionEnabled={false}
           logoEnabled={false}
         >
-          <Mapbox.Terrain
-            sourceID="mapbox-dem"
-            style={{ exaggeration: 1.5 }}
-          />
-
           <Mapbox.RasterDemSource
             id="mapbox-dem"
             url="mapbox://mapbox.terrain-rgb"
             tileSize={514}
             maxZoomLevel={14}
-          />
+          >
+            <Mapbox.Terrain
+              sourceID="mapbox-dem"
+              style={{ exaggeration: 1.5 }}
+            />
+          </Mapbox.RasterDemSource>
 
           <Mapbox.Camera
             ref={this.cameraRef}
