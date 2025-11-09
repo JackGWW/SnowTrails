@@ -20,7 +20,9 @@ Sentry.init({
 });
 
 // Log app startup
-Amplitude.init("1d4737f626618248997180e48f0bfd02");
+Amplitude.init("1d4737f626618248997180e48f0bfd02", undefined, {
+  disableCookies: true, // Disable cookies for React Native
+});
 Amplitude.track('App Started')
 
 const Tab = createBottomTabNavigator();

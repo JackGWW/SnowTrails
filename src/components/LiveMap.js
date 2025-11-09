@@ -293,13 +293,11 @@ export default class LiveMap extends React.Component {
           activeOpacity={0.5}
           underlayColor="#A9A9A9"
           onPress={() => this.animateToUser()} >
-          <>
-            <Image
-              source={require("../../assets/locationIcon.png")}
-              contentFit="contain"
-              style={styles.locationButton}
-            />
-          </>
+          <Image
+            source={require("../../assets/locationIcon.png")}
+            contentFit="contain"
+            style={styles.locationButton}
+          />
         </TouchableHighlight>
       </View>
     );
