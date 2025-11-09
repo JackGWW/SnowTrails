@@ -35,7 +35,9 @@ export default class LiveMap extends React.Component {
       hiddenMarkerDescription: "",
       coordinateMapping: require('../../data/coordinate_mapping.json'),
       trailMapping: require('../../data/trail_mapping.json'),
-      is3DMode: false
+      is3DMode: false,
+      isTracking: false,
+      locationButtonState: 0 // 0: default, 1: centered, 2: tracking
     };
 
     this.cameraRef = React.createRef();
@@ -229,6 +231,28 @@ export default class LiveMap extends React.Component {
     }
   }
 
+  handleLocationButtonPress() {
+    if (this.state.locationButtonState === 0) {
+      // First tap: Center on user
+      this.animateToUser();
+      this.setState({ locationButtonState: 1 });
+    } else if (this.state.locationButtonState === 1) {
+      // Second tap: Enable tracking
+      this.setState({ isTracking: true, locationButtonState: 2 });
+    } else {
+      // Third tap: Disable tracking
+      this.setState({ isTracking: false, locationButtonState: 0 });
+    }
+  }
+
+  onCameraChanged = (state) => {
+    // Disable tracking if user manually pans the map
+    // state.gestures.isGestureActive is true when user is actively moving the map
+    if (this.state.isTracking && state.gestures && state.gestures.isGestureActive) {
+      this.setState({ isTracking: false, locationButtonState: 0 });
+    }
+  }
+
   toggle3DMode() {
     const newMode = !this.state.is3DMode;
     this.setState({ is3DMode: newMode });
@@ -297,6 +321,7 @@ export default class LiveMap extends React.Component {
           onDidFinishLoadingMap={this.mapSetup.bind(this)}
           onPress={this.onMapPress}
           onMapIdle={this.updateRegion.bind(this)}
+          onCameraChanged={this.onCameraChanged}
           compassEnabled={false}
           scaleBarEnabled={false}
           attributionEnabled={false}
@@ -322,6 +347,9 @@ export default class LiveMap extends React.Component {
               [-80.398, 44.507], // Southwest
               [-80.328, 44.539]  // Northeast
             ]}
+            followUserLocation={this.state.isTracking}
+            followUserMode="compass"
+            followZoomLevel={16}
           />
 
           <Mapbox.LocationPuck
@@ -382,14 +410,18 @@ export default class LiveMap extends React.Component {
 
         {/* Bottom right, move to current location button */}
         <TouchableHighlight
-          style={styles.locationButtonContainer}
+          style={[
+            styles.locationButtonContainer,
+            this.state.isTracking && styles.locationButtonContainerActive
+          ]}
           activeOpacity={0.5}
           underlayColor="#A9A9A9"
-          onPress={() => this.animateToUser()} >
+          onPress={() => this.handleLocationButtonPress()} >
           <Image
             source={require("../../assets/locationIcon.png")}
             contentFit="contain"
             style={styles.locationButton}
+            tintColor={this.state.isTracking ? "#007AFF" : "#333"}
           />
         </TouchableHighlight>
       </View>
@@ -468,6 +500,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderColor: 'rgba(0,0,0,0.2)',
     backgroundColor: "rgba(255, 255, 255, 0.85)",
+  },
+  locationButtonContainerActive: {
+    backgroundColor: "rgba(230, 240, 255, 0.95)",
+    borderColor: '#007AFF',
   },
   locationButton: {
     height: 35,
