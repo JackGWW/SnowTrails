@@ -55,7 +55,14 @@
           "url": "https://sentry.io/"
         }
       ],
-      "expo-font"
+      "expo-font",
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsDownloadToken": "sk.eyJ1IjoiamFja2d3dyIsImEiOiJjbTNoOWE5YXQwZTRuMmpzZ3FwYW9wOTBpIn0.fkMDKS_JcR7Ob_bYPPjjtQ",
+          "RNMapboxMapsVersion": "11.0.0"
+        }
+      ]
     ],
     "extra": {
       "eas": {
