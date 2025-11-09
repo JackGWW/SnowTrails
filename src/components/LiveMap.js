@@ -84,10 +84,14 @@ export default class LiveMap extends React.Component {
   }
 
   updateCurrentLocation(coordinate) {
-    this.setState({
-      currentLatitude: coordinate.latitude,
-      currentLongitude: coordinate.longitude
-    });
+    if (coordinate && coordinate.latitude !== undefined && coordinate.longitude !== undefined) {
+      this.setState({
+        currentLatitude: coordinate.latitude,
+        currentLongitude: coordinate.longitude
+      });
+    } else {
+      console.warn("updateCurrentLocation: coordinate is undefined or invalid", coordinate);
+    }
   }
 
   updateHiddenMarker(coordinateKey) {
@@ -204,7 +208,7 @@ export default class LiveMap extends React.Component {
         <MapView
           ref={(ref) => (this.mapView = ref)}
           initialCamera={this.state.initialCamera}
-          provider={mapProvider} 
+          provider={mapProvider}
           showsUserLocation={true}
           followsUserLocation={true}
           showsCompass={false}
@@ -254,7 +258,6 @@ export default class LiveMap extends React.Component {
             }
             maximumZ={22}
             flipY={false}
-            zIndex={-3}
             shouldReplaceMapContent={true}
           />
           <AllTrails longitudeDelta={longitudeDelta} markerImages={markerImages} trailPattern={this.state.trailPattern} />

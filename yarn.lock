@@ -2548,6 +2548,49 @@ __metadata:
   languageName: node
   linkType: hard
 
+"SnowTrails@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "SnowTrails@workspace:."
+  dependencies:
+    "@amplitude/analytics-react-native": "npm:^1.5.16"
+    "@babel/core": "npm:^7.24.0"
+    "@expo/vector-icons": "npm:^15.0.3"
+    "@react-native-async-storage/async-storage": "npm:2.2.0"
+    "@react-native-masked-view/masked-view": "npm:^0.3.2"
+    "@react-native/babel-preset": "npm:^0.82.1"
+    "@react-navigation/bottom-tabs": "npm:^6.6.1"
+    "@react-navigation/native": "npm:^6.1.18"
+    "@sentry/react-native": "npm:~7.2.0"
+    "@types/react": "npm:~19.1.0"
+    "@types/react-dom": "npm:~19.1.0"
+    expo: "npm:^54.0.23"
+    expo-application: "npm:~7.0.7"
+    expo-constants: "npm:~18.0.10"
+    expo-dev-client: "npm:~6.0.17"
+    expo-device: "npm:~8.0.9"
+    expo-font: "npm:~14.0.9"
+    expo-image: "npm:~3.0.10"
+    expo-location: "npm:~19.0.7"
+    expo-status-bar: "npm:~3.0.8"
+    expo-updates: "npm:~29.0.12"
+    prop-types: "npm:^15.7.2"
+    react: "npm:19.1.0"
+    react-dom: "npm:19.1.0"
+    react-native: "npm:0.81.5"
+    react-native-app-intro-slider: "npm:^4.0.4"
+    react-native-gesture-handler: "npm:~2.28.0"
+    react-native-image-pan-zoom: "npm:^2.1.12"
+    react-native-loading-spinner-overlay: "npm:^2.0.0"
+    react-native-maps: "npm:1.20.1"
+    react-native-reanimated: "npm:~4.1.1"
+    react-native-safe-area-context: "npm:~5.6.0"
+    react-native-screens: "npm:~4.16.0"
+    react-native-web: "npm:^0.21.2"
+    react-native-worklets: "npm:0.5.1"
+    typescript: "npm:~5.9.2"
+  languageName: unknown
+  linkType: soft
+
 "abbrev@npm:^3.0.0":
   version: 3.0.1
   resolution: "abbrev@npm:3.0.1"
@@ -3677,6 +3720,53 @@ __metadata:
     expo: "*"
     react-native: "*"
   checksum: 10c0/c3878d7a4c438e1bab25bc5267553c06e4c002237f0cf35eb434de70734e31ef1d07c151d9a7771b75be1baa1c794a4c1c731167cbdfa5bd4fe41a499b8dda4b
+  languageName: node
+  linkType: hard
+
+"expo-dev-client@npm:~6.0.17":
+  version: 6.0.17
+  resolution: "expo-dev-client@npm:6.0.17"
+  dependencies:
+    expo-dev-launcher: "npm:6.0.17"
+    expo-dev-menu: "npm:7.0.16"
+    expo-dev-menu-interface: "npm:2.0.0"
+    expo-manifests: "npm:~1.0.8"
+    expo-updates-interface: "npm:~2.0.0"
+  peerDependencies:
+    expo: "*"
+  checksum: 10c0/aa3a323834d325267777f36d4756436824a6792490ef30cac57b2965ed836452eb519a19e539c7006ea3234fe6c4642bcdb7bf46e895db0149f88ed0d5e352b2
+  languageName: node
+  linkType: hard
+
+"expo-dev-launcher@npm:6.0.17":
+  version: 6.0.17
+  resolution: "expo-dev-launcher@npm:6.0.17"
+  dependencies:
+    expo-dev-menu: "npm:7.0.16"
+    expo-manifests: "npm:~1.0.8"
+  peerDependencies:
+    expo: "*"
+  checksum: 10c0/6a4a389b7c9efc4c4c99bd27f3a20808f84661ddc64f8bde93acea55c936b766639a7b81641a4069cc6d2bfedaacb3979e2cbb8f9d4563977f91290ef86e19e1
+  languageName: node
+  linkType: hard
+
+"expo-dev-menu-interface@npm:2.0.0":
+  version: 2.0.0
+  resolution: "expo-dev-menu-interface@npm:2.0.0"
+  peerDependencies:
+    expo: "*"
+  checksum: 10c0/ef85287262acce5822cd274f91b908bccbc590d3eba2fb34f037271f6f7d6d9e312655c72fca82f890035ed5954e47c58e4509ad5b925737da61d656c48170a4
+  languageName: node
+  linkType: hard
+
+"expo-dev-menu@npm:7.0.16":
+  version: 7.0.16
+  resolution: "expo-dev-menu@npm:7.0.16"
+  dependencies:
+    expo-dev-menu-interface: "npm:2.0.0"
+  peerDependencies:
+    expo: "*"
+  checksum: 10c0/3e2e23e304327959cfe6641623a690967e9e0c1715dc6ad1d12a47fad7b61f45f6c2273993354d85d396504f8a5cf16fe7d338aa166cd74daecf78409833f5a2
   languageName: node
   linkType: hard
 
@@ -6374,48 +6464,6 @@ __metadata:
   checksum: 10c0/9cb7757acb489bd83757ba1a274ab545eafd75598a9d817e0c3f8b164238dd90eba50d6b848bd4dcc5f3040912e882dc7ba71653e35af660d77b25c381d402e8
   languageName: node
   linkType: hard
-
-"root-workspace-0b6124@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "root-workspace-0b6124@workspace:."
-  dependencies:
-    "@amplitude/analytics-react-native": "npm:^1.5.16"
-    "@babel/core": "npm:^7.24.0"
-    "@expo/vector-icons": "npm:^15.0.3"
-    "@react-native-async-storage/async-storage": "npm:2.2.0"
-    "@react-native-masked-view/masked-view": "npm:^0.3.2"
-    "@react-native/babel-preset": "npm:^0.82.1"
-    "@react-navigation/bottom-tabs": "npm:^6.6.1"
-    "@react-navigation/native": "npm:^6.1.18"
-    "@sentry/react-native": "npm:~7.2.0"
-    "@types/react": "npm:~19.1.0"
-    "@types/react-dom": "npm:~19.1.0"
-    expo: "npm:^54.0.23"
-    expo-application: "npm:~7.0.7"
-    expo-constants: "npm:~18.0.10"
-    expo-device: "npm:~8.0.9"
-    expo-font: "npm:~14.0.9"
-    expo-image: "npm:~3.0.10"
-    expo-location: "npm:~19.0.7"
-    expo-status-bar: "npm:~3.0.8"
-    expo-updates: "npm:~29.0.12"
-    prop-types: "npm:^15.7.2"
-    react: "npm:19.1.0"
-    react-dom: "npm:19.1.0"
-    react-native: "npm:0.81.5"
-    react-native-app-intro-slider: "npm:^4.0.4"
-    react-native-gesture-handler: "npm:~2.28.0"
-    react-native-image-pan-zoom: "npm:^2.1.12"
-    react-native-loading-spinner-overlay: "npm:^2.0.0"
-    react-native-maps: "npm:1.20.1"
-    react-native-reanimated: "npm:~4.1.1"
-    react-native-safe-area-context: "npm:~5.6.0"
-    react-native-screens: "npm:~4.16.0"
-    react-native-web: "npm:^0.21.2"
-    react-native-worklets: "npm:0.5.1"
-    typescript: "npm:~5.9.2"
-  languageName: unknown
-  linkType: soft
 
 "safe-buffer@npm:5.2.1":
   version: 5.2.1
