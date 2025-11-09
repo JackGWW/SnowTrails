@@ -2,7 +2,7 @@
   "expo": {
     "name": "SnowTrails",
     "slug": "SnowTrails",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -19,12 +19,13 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.jgwwilliams.snowtrails",
-      "buildNumber": "1.4.0",
+      "buildNumber": "1.5.0",
       "config": {
         "googleMapsApiKey": "AIzaSyDwiFWcgGSy2wKw3oZgoUGrS25fYKhHF4A"
       },
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "This app uses the users location to show their current location on a trail map"
+        "NSLocationWhenInUseUsageDescription": "This app uses the users location to show their current location on a trail map",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
@@ -39,7 +40,7 @@
       },
       "icon": "./assets/icon.png",
       "package": "com.jgwwilliams.SnowTrails",
-      "versionCode": 21,
+      "versionCode": 22,
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",

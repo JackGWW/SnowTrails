@@ -68,11 +68,11 @@ export default class LiveMap extends React.Component {
     // TODO: Remove this and set to null from the start once the fix has been added to Expo
     this.setState({ trailPattern: null })
 
-    northEastLimit = {
+    var northEastLimit = {
       latitude: 44.539,
       longitude: -80.328,
     };
-    southWestLimit = {
+    var southWestLimit = {
       latitude: 44.507,
       longitude: -80.398,
     };
@@ -255,6 +255,7 @@ export default class LiveMap extends React.Component {
             maximumZ={22}
             flipY={false}
             zIndex={-3}
+            shouldReplaceMapContent={true}
           />
           <AllTrails longitudeDelta={longitudeDelta} markerImages={markerImages} trailPattern={this.state.trailPattern} />
           <CustomMarker
@@ -293,13 +294,11 @@ export default class LiveMap extends React.Component {
           activeOpacity={0.5}
           underlayColor="#A9A9A9"
           onPress={() => this.animateToUser()} >
-          <>
-            <Image
-              source={require("../../assets/locationIcon.png")}
-              contentFit="contain"
-              style={styles.locationButton}
-            />
-          </>
+          <Image
+            source={require("../../assets/locationIcon.png")}
+            contentFit="contain"
+            style={styles.locationButton}
+          />
         </TouchableHighlight>
       </View>
     );
