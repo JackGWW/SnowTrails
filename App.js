@@ -158,11 +158,9 @@ class App extends React.Component {
 
                 return <Ionicons name={iconName} size={size} color={color} />;
               },
+              tabBarActiveTintColor: "#1679F3",
+              tabBarInactiveTintColor: "gray",
             })}
-            tabBarOptions={{
-              activeTintColor: "#1679F3",
-              inactiveTintColor: "gray",
-            }}
           >
             <Tab.Screen name="GPS" component={LiveMap} />
             <Tab.Screen name="Map" component={StaticMap} />

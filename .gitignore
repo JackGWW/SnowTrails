@@ -19,3 +19,4 @@ data/.expo/README.md
 .yarnrc.yml
 .pnp.loader.mjs
 .pnp.cjs
+/ios
