@@ -101,13 +101,21 @@ export default class LiveMap extends React.Component {
     }
   }
 
-  updateRegion(region) {
+  async updateRegion() {
     // Calculate longitudeDelta from zoom level for marker sizing
-    // Mapbox uses zoom levels differently than react-native-maps
-    // Approximate conversion: longitudeDelta ≈ 360 / (2^zoom)
-    const zoom = region.properties.zoom || 15;
-    const longitudeDelta = 360 / Math.pow(2, zoom);
-    this.setState({ longitudeDelta });
+    // Query the camera state imperatively instead of relying on event object
+    if (!this.cameraRef.current) return;
+
+    try {
+      const cameraState = await this.cameraRef.current.getZoom();
+      const zoom = cameraState || 15;
+      // Mapbox uses zoom levels differently than react-native-maps
+      // Approximate conversion: longitudeDelta ≈ 360 / (2^zoom)
+      const longitudeDelta = 360 / Math.pow(2, zoom);
+      this.setState({ longitudeDelta });
+    } catch (error) {
+      console.warn('Could not get camera zoom:', error);
+    }
   }
 
   updateCurrentLocation(location) {
