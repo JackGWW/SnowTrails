@@ -52,8 +52,9 @@ def generate_coordinate_mapping(distance_cache, trail_description_blacklist=[]):
 
     # Print just distances
     for track in gpx.tracks:
-        trail_name = track.name.split('-')[0].strip()
-        color = track.name.split('-')[1].strip().lower()
+        base_name = track.name.split('(')[0]
+        trail_name = base_name.split('-')[0].strip()
+        color = base_name.split('-')[1].strip().lower()
 
         if color == "grey":
             continue

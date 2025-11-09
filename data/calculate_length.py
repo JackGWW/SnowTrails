@@ -75,7 +75,8 @@ def print_waypoints(gpx):
 
 def get_track(gpx, name):
     for track in gpx.tracks:
-        if track.name.split('-')[0].strip() == name:
+        base_name = track.name.split('(')[0]
+        if base_name.split('-')[0].strip() == name:
             return track
 
 
@@ -202,11 +203,13 @@ if __name__ == '__main__':
     
     # Print just distances
     for track in gpx.tracks:
-        trail_name = track.name.split('-')[0].strip()
+        base_name = track.name.split('(')[0]
+        trail_name = base_name.split('-')[0].strip()
         print_distance(trail_name)
 
     print()
     print("################# DETAILED INFO #####################")
     for track in gpx.tracks:
-        trail_name = track.name.split('-')[0].strip()
+        base_name = track.name.split('(')[0]
+        trail_name = base_name.split('-')[0].strip()
         print_distance_detailed(trail_name)
