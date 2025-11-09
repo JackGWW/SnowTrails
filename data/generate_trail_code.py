@@ -181,8 +181,8 @@ def write_code_to_file(code, filename):
 
 
 # Load GPX File
-gpx_file = open(gpx_filepath, "r")
-print("Removing invalid characters from file: " + gpx_file.readline(3))
+gpx_file = open(gpx_filepath, "r", encoding='utf-8-sig')  # utf-8-sig automatically handles BOM
+print("Loading GPX file with UTF-8 BOM handling")
 gpx = gpxpy.parse(gpx_file)
 
 # Load distance cache

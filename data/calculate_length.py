@@ -187,8 +187,7 @@ def print_distance(trailName):
 
 # Load GPX Trail File
 p = Path(__file__).with_name('Trails.gpx')
-gpx_file = p.open('r')
-gpx_file.readline(3) # Remove invalid characters from file
+gpx_file = p.open('r', encoding='utf-8-sig')  # utf-8-sig automatically handles BOM
 gpx = gpxpy.parse(gpx_file)
 
 # Load elevation cache
