@@ -6,6 +6,7 @@
 - Always fetch the latest master before creating a new branch
 
 # PR Creation
+- Only commit files related to the current change
 - Include a high level Overview section
 - Include a Why section with some brief context behind the change
 - Include a Changes section with bullet list of key changes
