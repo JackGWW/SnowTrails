@@ -1,15 +1,28 @@
 import React from "react";
-import { Polyline } from "react-native-maps";
+import Mapbox from "@rnmapbox/maps";
 import trail from "../../../data/json/TheSpur.json"
 
 const ShowTrail = (props) => {
   return (
-      <Polyline
-        lineDashPattern={props.trailPattern}
-        coordinates={trail}
-        strokeColor={"#FF9100"}
-        strokeWidth={3}
-      />
+      <Mapbox.ShapeSource
+        id="TheSpur-source"
+        shape={{
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: trail.map(coord => [coord.longitude, coord.latitude])
+          }
+        }}
+      >
+        <Mapbox.LineLayer
+          id="TheSpur-line"
+          style={{
+            lineColor: "#FF9100",
+            lineWidth: 3,
+            
+          }}
+        />
+      </Mapbox.ShapeSource>
 
   );
 };

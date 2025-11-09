@@ -1,5 +1,5 @@
 import React from "react";
-import { Polyline } from "react-native-maps";
+import Mapbox from "@rnmapbox/maps";
 import CustomMarker from "../markers/CustomMarker"
 import trail from "../../../data/json/AlpineExpress.json"
 
@@ -23,12 +23,25 @@ const ShowTrail = (props) => {
         id={"164535"}
       />
 
-      <Polyline
-        lineDashPattern={props.trailPattern}
-        coordinates={trail}
-        strokeColor={"#388E3C"}
-        strokeWidth={3}
-      />
+      <Mapbox.ShapeSource
+        id="AlpineExpress-source"
+        shape={{
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: trail.map(coord => [coord.longitude, coord.latitude])
+          }
+        }}
+      >
+        <Mapbox.LineLayer
+          id="AlpineExpress-line"
+          style={{
+            lineColor: "#388E3C",
+            lineWidth: 3,
+            
+          }}
+        />
+      </Mapbox.ShapeSource>
     </>
   );
 };

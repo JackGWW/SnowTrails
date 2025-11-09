@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Dimensions, TouchableHighlight } from "react-native";
-import MapView, { UrlTile, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
+import Mapbox from "@rnmapbox/maps";
 import Spinner from "react-native-loading-spinner-overlay";
 import * as Location from 'expo-location';
 import { Image } from 'expo-image';
@@ -9,6 +9,8 @@ import { Image } from 'expo-image';
 import AllTrails from "./trails/AllTrails";
 import CustomMarker from "./markers/CustomMarker"
 
+// Set Mapbox access token
+Mapbox.setAccessToken("pk.eyJ1IjoiamFja2d3dyIsImEiOiJja2l4dDZ5bnIxZTh1MnNwZmdxODA4cjU1In0.QruuU5HoAnwNtt0UE45GSg");
 
 let circleIcon = require("../../assets/trailMarkers/circle.svg")
 let squareIcon = require("../../assets/trailMarkers/square.svg")
@@ -22,23 +24,7 @@ export default class LiveMap extends React.Component {
   constructor() {
     super();
 
-    let initialCamera = {
-      center: {
-        latitude: 44.519949,
-        longitude: -80.351933,
-      },
-      pitch: 0,
-      heading: 180,
-
-      // Only on iOS MapKit, in meters. The property is ignored by Google Maps.
-      altitude: 0,
-
-      // Only when using Google Maps.
-      zoom: 15,
-    };
-
     this.state = {
-      initialCamera: initialCamera,
       longitudeDelta: 0.011,
       spinner: true,
       currentLatitude: 44.519,
@@ -51,6 +37,8 @@ export default class LiveMap extends React.Component {
       trailMapping: require('../../data/trail_mapping.json'),
       trailPattern: null
     };
+
+    this.cameraRef = React.createRef();
   }
 
   async enableLocationPermissions() {
@@ -69,30 +57,25 @@ export default class LiveMap extends React.Component {
 
     // TODO: Remove this and set to null from the start once the fix has been added to Expo
     this.setState({ trailPattern: null })
-
-    var northEastLimit = {
-      latitude: 44.539,
-      longitude: -80.328,
-    };
-    var southWestLimit = {
-      latitude: 44.507,
-      longitude: -80.398,
-    };
-    this.mapView.setMapBoundaries(northEastLimit, southWestLimit);
   }
 
   updateRegion(region) {
-    this.setState({ longitudeDelta: region.longitudeDelta });
+    // Calculate longitudeDelta from zoom level for marker sizing
+    // Mapbox uses zoom levels differently than react-native-maps
+    // Approximate conversion: longitudeDelta ≈ 360 / (2^zoom)
+    const zoom = region.properties.zoom || 15;
+    const longitudeDelta = 360 / Math.pow(2, zoom);
+    this.setState({ longitudeDelta });
   }
 
-  updateCurrentLocation(coordinate) {
-    if (coordinate && coordinate.latitude !== undefined && coordinate.longitude !== undefined) {
+  updateCurrentLocation(location) {
+    if (location && location.coords) {
       this.setState({
-        currentLatitude: coordinate.latitude,
-        currentLongitude: coordinate.longitude
+        currentLatitude: location.coords.latitude,
+        currentLongitude: location.coords.longitude
       });
     } else {
-      console.warn("updateCurrentLocation: coordinate is undefined or invalid", coordinate);
+      console.warn("updateCurrentLocation: location is undefined or invalid", location);
     }
   }
 
@@ -105,7 +88,7 @@ export default class LiveMap extends React.Component {
     if (trailDescription === ""){
       trailDescription = null
     }
-    
+
     this.setState({
       hiddenMarkerLatitude: coordinateInfo.lat,
       hiddenMarkerLongitude: coordinateInfo.lon,
@@ -183,24 +166,66 @@ export default class LiveMap extends React.Component {
   }
 
   animateToUser() {
-    let currentLocation = {
-      center: {
-        latitude: this.state.currentLatitude,
-        longitude: this.state.currentLongitude,
-      }
+    if (this.cameraRef.current) {
+      // Clamp coordinates to map boundaries
+      const northEastLimit = { latitude: 44.539, longitude: -80.328 };
+      const southWestLimit = { latitude: 44.507, longitude: -80.398 };
+
+      const clampedLatitude = Math.max(
+        southWestLimit.latitude,
+        Math.min(northEastLimit.latitude, this.state.currentLatitude)
+      );
+      const clampedLongitude = Math.max(
+        southWestLimit.longitude,
+        Math.min(northEastLimit.longitude, this.state.currentLongitude)
+      );
+
+      this.cameraRef.current.setCamera({
+        centerCoordinate: [clampedLongitude, clampedLatitude],
+        animationDuration: 1000,
+      });
     }
-    this.mapView.animateCamera(currentLocation)
+  }
+
+  onMapPress = (event) => {
+    // If map is tapped, check if it is tapped on a trail
+    // If a trail is tapped, show a marker on that trail
+    const { geometry } = event;
+    if (!geometry || !geometry.coordinates) return;
+
+    const coordinate = {
+      latitude: geometry.coordinates[1],
+      longitude: geometry.coordinates[0]
+    };
+
+    let coordinateKey = this.getCoordinateKey(coordinate, 4, 4)
+    if (coordinateKey in this.state.coordinateMapping) {
+      this.updateHiddenMarker(coordinateKey)
+      return
+    }
+
+    coordinateKey = this.getCoordinateKey(coordinate, 4, 3)
+    if (coordinateKey in this.state.coordinateMapping) {
+      this.updateHiddenMarker(coordinateKey)
+      return
+    }
+
+    coordinateKey = this.getCoordinateKey(coordinate, 3, 4)
+    if (coordinateKey in this.state.coordinateMapping) {
+      this.updateHiddenMarker(coordinateKey)
+      return
+    }
+
+    coordinateKey = this.getCoordinateKey(coordinate, 3, 3)
+    if (coordinateKey in this.state.coordinateMapping) {
+      this.updateHiddenMarker(coordinateKey)
+      return
+    }
   }
 
   render() {
     let markerImages = this.getMarkerImages()
     let longitudeDelta = this.state.longitudeDelta.toFixed(5)
-    
-    // Always use GoogleMaps (instead of MapKit on iOS). If using the DEV build, google maps doen't work
-    var mapProvider = PROVIDER_GOOGLE
-    if (__DEV__) {
-      var mapProvider = PROVIDER_DEFAULT
-    }
 
     return (
       <View style={styles.container}>
@@ -212,63 +237,44 @@ export default class LiveMap extends React.Component {
           overlayColor={"rgba(0, 0, 0, 0.5)"}
         />
 
-        <MapView
-          ref={(ref) => (this.mapView = ref)}
-          initialCamera={this.state.initialCamera}
-          provider={mapProvider}
-          showsUserLocation={true}
-          followsUserLocation={true}
-          showsCompass={false}
-          showsMyLocationButton={false}
-          toolbarEnabled={false} // Hide map buttons on marker press
-          minZoomLevel={14}
-          maxZoomLevel={18}
-          mapType={"none"}
+        <Mapbox.MapView
           style={styles.mapStyle}
-          onMapReady={this.mapSetup.bind(this)} // Initialize map boundaries when the map loads
-          onUserLocationChange={(event) => this.updateCurrentLocation(event.nativeEvent.coordinate)}
-          onRegionChangeComplete={(region) => this.updateRegion(region)}
-
-          onPress={(event) => {
-            // If map is tapped, check if it is tapped on a trail
-            // If a trail is tapped, show a marker on that trail 
-            let coordinate = event.nativeEvent.coordinate
-            
-            let coordinateKey = this.getCoordinateKey(coordinate, 4, 4)
-            if (coordinateKey in this.state.coordinateMapping) {
-              this.updateHiddenMarker(coordinateKey)
-              return
-            }
-
-            coordinateKey = this.getCoordinateKey(coordinate, 4, 3)
-            if (coordinateKey in this.state.coordinateMapping) {
-              this.updateHiddenMarker(coordinateKey)
-              return
-            }
-
-            coordinateKey = this.getCoordinateKey(coordinate, 3, 4)
-            if (coordinateKey in this.state.coordinateMapping) {
-              this.updateHiddenMarker(coordinateKey)
-              return
-            }
-
-            coordinateKey = this.getCoordinateKey(coordinate, 3, 3)
-            if (coordinateKey in this.state.coordinateMapping) {
-              this.updateHiddenMarker(coordinateKey)
-              return
-            }
-          }}
+          styleURL="https://api.mapbox.com/styles/v1/jackgww/ckixum56n651w19npcrja4rnq?access_token=pk.eyJ1IjoiamFja2d3dyIsImEiOiJja2l4dDZ5bnIxZTh1MnNwZmdxODA4cjU1In0.QruuU5HoAnwNtt0UE45GSg"
+          onDidFinishLoadingMap={this.mapSetup.bind(this)}
+          onPress={this.onMapPress}
+          onRegionDidChange={this.updateRegion.bind(this)}
+          compassEnabled={false}
+          scaleBarEnabled={false}
+          attributionEnabled={false}
+          logoEnabled={false}
         >
-          <UrlTile
-            urlTemplate={
-              "https://api.mapbox.com/styles/v1/jackgww/ckixum56n651w19npcrja4rnq/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamFja2d3dyIsImEiOiJja2l4dDZ5bnIxZTh1MnNwZmdxODA4cjU1In0.QruuU5HoAnwNtt0UE45GSg"
-            }
-            maximumZ={22}
-            flipY={false}
-            shouldReplaceMapContent={true}
-            zIndex={-1} // keep tiles underneath custom trails/markers on Google Maps iOS
+          <Mapbox.Camera
+            ref={this.cameraRef}
+            zoomLevel={15}
+            centerCoordinate={[-80.351933, 44.519949]}
+            pitch={0}
+            heading={180}
+            minZoomLevel={14}
+            maxZoomLevel={18}
+            maxBounds={[
+              [-80.398, 44.507], // Southwest
+              [-80.328, 44.539]  // Northeast
+            ]}
           />
+
+          <Mapbox.LocationPuck
+            pulsing={{ isEnabled: true }}
+            puckBearingEnabled={true}
+            puckBearing="heading"
+          />
+
+          <Mapbox.UserLocation
+            visible={true}
+            onUpdate={(location) => this.updateCurrentLocation(location)}
+          />
+
           <AllTrails longitudeDelta={longitudeDelta} markerImages={markerImages} trailPattern={this.state.trailPattern} />
+
           <CustomMarker
             longitudeDelta={longitudeDelta}
             location={{ latitude: 44.512641029432416, longitude: -80.363259455189109 }}
@@ -288,7 +294,7 @@ export default class LiveMap extends React.Component {
             key={this.state.hiddenMarkerLatitude}
             tappable={false}
           />
-        </MapView>
+        </Mapbox.MapView>
 
         {/* Bottom left, trail rating legend */}
         <View style={styles.legendContainer}>
@@ -298,7 +304,7 @@ export default class LiveMap extends React.Component {
             contentFit="contain"
           />
         </View>
-        
+
         {/* Bottom right, move to current location button */}
         <TouchableHighlight
           style={styles.locationButtonContainer}

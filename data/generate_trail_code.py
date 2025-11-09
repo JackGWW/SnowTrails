@@ -148,14 +148,17 @@ def generate_markers(data):
 def generate_trail(data):
     trail_name = data["name"]
     print("Generating trail for " + trail_name)
+    filename = stripped_name(trail_name, True)
 
-    line_dash_pattern = "props.trailPattern"
+    # For Mapbox, lineDasharray needs to be in the style object
+    line_dash_array = ""
     if "cross country" in trail_name.lower():
-        line_dash_pattern = "[3, 3]"
+        line_dash_array = "lineDasharray: [3, 3],"
 
     return line_template.substitute(
+        id=filename,
         color=data["color"],
-        line_dash_pattern=line_dash_pattern
+        lineDashArray=line_dash_array
         )
     
 

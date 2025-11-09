@@ -1,5 +1,5 @@
 import React from "react";
-import { Polyline } from "react-native-maps";
+import Mapbox from "@rnmapbox/maps";
 import CustomMarker from "../markers/CustomMarker"
 import trail from "../../../data/json/LightBlueTrail.json"
 
@@ -15,12 +15,25 @@ const ShowTrail = (props) => {
         id={"842698"}
       />
 
-      <Polyline
-        lineDashPattern={props.trailPattern}
-        coordinates={trail}
-        strokeColor={"#0CE1F1"}
-        strokeWidth={3}
-      />
+      <Mapbox.ShapeSource
+        id="LightBlueTrail-source"
+        shape={{
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: trail.map(coord => [coord.longitude, coord.latitude])
+          }
+        }}
+      >
+        <Mapbox.LineLayer
+          id="LightBlueTrail-line"
+          style={{
+            lineColor: "#0CE1F1",
+            lineWidth: 3,
+            
+          }}
+        />
+      </Mapbox.ShapeSource>
     </>
   );
 };

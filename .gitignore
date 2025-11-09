@@ -9,6 +9,11 @@ npm-debug.*
 *.orig.*
 web-build/
 
+# Environment variables (contains secret tokens)
+.env
+.env.local
+.netrc
+
 # macOS
 .DS_Store
 package-lock.json
@@ -22,3 +27,4 @@ data/.expo/README.md
 /ios
 *.ipa
 pc-api-7156336600593486586-385-84e9e682a380.json
+/android
