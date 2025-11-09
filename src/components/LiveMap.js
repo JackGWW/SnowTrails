@@ -276,7 +276,7 @@ export default class LiveMap extends React.Component {
             onUpdate={(location) => this.updateCurrentLocation(location)}
           />
 
-          <AllTrails longitudeDelta={longitudeDelta} markerImages={markerImages} />
+          <AllTrails />
 
           <CustomMarker
             longitudeDelta={longitudeDelta}
