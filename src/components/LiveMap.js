@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Dimensions, TouchableHighlight } from "react-native";
+import { StyleSheet, View, Dimensions, TouchableHighlight, Text } from "react-native";
 import Mapbox from "@rnmapbox/maps";
 import Spinner from "react-native-loading-spinner-overlay";
 import * as Location from 'expo-location';
@@ -34,7 +34,8 @@ export default class LiveMap extends React.Component {
       hiddenMarkerName: "",
       hiddenMarkerDescription: "",
       coordinateMapping: require('../../data/coordinate_mapping.json'),
-      trailMapping: require('../../data/trail_mapping.json')
+      trailMapping: require('../../data/trail_mapping.json'),
+      is3DMode: false
     };
 
     this.cameraRef = React.createRef();
@@ -194,6 +195,18 @@ export default class LiveMap extends React.Component {
     }
   }
 
+  toggle3DMode() {
+    const newMode = !this.state.is3DMode;
+    this.setState({ is3DMode: newMode });
+
+    if (this.cameraRef.current) {
+      this.cameraRef.current.setCamera({
+        pitch: newMode ? 45 : 0,
+        animationDuration: 500,
+      });
+    }
+  }
+
   onMapPress = (event) => {
     // If map is tapped, check if it is tapped on a trail
     // If a trail is tapped, show a marker on that trail
@@ -255,6 +268,18 @@ export default class LiveMap extends React.Component {
           attributionEnabled={false}
           logoEnabled={false}
         >
+          <Mapbox.Terrain
+            sourceID="mapbox-dem"
+            exaggeration={1.5}
+          />
+
+          <Mapbox.RasterDemSource
+            id="mapbox-dem"
+            url="mapbox://mapbox.terrain-rgb"
+            tileSize={514}
+            maxZoomLevel={14}
+          />
+
           <Mapbox.Camera
             ref={this.cameraRef}
             minZoomLevel={14}
@@ -308,6 +333,19 @@ export default class LiveMap extends React.Component {
           />
         </View>
 
+        {/* Bottom right, 3D toggle button */}
+        <TouchableHighlight
+          style={styles.terrainButtonContainer}
+          activeOpacity={0.5}
+          underlayColor="#A9A9A9"
+          onPress={() => this.toggle3DMode()} >
+          <View style={styles.terrainButton}>
+            <Text style={styles.terrainButtonText}>
+              {this.state.is3DMode ? '2D' : '3D'}
+            </Text>
+          </View>
+        </TouchableHighlight>
+
         {/* Bottom right, move to current location button */}
         <TouchableHighlight
           style={styles.locationButtonContainer}
@@ -359,6 +397,30 @@ const styles = StyleSheet.create({
     height: 80,
     width: 80,
     flexDirection: "row",
+  },
+  terrainButtonContainer: {
+    position: "absolute",
+    right: 20,
+    bottom: 80,
+    height: 50,
+    width: 50,
+    borderWidth: 1,
+    borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: "rgba(255, 255, 255, 0.85)",
+  },
+  terrainButton: {
+    height: 50,
+    width: 50,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  terrainButtonText: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#333",
   },
   locationButtonContainer: {
     position: "absolute",
