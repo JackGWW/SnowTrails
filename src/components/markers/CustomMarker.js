@@ -1,5 +1,6 @@
 import React from "react";
 import { Marker } from "react-native-maps";
+import { Image } from 'expo-image';
 
 export default class CustomMarker extends React.Component {
     constructor(props) {
@@ -22,6 +23,7 @@ export default class CustomMarker extends React.Component {
 
     render() {
         let markerKey = this.props.id + this.props.longitudeDelta
+        const iconDescriptor = this.props.icon;
         return (
             <Marker
                 coordinate={this.props.location}
@@ -31,7 +33,13 @@ export default class CustomMarker extends React.Component {
                 tappable={false}
                 key={markerKey} // Key update is required to get android to redraw the image at a different size
             >
-                { this.props.icon }
+                {iconDescriptor ? (
+                    <Image
+                        source={iconDescriptor.source}
+                        style={{ height: iconDescriptor.height, width: iconDescriptor.width }}
+                        contentFit="contain"
+                    />
+                ) : null}
             </Marker>
         );
     }
