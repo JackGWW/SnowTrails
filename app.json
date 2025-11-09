@@ -54,7 +54,8 @@
           "project": "snowtrails",
           "url": "https://sentry.io/"
         }
-      ]
+      ],
+      "expo-font"
     ],
     "extra": {
       "eas": {
