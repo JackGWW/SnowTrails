@@ -431,15 +431,15 @@ export default class LiveMap extends React.Component {
           underlayColor="#A9A9A9"
           onPress={() => this.toggleTracking()}
           disabled={!this.state.isUserInBounds && !this.state.isTracking} >
-          <View style={styles.trackingButton}>
-            <Text style={[
-              styles.trackingButtonText,
-              this.state.isTracking && styles.trackingButtonTextActive,
-              !this.state.isUserInBounds && styles.buttonTextDisabled
-            ]}>
-              {this.state.isTracking ? 'STOP' : 'FOLLOW'}
-            </Text>
-          </View>
+          <Image
+            source={require("../../assets/locationIcon.png")}
+            contentFit="contain"
+            style={styles.trackingButton}
+            tintColor={
+              !this.state.isUserInBounds ? "#999" :
+              this.state.isTracking ? "#FFF" : "#333"
+            }
+          />
         </TouchableHighlight>
 
         {/* Bottom right, move to current location button */}
@@ -528,7 +528,7 @@ const styles = StyleSheet.create({
     right: 20,
     bottom: 80,
     height: 50,
-    width: 80,
+    width: 50,
     borderWidth: 1,
     borderRadius: 25,
     alignItems: "center",
@@ -541,18 +541,8 @@ const styles = StyleSheet.create({
     borderColor: '#007AFF',
   },
   trackingButton: {
-    height: 50,
-    width: 80,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  trackingButtonText: {
-    fontSize: 13,
-    fontWeight: "700",
-    color: "#333",
-  },
-  trackingButtonTextActive: {
-    color: "#FFF",
+    height: 35,
+    width: 35,
   },
   locationButtonContainer: {
     position: "absolute",
