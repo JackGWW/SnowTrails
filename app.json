@@ -19,7 +19,6 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.jgwwilliams.snowtrails",
-      "buildNumber": "1.5.0",
       "config": {
         "googleMapsApiKey": "AIzaSyDwiFWcgGSy2wKw3oZgoUGrS25fYKhHF4A"
       },
