@@ -1,5 +1,5 @@
 import React from "react";
-import { Polyline } from "react-native-maps";
+import Mapbox from "@rnmapbox/maps";
 import CustomMarker from "../markers/CustomMarker"
 import trail from "../../../data/json/SouthAscent.json"
 
@@ -31,12 +31,25 @@ const ShowTrail = (props) => {
         id={"193598"}
       />
 
-      <Polyline
-        lineDashPattern={props.trailPattern}
-        coordinates={trail}
-        strokeColor={"#212121"}
-        strokeWidth={3}
-      />
+      <Mapbox.ShapeSource
+        id="SouthAscent-source"
+        shape={{
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: trail.map(coord => [coord.longitude, coord.latitude])
+          }
+        }}
+      >
+        <Mapbox.LineLayer
+          id="SouthAscent-line"
+          style={{
+            lineColor: "#212121",
+            lineWidth: 3,
+            
+          }}
+        />
+      </Mapbox.ShapeSource>
     </>
   );
 };

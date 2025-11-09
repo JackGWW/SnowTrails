@@ -11,17 +11,30 @@ marker_template = Template("""      <CustomMarker
 """)
 
 
-line_template = Template("""      <Polyline
-        lineDashPattern={${line_dash_pattern}}
-        coordinates={trail}
-        strokeColor={"${color}"}
-        strokeWidth={3}
-      />
+line_template = Template("""      <Mapbox.ShapeSource
+        id="${id}-source"
+        shape={{
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: trail.map(coord => [coord.longitude, coord.latitude])
+          }
+        }}
+      >
+        <Mapbox.LineLayer
+          id="${id}-line"
+          style={{
+            lineColor: "${color}",
+            lineWidth: 3,
+            ${lineDashArray}
+          }}
+        />
+      </Mapbox.ShapeSource>
 """)
 
 
 trail_template = Template("""import React from "react";
-import { Polyline } from "react-native-maps";
+import Mapbox from "@rnmapbox/maps";
 import trail from "../../../data/json/${filename}.json"
 
 const ShowTrail = (props) => {
@@ -34,7 +47,7 @@ export default ShowTrail;
 """)
 
 trail_and_marker_template = Template("""import React from "react";
-import { Polyline } from "react-native-maps";
+import Mapbox from "@rnmapbox/maps";
 import CustomMarker from "../markers/CustomMarker"
 import trail from "../../../data/json/${filename}.json"
 

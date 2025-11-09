@@ -1,15 +1,28 @@
 import React from "react";
-import { Polyline } from "react-native-maps";
+import Mapbox from "@rnmapbox/maps";
 import trail from "../../../data/json/StusLine.json"
 
 const ShowTrail = (props) => {
   return (
-      <Polyline
-        lineDashPattern={props.trailPattern}
-        coordinates={trail}
-        strokeColor={"#989898"}
-        strokeWidth={3}
-      />
+      <Mapbox.ShapeSource
+        id="StusLine-source"
+        shape={{
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: trail.map(coord => [coord.longitude, coord.latitude])
+          }
+        }}
+      >
+        <Mapbox.LineLayer
+          id="StusLine-line"
+          style={{
+            lineColor: "#989898",
+            lineWidth: 3,
+            
+          }}
+        />
+      </Mapbox.ShapeSource>
 
   );
 };

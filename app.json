@@ -19,9 +19,6 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.jgwwilliams.snowtrails",
-      "config": {
-        "googleMapsApiKey": "AIzaSyDwiFWcgGSy2wKw3oZgoUGrS25fYKhHF4A"
-      },
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app uses the users location to show their current location on a trail map",
         "ITSAppUsesNonExemptEncryption": false
@@ -31,11 +28,6 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon_foreground.png",
         "backgroundColor": "#1679F3"
-      },
-      "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyDyxf__edqt0S_bxIHi193JraImCgI02jA"
-        }
       },
       "icon": "./assets/icon.png",
       "package": "com.jgwwilliams.SnowTrails",
@@ -55,7 +47,13 @@
           "url": "https://sentry.io/"
         }
       ],
-      "expo-font"
+      "expo-font",
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsVersion": "10.18.2"
+        }
+      ]
     ],
     "extra": {
       "eas": {
