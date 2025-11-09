@@ -78,5 +78,5 @@ export default ShowTrail;
 all_trails_import_template = Template("""import ${filename} from "./${filename}"
 """)
 
-all_trails_component_template = Template("""      <${filename} longitudeDelta={props.longitudeDelta} markerImages={props.markerImages} trailPattern={props.trailPattern}/>
+all_trails_component_template = Template("""      <${filename} longitudeDelta={props.longitudeDelta} markerImages={props.markerImages}/>
 """)
