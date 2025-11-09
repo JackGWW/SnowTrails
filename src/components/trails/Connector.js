@@ -29,7 +29,9 @@ const ShowTrail = (props) => {
           id="Connector-line"
           style={{
             lineColor: "#388E3C",
-            lineWidth: 3,
+            lineWidth: ['interpolate', ['linear'], ['zoom'], 14, 2, 16, 3, 18, 5],
+            lineCap: 'round',
+            lineJoin: 'round',
             
           }}
         />

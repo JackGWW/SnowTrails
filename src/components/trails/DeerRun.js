@@ -29,7 +29,9 @@ const ShowTrail = (props) => {
           id="DeerRun-line"
           style={{
             lineColor: "magenta",
-            lineWidth: 3,
+            lineWidth: ['interpolate', ['linear'], ['zoom'], 14, 2, 16, 3, 18, 5],
+            lineCap: 'round',
+            lineJoin: 'round',
             
           }}
         />

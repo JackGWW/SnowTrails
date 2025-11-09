@@ -37,7 +37,9 @@ const ShowTrail = (props) => {
           id="Crossover-line"
           style={{
             lineColor: "#2962FF",
-            lineWidth: 3,
+            lineWidth: ['interpolate', ['linear'], ['zoom'], 14, 2, 16, 3, 18, 5],
+            lineCap: 'round',
+            lineJoin: 'round',
             
           }}
         />
