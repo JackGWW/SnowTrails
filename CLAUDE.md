@@ -1,3 +1,7 @@
+# Python commands
+- Always use the virtual environment source venv/bin/activate
+- Generate all the trail code using `cd data && source venv/bin/activate && python generate_trail_code.py`
+
 # Git Branches
 - Always fetch the latest master before creating a new branch
 
