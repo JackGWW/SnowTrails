@@ -255,6 +255,7 @@ export default class LiveMap extends React.Component {
             maximumZ={22}
             flipY={false}
             zIndex={-3}
+            shouldReplaceMapContent={true}
           />
           <AllTrails longitudeDelta={longitudeDelta} markerImages={markerImages} trailPattern={this.state.trailPattern} />
           <CustomMarker
