@@ -1,15 +1,30 @@
 import React from "react";
-import { Polyline } from "react-native-maps";
+import Mapbox from "@rnmapbox/maps";
 import trail from "../../../data/json/CrossCountrySkiTrail.json"
 
 const ShowTrail = (props) => {
   return (
-      <Polyline
-        lineDashPattern={[3, 3]}
-        coordinates={trail}
-        strokeColor={"#696969"}
-        strokeWidth={3}
-      />
+      <Mapbox.ShapeSource
+        id={`trail-source-${props.id || "CrossCountrySkiTrail"}`}
+        shape={{
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: trail.map(coord => [coord.longitude, coord.latitude])
+          }
+        }}
+      >
+        <Mapbox.LineLayer
+          id={`trail-line-${props.id || "CrossCountrySkiTrail"}`}
+          style={{
+            lineColor: "#696969",
+            lineWidth: 3,
+            lineCap: 'round',
+            lineJoin: 'round',
+            lineDasharray: [3, 3],
+          }}
+        />
+      </Mapbox.ShapeSource>
 
   );
 };
