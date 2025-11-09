@@ -48,22 +48,56 @@ export default class LiveMap extends React.Component {
     }
   }
 
-  mapSetup() {
+  async mapSetup() {
     // Set map boundaries to the area containing the trails
     this.setState({ spinner: false });
 
     // Ask for location permissions
-    this.enableLocationPermissions()
+    await this.enableLocationPermissions();
 
-    // Set initial camera position after map has loaded
-    if (this.cameraRef.current) {
-      this.cameraRef.current.setCamera({
-        centerCoordinate: [-80.351933, 44.519949],
-        zoomLevel: 15,
-        pitch: 0,
-        heading: 210,
-        animationDuration: 0, // No animation on initial load
+    // Try to get user's current location
+    try {
+      const location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Balanced,
       });
+
+      const userLat = location.coords.latitude;
+      const userLon = location.coords.longitude;
+
+      // Check if user is within map boundaries
+      const northEastLimit = { latitude: 44.539, longitude: -80.328 };
+      const southWestLimit = { latitude: 44.507, longitude: -80.398 };
+
+      const isWithinBounds =
+        userLat >= southWestLimit.latitude &&
+        userLat <= northEastLimit.latitude &&
+        userLon >= southWestLimit.longitude &&
+        userLon <= northEastLimit.longitude;
+
+      // Set initial camera position after map has loaded
+      if (this.cameraRef.current) {
+        this.cameraRef.current.setCamera({
+          centerCoordinate: isWithinBounds
+            ? [userLon, userLat]
+            : [-80.351933, 44.519949],
+          zoomLevel: 15,
+          pitch: 0,
+          heading: 210,
+          animationDuration: 0, // No animation on initial load
+        });
+      }
+    } catch (error) {
+      console.log('Could not get user location:', error);
+      // Fall back to default location
+      if (this.cameraRef.current) {
+        this.cameraRef.current.setCamera({
+          centerCoordinate: [-80.351933, 44.519949],
+          zoomLevel: 15,
+          pitch: 0,
+          heading: 210,
+          animationDuration: 0,
+        });
+      }
     }
   }
 
