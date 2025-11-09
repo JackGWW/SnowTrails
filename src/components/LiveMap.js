@@ -68,11 +68,11 @@ export default class LiveMap extends React.Component {
     // TODO: Remove this and set to null from the start once the fix has been added to Expo
     this.setState({ trailPattern: null })
 
-    northEastLimit = {
+    var northEastLimit = {
       latitude: 44.539,
       longitude: -80.328,
     };
-    southWestLimit = {
+    var southWestLimit = {
       latitude: 44.507,
       longitude: -80.398,
     };
