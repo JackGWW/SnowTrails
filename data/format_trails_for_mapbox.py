@@ -48,7 +48,8 @@ gpx = gpxpy.parse(gpx_file)
 # Convert trail data into formatted data
 formatted_gpx = gpxpy.gpx.GPX()
 for track in gpx.tracks:
-    name, color = track.name.split("-")
+    name, color = track.name.split("(")[0].split("-")
+    print(name, color)
     name, color = name.strip(), color.strip()
     color_hex = color_mapping[color.lower()]
 

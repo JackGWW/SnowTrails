@@ -203,7 +203,8 @@ else:
 print("\n### PARSING TRAILS ###")
 trail_data = {}
 for track in gpx.tracks:
-    name, color = track.name.split("-")
+    base_name = track.name.split("(")[0]
+    name, color = base_name.split("-")
     filename = stripped_name(name, True)
     color = color_mapping[color.strip().lower()]
 
