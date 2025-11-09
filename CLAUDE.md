@@ -4,6 +4,7 @@
 
 # Git Branches
 - Always fetch the latest master before creating a new branch
+- By default, create new branches off of the master branch
 
 # PR Creation
 - Only commit files related to the current change
