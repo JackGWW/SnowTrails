@@ -15,3 +15,8 @@ package-lock.json
 *.pyc
 *.lock
 data/.expo/README.md
+/.yarn
+.yarnrc.yml
+.pnp.loader.mjs
+.pnp.cjs
+/ios
