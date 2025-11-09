@@ -53,6 +53,17 @@ export default class LiveMap extends React.Component {
 
     // Ask for location permissions
     this.enableLocationPermissions()
+
+    // Set initial camera position after map has loaded
+    if (this.cameraRef.current) {
+      this.cameraRef.current.setCamera({
+        centerCoordinate: [-80.351933, 44.519949],
+        zoomLevel: 15,
+        pitch: 0,
+        heading: 210,
+        animationDuration: 0, // No animation on initial load
+      });
+    }
   }
 
   updateRegion(region) {
@@ -246,10 +257,6 @@ export default class LiveMap extends React.Component {
         >
           <Mapbox.Camera
             ref={this.cameraRef}
-            zoomLevel={15}
-            centerCoordinate={[-80.351933, 44.519949]}
-            pitch={0}
-            heading={180}
             minZoomLevel={14}
             maxZoomLevel={18}
             maxBounds={[
