@@ -34,8 +34,7 @@ export default class LiveMap extends React.Component {
       hiddenMarkerName: "",
       hiddenMarkerDescription: "",
       coordinateMapping: require('../../data/coordinate_mapping.json'),
-      trailMapping: require('../../data/trail_mapping.json'),
-      trailPattern: null
+      trailMapping: require('../../data/trail_mapping.json')
     };
 
     this.cameraRef = React.createRef();
@@ -54,9 +53,6 @@ export default class LiveMap extends React.Component {
 
     // Ask for location permissions
     this.enableLocationPermissions()
-
-    // TODO: Remove this and set to null from the start once the fix has been added to Expo
-    this.setState({ trailPattern: null })
   }
 
   updateRegion(region) {
@@ -273,7 +269,7 @@ export default class LiveMap extends React.Component {
             onUpdate={(location) => this.updateCurrentLocation(location)}
           />
 
-          <AllTrails longitudeDelta={longitudeDelta} markerImages={markerImages} trailPattern={this.state.trailPattern} />
+          <AllTrails longitudeDelta={longitudeDelta} markerImages={markerImages} />
 
           <CustomMarker
             longitudeDelta={longitudeDelta}
