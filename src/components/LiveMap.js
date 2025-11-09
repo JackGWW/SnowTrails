@@ -37,7 +37,12 @@ export default class LiveMap extends React.Component {
       trailMapping: require('../../data/trail_mapping.json'),
       is3DMode: false,
       isTracking: false,
-      locationButtonState: 0 // 0: default, 1: centered, 2: tracking
+      isUserInBounds: false
+    };
+
+    this.mapBounds = {
+      northEast: { latitude: 44.539, longitude: -80.328 },
+      southWest: { latitude: 44.507, longitude: -80.398 }
     };
 
     this.cameraRef = React.createRef();
@@ -48,6 +53,15 @@ export default class LiveMap extends React.Component {
     if (status !== 'granted') {
       console.log('Location permission was denied');
     }
+  }
+
+  isWithinBounds(lat, lon) {
+    return (
+      lat >= this.mapBounds.southWest.latitude &&
+      lat <= this.mapBounds.northEast.latitude &&
+      lon >= this.mapBounds.southWest.longitude &&
+      lon <= this.mapBounds.northEast.longitude
+    );
   }
 
   async mapSetup() {
@@ -67,14 +81,14 @@ export default class LiveMap extends React.Component {
       const userLon = location.coords.longitude;
 
       // Check if user is within map boundaries
-      const northEastLimit = { latitude: 44.539, longitude: -80.328 };
-      const southWestLimit = { latitude: 44.507, longitude: -80.398 };
+      const isWithinBounds = this.isWithinBounds(userLat, userLon);
 
-      const isWithinBounds =
-        userLat >= southWestLimit.latitude &&
-        userLat <= northEastLimit.latitude &&
-        userLon >= southWestLimit.longitude &&
-        userLon <= northEastLimit.longitude;
+      // Update state to track if user is in bounds
+      this.setState({
+        isUserInBounds: isWithinBounds,
+        currentLatitude: userLat,
+        currentLongitude: userLon
+      });
 
       // Set initial camera position after map has loaded
       if (this.cameraRef.current) {
@@ -87,6 +101,14 @@ export default class LiveMap extends React.Component {
           heading: 210,
           animationDuration: 0, // No animation on initial load
         });
+      }
+
+      // Enable tracking by default if user is within bounds
+      if (isWithinBounds) {
+        // Delay slightly to ensure camera is set up
+        setTimeout(() => {
+          this.setState({ isTracking: true });
+        }, 500);
       }
     } catch (error) {
       console.log('Could not get user location:', error);
@@ -114,10 +136,20 @@ export default class LiveMap extends React.Component {
 
   updateCurrentLocation(location) {
     if (location && location.coords) {
+      const lat = location.coords.latitude;
+      const lon = location.coords.longitude;
+      const isInBounds = this.isWithinBounds(lat, lon);
+
       this.setState({
-        currentLatitude: location.coords.latitude,
-        currentLongitude: location.coords.longitude
+        currentLatitude: lat,
+        currentLongitude: lon,
+        isUserInBounds: isInBounds
       });
+
+      // Disable tracking if user goes out of bounds
+      if (this.state.isTracking && !isInBounds) {
+        this.setState({ isTracking: false });
+      }
     } else {
       console.warn("updateCurrentLocation: location is undefined or invalid", location);
     }
@@ -210,46 +242,26 @@ export default class LiveMap extends React.Component {
   }
 
   animateToUser() {
-    if (this.cameraRef.current) {
-      // Clamp coordinates to map boundaries
-      const northEastLimit = { latitude: 44.539, longitude: -80.328 };
-      const southWestLimit = { latitude: 44.507, longitude: -80.398 };
-
-      const clampedLatitude = Math.max(
-        southWestLimit.latitude,
-        Math.min(northEastLimit.latitude, this.state.currentLatitude)
-      );
-      const clampedLongitude = Math.max(
-        southWestLimit.longitude,
-        Math.min(northEastLimit.longitude, this.state.currentLongitude)
-      );
-
+    if (this.cameraRef.current && this.state.isUserInBounds) {
       this.cameraRef.current.setCamera({
-        centerCoordinate: [clampedLongitude, clampedLatitude],
+        centerCoordinate: [this.state.currentLongitude, this.state.currentLatitude],
         animationDuration: 1000,
       });
     }
   }
 
-  handleLocationButtonPress() {
-    if (this.state.locationButtonState === 0) {
-      // First tap: Center on user
-      this.animateToUser();
-      this.setState({ locationButtonState: 1 });
-    } else if (this.state.locationButtonState === 1) {
-      // Second tap: Enable tracking
-      this.setState({ isTracking: true, locationButtonState: 2 });
-    } else {
-      // Third tap: Disable tracking
-      this.setState({ isTracking: false, locationButtonState: 0 });
+  toggleTracking() {
+    // Only allow enabling tracking if user is within bounds
+    if (!this.state.isTracking && !this.state.isUserInBounds) {
+      return; // Don't enable tracking if user is out of bounds
     }
+    this.setState({ isTracking: !this.state.isTracking });
   }
 
   onCameraChanged = (state) => {
     // Disable tracking if user manually pans the map
-    // state.gestures.isGestureActive is true when user is actively moving the map
     if (this.state.isTracking && state.gestures && state.gestures.isGestureActive) {
-      this.setState({ isTracking: false, locationButtonState: 0 });
+      this.setState({ isTracking: false });
     }
   }
 
@@ -408,20 +420,43 @@ export default class LiveMap extends React.Component {
           </View>
         </TouchableHighlight>
 
+        {/* Bottom right, GPS tracking toggle button */}
+        <TouchableHighlight
+          style={[
+            styles.trackingButtonContainer,
+            this.state.isTracking && styles.trackingButtonActive,
+            !this.state.isUserInBounds && styles.buttonDisabled
+          ]}
+          activeOpacity={0.5}
+          underlayColor="#A9A9A9"
+          onPress={() => this.toggleTracking()}
+          disabled={!this.state.isUserInBounds && !this.state.isTracking} >
+          <View style={styles.trackingButton}>
+            <Text style={[
+              styles.trackingButtonText,
+              this.state.isTracking && styles.trackingButtonTextActive,
+              !this.state.isUserInBounds && styles.buttonTextDisabled
+            ]}>
+              {this.state.isTracking ? 'STOP' : 'FOLLOW'}
+            </Text>
+          </View>
+        </TouchableHighlight>
+
         {/* Bottom right, move to current location button */}
         <TouchableHighlight
           style={[
             styles.locationButtonContainer,
-            this.state.isTracking && styles.locationButtonContainerActive
+            !this.state.isUserInBounds && styles.buttonDisabled
           ]}
           activeOpacity={0.5}
           underlayColor="#A9A9A9"
-          onPress={() => this.handleLocationButtonPress()} >
+          onPress={() => this.animateToUser()}
+          disabled={!this.state.isUserInBounds} >
           <Image
             source={require("../../assets/locationIcon.png")}
             contentFit="contain"
             style={styles.locationButton}
-            tintColor={this.state.isTracking ? "#007AFF" : "#333"}
+            tintColor={!this.state.isUserInBounds ? "#999" : "#333"}
           />
         </TouchableHighlight>
       </View>
@@ -467,7 +502,7 @@ const styles = StyleSheet.create({
   terrainButtonContainer: {
     position: "absolute",
     right: 20,
-    bottom: 80,
+    bottom: 140,
     height: 50,
     width: 50,
     borderWidth: 1,
@@ -488,6 +523,37 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#333",
   },
+  trackingButtonContainer: {
+    position: "absolute",
+    right: 20,
+    bottom: 80,
+    height: 50,
+    width: 80,
+    borderWidth: 1,
+    borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: "rgba(255, 255, 255, 0.85)",
+  },
+  trackingButtonActive: {
+    backgroundColor: "rgba(0, 122, 255, 0.9)",
+    borderColor: '#007AFF',
+  },
+  trackingButton: {
+    height: 50,
+    width: 80,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  trackingButtonText: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#333",
+  },
+  trackingButtonTextActive: {
+    color: "#FFF",
+  },
   locationButtonContainer: {
     position: "absolute",
     right: 20,
@@ -501,13 +567,16 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(0,0,0,0.2)',
     backgroundColor: "rgba(255, 255, 255, 0.85)",
   },
-  locationButtonContainerActive: {
-    backgroundColor: "rgba(230, 240, 255, 0.95)",
-    borderColor: '#007AFF',
-  },
   locationButton: {
     height: 35,
     width: 35,
+  },
+  buttonDisabled: {
+    opacity: 0.5,
+    backgroundColor: "rgba(200, 200, 200, 0.6)",
+  },
+  buttonTextDisabled: {
+    color: "#999",
   },
   spinnerTextStyle: {
     color: "#FFF",
