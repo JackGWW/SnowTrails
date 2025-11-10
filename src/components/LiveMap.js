@@ -245,16 +245,7 @@ export default class LiveMap extends React.Component {
   animateToUser() {
     if (this.cameraRef.current) {
       // Check if user is within map boundaries
-      const northEastLimit = { latitude: 44.539, longitude: -80.328 };
-      const southWestLimit = { latitude: 44.507, longitude: -80.398 };
-
-      const isWithinBounds =
-        this.state.currentLatitude >= southWestLimit.latitude &&
-        this.state.currentLatitude <= northEastLimit.latitude &&
-        this.state.currentLongitude >= southWestLimit.longitude &&
-        this.state.currentLongitude <= northEastLimit.longitude;
-
-      if (!isWithinBounds) {
+      if (!this.isWithinBounds(this.state.currentLatitude, this.state.currentLongitude)) {
         // Show toast alert if user is outside boundaries
         Toast.show({
           type: 'info',
