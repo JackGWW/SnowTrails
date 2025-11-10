@@ -293,10 +293,10 @@ export default class LiveMap extends React.Component {
       <View style={styles.container}>
         <Spinner
           visible={this.state.spinner}
-          textContent={"Loading..."}
+          textContent={"Loading map..."}
           textStyle={styles.spinnerTextStyle}
           animation={"fade"}
-          overlayColor={"rgba(0, 0, 0, 0.5)"}
+          overlayColor={"rgba(46, 58, 82, 0.75)"}
         />
 
         <Mapbox.MapView
@@ -378,8 +378,8 @@ export default class LiveMap extends React.Component {
         {/* Bottom right, 3D toggle button */}
         <TouchableHighlight
           style={styles.terrainButtonContainer}
-          activeOpacity={0.5}
-          underlayColor="#A9A9A9"
+          activeOpacity={0.7}
+          underlayColor="#F0F0F0"
           onPress={() => this.toggle3DMode()} >
           <View style={styles.terrainButton}>
             <Text style={styles.terrainButtonText}>
@@ -391,8 +391,8 @@ export default class LiveMap extends React.Component {
         {/* Bottom right, move to current location button */}
         <TouchableHighlight
           style={styles.locationButtonContainer}
-          activeOpacity={0.5}
-          underlayColor="#A9A9A9"
+          activeOpacity={0.7}
+          underlayColor="#F0F0F0"
           onPress={() => this.animateToUser()} >
           <Image
             source={require("../../assets/locationIcon.png")}
@@ -408,7 +408,7 @@ export default class LiveMap extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#F7F7F7",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -423,8 +423,8 @@ const styles = StyleSheet.create({
   },
   legendContainer: {
     position: "absolute",
-    left: 1,
-    bottom: 1,
+    left: 12,
+    bottom: 12,
     height: 100,
     width: 100,
     flex: 1,
@@ -436,52 +436,61 @@ const styles = StyleSheet.create({
   legend: {
     top: 0,
     right: 0,
-    height: 80,
-    width: 80,
+    height: 90,
+    width: 90,
     flexDirection: "row",
   },
   terrainButtonContainer: {
     position: "absolute",
-    right: 20,
-    bottom: 80,
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    borderRadius: 25,
+    right: 16,
+    bottom: 88,
+    height: 56,
+    width: 56,
+    borderRadius: 28,
     alignItems: "center",
     justifyContent: "center",
-    borderColor: 'rgba(0,0,0,0.2)',
-    backgroundColor: "rgba(255, 255, 255, 0.85)",
+    backgroundColor: "#FFFFFF",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 8,
   },
   terrainButton: {
-    height: 50,
-    width: 50,
+    height: 56,
+    width: 56,
     alignItems: "center",
     justifyContent: "center",
   },
   terrainButtonText: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "700",
-    color: "#333",
+    color: "#2E3A52",
+    letterSpacing: 0.5,
   },
   locationButtonContainer: {
     position: "absolute",
-    right: 20,
+    right: 16,
     bottom: 20,
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    borderRadius: 25,
+    height: 56,
+    width: 56,
+    borderRadius: 28,
     alignItems: "center",
     justifyContent: "center",
-    borderColor: 'rgba(0,0,0,0.2)',
-    backgroundColor: "rgba(255, 255, 255, 0.85)",
+    backgroundColor: "#FFFFFF",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 8,
   },
   locationButton: {
-    height: 35,
-    width: 35,
+    height: 32,
+    width: 32,
   },
   spinnerTextStyle: {
     color: "#FFF",
+    fontSize: 16,
+    fontWeight: "500",
   },
 });

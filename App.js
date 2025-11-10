@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet, View, Text, Image, Dimensions } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { LinearGradient } from 'expo-linear-gradient';
 import * as Sentry from '@sentry/react-native';
 import * as Amplitude from '@amplitude/analytics-react-native';
 
@@ -30,26 +31,29 @@ const Tab = createBottomTabNavigator();
 const slides = [
   {
     key: "Welcome",
-    title: "Welcome!",
+    title: "Welcome to SnowTrails",
     text:
-      "Enjoy using SnowTrails, your snowshoe trail map for Alpine, Craigleith & Georgian Peaks Ski Clubs.",
+      "Your digital companion for exploring snowshoe trails at Alpine, Craigleith & Georgian Peaks Ski Clubs.",
     image: require("./assets/doubleSnowshoe.png"),
-    bg: "#1679F3",
+    bg: "#2E3A52",
+    bgGradient: ["#2E3A52", "#1A2332"],
   },
   {
     key: "Disclaimer",
-    title: "Disclaimer",
+    title: "Important Notice",
     text:
-    "Many of the trails shown are on private property. Trails on ski club property may only be used by club members.\n\nAlpine, Craigleith & Georgian Peaks Ski Clubs do not maintain the trails and assume no liability to users of the trails or this app, whether for trail condition, trail markings, map accuracy or any other matter whatsoever. Users of the trails and this app do so at their own risk.",
+    "Many trails shown are on private property. Trails on ski club property may only be used by club members.\n\nAlpine, Craigleith & Georgian Peaks Ski Clubs do not maintain the trails and assume no liability to users of the trails or this app, whether for trail condition, trail markings, map accuracy or any other matter whatsoever. Users of the trails and this app do so at their own risk.",
     image: require("./assets/disclaimer.png"),
-    bg: "#DF9313",
+    bg: "#E8734E",
+    bgGradient: ["#E8734E", "#D65A3D"],
   },
   {
     key: "Tap",
-    title: "Tip: Tap on Trails",
-    text: "Tap on trails to see detailed trail info.",
+    title: "Get Started",
+    text: "Tap on any trail to view detailed information and plan your adventure.",
     image: require("./assets/touchTrail.png"),
-    bg: "#B030DE",
+    bg: "#4A90A4",
+    bgGradient: ["#4A90A4", "#357A8E"],
   },
 ];
 
@@ -58,24 +62,39 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "blue",
+    paddingHorizontal: 30,
+    paddingBottom: 60,
+  },
+  slideGradient: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
   },
   image: {
-    width: Dimensions.get("window").width * 0.7,
-    height: Dimensions.get("window").height * 0.35,
-    marginVertical: 0,
+    width: Dimensions.get("window").width * 0.65,
+    height: Dimensions.get("window").height * 0.32,
+    marginBottom: 32,
+    marginTop: 20,
     resizeMode: "contain",
   },
   text: {
-    color: "rgba(255, 255, 255, 0.8)",
+    color: "rgba(255, 255, 255, 0.92)",
     textAlign: "center",
-    fontSize: 18,
-    marginHorizontal: 10,
+    fontSize: 17,
+    lineHeight: 26,
+    marginHorizontal: 20,
+    fontWeight: "400",
+    letterSpacing: 0.3,
   },
   title: {
-    fontSize: 26,
+    fontSize: 32,
+    fontWeight: "700",
     color: "white",
     textAlign: "center",
+    marginBottom: 16,
+    letterSpacing: 0.5,
   },
 });
 
@@ -102,14 +121,13 @@ class App extends React.Component {
 
   _renderItem = ({ item }) => {
     return (
-      <View
-        style={[
-          styles.slide,
-          {
-            backgroundColor: item.bg,
-          },
-        ]}
-      >
+      <View style={styles.slide}>
+        <LinearGradient
+          colors={item.bgGradient || [item.bg, item.bg]}
+          style={styles.slideGradient}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1 }}
+        />
         <Text style={styles.title}>{item.title}</Text>
         <Image source={item.image} style={styles.image} />
         <Text style={styles.text}>{item.text}</Text>
@@ -153,19 +171,46 @@ class App extends React.Component {
                 let iconName;
 
                 if (route.name === "GPS") {
-                  iconName = "navigate-outline";
+                  iconName = focused ? "navigate" : "navigate-outline";
                 } else if (route.name === "Map") {
-                  iconName = "map-outline";
+                  iconName = focused ? "map" : "map-outline";
                 }
 
                 return <Ionicons name={iconName} size={size} color={color} />;
               },
-              tabBarActiveTintColor: "#1679F3",
-              tabBarInactiveTintColor: "gray",
+              tabBarActiveTintColor: "#2E3A52",
+              tabBarInactiveTintColor: "#8E8E93",
+              tabBarStyle: {
+                backgroundColor: "#FFFFFF",
+                borderTopWidth: 1,
+                borderTopColor: "#E5E5EA",
+                paddingBottom: 8,
+                paddingTop: 8,
+                height: 60,
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: -2 },
+                shadowOpacity: 0.05,
+                shadowRadius: 8,
+                elevation: 8,
+              },
+              tabBarLabelStyle: {
+                fontSize: 11,
+                fontWeight: "600",
+                letterSpacing: 0.2,
+              },
+              headerShown: false,
             })}
           >
-            <Tab.Screen name="GPS" component={LiveMap} />
-            <Tab.Screen name="Map" component={StaticMap} />
+            <Tab.Screen
+              name="GPS"
+              component={LiveMap}
+              options={{ tabBarLabel: "Live Map" }}
+            />
+            <Tab.Screen
+              name="Map"
+              component={StaticMap}
+              options={{ tabBarLabel: "Trail Map" }}
+            />
           </Tab.Navigator>
         </NavigationContainer>
       );
