@@ -321,6 +321,11 @@ class LiveMapComponent extends React.Component {
       this.updateHiddenMarker(coordinateKey)
       return
     }
+
+    // If tapped somewhere else (not on a trail), hide the callout
+    if (this.child) {
+      this.child.hideCallout()
+    }
   }
 
   render() {
