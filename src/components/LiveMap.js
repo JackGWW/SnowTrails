@@ -232,7 +232,7 @@ export default class LiveMap extends React.Component {
         // Show toast alert if user is outside boundaries
         Toast.show({
           type: 'info',
-          text1: 'Location outside trail area',
+          text1: 'Outside trail area',
           text2: 'You are currently outside the mapped trails',
           position: 'bottom',
           visibilityTime: 3000,
