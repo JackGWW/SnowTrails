@@ -102,14 +102,6 @@ export default class LiveMap extends React.Component {
           animationDuration: 0, // No animation on initial load
         });
       }
-
-      // Enable tracking by default if user is within bounds
-      if (isWithinBounds) {
-        // Delay slightly to ensure camera is set up
-        setTimeout(() => {
-          this.setState({ isTracking: true });
-        }, 500);
-      }
     } catch (error) {
       console.log('Could not get user location:', error);
       // Fall back to default location
@@ -242,20 +234,14 @@ export default class LiveMap extends React.Component {
   }
 
   animateToUser() {
-    if (this.cameraRef.current && this.state.isUserInBounds) {
+    if (this.cameraRef.current) {
       this.cameraRef.current.setCamera({
         centerCoordinate: [this.state.currentLongitude, this.state.currentLatitude],
         animationDuration: 1000,
       });
+      // Start tracking when user presses location button
+      this.setState({ isTracking: true });
     }
-  }
-
-  toggleTracking() {
-    // Only allow enabling tracking if user is within bounds
-    if (!this.state.isTracking && !this.state.isUserInBounds) {
-      return; // Don't enable tracking if user is out of bounds
-    }
-    this.setState({ isTracking: !this.state.isTracking });
   }
 
   onCameraChanged = (state) => {
@@ -420,43 +406,16 @@ export default class LiveMap extends React.Component {
           </View>
         </TouchableHighlight>
 
-        {/* Bottom right, GPS tracking toggle button */}
+        {/* Bottom right, location button (centers and starts tracking) */}
         <TouchableHighlight
-          style={[
-            styles.trackingButtonContainer,
-            this.state.isTracking && styles.trackingButtonActive,
-            !this.state.isUserInBounds && styles.buttonDisabled
-          ]}
+          style={styles.locationButtonContainer}
           activeOpacity={0.5}
           underlayColor="#A9A9A9"
-          onPress={() => this.toggleTracking()}
-          disabled={!this.state.isUserInBounds && !this.state.isTracking} >
-          <Image
-            source={require("../../assets/locationIcon.png")}
-            contentFit="contain"
-            style={styles.trackingButton}
-            tintColor={
-              !this.state.isUserInBounds ? "#999" :
-              this.state.isTracking ? "#FFF" : "#333"
-            }
-          />
-        </TouchableHighlight>
-
-        {/* Bottom right, move to current location button */}
-        <TouchableHighlight
-          style={[
-            styles.locationButtonContainer,
-            !this.state.isUserInBounds && styles.buttonDisabled
-          ]}
-          activeOpacity={0.5}
-          underlayColor="#A9A9A9"
-          onPress={() => this.animateToUser()}
-          disabled={!this.state.isUserInBounds} >
+          onPress={() => this.animateToUser()} >
           <Image
             source={require("../../assets/locationIcon.png")}
             contentFit="contain"
             style={styles.locationButton}
-            tintColor={!this.state.isUserInBounds ? "#999" : "#333"}
           />
         </TouchableHighlight>
       </View>
@@ -502,7 +461,7 @@ const styles = StyleSheet.create({
   terrainButtonContainer: {
     position: "absolute",
     right: 20,
-    bottom: 140,
+    bottom: 80,
     height: 50,
     width: 50,
     borderWidth: 1,
@@ -523,27 +482,6 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#333",
   },
-  trackingButtonContainer: {
-    position: "absolute",
-    right: 20,
-    bottom: 80,
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    borderRadius: 25,
-    alignItems: "center",
-    justifyContent: "center",
-    borderColor: 'rgba(0,0,0,0.2)',
-    backgroundColor: "rgba(255, 255, 255, 0.85)",
-  },
-  trackingButtonActive: {
-    backgroundColor: "rgba(0, 122, 255, 0.9)",
-    borderColor: '#007AFF',
-  },
-  trackingButton: {
-    height: 35,
-    width: 35,
-  },
   locationButtonContainer: {
     position: "absolute",
     right: 20,
@@ -560,13 +498,6 @@ const styles = StyleSheet.create({
   locationButton: {
     height: 35,
     width: 35,
-  },
-  buttonDisabled: {
-    opacity: 0.5,
-    backgroundColor: "rgba(200, 200, 200, 0.6)",
-  },
-  buttonTextDisabled: {
-    color: "#999",
   },
   spinnerTextStyle: {
     color: "#FFF",
