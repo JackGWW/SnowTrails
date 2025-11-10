@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#1679F3"
+      "backgroundColor": "#2E3A52"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -27,7 +27,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon_foreground.png",
-        "backgroundColor": "#1679F3"
+        "backgroundColor": "#2E3A52"
       },
       "icon": "./assets/icon.png",
       "package": "com.jgwwilliams.SnowTrails",
