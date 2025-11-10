@@ -6,6 +6,7 @@ import { StyleSheet, View, Text, Image, Dimensions } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from 'expo-linear-gradient';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Sentry from '@sentry/react-native';
 import * as Amplitude from '@amplitude/analytics-react-native';
 
@@ -27,6 +28,61 @@ Amplitude.init("1d4737f626618248997180e48f0bfd02", undefined, {
 Amplitude.track('App Started')
 
 const Tab = createBottomTabNavigator();
+
+// Wrapper component to provide safe area insets to tab navigator
+function TabNavigator() {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === "GPS") {
+            iconName = focused ? "navigate" : "navigate-outline";
+          } else if (route.name === "Map") {
+            iconName = focused ? "map" : "map-outline";
+          }
+
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: "#2E3A52",
+        tabBarInactiveTintColor: "#8E8E93",
+        tabBarStyle: {
+          backgroundColor: "#FFFFFF",
+          borderTopWidth: 1,
+          borderTopColor: "#E5E5EA",
+          paddingBottom: insets.bottom + 8,
+          paddingTop: 8,
+          height: 60 + insets.bottom,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: -2 },
+          shadowOpacity: 0.05,
+          shadowRadius: 8,
+          elevation: 8,
+        },
+        tabBarLabelStyle: {
+          fontSize: 11,
+          fontWeight: "600",
+          letterSpacing: 0.2,
+        },
+        headerShown: false,
+      })}
+    >
+      <Tab.Screen
+        name="GPS"
+        component={LiveMap}
+        options={{ tabBarLabel: "Live Map" }}
+      />
+      <Tab.Screen
+        name="Map"
+        component={StaticMap}
+        options={{ tabBarLabel: "Trail Map" }}
+      />
+    </Tab.Navigator>
+  );
+}
 
 const slides = [
   {
@@ -164,55 +220,11 @@ class App extends React.Component {
   render() {
     if (this.state.showRealApp) {
       return (
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ focused, color, size }) => {
-                let iconName;
-
-                if (route.name === "GPS") {
-                  iconName = focused ? "navigate" : "navigate-outline";
-                } else if (route.name === "Map") {
-                  iconName = focused ? "map" : "map-outline";
-                }
-
-                return <Ionicons name={iconName} size={size} color={color} />;
-              },
-              tabBarActiveTintColor: "#2E3A52",
-              tabBarInactiveTintColor: "#8E8E93",
-              tabBarStyle: {
-                backgroundColor: "#FFFFFF",
-                borderTopWidth: 1,
-                borderTopColor: "#E5E5EA",
-                paddingBottom: 8,
-                paddingTop: 8,
-                height: 60,
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: -2 },
-                shadowOpacity: 0.05,
-                shadowRadius: 8,
-                elevation: 8,
-              },
-              tabBarLabelStyle: {
-                fontSize: 11,
-                fontWeight: "600",
-                letterSpacing: 0.2,
-              },
-              headerShown: false,
-            })}
-          >
-            <Tab.Screen
-              name="GPS"
-              component={LiveMap}
-              options={{ tabBarLabel: "Live Map" }}
-            />
-            <Tab.Screen
-              name="Map"
-              component={StaticMap}
-              options={{ tabBarLabel: "Trail Map" }}
-            />
-          </Tab.Navigator>
-        </NavigationContainer>
+        <SafeAreaProvider>
+          <NavigationContainer>
+            <TabNavigator />
+          </NavigationContainer>
+        </SafeAreaProvider>
       );
     } else {
       return (

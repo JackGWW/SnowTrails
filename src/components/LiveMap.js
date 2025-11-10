@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View, Dimensions, TouchableHighlight, Text } from "react-native";
 import Mapbox from "@rnmapbox/maps";
 import Spinner from "react-native-loading-spinner-overlay";
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Location from 'expo-location';
 import { Image } from 'expo-image';
 
@@ -18,7 +19,7 @@ let diamondIcon = require("../../assets/trailMarkers/diamond.svg")
 let benchIcon = require("../../assets/trailMarkers/bench.png")
 let invisibleIcon = require("../../assets/trailMarkers/invisible.png")
 
-export default class LiveMap extends React.Component {
+class LiveMapComponent extends React.Component {
   markerIconCache = new Map();
 
   constructor() {
@@ -288,6 +289,7 @@ export default class LiveMap extends React.Component {
   render() {
     let markerImages = this.getMarkerImages()
     let longitudeDelta = this.state.longitudeDelta.toFixed(5)
+    const { bottomInset } = this.props;
 
     return (
       <View style={styles.container}>
@@ -367,7 +369,7 @@ export default class LiveMap extends React.Component {
         </Mapbox.MapView>
 
         {/* Bottom left, trail rating legend */}
-        <View style={styles.legendContainer}>
+        <View style={[styles.legendContainer, { bottom: -20 + bottomInset }]}>
           <Image
             source={require("../../assets/legend.png")}
             style={styles.legend}
@@ -377,7 +379,7 @@ export default class LiveMap extends React.Component {
 
         {/* Bottom right, 3D toggle button */}
         <TouchableHighlight
-          style={styles.terrainButtonContainer}
+          style={[styles.terrainButtonContainer, { bottom: 58 + bottomInset }]}
           activeOpacity={0.7}
           underlayColor="#F0F0F0"
           onPress={() => this.toggle3DMode()} >
@@ -390,7 +392,7 @@ export default class LiveMap extends React.Component {
 
         {/* Bottom right, move to current location button */}
         <TouchableHighlight
-          style={styles.locationButtonContainer}
+          style={[styles.locationButtonContainer, { bottom: -10 + bottomInset }]}
           activeOpacity={0.7}
           underlayColor="#F0F0F0"
           onPress={() => this.animateToUser()} >
@@ -424,7 +426,6 @@ const styles = StyleSheet.create({
   legendContainer: {
     position: "absolute",
     left: 12,
-    bottom: 12,
     height: 100,
     width: 100,
     flex: 1,
@@ -443,7 +444,6 @@ const styles = StyleSheet.create({
   terrainButtonContainer: {
     position: "absolute",
     right: 16,
-    bottom: 88,
     height: 56,
     width: 56,
     borderRadius: 28,
@@ -471,7 +471,6 @@ const styles = StyleSheet.create({
   locationButtonContainer: {
     position: "absolute",
     right: 16,
-    bottom: 20,
     height: 56,
     width: 56,
     borderRadius: 28,
@@ -494,3 +493,9 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 });
+
+// Wrapper component to provide safe area insets
+export default function LiveMap(props) {
+  const insets = useSafeAreaInsets();
+  return <LiveMapComponent {...props} bottomInset={insets.bottom} />;
+}
