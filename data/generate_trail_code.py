@@ -124,12 +124,18 @@ def generate_markers(data):
     print("Generating markers for " + trail_name)
 
     # Get distance data
-    if trail_name not in distance_cache:
-        update_distance_cache(trail_name)
-    
-    distance = distance_cache.get(trail_name).get("distance")
-    elv_gain = distance_cache.get(trail_name).get("elv_gain")
-    elv_descent = distance_cache.get(trail_name).get("elv_descent")
+    if trail_name not in trail_description_blacklist:
+        if trail_name not in distance_cache:
+            update_distance_cache(trail_name)
+
+        distance = distance_cache.get(trail_name).get("distance")
+        elv_gain = distance_cache.get(trail_name).get("elv_gain")
+        elv_descent = distance_cache.get(trail_name).get("elv_descent")
+    else:
+        distance = ""
+        elv_gain = ""
+        elv_descent = ""
+
     description = generate_trail_description(trail_name, distance, elv_gain, elv_descent)
 
     markers_code = []
