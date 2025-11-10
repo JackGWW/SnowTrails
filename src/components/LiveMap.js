@@ -5,6 +5,7 @@ import Spinner from "react-native-loading-spinner-overlay";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Location from 'expo-location';
 import { Image } from 'expo-image';
+import Toast from 'react-native-toast-message';
 
 // Polyline components for all trails
 import AllTrails from "./trails/AllTrails";
@@ -36,7 +37,14 @@ class LiveMapComponent extends React.Component {
       hiddenMarkerDescription: "",
       coordinateMapping: require('../../data/coordinate_mapping.json'),
       trailMapping: require('../../data/trail_mapping.json'),
-      is3DMode: false
+      is3DMode: false,
+      isTracking: false,
+      isUserInBounds: false
+    };
+
+    this.mapBounds = {
+      northEast: { latitude: 44.539, longitude: -80.328 },
+      southWest: { latitude: 44.507, longitude: -80.398 }
     };
 
     this.cameraRef = React.createRef();
@@ -47,6 +55,15 @@ class LiveMapComponent extends React.Component {
     if (status !== 'granted') {
       console.log('Location permission was denied');
     }
+  }
+
+  isWithinBounds(lat, lon) {
+    return (
+      lat >= this.mapBounds.southWest.latitude &&
+      lat <= this.mapBounds.northEast.latitude &&
+      lon >= this.mapBounds.southWest.longitude &&
+      lon <= this.mapBounds.northEast.longitude
+    );
   }
 
   async mapSetup() {
@@ -66,14 +83,14 @@ class LiveMapComponent extends React.Component {
       const userLon = location.coords.longitude;
 
       // Check if user is within map boundaries
-      const northEastLimit = { latitude: 44.539, longitude: -80.328 };
-      const southWestLimit = { latitude: 44.507, longitude: -80.398 };
+      const isWithinBounds = this.isWithinBounds(userLat, userLon);
 
-      const isWithinBounds =
-        userLat >= southWestLimit.latitude &&
-        userLat <= northEastLimit.latitude &&
-        userLon >= southWestLimit.longitude &&
-        userLon <= northEastLimit.longitude;
+      // Update state to track if user is in bounds
+      this.setState({
+        isUserInBounds: isWithinBounds,
+        currentLatitude: userLat,
+        currentLongitude: userLon
+      });
 
       // Set initial camera position after map has loaded
       if (this.cameraRef.current) {
@@ -121,10 +138,20 @@ class LiveMapComponent extends React.Component {
 
   updateCurrentLocation(location) {
     if (location && location.coords) {
+      const lat = location.coords.latitude;
+      const lon = location.coords.longitude;
+      const isInBounds = this.isWithinBounds(lat, lon);
+
       this.setState({
-        currentLatitude: location.coords.latitude,
-        currentLongitude: location.coords.longitude
+        currentLatitude: lat,
+        currentLongitude: lon,
+        isUserInBounds: isInBounds
       });
+
+      // Disable tracking if user goes out of bounds
+      if (this.state.isTracking && !isInBounds) {
+        this.setState({ isTracking: false });
+      }
     } else {
       console.warn("updateCurrentLocation: location is undefined or invalid", location);
     }
@@ -218,23 +245,33 @@ class LiveMapComponent extends React.Component {
 
   animateToUser() {
     if (this.cameraRef.current) {
-      // Clamp coordinates to map boundaries
-      const northEastLimit = { latitude: 44.539, longitude: -80.328 };
-      const southWestLimit = { latitude: 44.507, longitude: -80.398 };
+      // Check if user is within map boundaries
+      if (!this.isWithinBounds(this.state.currentLatitude, this.state.currentLongitude)) {
+        // Show toast alert if user is outside boundaries
+        Toast.show({
+          type: 'info',
+          text1: 'Outside trail area',
+          text2: 'You are currently outside the mapped trails',
+          position: 'bottom',
+          visibilityTime: 3000,
+        });
+        return;
+      }
 
-      const clampedLatitude = Math.max(
-        southWestLimit.latitude,
-        Math.min(northEastLimit.latitude, this.state.currentLatitude)
-      );
-      const clampedLongitude = Math.max(
-        southWestLimit.longitude,
-        Math.min(northEastLimit.longitude, this.state.currentLongitude)
-      );
-
+      // Animate to user location if within bounds
       this.cameraRef.current.setCamera({
-        centerCoordinate: [clampedLongitude, clampedLatitude],
+        centerCoordinate: [this.state.currentLongitude, this.state.currentLatitude],
         animationDuration: 1000,
       });
+      // Start tracking when user presses location button
+      this.setState({ isTracking: true });
+    }
+  }
+
+  onCameraChanged = (state) => {
+    // Disable tracking if user manually pans the map
+    if (this.state.isTracking && state.gestures && state.gestures.isGestureActive) {
+      this.setState({ isTracking: false });
     }
   }
 
@@ -307,6 +344,7 @@ class LiveMapComponent extends React.Component {
           onDidFinishLoadingMap={this.mapSetup.bind(this)}
           onPress={this.onMapPress}
           onMapIdle={this.updateRegion.bind(this)}
+          onCameraChanged={this.onCameraChanged}
           compassEnabled={false}
           scaleBarEnabled={false}
           attributionEnabled={false}
@@ -332,6 +370,9 @@ class LiveMapComponent extends React.Component {
               [-80.398, 44.507], // Southwest
               [-80.328, 44.539]  // Northeast
             ]}
+            followUserLocation={this.state.isTracking}
+            followUserMode="compass"
+            followZoomLevel={16}
           />
 
           <Mapbox.LocationPuck
@@ -390,7 +431,7 @@ class LiveMapComponent extends React.Component {
           </View>
         </TouchableHighlight>
 
-        {/* Bottom right, move to current location button */}
+        {/* Bottom right, location button (centers and starts tracking) */}
         <TouchableHighlight
           style={[styles.locationButtonContainer, { bottom: -10 + bottomInset }]}
           activeOpacity={0.7}
@@ -402,6 +443,8 @@ class LiveMapComponent extends React.Component {
             style={styles.locationButton}
           />
         </TouchableHighlight>
+
+        <Toast />
       </View>
     );
   }
