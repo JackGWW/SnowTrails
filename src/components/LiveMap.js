@@ -4,6 +4,7 @@ import Mapbox from "@rnmapbox/maps";
 import Spinner from "react-native-loading-spinner-overlay";
 import * as Location from 'expo-location';
 import { Image } from 'expo-image';
+import Toast from 'react-native-toast-message';
 
 // Polyline components for all trails
 import AllTrails from "./trails/AllTrails";
@@ -117,13 +118,21 @@ export default class LiveMap extends React.Component {
     }
   }
 
-  updateRegion(region) {
+  async updateRegion() {
     // Calculate longitudeDelta from zoom level for marker sizing
-    // Mapbox uses zoom levels differently than react-native-maps
-    // Approximate conversion: longitudeDelta ≈ 360 / (2^zoom)
-    const zoom = region.properties.zoom || 15;
-    const longitudeDelta = 360 / Math.pow(2, zoom);
-    this.setState({ longitudeDelta });
+    // Query the camera state imperatively instead of relying on event object
+    if (!this.cameraRef.current) return;
+
+    try {
+      const cameraState = await this.cameraRef.current.getZoom();
+      const zoom = cameraState || 15;
+      // Mapbox uses zoom levels differently than react-native-maps
+      // Approximate conversion: longitudeDelta ≈ 360 / (2^zoom)
+      const longitudeDelta = 360 / Math.pow(2, zoom);
+      this.setState({ longitudeDelta });
+    } catch (error) {
+      console.warn('Could not get camera zoom:', error);
+    }
   }
 
   updateCurrentLocation(location) {
@@ -235,6 +244,29 @@ export default class LiveMap extends React.Component {
 
   animateToUser() {
     if (this.cameraRef.current) {
+      // Check if user is within map boundaries
+      const northEastLimit = { latitude: 44.539, longitude: -80.328 };
+      const southWestLimit = { latitude: 44.507, longitude: -80.398 };
+
+      const isWithinBounds =
+        this.state.currentLatitude >= southWestLimit.latitude &&
+        this.state.currentLatitude <= northEastLimit.latitude &&
+        this.state.currentLongitude >= southWestLimit.longitude &&
+        this.state.currentLongitude <= northEastLimit.longitude;
+
+      if (!isWithinBounds) {
+        // Show toast alert if user is outside boundaries
+        Toast.show({
+          type: 'info',
+          text1: 'Outside trail area',
+          text2: 'You are currently outside the mapped trails',
+          position: 'bottom',
+          visibilityTime: 3000,
+        });
+        return;
+      }
+
+      // Animate to user location if within bounds
       this.cameraRef.current.setCamera({
         centerCoordinate: [this.state.currentLongitude, this.state.currentLatitude],
         animationDuration: 1000,
@@ -325,17 +357,17 @@ export default class LiveMap extends React.Component {
           attributionEnabled={false}
           logoEnabled={false}
         >
-          <Mapbox.Terrain
-            sourceID="mapbox-dem"
-            style={{ exaggeration: 1.5 }}
-          />
-
           <Mapbox.RasterDemSource
             id="mapbox-dem"
             url="mapbox://mapbox.terrain-rgb"
             tileSize={514}
             maxZoomLevel={14}
-          />
+          >
+            <Mapbox.Terrain
+              sourceID="mapbox-dem"
+              style={{ exaggeration: 1.5 }}
+            />
+          </Mapbox.RasterDemSource>
 
           <Mapbox.Camera
             ref={this.cameraRef}
@@ -418,6 +450,8 @@ export default class LiveMap extends React.Component {
             style={styles.locationButton}
           />
         </TouchableHighlight>
+
+        <Toast />
       </View>
     );
   }
