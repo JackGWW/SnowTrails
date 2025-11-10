@@ -36,7 +36,14 @@ export default class LiveMap extends React.Component {
       hiddenMarkerDescription: "",
       coordinateMapping: require('../../data/coordinate_mapping.json'),
       trailMapping: require('../../data/trail_mapping.json'),
-      is3DMode: false
+      is3DMode: false,
+      isTracking: false,
+      isUserInBounds: false
+    };
+
+    this.mapBounds = {
+      northEast: { latitude: 44.539, longitude: -80.328 },
+      southWest: { latitude: 44.507, longitude: -80.398 }
     };
 
     this.cameraRef = React.createRef();
@@ -47,6 +54,15 @@ export default class LiveMap extends React.Component {
     if (status !== 'granted') {
       console.log('Location permission was denied');
     }
+  }
+
+  isWithinBounds(lat, lon) {
+    return (
+      lat >= this.mapBounds.southWest.latitude &&
+      lat <= this.mapBounds.northEast.latitude &&
+      lon >= this.mapBounds.southWest.longitude &&
+      lon <= this.mapBounds.northEast.longitude
+    );
   }
 
   async mapSetup() {
@@ -66,14 +82,14 @@ export default class LiveMap extends React.Component {
       const userLon = location.coords.longitude;
 
       // Check if user is within map boundaries
-      const northEastLimit = { latitude: 44.539, longitude: -80.328 };
-      const southWestLimit = { latitude: 44.507, longitude: -80.398 };
+      const isWithinBounds = this.isWithinBounds(userLat, userLon);
 
-      const isWithinBounds =
-        userLat >= southWestLimit.latitude &&
-        userLat <= northEastLimit.latitude &&
-        userLon >= southWestLimit.longitude &&
-        userLon <= northEastLimit.longitude;
+      // Update state to track if user is in bounds
+      this.setState({
+        isUserInBounds: isWithinBounds,
+        currentLatitude: userLat,
+        currentLongitude: userLon
+      });
 
       // Set initial camera position after map has loaded
       if (this.cameraRef.current) {
@@ -121,10 +137,20 @@ export default class LiveMap extends React.Component {
 
   updateCurrentLocation(location) {
     if (location && location.coords) {
+      const lat = location.coords.latitude;
+      const lon = location.coords.longitude;
+      const isInBounds = this.isWithinBounds(lat, lon);
+
       this.setState({
-        currentLatitude: location.coords.latitude,
-        currentLongitude: location.coords.longitude
+        currentLatitude: lat,
+        currentLongitude: lon,
+        isUserInBounds: isInBounds
       });
+
+      // Disable tracking if user goes out of bounds
+      if (this.state.isTracking && !isInBounds) {
+        this.setState({ isTracking: false });
+      }
     } else {
       console.warn("updateCurrentLocation: location is undefined or invalid", location);
     }
@@ -219,16 +245,7 @@ export default class LiveMap extends React.Component {
   animateToUser() {
     if (this.cameraRef.current) {
       // Check if user is within map boundaries
-      const northEastLimit = { latitude: 44.539, longitude: -80.328 };
-      const southWestLimit = { latitude: 44.507, longitude: -80.398 };
-
-      const isWithinBounds =
-        this.state.currentLatitude >= southWestLimit.latitude &&
-        this.state.currentLatitude <= northEastLimit.latitude &&
-        this.state.currentLongitude >= southWestLimit.longitude &&
-        this.state.currentLongitude <= northEastLimit.longitude;
-
-      if (!isWithinBounds) {
+      if (!this.isWithinBounds(this.state.currentLatitude, this.state.currentLongitude)) {
         // Show toast alert if user is outside boundaries
         Toast.show({
           type: 'info',
@@ -245,6 +262,15 @@ export default class LiveMap extends React.Component {
         centerCoordinate: [this.state.currentLongitude, this.state.currentLatitude],
         animationDuration: 1000,
       });
+      // Start tracking when user presses location button
+      this.setState({ isTracking: true });
+    }
+  }
+
+  onCameraChanged = (state) => {
+    // Disable tracking if user manually pans the map
+    if (this.state.isTracking && state.gestures && state.gestures.isGestureActive) {
+      this.setState({ isTracking: false });
     }
   }
 
@@ -316,6 +342,7 @@ export default class LiveMap extends React.Component {
           onDidFinishLoadingMap={this.mapSetup.bind(this)}
           onPress={this.onMapPress}
           onMapIdle={this.updateRegion.bind(this)}
+          onCameraChanged={this.onCameraChanged}
           compassEnabled={false}
           scaleBarEnabled={false}
           attributionEnabled={false}
@@ -341,6 +368,9 @@ export default class LiveMap extends React.Component {
               [-80.398, 44.507], // Southwest
               [-80.328, 44.539]  // Northeast
             ]}
+            followUserLocation={this.state.isTracking}
+            followUserMode="compass"
+            followZoomLevel={16}
           />
 
           <Mapbox.LocationPuck
@@ -399,7 +429,7 @@ export default class LiveMap extends React.Component {
           </View>
         </TouchableHighlight>
 
-        {/* Bottom right, move to current location button */}
+        {/* Bottom right, location button (centers and starts tracking) */}
         <TouchableHighlight
           style={styles.locationButtonContainer}
           activeOpacity={0.5}
