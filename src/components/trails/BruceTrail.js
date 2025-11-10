@@ -48,22 +48,6 @@ const ShowTrail = (props) => {
       />
       <CustomMarker
         longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.51208262704313, longitude: -80.35794675350189}}
-        trailName={"Bruce Trail"}
-        
-        icon={props.markerImages["Square"]}
-        id={"458764"}
-      />
-      <CustomMarker
-        longitudeDelta={props.longitudeDelta}
-        location={{latitude: 44.51365230605006, longitude: -80.36034800112247}}
-        trailName={"Bruce Trail"}
-        
-        icon={props.markerImages["Diamond"]}
-        id={"507241"}
-      />
-      <CustomMarker
-        longitudeDelta={props.longitudeDelta}
         location={{latitude: 44.51309658586979, longitude: -80.36267129704356}}
         trailName={"Bruce Trail"}
         
