@@ -4,6 +4,7 @@ import Mapbox from "@rnmapbox/maps";
 import Spinner from "react-native-loading-spinner-overlay";
 import * as Location from 'expo-location';
 import { Image } from 'expo-image';
+import Toast from 'react-native-toast-message';
 
 // Polyline components for all trails
 import AllTrails from "./trails/AllTrails";
@@ -217,21 +218,31 @@ export default class LiveMap extends React.Component {
 
   animateToUser() {
     if (this.cameraRef.current) {
-      // Clamp coordinates to map boundaries
+      // Check if user is within map boundaries
       const northEastLimit = { latitude: 44.539, longitude: -80.328 };
       const southWestLimit = { latitude: 44.507, longitude: -80.398 };
 
-      const clampedLatitude = Math.max(
-        southWestLimit.latitude,
-        Math.min(northEastLimit.latitude, this.state.currentLatitude)
-      );
-      const clampedLongitude = Math.max(
-        southWestLimit.longitude,
-        Math.min(northEastLimit.longitude, this.state.currentLongitude)
-      );
+      const isWithinBounds =
+        this.state.currentLatitude >= southWestLimit.latitude &&
+        this.state.currentLatitude <= northEastLimit.latitude &&
+        this.state.currentLongitude >= southWestLimit.longitude &&
+        this.state.currentLongitude <= northEastLimit.longitude;
 
+      if (!isWithinBounds) {
+        // Show toast alert if user is outside boundaries
+        Toast.show({
+          type: 'info',
+          text1: 'Outside trail area',
+          text2: 'You are currently outside the mapped trails',
+          position: 'bottom',
+          visibilityTime: 3000,
+        });
+        return;
+      }
+
+      // Animate to user location if within bounds
       this.cameraRef.current.setCamera({
-        centerCoordinate: [clampedLongitude, clampedLatitude],
+        centerCoordinate: [this.state.currentLongitude, this.state.currentLatitude],
         animationDuration: 1000,
       });
     }
@@ -400,6 +411,8 @@ export default class LiveMap extends React.Component {
             style={styles.locationButton}
           />
         </TouchableHighlight>
+
+        <Toast />
       </View>
     );
   }
