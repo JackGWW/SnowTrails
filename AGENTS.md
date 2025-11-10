@@ -12,3 +12,17 @@ SnowTrails is an Expo-managed React Native app. `App.js` boots the experience an
 
 ## Coding Style & Naming Conventions
 Use function components with hooks and keep logic in small modules. Match the existing 2-space indentation, trailing commas, and single quotes. Name React components in PascalCase (`LiveMap`), colocated helper files in camelCase, and generated data artifacts in snake_case. Define props via `PropTypes` or JSDoc, and keep map constants (colors, zoom levels) in dedicated config objects rather than inline literals. Secrets (Sentry DSN, Amplitude keys) belong in Expo config variables, never in git history.
+
+## Python commands
+- Always use the virtual environment source venv/bin/activate
+- Generate all the trail code using `cd data && source venv/bin/activate && python generate_trail_code.py`
+
+## Git Branches
+- Always fetch the latest master before creating a new branch
+- By default, create new branches off of the master branch
+
+## PR Creation
+- Only commit files related to the current change
+- Include a high level Overview section
+- Include a Why section with some brief context behind the change
+- Include a Changes section with bullet list of key changes
