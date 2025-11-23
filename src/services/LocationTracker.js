@@ -91,27 +91,29 @@ function notifyListeners(location) {
   locationListeners.forEach((callback) => callback(location));
 }
 
-// Define the background task
-TaskManager.defineTask(LOCATION_TASK_NAME, ({ data, error }) => {
-  if (error) {
-    console.error('Background location error:', error);
-    return;
-  }
-  if (data) {
-    const { locations } = data;
-    if (locations && locations.length > 0) {
-      // Process each location update
-      locations.forEach((location) => {
-        notifyListeners({
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
-          altitude: location.coords.altitude,
-          timestamp: location.timestamp,
-        });
-      });
+// Define the background task (guarded to prevent crashes during Fast Refresh)
+if (!TaskManager.isTaskDefined(LOCATION_TASK_NAME)) {
+  TaskManager.defineTask(LOCATION_TASK_NAME, ({ data, error }) => {
+    if (error) {
+      console.error('Background location error:', error);
+      return;
     }
-  }
-});
+    if (data) {
+      const { locations } = data;
+      if (locations && locations.length > 0) {
+        // Process each location update
+        locations.forEach((location) => {
+          notifyListeners({
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+            altitude: location.coords.altitude,
+            timestamp: location.timestamp,
+          });
+        });
+      }
+    }
+  });
+}
 
 // Request background location permissions
 export async function requestBackgroundPermissions() {
