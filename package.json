@@ -24,6 +24,7 @@
     "expo-image": "~3.0.10",
     "expo-linear-gradient": "~15.0.7",
     "expo-location": "~19.0.7",
+    "expo-task-manager": "~12.1.4",
     "expo-status-bar": "~3.0.8",
     "expo-updates": "~29.0.12",
     "prop-types": "^15.7.2",

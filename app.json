@@ -21,7 +21,9 @@
       "bundleIdentifier": "com.jgwwilliams.snowtrails",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app uses the users location to show their current location on a trail map",
-        "ITSAppUsesNonExemptEncryption": false
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "This app uses your location in the background to record your route while hiking",
+        "ITSAppUsesNonExemptEncryption": false,
+        "UIBackgroundModes": ["location"]
       }
     },
     "android": {
@@ -34,7 +36,9 @@
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
-        "FOREGROUND_SERVICE"
+        "ACCESS_BACKGROUND_LOCATION",
+        "FOREGROUND_SERVICE",
+        "FOREGROUND_SERVICE_LOCATION"
       ]
     },
     "plugins": [
@@ -52,7 +56,15 @@
         {
           "RNMapboxMapsVersion": "11.8.0"
         }
-      ]
+      ],
+      [
+        "expo-location",
+        {
+          "isAndroidBackgroundLocationEnabled": true,
+          "isIosBackgroundLocationEnabled": true
+        }
+      ],
+      "expo-task-manager"
     ],
     "extra": {
       "eas": {

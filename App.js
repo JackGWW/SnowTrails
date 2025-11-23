@@ -12,6 +12,8 @@ import * as Amplitude from '@amplitude/analytics-react-native';
 
 import LiveMap from "./src/components/LiveMap";
 import StaticMap from "./src/components/StaticMap";
+import RecordingScreen from "./src/components/RecordingScreen";
+import { isCurrentlyRecording } from "./src/services/LocationTracker";
 
 // Setup crash reports
 Sentry.init({
@@ -32,20 +34,36 @@ const Tab = createBottomTabNavigator();
 // Wrapper component to provide safe area insets to tab navigator
 function TabNavigator() {
   const insets = useSafeAreaInsets();
+  const [recordingActive, setRecordingActive] = React.useState(false);
+
+  // Check recording status periodically to update tab icon
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setRecordingActive(isCurrentlyRecording());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
+          let iconColor = color;
 
           if (route.name === "GPS") {
             iconName = focused ? "navigate" : "navigate-outline";
+          } else if (route.name === "Record") {
+            iconName = focused ? "radio-button-on" : "radio-button-on-outline";
+            // Show red icon when recording is active
+            if (recordingActive && !focused) {
+              iconColor = "#FF3B30";
+            }
           } else if (route.name === "Map") {
             iconName = focused ? "map" : "map-outline";
           }
 
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return <Ionicons name={iconName} size={size} color={iconColor} />;
         },
         tabBarActiveTintColor: "#2E3A52",
         tabBarInactiveTintColor: "#8E8E93",
@@ -74,6 +92,24 @@ function TabNavigator() {
         name="GPS"
         component={LiveMap}
         options={{ tabBarLabel: "Live Map" }}
+      />
+      <Tab.Screen
+        name="Record"
+        component={RecordingScreen}
+        options={{
+          tabBarLabel: "Record",
+          tabBarBadge: recordingActive ? "" : undefined,
+          tabBarBadgeStyle: recordingActive ? {
+            backgroundColor: "#FF3B30",
+            minWidth: 8,
+            maxWidth: 8,
+            minHeight: 8,
+            maxHeight: 8,
+            borderRadius: 4,
+            marginLeft: 10,
+            marginTop: 4,
+          } : undefined,
+        }}
       />
       <Tab.Screen
         name="Map"
