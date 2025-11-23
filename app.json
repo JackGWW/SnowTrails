@@ -21,7 +21,11 @@
       "bundleIdentifier": "com.jgwwilliams.snowtrails",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app uses the users location to show their current location on a trail map",
-        "ITSAppUsesNonExemptEncryption": false
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "SnowTrails needs background access to track your snowshoe routes while the screen is off.",
+        "ITSAppUsesNonExemptEncryption": false,
+        "UIBackgroundModes": [
+          "location"
+        ]
       }
     },
     "android": {
@@ -34,7 +38,9 @@
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
-        "FOREGROUND_SERVICE"
+        "FOREGROUND_SERVICE",
+        "ACCESS_BACKGROUND_LOCATION",
+        "FOREGROUND_SERVICE_LOCATION"
       ]
     },
     "plugins": [
@@ -44,6 +50,13 @@
           "organization": "snowtrails",
           "project": "snowtrails",
           "url": "https://sentry.io/"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "SnowTrails needs background access to track your snowshoe routes while the screen is off.",
+          "isAndroidBackgroundLocationEnabled": true
         }
       ],
       "expo-font",
