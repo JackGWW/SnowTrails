@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Dimensions, TouchableHighlight, Text } from "react-native";
+import { StyleSheet, View, TouchableHighlight, Text } from "react-native";
 import Mapbox from "@rnmapbox/maps";
 import Spinner from "react-native-loading-spinner-overlay";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -459,13 +459,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F7F7F7",
-    alignItems: "center",
-    justifyContent: "center",
   },
   mapStyle: {
-    position: "absolute",
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    flex: 1,
   },
   map: {
     flex: 1,
