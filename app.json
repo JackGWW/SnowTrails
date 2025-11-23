@@ -21,7 +21,11 @@
       "bundleIdentifier": "com.jgwwilliams.snowtrails",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app uses the users location to show their current location on a trail map",
-        "ITSAppUsesNonExemptEncryption": false
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "SnowTrails uses your location to record your routes, even when the app is in the background.",
+        "ITSAppUsesNonExemptEncryption": false,
+        "UIBackgroundModes": [
+          "location"
+        ]
       }
     },
     "android": {
@@ -34,7 +38,9 @@
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
-        "FOREGROUND_SERVICE"
+        "FOREGROUND_SERVICE",
+        "ACCESS_BACKGROUND_LOCATION",
+        "FOREGROUND_SERVICE_LOCATION"
       ]
     },
     "plugins": [
@@ -47,6 +53,13 @@
         }
       ],
       "expo-font",
+      [
+        "expo-location",
+        {
+          "isAndroidBackgroundLocationEnabled": true,
+          "locationAlwaysAndWhenInUsePermission": "Allow SnowTrails to access your location so routes can be recorded in the background."
+        }
+      ],
       [
         "@rnmapbox/maps",
         {

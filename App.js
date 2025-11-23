@@ -12,6 +12,7 @@ import * as Amplitude from '@amplitude/analytics-react-native';
 
 import LiveMap from "./src/components/LiveMap";
 import StaticMap from "./src/components/StaticMap";
+import RecordingScreen from "./src/components/RecordingScreen";
 
 // Setup crash reports
 Sentry.init({
@@ -32,6 +33,7 @@ const Tab = createBottomTabNavigator();
 // Wrapper component to provide safe area insets to tab navigator
 function TabNavigator() {
   const insets = useSafeAreaInsets();
+  const [isRecordingActive, setIsRecordingActive] = React.useState(false);
 
   return (
     <Tab.Navigator
@@ -43,9 +45,12 @@ function TabNavigator() {
             iconName = focused ? "navigate" : "navigate-outline";
           } else if (route.name === "Map") {
             iconName = focused ? "map" : "map-outline";
+          } else if (route.name === "Record") {
+            iconName = isRecordingActive ? "walk" : "walk-outline";
           }
 
-          return <Ionicons name={iconName} size={size} color={color} />;
+          const tintColor = route.name === "Record" && isRecordingActive ? "#FF4D6D" : color;
+          return <Ionicons name={iconName} size={size} color={tintColor} />;
         },
         tabBarActiveTintColor: "#2E3A52",
         tabBarInactiveTintColor: "#8E8E93",
@@ -75,6 +80,17 @@ function TabNavigator() {
         component={LiveMap}
         options={{ tabBarLabel: "Live Map" }}
       />
+      <Tab.Screen
+        name="Record"
+        options={{ tabBarLabel: "Record" }}
+      >
+        {(props) => (
+          <RecordingScreen
+            {...props}
+            onRecordingStateChange={(isActive) => setIsRecordingActive(isActive)}
+          />
+        )}
+      </Tab.Screen>
       <Tab.Screen
         name="Map"
         component={StaticMap}
