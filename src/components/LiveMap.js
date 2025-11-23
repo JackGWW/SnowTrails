@@ -333,6 +333,16 @@ function LiveMap() {
   const cycleLocationMode = () => {
     if (cameraRef.current) {
       if (locationMode === 'off') {
+        // Don't enable location tracking if user is outside map bounds
+        if (!isUserInBounds) {
+          Toast.show({
+            type: 'info',
+            text1: 'Outside map area',
+            text2: 'Location tracking is only available within the trail area',
+            position: 'bottom',
+          });
+          return;
+        }
         // off -> follow
         cameraRef.current.setCamera({
           centerCoordinate: [currentLongitude, currentLatitude],
