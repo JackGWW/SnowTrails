@@ -1,15 +1,19 @@
 import React from "react";
-import { StyleSheet, View, TouchableHighlight, Text } from "react-native";
+import { StyleSheet, View, TouchableHighlight, TouchableOpacity, Text } from "react-native";
 import Mapbox from "@rnmapbox/maps";
 import Spinner from "react-native-loading-spinner-overlay";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 import * as Location from 'expo-location';
 import { Image } from 'expo-image';
 import Toast from 'react-native-toast-message';
+import { Ionicons } from '@expo/vector-icons';
 
 // Polyline components for all trails
 import AllTrails from "./trails/AllTrails";
-import CustomMarker from "./markers/CustomMarker"
+import CustomMarker from "./markers/CustomMarker";
+import { subscribeToRecordingState, getRecordingState } from '../services/RecordingState';
+import { formatDistance, formatElevation } from '../services/LocationTracker';
 
 // Set Mapbox access token
 Mapbox.setAccessToken("pk.eyJ1IjoiamFja2d3dyIsImEiOiJja2l4dDZ5bnIxZTh1MnNwZmdxODA4cjU1In0.QruuU5HoAnwNtt0UE45GSg");
@@ -39,7 +43,8 @@ class LiveMapComponent extends React.Component {
       trailMapping: require('../../data/trail_mapping.json'),
       is3DMode: false,
       isTracking: false,
-      isUserInBounds: false
+      isUserInBounds: false,
+      recordingState: getRecordingState(),
     };
 
     this.mapBounds = {
@@ -48,6 +53,19 @@ class LiveMapComponent extends React.Component {
     };
 
     this.cameraRef = React.createRef();
+    this.unsubscribeRecording = null;
+  }
+
+  componentDidMount() {
+    this.unsubscribeRecording = subscribeToRecordingState((recordingState) => {
+      this.setState({ recordingState });
+    });
+  }
+
+  componentWillUnmount() {
+    if (this.unsubscribeRecording) {
+      this.unsubscribeRecording();
+    }
   }
 
   async enableLocationPermissions() {
@@ -449,6 +467,28 @@ class LiveMapComponent extends React.Component {
           />
         </TouchableHighlight>
 
+        {/* Recording indicator pill */}
+        {(this.state.recordingState.isRecording || this.state.recordingState.isPaused) && (
+          <TouchableOpacity
+            style={styles.recordingPill}
+            activeOpacity={0.8}
+            onPress={() => this.props.navigation.navigate('Record')}
+          >
+            <Ionicons
+              name={this.state.recordingState.isPaused ? "pause" : "radio-button-on"}
+              size={14}
+              color="#FF3B30"
+            />
+            <Text style={styles.recordingPillText}>
+              {formatDistance(this.state.recordingState.distance)} km
+            </Text>
+            <View style={styles.recordingPillDivider} />
+            <Text style={styles.recordingPillText}>
+              {formatElevation(this.state.recordingState.elevationGain)}m
+            </Text>
+          </TouchableOpacity>
+        )}
+
         <Toast />
       </View>
     );
@@ -536,10 +576,38 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "500",
   },
+  recordingPill: {
+    position: "absolute",
+    bottom: 26,
+    alignSelf: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.95)",
+    paddingVertical: 8,
+    paddingHorizontal: 14,
+    borderRadius: 20,
+    gap: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  recordingPillText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#2E3A52",
+  },
+  recordingPillDivider: {
+    width: 1,
+    height: 14,
+    backgroundColor: "#E5E5EA",
+  },
 });
 
-// Wrapper component to provide safe area insets
+// Wrapper component to provide safe area insets and navigation
 export default function LiveMap(props) {
   const insets = useSafeAreaInsets();
-  return <LiveMapComponent {...props} bottomInset={insets.bottom} />;
+  const navigation = useNavigation();
+  return <LiveMapComponent {...props} bottomInset={insets.bottom} navigation={navigation} />;
 }

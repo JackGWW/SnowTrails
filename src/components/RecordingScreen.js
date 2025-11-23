@@ -22,6 +22,7 @@ import {
   formatDistance,
   formatElevation,
 } from '../services/LocationTracker';
+import { updateRecordingState, resetRecordingState } from '../services/RecordingState';
 
 // Marker icons
 let circleIcon = require('../../assets/trailMarkers/circle.svg');
@@ -192,6 +193,17 @@ function RecordingScreenComponent({ bottomInset }) {
       }
     };
   }, [recordingState, handleLocationUpdate]);
+
+  // Publish recording state changes to shared state
+  useEffect(() => {
+    updateRecordingState({
+      isRecording: recordingState === RecordingState.RECORDING,
+      isPaused: recordingState === RecordingState.PAUSED,
+      distance,
+      elapsedTime,
+      elevationGain,
+    });
+  }, [recordingState, distance, elapsedTime, elevationGain]);
 
   // Marker size based on zoom level
   const getMarkerSize = (delta) => {
