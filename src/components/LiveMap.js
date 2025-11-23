@@ -664,7 +664,9 @@ function LiveMap() {
             onPress={handleStartRecording}
             activeOpacity={0.8}
           >
-            <View style={styles.recordButtonInner} />
+            <View style={styles.recordButtonOuter}>
+              <View style={styles.recordButtonInner} />
+            </View>
           </TouchableOpacity>
         )}
 
@@ -804,10 +806,20 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 4,
   },
+  recordButtonOuter: {
+    height: 34,
+    width: 34,
+    borderRadius: 17,
+    backgroundColor: "#FFFFFF",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 2,
+    borderColor: "#FF3B30",
+  },
   recordButtonInner: {
-    height: 24,
-    width: 24,
-    borderRadius: 12,
+    height: 22,
+    width: 22,
+    borderRadius: 11,
     backgroundColor: "#FF3B30",
   },
   pauseButton: {
