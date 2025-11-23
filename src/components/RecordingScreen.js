@@ -376,14 +376,6 @@ function RecordingScreenComponent({ bottomInset }) {
     startTimeRef.current = Date.now();
     pausedTimeRef.current = 0;
     setRecordingState(RecordingState.RECORDING);
-
-    Toast.show({
-      type: 'success',
-      text1: 'Recording started',
-      text2: 'Your route is being tracked',
-      position: 'bottom',
-      visibilityTime: 2000,
-    });
   };
 
   const handlePauseRecording = async () => {
@@ -393,13 +385,6 @@ function RecordingScreenComponent({ bottomInset }) {
     // Save elapsed time
     pausedTimeRef.current = elapsedTime;
     setRecordingState(RecordingState.PAUSED);
-
-    Toast.show({
-      type: 'info',
-      text1: 'Recording paused',
-      position: 'bottom',
-      visibilityTime: 2000,
-    });
   };
 
   const handleResumeRecording = async () => {
@@ -417,13 +402,6 @@ function RecordingScreenComponent({ bottomInset }) {
     // Reset start time (pausedTimeRef already has accumulated time)
     startTimeRef.current = Date.now();
     setRecordingState(RecordingState.RECORDING);
-
-    Toast.show({
-      type: 'success',
-      text1: 'Recording resumed',
-      position: 'bottom',
-      visibilityTime: 2000,
-    });
   };
 
   const handleClearRecording = () => {
@@ -550,7 +528,7 @@ function RecordingScreenComponent({ bottomInset }) {
 
       {/* 3D Toggle Button */}
       <TouchableHighlight
-        style={[styles.terrainButtonContainer, { bottom: 133 + bottomInset }]}
+        style={[styles.terrainButtonContainer, { bottom: 200 + bottomInset }]}
         activeOpacity={0.7}
         underlayColor="#F0F0F0"
         onPress={toggle3DMode}
@@ -562,7 +540,7 @@ function RecordingScreenComponent({ bottomInset }) {
 
       {/* Location Button */}
       <TouchableHighlight
-        style={[styles.locationButtonContainer, { bottom: 65 + bottomInset }]}
+        style={[styles.locationButtonContainer, { bottom: 135 + bottomInset }]}
         activeOpacity={0.7}
         underlayColor="#F0F0F0"
         onPress={animateToUser}
