@@ -347,6 +347,36 @@ function RecordingScreenComponent({ bottomInset }) {
   };
 
   const handleStartRecording = async () => {
+    // TODO: Uncomment location check for production
+    // // Check if user is within map bounds
+    // try {
+    //   const location = await Location.getCurrentPositionAsync({
+    //     accuracy: Location.Accuracy.Balanced,
+    //   });
+    //   const lat = location.coords.latitude;
+    //   const lon = location.coords.longitude;
+
+    //   if (!isWithinBounds(lat, lon)) {
+    //     Toast.show({
+    //       type: 'info',
+    //       text1: 'Outside trail area',
+    //       text2: 'You must be within the trail area to start recording',
+    //       position: 'bottom',
+    //       visibilityTime: 3000,
+    //     });
+    //     return;
+    //   }
+    // } catch (error) {
+    //   console.warn('Could not get user location:', error);
+    //   Toast.show({
+    //     type: 'error',
+    //     text1: 'Location unavailable',
+    //     text2: 'Could not determine your location',
+    //     position: 'bottom',
+    //   });
+    //   return;
+    // }
+
     // Request permissions
     const permResult = await requestBackgroundPermissions();
     if (!permResult.granted) {
@@ -478,6 +508,7 @@ function RecordingScreenComponent({ bottomInset }) {
           followUserLocation={recordingState === RecordingState.RECORDING}
           followUserMode="compass"
           followZoomLevel={16}
+          followPitch={is3DMode ? 45 : 0}
         />
 
         <Mapbox.LocationPuck pulsing={{ isEnabled: true }} puckBearingEnabled={true} puckBearing="heading" />
