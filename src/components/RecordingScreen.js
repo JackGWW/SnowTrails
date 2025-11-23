@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, TouchableHighlight, Alert } from 'react-native';
 import Mapbox from '@rnmapbox/maps';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import Toast from 'react-native-toast-message';
+
+import AllTrails from './trails/AllTrails';
+import CustomMarker from './markers/CustomMarker';
 
 import {
   requestBackgroundPermissions,
@@ -18,12 +21,31 @@ import {
   formatElevation,
 } from '../services/LocationTracker';
 
+// Marker icons
+let circleIcon = require('../../assets/trailMarkers/circle.svg');
+let squareIcon = require('../../assets/trailMarkers/square.svg');
+let diamondIcon = require('../../assets/trailMarkers/diamond.svg');
+let benchIcon = require('../../assets/trailMarkers/bench.png');
+let invisibleIcon = require('../../assets/trailMarkers/invisible.png');
+
 // Recording states
 const RecordingState = {
   IDLE: 'idle',
   RECORDING: 'recording',
   PAUSED: 'paused',
 };
+
+// Format time with smart hours display
+function formatTime(seconds) {
+  const hrs = Math.floor(seconds / 3600);
+  const mins = Math.floor((seconds % 3600) / 60);
+  const secs = Math.floor(seconds % 60);
+
+  if (hrs > 0) {
+    return `${hrs}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  }
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
 
 function RecordingScreenComponent({ bottomInset }) {
   const [recordingState, setRecordingState] = useState(RecordingState.IDLE);
@@ -32,12 +54,26 @@ function RecordingScreenComponent({ bottomInset }) {
   const [elevationGain, setElevationGain] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [currentLocation, setCurrentLocation] = useState(null);
+  const [is3DMode, setIs3DMode] = useState(false);
+  const [longitudeDelta, setLongitudeDelta] = useState(0.011);
+
+  // Trail marker data
+  const [coordinateMapping] = useState(require('../../data/coordinate_mapping.json'));
+  const [trailMapping] = useState(require('../../data/trail_mapping.json'));
+  const [hiddenMarker, setHiddenMarker] = useState({
+    latitude: 44.518,
+    longitude: -80.353,
+    name: '',
+    description: '',
+  });
 
   const cameraRef = useRef(null);
   const startTimeRef = useRef(null);
   const pausedTimeRef = useRef(0);
   const timerRef = useRef(null);
   const unsubscribeRef = useRef(null);
+  const hiddenMarkerRef = useRef(null);
+  const markerIconCache = useRef(new Map());
 
   // Update timer every second while recording
   useEffect(() => {
@@ -97,6 +133,159 @@ function RecordingScreenComponent({ bottomInset }) {
       }
     };
   }, [recordingState, handleLocationUpdate]);
+
+  // Marker size based on zoom level
+  const getMarkerSize = (delta) => {
+    switch (true) {
+      case delta < 0.0025:
+        return 35;
+      case delta < 0.003:
+        return 32;
+      case delta < 0.0035:
+        return 29;
+      case delta < 0.0042:
+        return 26;
+      case delta < 0.005:
+        return 23;
+      case delta < 0.0065:
+        return 20;
+      case delta < 0.008:
+        return 18;
+      case delta < 0.01:
+        return 16;
+      case delta < 0.0119:
+        return 14;
+      case delta < 0.0187:
+        return 11;
+      case delta < 0.02:
+        return 10;
+      case delta < 0.025:
+        return 9;
+      default:
+        return 8;
+    }
+  };
+
+  const createIconDescriptor = (source, size) => {
+    const roundedSize = Math.max(1, Math.round(size));
+    return Object.freeze({
+      source,
+      width: roundedSize,
+      height: roundedSize,
+    });
+  };
+
+  const getMarkerImages = () => {
+    const size = getMarkerSize(longitudeDelta);
+
+    if (markerIconCache.current.has(size)) {
+      return markerIconCache.current.get(size);
+    }
+
+    const icons = {
+      Circle: createIconDescriptor(circleIcon, size),
+      Square: createIconDescriptor(squareIcon, size),
+      Diamond: createIconDescriptor(diamondIcon, size),
+      Bench: createIconDescriptor(benchIcon, size * 1.2),
+      Invisible: createIconDescriptor(invisibleIcon, 1),
+    };
+
+    markerIconCache.current.set(size, icons);
+    return icons;
+  };
+
+  const updateRegion = async () => {
+    if (!cameraRef.current) return;
+
+    try {
+      const zoom = await cameraRef.current.getZoom();
+      const zoomLevel = zoom || 15;
+      const delta = 360 / Math.pow(2, zoomLevel);
+      setLongitudeDelta(delta);
+    } catch (error) {
+      console.warn('Could not get camera zoom:', error);
+    }
+  };
+
+  const toggle3DMode = () => {
+    const newMode = !is3DMode;
+    setIs3DMode(newMode);
+
+    if (cameraRef.current) {
+      cameraRef.current.setCamera({
+        pitch: newMode ? 45 : 0,
+        animationDuration: 500,
+      });
+    }
+  };
+
+  const getCoordinateKey = (coordinate, latDecimals, longDecimals) => {
+    return coordinate.latitude.toFixed(latDecimals) + ',' + coordinate.longitude.toFixed(longDecimals);
+  };
+
+  const updateHiddenMarker = (coordinateKey) => {
+    const coordinateInfo = coordinateMapping[coordinateKey];
+    const trailInfo = trailMapping[coordinateInfo.trail];
+    const trailName = trailInfo.name;
+    let trailDescription = trailInfo.description;
+
+    if (trailDescription === '') {
+      trailDescription = null;
+    }
+
+    setHiddenMarker({
+      latitude: coordinateInfo.lat,
+      longitude: coordinateInfo.lon,
+      name: trailName,
+      description: trailDescription,
+    });
+
+    // Give marker time to update before displaying
+    setTimeout(() => {
+      if (hiddenMarkerRef.current) {
+        hiddenMarkerRef.current.displayTrailName(false);
+      }
+    }, 10);
+  };
+
+  const onMapPress = (event) => {
+    const { geometry } = event;
+    if (!geometry || !geometry.coordinates) return;
+
+    const coordinate = {
+      latitude: geometry.coordinates[1],
+      longitude: geometry.coordinates[0],
+    };
+
+    let coordinateKey = getCoordinateKey(coordinate, 4, 4);
+    if (coordinateKey in coordinateMapping) {
+      updateHiddenMarker(coordinateKey);
+      return;
+    }
+
+    coordinateKey = getCoordinateKey(coordinate, 4, 3);
+    if (coordinateKey in coordinateMapping) {
+      updateHiddenMarker(coordinateKey);
+      return;
+    }
+
+    coordinateKey = getCoordinateKey(coordinate, 3, 4);
+    if (coordinateKey in coordinateMapping) {
+      updateHiddenMarker(coordinateKey);
+      return;
+    }
+
+    coordinateKey = getCoordinateKey(coordinate, 3, 3);
+    if (coordinateKey in coordinateMapping) {
+      updateHiddenMarker(coordinateKey);
+      return;
+    }
+
+    // If tapped somewhere else (not on a trail), hide the callout
+    if (hiddenMarkerRef.current) {
+      hiddenMarkerRef.current.hideCallout();
+    }
+  };
 
   const handleStartRecording = async () => {
     // Request permissions
@@ -212,6 +401,8 @@ function RecordingScreenComponent({ bottomInset }) {
   };
 
   const hasRoute = coordinates.length > 1;
+  const markerImages = getMarkerImages();
+  const longitudeDeltaStr = longitudeDelta.toFixed(5);
 
   return (
     <View style={styles.container}>
@@ -223,22 +414,61 @@ function RecordingScreenComponent({ bottomInset }) {
         scaleBarEnabled={false}
         attributionEnabled={false}
         logoEnabled={false}
+        onPress={onMapPress}
+        onMapIdle={updateRegion}
       >
+        <Mapbox.RasterDemSource
+          id="mapbox-dem"
+          url="mapbox://mapbox.terrain-rgb"
+          tileSize={514}
+          maxZoomLevel={14}
+        >
+          <Mapbox.Terrain sourceID="mapbox-dem" style={{ exaggeration: 1.5 }} />
+        </Mapbox.RasterDemSource>
+
         <Mapbox.Camera
           ref={cameraRef}
           defaultSettings={{
             centerCoordinate: [-80.351933, 44.519949],
             zoomLevel: 15,
           }}
+          minZoomLevel={14}
+          maxZoomLevel={18}
+          maxBounds={[
+            [-80.398, 44.507], // Southwest
+            [-80.328, 44.539], // Northeast
+          ]}
           followUserLocation={recordingState === RecordingState.RECORDING}
           followUserMode="compass"
           followZoomLevel={16}
         />
 
-        <Mapbox.LocationPuck
-          pulsing={{ isEnabled: true }}
-          puckBearingEnabled={true}
-          puckBearing="heading"
+        <Mapbox.LocationPuck pulsing={{ isEnabled: true }} puckBearingEnabled={true} puckBearing="heading" />
+
+        {/* All trails */}
+        <AllTrails longitudeDelta={longitudeDeltaStr} markerImages={markerImages} />
+
+        {/* Bench marker */}
+        <CustomMarker
+          longitudeDelta={longitudeDeltaStr}
+          location={{ latitude: 44.512641029432416, longitude: -80.363259455189109 }}
+          trailName={'The Bench'}
+          trailDescription={'Lookout point'}
+          icon={markerImages['Bench']}
+          id={'recording-bench'}
+        />
+
+        {/* Hidden marker for trail taps */}
+        <CustomMarker
+          longitudeDelta={'0'}
+          location={{ latitude: hiddenMarker.latitude, longitude: hiddenMarker.longitude }}
+          trailName={hiddenMarker.name}
+          trailDescription={hiddenMarker.description}
+          icon={markerImages['Invisible']}
+          id={'recording-hidden'}
+          ref={hiddenMarkerRef}
+          key={hiddenMarker.latitude}
+          tappable={false}
         />
 
         {/* Recorded route line */}
@@ -257,79 +487,69 @@ function RecordingScreenComponent({ bottomInset }) {
         )}
       </Mapbox.MapView>
 
-      {/* Stats Panel */}
-      <View style={[styles.statsPanel, { paddingBottom: 16 + bottomInset }]}>
-        <View style={styles.statsRow}>
-          <View style={styles.statItem}>
-            <Text style={styles.statValue}>{formatDistance(distance)}</Text>
-            <Text style={styles.statLabel}>km</Text>
-          </View>
-          <View style={styles.statDivider} />
-          <View style={styles.statItem}>
-            <Text style={styles.statValue}>{formatDuration(elapsedTime)}</Text>
-            <Text style={styles.statLabel}>time</Text>
-          </View>
-          <View style={styles.statDivider} />
-          <View style={styles.statItem}>
-            <Text style={styles.statValue}>{formatElevation(elevationGain)}</Text>
-            <Text style={styles.statLabel}>m ↑</Text>
-          </View>
+      {/* 3D Toggle Button */}
+      <TouchableHighlight
+        style={[styles.terrainButtonContainer, { bottom: 140 + bottomInset }]}
+        activeOpacity={0.7}
+        underlayColor="#F0F0F0"
+        onPress={toggle3DMode}
+      >
+        <View style={styles.terrainButton}>
+          <Text style={styles.terrainButtonText}>{is3DMode ? '2D' : '3D'}</Text>
         </View>
+      </TouchableHighlight>
 
-        {/* Controls */}
-        <View style={styles.controlsRow}>
-          {recordingState === RecordingState.IDLE && (
-            <TouchableOpacity
-              style={[styles.button, styles.startButton]}
-              onPress={handleStartRecording}
-              activeOpacity={0.8}
-            >
-              <Ionicons name="radio-button-on" size={24} color="#FFFFFF" />
-              <Text style={styles.buttonText}>Start Recording</Text>
+      {/* Control Buttons - floating above stats */}
+      <View style={[styles.controlsContainer, { bottom: 80 + bottomInset }]}>
+        {recordingState === RecordingState.IDLE && (
+          <TouchableOpacity style={[styles.button, styles.startButton]} onPress={handleStartRecording} activeOpacity={0.8}>
+            <Ionicons name="radio-button-on" size={24} color="#FFFFFF" />
+            <Text style={styles.buttonText}>Start Recording</Text>
+          </TouchableOpacity>
+        )}
+
+        {recordingState === RecordingState.RECORDING && (
+          <>
+            <TouchableOpacity style={[styles.button, styles.pauseButton]} onPress={handlePauseRecording} activeOpacity={0.8}>
+              <Ionicons name="pause" size={24} color="#FFFFFF" />
+              <Text style={styles.buttonText}>Pause</Text>
             </TouchableOpacity>
-          )}
+            <TouchableOpacity style={[styles.button, styles.clearButton]} onPress={handleClearRecording} activeOpacity={0.8}>
+              <Ionicons name="close" size={24} color="#FFFFFF" />
+              <Text style={styles.buttonText}>Clear</Text>
+            </TouchableOpacity>
+          </>
+        )}
 
-          {recordingState === RecordingState.RECORDING && (
-            <>
-              <TouchableOpacity
-                style={[styles.button, styles.pauseButton]}
-                onPress={handlePauseRecording}
-                activeOpacity={0.8}
-              >
-                <Ionicons name="pause" size={24} color="#FFFFFF" />
-                <Text style={styles.buttonText}>Pause</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.button, styles.clearButton]}
-                onPress={handleClearRecording}
-                activeOpacity={0.8}
-              >
-                <Ionicons name="close" size={24} color="#FFFFFF" />
-                <Text style={styles.buttonText}>Clear</Text>
-              </TouchableOpacity>
-            </>
-          )}
+        {recordingState === RecordingState.PAUSED && (
+          <>
+            <TouchableOpacity style={[styles.button, styles.resumeButton]} onPress={handleResumeRecording} activeOpacity={0.8}>
+              <Ionicons name="play" size={24} color="#FFFFFF" />
+              <Text style={styles.buttonText}>Resume</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.button, styles.clearButton]} onPress={handleClearRecording} activeOpacity={0.8}>
+              <Ionicons name="close" size={24} color="#FFFFFF" />
+              <Text style={styles.buttonText}>Clear</Text>
+            </TouchableOpacity>
+          </>
+        )}
+      </View>
 
-          {recordingState === RecordingState.PAUSED && (
-            <>
-              <TouchableOpacity
-                style={[styles.button, styles.resumeButton]}
-                onPress={handleResumeRecording}
-                activeOpacity={0.8}
-              >
-                <Ionicons name="play" size={24} color="#FFFFFF" />
-                <Text style={styles.buttonText}>Resume</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.button, styles.clearButton]}
-                onPress={handleClearRecording}
-                activeOpacity={0.8}
-              >
-                <Ionicons name="close" size={24} color="#FFFFFF" />
-                <Text style={styles.buttonText}>Clear</Text>
-              </TouchableOpacity>
-            </>
-          )}
+      {/* Stats Bar - sits above tab bar */}
+      <View style={[styles.statsBar, { paddingBottom: 8 }]}>
+        <View style={styles.statItem}>
+          <Text style={styles.statValue}>{formatDistance(distance)}</Text>
+          <Text style={styles.statLabel}>km</Text>
+        </View>
+        <View style={styles.statDivider} />
+        <View style={styles.statItem}>
+          <Text style={styles.statValue}>{formatTime(elapsedTime)}</Text>
+          <Text style={styles.statLabel}>time</Text>
+        </View>
+        <View style={styles.statDivider} />
+        <View style={styles.statItem}>
+          <Text style={styles.statValue}>{formatElevation(elevationGain)}</Text>
+          <Text style={styles.statLabel}>m gain</Text>
         </View>
       </View>
 
@@ -346,46 +566,37 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
   },
-  statsPanel: {
+  terrainButtonContainer: {
+    position: 'absolute',
+    right: 16,
+    height: 56,
+    width: 56,
+    borderRadius: 28,
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#FFFFFF',
-    paddingTop: 20,
-    paddingHorizontal: 20,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
     shadowRadius: 12,
     elevation: 8,
   },
-  statsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+  terrainButton: {
+    height: 56,
+    width: 56,
     alignItems: 'center',
-    marginBottom: 20,
+    justifyContent: 'center',
   },
-  statItem: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  statValue: {
-    fontSize: 32,
+  terrainButtonText: {
+    fontSize: 16,
     fontWeight: '700',
     color: '#2E3A52',
-    letterSpacing: -0.5,
+    letterSpacing: 0.5,
   },
-  statLabel: {
-    fontSize: 14,
-    color: '#8E8E93',
-    marginTop: 4,
-    fontWeight: '500',
-  },
-  statDivider: {
-    width: 1,
-    height: 40,
-    backgroundColor: '#E5E5EA',
-  },
-  controlsRow: {
+  controlsContainer: {
+    position: 'absolute',
+    left: 16,
+    right: 16,
     flexDirection: 'row',
     justifyContent: 'center',
     gap: 12,
@@ -399,6 +610,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     gap: 8,
     minWidth: 140,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 6,
   },
   buttonText: {
     color: '#FFFFFF',
@@ -420,6 +636,37 @@ const styles = StyleSheet.create({
   clearButton: {
     backgroundColor: '#FF3B30',
     flex: 1,
+  },
+  statsBar: {
+    backgroundColor: '#FFFFFF',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderTopWidth: 1,
+    borderTopColor: '#E5E5EA',
+  },
+  statItem: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  statValue: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#2E3A52',
+    letterSpacing: -0.5,
+  },
+  statLabel: {
+    fontSize: 12,
+    color: '#8E8E93',
+    marginTop: 2,
+    fontWeight: '500',
+  },
+  statDivider: {
+    width: 1,
+    height: 32,
+    backgroundColor: '#E5E5EA',
   },
 });
 
