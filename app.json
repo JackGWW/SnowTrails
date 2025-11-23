@@ -52,19 +52,14 @@
       ],
       "expo-font",
       [
-        "@rnmapbox/maps",
-        {
-          "RNMapboxMapsVersion": "11.8.0"
-        }
-      ],
-      [
         "expo-location",
         {
           "isIosBackgroundLocationEnabled": true,
           "isAndroidBackgroundLocationEnabled": true,
           "isAndroidForegroundServiceEnabled": true
         }
-      ]
+      ],
+      "@rnmapbox/maps"
     ],
     "extra": {
       "eas": {
