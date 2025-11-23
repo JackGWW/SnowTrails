@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, TouchableOpacity, TouchableHighlight, Alert } f
 import Mapbox from '@rnmapbox/maps';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { Image } from 'expo-image';
 import Toast from 'react-native-toast-message';
 import * as Location from 'expo-location';
 
@@ -83,37 +82,6 @@ function RecordingScreenComponent({ bottomInset }) {
       const inBounds = isWithinBounds(lat, lon);
       setUserLocation({ latitude: lat, longitude: lon });
       setIsUserInBounds(inBounds);
-    }
-  };
-
-  const animateToUser = async () => {
-    if (!cameraRef.current) return;
-
-    // Get current location
-    try {
-      const location = await Location.getCurrentPositionAsync({
-        accuracy: Location.Accuracy.Balanced,
-      });
-      const lat = location.coords.latitude;
-      const lon = location.coords.longitude;
-
-      if (!isWithinBounds(lat, lon)) {
-        Toast.show({
-          type: 'info',
-          text1: 'Outside trail area',
-          text2: 'You are currently outside the mapped trails',
-          position: 'bottom',
-          visibilityTime: 3000,
-        });
-        return;
-      }
-
-      cameraRef.current.setCamera({
-        centerCoordinate: [lon, lat],
-        animationDuration: 1000,
-      });
-    } catch (error) {
-      console.warn('Could not get user location:', error);
     }
   };
 
@@ -517,7 +485,7 @@ function RecordingScreenComponent({ bottomInset }) {
             [-80.398, 44.507], // Southwest
             [-80.328, 44.539], // Northeast
           ]}
-          followUserLocation={recordingState === RecordingState.RECORDING}
+          followUserLocation={isUserInBounds}
           followUserMode="compass"
           followZoomLevel={16}
           followPitch={is3DMode ? 45 : 0}
@@ -571,7 +539,7 @@ function RecordingScreenComponent({ bottomInset }) {
 
       {/* 3D Toggle Button */}
       <TouchableHighlight
-        style={[styles.terrainButtonContainer, { bottom: 200 + bottomInset }]}
+        style={[styles.terrainButtonContainer, { bottom: 135 + bottomInset }]}
         activeOpacity={0.7}
         underlayColor="#F0F0F0"
         onPress={toggle3DMode}
@@ -579,20 +547,6 @@ function RecordingScreenComponent({ bottomInset }) {
         <View style={styles.terrainButton}>
           <Text style={styles.terrainButtonText}>{is3DMode ? '2D' : '3D'}</Text>
         </View>
-      </TouchableHighlight>
-
-      {/* Location Button */}
-      <TouchableHighlight
-        style={[styles.locationButtonContainer, { bottom: 135 + bottomInset }]}
-        activeOpacity={0.7}
-        underlayColor="#F0F0F0"
-        onPress={animateToUser}
-      >
-        <Image
-          source={require('../../assets/locationIcon.png')}
-          contentFit="contain"
-          style={styles.locationButton}
-        />
       </TouchableHighlight>
 
       {/* Control Buttons - floating above stats */}
@@ -644,8 +598,8 @@ function RecordingScreenComponent({ bottomInset }) {
         </View>
         <View style={styles.statDivider} />
         <View style={styles.statItem}>
-          <Text style={styles.statValue}>{formatElevation(elevationGain)}m</Text>
-          <Text style={styles.statLabel}>gain</Text>
+          <Text style={styles.statValue}>{formatElevation(elevationGain)}</Text>
+          <Text style={styles.statLabel}>m↑</Text>
         </View>
       </View>
 
@@ -688,25 +642,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#2E3A52',
     letterSpacing: 0.5,
-  },
-  locationButtonContainer: {
-    position: 'absolute',
-    right: 16,
-    height: 56,
-    width: 56,
-    borderRadius: 28,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFFFFF',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 12,
-    elevation: 8,
-  },
-  locationButton: {
-    height: 32,
-    width: 32,
   },
   controlsContainer: {
     position: 'absolute',

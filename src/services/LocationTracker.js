@@ -68,9 +68,9 @@ export function formatDuration(seconds) {
     .padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
 
-// Format distance in meters to km with 2 decimal places
+// Format distance in meters to km with 1 decimal place
 export function formatDistance(meters) {
-  return (meters / 1000).toFixed(2);
+  return (meters / 1000).toFixed(1);
 }
 
 // Format elevation in meters with no decimal places

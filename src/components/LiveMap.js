@@ -484,7 +484,7 @@ class LiveMapComponent extends React.Component {
             </Text>
             <View style={styles.recordingPillDivider} />
             <Text style={styles.recordingPillText}>
-              {formatElevation(this.state.recordingState.elevationGain)}m
+              {formatElevation(this.state.recordingState.elevationGain)} m↑
             </Text>
           </TouchableOpacity>
         )}
