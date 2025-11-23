@@ -11,6 +11,7 @@ import * as Sentry from '@sentry/react-native';
 import * as Amplitude from '@amplitude/analytics-react-native';
 
 import LiveMap from "./src/components/LiveMap";
+import RecordingScreen from "./src/components/RecordingScreen";
 import StaticMap from "./src/components/StaticMap";
 
 // Setup crash reports
@@ -41,6 +42,8 @@ function TabNavigator() {
 
           if (route.name === "GPS") {
             iconName = focused ? "navigate" : "navigate-outline";
+          } else if (route.name === "Record") {
+            iconName = focused ? "radio-button-on" : "radio-button-off";
           } else if (route.name === "Map") {
             iconName = focused ? "map" : "map-outline";
           }
@@ -74,6 +77,11 @@ function TabNavigator() {
         name="GPS"
         component={LiveMap}
         options={{ tabBarLabel: "Live Map" }}
+      />
+      <Tab.Screen
+        name="Record"
+        component={RecordingScreen}
+        options={{ tabBarLabel: "Record" }}
       />
       <Tab.Screen
         name="Map"
@@ -195,7 +203,7 @@ class App extends React.Component {
     // If it's on the disclaimer slide, change the next button to "I Agree"
     if (index === 1) {
       this.setState({ nextLabel: "I Agree" });
-      
+
       // Hide the next button for 3 seconds the first time the disclaimer is shown
       if (!this.state.disclaimerShown) {
         this.setState({ showNextButton: false, showPrevButton: false });
