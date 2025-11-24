@@ -91,19 +91,17 @@ export class GPSFilter {
     this.lastRecorded = null;
     this.lastDisplay = null;
     this.altitudeDriftDisplay = 0;
-    this.altitudeDriftRecorded = 0;
   }
 
   reset(anchor = null) {
     this.lastRecorded = anchor;
     this.lastDisplay = anchor;
     this.altitudeDriftDisplay = 0;
-    this.altitudeDriftRecorded = 0;
   }
 
-  smoothAltitude(previousAlt, newAlt, channel) {
+  smoothAltitude(previousAlt, newAlt, channel, accuracy = null) {
     const driftKey =
-      channel === 'display' ? 'altitudeDriftDisplay' : 'altitudeDriftRecorded';
+      channel === 'display' ? 'altitudeDriftDisplay' : 'altitudeDriftDisplay';
 
     if (newAlt == null) {
       return previousAlt ?? null;
@@ -117,10 +115,18 @@ export class GPSFilter {
     const diff = newAlt - previousAlt;
     const absDiff = Math.abs(diff);
 
-    if (absDiff < this.config.verticalNoiseThreshold) {
+    const accuracyScale =
+      accuracy != null ? clamp((accuracy ?? 12) / 12, 0.5, 2) : 1;
+    const noiseThreshold = this.config.verticalNoiseThreshold * accuracyScale;
+    const commitThreshold = Math.max(
+      this.config.minAltitudeCommit * accuracyScale,
+      this.config.minAltitudeCommit * 0.5
+    );
+
+    if (absDiff < noiseThreshold) {
       this[driftKey] += diff;
-      if (Math.abs(this[driftKey]) >= this.config.minAltitudeCommit) {
-        const committed = this[driftKey] * 0.65;
+      if (Math.abs(this[driftKey]) >= commitThreshold) {
+        const committed = this[driftKey];
         this[driftKey] = 0;
         return previousAlt + committed;
       }
@@ -128,7 +134,7 @@ export class GPSFilter {
     }
 
     this[driftKey] = 0;
-    return previousAlt + diff * 0.65;
+    return previousAlt + diff * 0.75;
   }
 
   processSample(location) {
@@ -167,11 +173,10 @@ export class GPSFilter {
     const smoothedRecorded = {
       ...candidateDisplay,
       heading,
-      altitude: this.smoothAltitude(
+      altitude:
+        candidateDisplay.altitude ??
+        normalized.altitude ??
         this.lastRecorded.altitude,
-        candidateDisplay.altitude,
-        'recorded'
-      ),
     };
 
     this.lastRecorded = smoothedRecorded;
@@ -200,12 +205,19 @@ export class GPSFilter {
       this.config
     );
 
+    const verticalAccuracy =
+      smoothedPosition.verticalAccuracy ??
+      smoothedPosition.altitudeAccuracy ??
+      smoothedPosition.accuracy ??
+      null;
+
     return {
       ...smoothedPosition,
       altitude: this.smoothAltitude(
         this.lastDisplay?.altitude ?? null,
         smoothedPosition.altitude,
-        'display'
+        'display',
+        verticalAccuracy
       ),
     };
   }
