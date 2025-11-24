@@ -2,7 +2,10 @@ import * as Location from 'expo-location';
 import * as TaskManager from 'expo-task-manager';
 
 const LOCATION_TASK_NAME = 'snowtrails-background-location';
-const MIN_DISTANCE_METERS = 5; // Filter GPS noise - ignore points closer than this
+const REQUESTED_DISTANCE_INTERVAL_METERS = 2; // Request granular updates for tight turns
+const REQUESTED_TIME_INTERVAL_MS = 2500;
+const MIN_GAIN_THRESHOLD_METERS = 0.3;
+const MAX_GAIN_THRESHOLD_METERS = 2;
 
 // Event listeners for location updates
 let locationListeners = [];
@@ -26,6 +29,41 @@ function toRadians(degrees) {
   return degrees * (Math.PI / 180);
 }
 
+const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+const getAltitudeAccuracy = (coord) =>
+  coord?.verticalAccuracy ??
+  coord?.altitudeAccuracy ??
+  coord?.accuracy ??
+  null;
+
+const getAltitudeNoiseThreshold = (prev, curr) => {
+  const accuracySamples = [];
+
+  const prevAccuracy = getAltitudeAccuracy(prev);
+  if (typeof prevAccuracy === 'number') {
+    accuracySamples.push(prevAccuracy);
+  }
+  const currAccuracy = getAltitudeAccuracy(curr);
+  if (typeof currAccuracy === 'number') {
+    accuracySamples.push(currAccuracy);
+  }
+
+  if (accuracySamples.length === 0) {
+    return MIN_GAIN_THRESHOLD_METERS;
+  }
+
+  const avgAccuracy =
+    accuracySamples.reduce((sum, value) => sum + value, 0) /
+    accuracySamples.length;
+
+  return clamp(
+    avgAccuracy * 0.1,
+    MIN_GAIN_THRESHOLD_METERS,
+    MAX_GAIN_THRESHOLD_METERS
+  );
+};
+
 // Calculate elevation gain from an array of coordinates with altitude
 export function calculateElevationGain(coordinates) {
   let totalGain = 0;
@@ -34,7 +72,8 @@ export function calculateElevationGain(coordinates) {
     const curr = coordinates[i];
     if (prev.altitude != null && curr.altitude != null) {
       const diff = curr.altitude - prev.altitude;
-      if (diff > 0) {
+      const noiseThreshold = getAltitudeNoiseThreshold(prev, curr);
+      if (diff > noiseThreshold) {
         totalGain += diff;
       }
     }
@@ -103,12 +142,7 @@ if (!TaskManager.isTaskDefined(LOCATION_TASK_NAME)) {
       if (locations && locations.length > 0) {
         // Process each location update
         locations.forEach((location) => {
-          notifyListeners({
-            latitude: location.coords.latitude,
-            longitude: location.coords.longitude,
-            altitude: location.coords.altitude,
-            timestamp: location.timestamp,
-          });
+          notifyListeners(formatLocationSample(location));
         });
       }
     }
@@ -146,9 +180,9 @@ export async function startTracking() {
 
   try {
     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
-      accuracy: Location.Accuracy.High,
-      timeInterval: 3000, // Update every 3 seconds
-      distanceInterval: MIN_DISTANCE_METERS, // Minimum distance between updates
+      accuracy: Location.Accuracy.Highest,
+      timeInterval: REQUESTED_TIME_INTERVAL_MS,
+      distanceInterval: REQUESTED_DISTANCE_INTERVAL_METERS,
       showsBackgroundLocationIndicator: true, // iOS blue bar
       foregroundService: {
         notificationTitle: 'SnowTrails Recording',
@@ -181,16 +215,17 @@ export async function stopTracking() {
   }
 }
 
-// Filter a new coordinate based on distance from last point
-export function shouldAddCoordinate(newCoord, lastCoord) {
-  if (!lastCoord) {
-    return true;
-  }
-  const distance = calculateDistance(
-    lastCoord.latitude,
-    lastCoord.longitude,
-    newCoord.latitude,
-    newCoord.longitude
-  );
-  return distance >= MIN_DISTANCE_METERS;
+function formatLocationSample(location) {
+  const coords = location.coords ?? {};
+  return {
+    latitude: coords.latitude,
+    longitude: coords.longitude,
+    altitude: coords.altitude,
+    accuracy: coords.accuracy,
+    horizontalAccuracy: coords.accuracy,
+    verticalAccuracy: coords.altitudeAccuracy,
+    altitudeAccuracy: coords.altitudeAccuracy,
+    speed: coords.speed,
+    timestamp: location.timestamp,
+  };
 }
