@@ -20,8 +20,10 @@
       "supportsTablet": false,
       "bundleIdentifier": "com.jgwwilliams.snowtrails",
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "This app uses the users location to show their current location on a trail map",
-        "ITSAppUsesNonExemptEncryption": false
+        "NSLocationWhenInUseUsageDescription": "This app uses your location to show your current position on the trail map",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "This app uses your location to record your snowshoe route, even when the app is in the background",
+        "ITSAppUsesNonExemptEncryption": false,
+        "UIBackgroundModes": ["location"]
       }
     },
     "android": {
@@ -34,7 +36,9 @@
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
-        "FOREGROUND_SERVICE"
+        "ACCESS_BACKGROUND_LOCATION",
+        "FOREGROUND_SERVICE",
+        "FOREGROUND_SERVICE_LOCATION"
       ]
     },
     "plugins": [
@@ -47,6 +51,14 @@
         }
       ],
       "expo-font",
+      [
+        "expo-location",
+        {
+          "isIosBackgroundLocationEnabled": true,
+          "isAndroidBackgroundLocationEnabled": true,
+          "isAndroidForegroundServiceEnabled": true
+        }
+      ],
       "@rnmapbox/maps"
     ],
     "extra": {

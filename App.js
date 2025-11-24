@@ -195,7 +195,7 @@ class App extends React.Component {
     // If it's on the disclaimer slide, change the next button to "I Agree"
     if (index === 1) {
       this.setState({ nextLabel: "I Agree" });
-      
+
       // Hide the next button for 3 seconds the first time the disclaimer is shown
       if (!this.state.disclaimerShown) {
         this.setState({ showNextButton: false, showPrevButton: false });
