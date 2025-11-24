@@ -16,7 +16,7 @@ import {
   startTracking,
   stopTracking,
   subscribeToLocationUpdates,
-  createTrailRecordingFilter,
+  shouldAddCoordinate,
   calculateTotalDistance,
   calculateElevationGain,
   formatDistance,
@@ -89,7 +89,6 @@ function LiveMap() {
   const pausedTimeRef = useRef(0);
   const timerRef = useRef(null);
   const unsubscribeRef = useRef(null);
-  const trailFilterRef = useRef(createTrailRecordingFilter());
 
   // Static data
   const coordinateMapping = useRef(require('../../data/coordinate_mapping.json')).current;
@@ -149,10 +148,9 @@ function LiveMap() {
 
       setCoordinates((prev) => {
         const lastCoord = prev.length > 0 ? prev[prev.length - 1] : null;
-        const processedCoord = trailFilterRef.current.process(location, lastCoord);
 
-        if (processedCoord) {
-          const newCoords = [...prev, processedCoord];
+        if (shouldAddCoordinate(location, lastCoord)) {
+          const newCoords = [...prev, location];
           setDistance(calculateTotalDistance(newCoords));
           setElevationGain(calculateElevationGain(newCoords));
           return newCoords;
@@ -176,12 +174,6 @@ function LiveMap() {
       }
     };
   }, [recordingState, handleLocationUpdate]);
-
-  useEffect(() => {
-    if (recordingState === RecordingStateEnum.IDLE) {
-      trailFilterRef.current.reset();
-    }
-  }, [recordingState]);
 
 
   const enableLocationPermissions = async () => {
@@ -451,7 +443,6 @@ function LiveMap() {
 
     startTimeRef.current = Date.now();
     pausedTimeRef.current = 0;
-    trailFilterRef.current.reset();
     setRecordingState(RecordingStateEnum.RECORDING);
     setLocationMode('compass'); // Auto-enable compass mode when recording starts
   };
@@ -495,7 +486,6 @@ function LiveMap() {
             setElapsedTime(0);
             startTimeRef.current = null;
             pausedTimeRef.current = 0;
-            trailFilterRef.current.reset();
           },
         },
       ]
