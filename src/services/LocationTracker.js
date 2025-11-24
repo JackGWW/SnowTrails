@@ -2,7 +2,6 @@ import * as Location from 'expo-location';
 import * as TaskManager from 'expo-task-manager';
 
 const LOCATION_TASK_NAME = 'snowtrails-background-location';
-const MIN_DISTANCE_METERS = 5; // Filter GPS noise - ignore points closer than this
 
 // Event listeners for location updates
 let locationListeners = [];
@@ -101,12 +100,18 @@ if (!TaskManager.isTaskDefined(LOCATION_TASK_NAME)) {
     if (data) {
       const { locations } = data;
       if (locations && locations.length > 0) {
-        // Process each location update
+        // Process each location update with full accuracy metadata
         locations.forEach((location) => {
           notifyListeners({
             latitude: location.coords.latitude,
             longitude: location.coords.longitude,
             altitude: location.coords.altitude,
+            accuracy: location.coords.accuracy,
+            horizontalAccuracy: location.coords.accuracy,
+            verticalAccuracy: location.coords.altitudeAccuracy,
+            altitudeAccuracy: location.coords.altitudeAccuracy,
+            speed: location.coords.speed,
+            heading: location.coords.heading,
             timestamp: location.timestamp,
           });
         });
@@ -146,13 +151,13 @@ export async function startTracking() {
 
   try {
     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
-      accuracy: Location.Accuracy.High,
-      timeInterval: 3000, // Update every 3 seconds
-      distanceInterval: MIN_DISTANCE_METERS, // Minimum distance between updates
+      accuracy: Location.Accuracy.BestForNavigation,
+      timeInterval: 2000, // Check every 2 seconds for hiking pace
+      distanceInterval: 2, // Low threshold - let filter decide what to keep
       showsBackgroundLocationIndicator: true, // iOS blue bar
       foregroundService: {
         notificationTitle: 'SnowTrails Recording',
-        notificationBody: 'Recording your snowshoe route',
+        notificationBody: 'Recording your route',
         notificationColor: '#2E3A52',
       },
       pausesUpdatesAutomatically: false,
@@ -181,7 +186,8 @@ export async function stopTracking() {
   }
 }
 
-// Filter a new coordinate based on distance from last point
+// Note: Coordinate filtering is now handled by GPSFilter service
+// This function is kept for backwards compatibility but is deprecated
 export function shouldAddCoordinate(newCoord, lastCoord) {
   if (!lastCoord) {
     return true;
@@ -192,5 +198,5 @@ export function shouldAddCoordinate(newCoord, lastCoord) {
     newCoord.latitude,
     newCoord.longitude
   );
-  return distance >= MIN_DISTANCE_METERS;
+  return distance >= 5; // Legacy default
 }

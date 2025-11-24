@@ -16,12 +16,12 @@ import {
   startTracking,
   stopTracking,
   subscribeToLocationUpdates,
-  shouldAddCoordinate,
   calculateTotalDistance,
   calculateElevationGain,
   formatDistance,
   formatElevation,
 } from '../services/LocationTracker';
+import { createGPSFilter } from '../services/GPSFilter';
 
 // Set Mapbox access token
 Mapbox.setAccessToken("pk.eyJ1IjoiamFja2d3dyIsImEiOiJja2l4dDZ5bnIxZTh1MnNwZmdxODA4cjU1In0.QruuU5HoAnwNtt0UE45GSg");
@@ -80,6 +80,7 @@ function LiveMap() {
   // Recording state
   const [recordingState, setRecordingState] = useState(RecordingStateEnum.IDLE);
   const [coordinates, setCoordinates] = useState([]);
+  const [currentDisplayLocation, setCurrentDisplayLocation] = useState(null);
   const [distance, setDistance] = useState(0);
   const [elevationGain, setElevationGain] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -97,6 +98,7 @@ function LiveMap() {
   const unsubscribeRef = useRef(null);
   const legendTapCountRef = useRef(0);
   const legendTapTimeoutRef = useRef(null);
+  const gpsFilterRef = useRef(null);
 
   // Static data
   const coordinateMapping = useRef(require('../../data/coordinate_mapping.json')).current;
@@ -153,17 +155,28 @@ function LiveMap() {
     (location) => {
       if (recordingState !== RecordingStateEnum.RECORDING) return;
 
-      setCoordinates((prev) => {
-        const lastCoord = prev.length > 0 ? prev[prev.length - 1] : null;
+      // Initialize GPS filter if needed
+      if (!gpsFilterRef.current) {
+        gpsFilterRef.current = createGPSFilter();
+      }
 
-        if (shouldAddCoordinate(location, lastCoord)) {
-          const newCoords = [...prev, location];
+      // Process location through GPS filter
+      const result = gpsFilterRef.current.processLocation(location);
+
+      // Always update display location for live preview (prevents UI freezing)
+      if (result.displayLocation) {
+        setCurrentDisplayLocation(result.displayLocation);
+      }
+
+      // Only add to recorded coordinates if filter approves
+      if (result.shouldRecord && result.recordedLocation) {
+        setCoordinates((prev) => {
+          const newCoords = [...prev, result.recordedLocation];
           setDistance(calculateTotalDistance(newCoords));
           setElevationGain(calculateElevationGain(newCoords));
           return newCoords;
-        }
-        return prev;
-      });
+        });
+      }
     },
     [recordingState]
   );
@@ -491,6 +504,9 @@ function LiveMap() {
       return;
     }
 
+    // Initialize GPS filter for new recording
+    gpsFilterRef.current = createGPSFilter();
+
     startTimeRef.current = Date.now();
     pausedTimeRef.current = 0;
     setRecordingState(RecordingStateEnum.RECORDING);
@@ -514,6 +530,9 @@ function LiveMap() {
       return;
     }
 
+    // Don't reset GPS filter on resume - continue with existing state
+    // This preserves filter context across pause/resume
+
     startTimeRef.current = Date.now();
     setRecordingState(RecordingStateEnum.RECORDING);
   };
@@ -531,11 +550,13 @@ function LiveMap() {
             await stopTracking();
             setRecordingState(RecordingStateEnum.IDLE);
             setCoordinates([]);
+            setCurrentDisplayLocation(null);
             setDistance(0);
             setElevationGain(0);
             setElapsedTime(0);
             startTimeRef.current = null;
             pausedTimeRef.current = 0;
+            gpsFilterRef.current = null;
           },
         },
       ]
@@ -543,15 +564,24 @@ function LiveMap() {
   };
 
   // Convert coordinates to GeoJSON format for Mapbox
+  // Include live preview point when recording (shows where user currently is)
+  const displayCoordinates = React.useMemo(() => {
+    if (recordingState === RecordingStateEnum.RECORDING && currentDisplayLocation && coordinates.length > 0) {
+      // Add current display location to end for live preview
+      return [...coordinates, currentDisplayLocation];
+    }
+    return coordinates;
+  }, [coordinates, currentDisplayLocation, recordingState]);
+
   const routeGeoJSON = {
     type: 'Feature',
     geometry: {
       type: 'LineString',
-      coordinates: coordinates.map((coord) => [coord.longitude, coord.latitude]),
+      coordinates: displayCoordinates.map((coord) => [coord.longitude, coord.latitude]),
     },
   };
 
-  const hasRoute = coordinates.length > 1;
+  const hasRoute = displayCoordinates.length > 1;
   const markerImages = getMarkerImages();
   const longitudeDeltaStr = longitudeDelta.toFixed(5);
   const isRecordingActive = recordingState !== RecordingStateEnum.IDLE;
