@@ -664,9 +664,8 @@ function LiveMap() {
             onPress={handleStartRecording}
             activeOpacity={0.8}
           >
-            <View style={styles.recordButtonOuter}>
-              <View style={styles.recordButtonInner} />
-            </View>
+            <Ionicons name="radio-button-on" size={20} color="#FF3B30" />
+            <Text style={styles.recordButtonText}>Record</Text>
           </TouchableOpacity>
         )}
 
@@ -822,6 +821,12 @@ const styles = StyleSheet.create({
     width: 15,
     borderRadius: 8,
     backgroundColor: "#FF3B30",
+  },
+  recordButtonText: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#2E3A52",
+    marginLeft: 8,
   },
   pauseButton: {
     height: 56,
