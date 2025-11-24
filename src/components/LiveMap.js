@@ -16,12 +16,12 @@ import {
   startTracking,
   stopTracking,
   subscribeToLocationUpdates,
-  shouldAddCoordinate,
   calculateTotalDistance,
   calculateElevationGain,
   formatDistance,
   formatElevation,
 } from '../services/LocationTracker';
+import { createGPSFilter } from '../services/GPSFilter';
 
 // Set Mapbox access token
 Mapbox.setAccessToken("pk.eyJ1IjoiamFja2d3dyIsImEiOiJja2l4dDZ5bnIxZTh1MnNwZmdxODA4cjU1In0.QruuU5HoAnwNtt0UE45GSg");
@@ -80,6 +80,7 @@ function LiveMap() {
   // Recording state
   const [recordingState, setRecordingState] = useState(RecordingStateEnum.IDLE);
   const [coordinates, setCoordinates] = useState([]);
+  const [currentRoutePosition, setCurrentRoutePosition] = useState(null);
   const [distance, setDistance] = useState(0);
   const [elevationGain, setElevationGain] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -95,6 +96,7 @@ function LiveMap() {
   const pausedTimeRef = useRef(0);
   const timerRef = useRef(null);
   const unsubscribeRef = useRef(null);
+  const gpsFilterRef = useRef(createGPSFilter());
   const legendTapCountRef = useRef(0);
   const legendTapTimeoutRef = useRef(null);
 
@@ -151,19 +153,26 @@ function LiveMap() {
   // Handle new location updates for recording
   const handleLocationUpdate = useCallback(
     (location) => {
+      const filter = gpsFilterRef.current ?? createGPSFilter();
+      gpsFilterRef.current = filter;
+
+      const { displayCoordinate, recordedCoordinate } =
+        filter.processSample(location);
+
+      if (displayCoordinate) {
+        setCurrentRoutePosition(displayCoordinate);
+      }
+
       if (recordingState !== RecordingStateEnum.RECORDING) return;
 
-      setCoordinates((prev) => {
-        const lastCoord = prev.length > 0 ? prev[prev.length - 1] : null;
-
-        if (shouldAddCoordinate(location, lastCoord)) {
-          const newCoords = [...prev, location];
+      if (recordedCoordinate) {
+        setCoordinates((prev) => {
+          const newCoords = [...prev, recordedCoordinate];
           setDistance(calculateTotalDistance(newCoords));
           setElevationGain(calculateElevationGain(newCoords));
           return newCoords;
-        }
-        return prev;
-      });
+        });
+      }
     },
     [recordingState]
   );
@@ -491,6 +500,9 @@ function LiveMap() {
       return;
     }
 
+    gpsFilterRef.current = createGPSFilter();
+    setCurrentRoutePosition(null);
+
     startTimeRef.current = Date.now();
     pausedTimeRef.current = 0;
     setRecordingState(RecordingStateEnum.RECORDING);
@@ -531,11 +543,13 @@ function LiveMap() {
             await stopTracking();
             setRecordingState(RecordingStateEnum.IDLE);
             setCoordinates([]);
+            setCurrentRoutePosition(null);
             setDistance(0);
             setElevationGain(0);
             setElapsedTime(0);
             startTimeRef.current = null;
             pausedTimeRef.current = 0;
+            gpsFilterRef.current = createGPSFilter();
           },
         },
       ]
@@ -543,15 +557,22 @@ function LiveMap() {
   };
 
   // Convert coordinates to GeoJSON format for Mapbox
+  const displayCoordinates =
+    recordingState === RecordingStateEnum.RECORDING &&
+    currentRoutePosition &&
+    coordinates.length > 0
+      ? [...coordinates, currentRoutePosition]
+      : coordinates;
+
   const routeGeoJSON = {
     type: 'Feature',
     geometry: {
       type: 'LineString',
-      coordinates: coordinates.map((coord) => [coord.longitude, coord.latitude]),
+      coordinates: displayCoordinates.map((coord) => [coord.longitude, coord.latitude]),
     },
   };
 
-  const hasRoute = coordinates.length > 1;
+  const hasRoute = displayCoordinates.length > 1;
   const markerImages = getMarkerImages();
   const longitudeDeltaStr = longitudeDelta.toFixed(5);
   const isRecordingActive = recordingState !== RecordingStateEnum.IDLE;

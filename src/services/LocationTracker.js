@@ -2,7 +2,9 @@ import * as Location from 'expo-location';
 import * as TaskManager from 'expo-task-manager';
 
 const LOCATION_TASK_NAME = 'snowtrails-background-location';
-const MIN_DISTANCE_METERS = 5; // Filter GPS noise - ignore points closer than this
+const REQUESTED_DISTANCE_INTERVAL_METERS = 2; // Request granular updates for tight turns
+const REQUESTED_TIME_INTERVAL_MS = 2500;
+const ELEVATION_NOISE_THRESHOLD = 1.2;
 
 // Event listeners for location updates
 let locationListeners = [];
@@ -34,7 +36,7 @@ export function calculateElevationGain(coordinates) {
     const curr = coordinates[i];
     if (prev.altitude != null && curr.altitude != null) {
       const diff = curr.altitude - prev.altitude;
-      if (diff > 0) {
+      if (diff > ELEVATION_NOISE_THRESHOLD) {
         totalGain += diff;
       }
     }
@@ -103,12 +105,7 @@ if (!TaskManager.isTaskDefined(LOCATION_TASK_NAME)) {
       if (locations && locations.length > 0) {
         // Process each location update
         locations.forEach((location) => {
-          notifyListeners({
-            latitude: location.coords.latitude,
-            longitude: location.coords.longitude,
-            altitude: location.coords.altitude,
-            timestamp: location.timestamp,
-          });
+          notifyListeners(formatLocationSample(location));
         });
       }
     }
@@ -146,9 +143,9 @@ export async function startTracking() {
 
   try {
     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
-      accuracy: Location.Accuracy.High,
-      timeInterval: 3000, // Update every 3 seconds
-      distanceInterval: MIN_DISTANCE_METERS, // Minimum distance between updates
+      accuracy: Location.Accuracy.BestForNavigation,
+      timeInterval: REQUESTED_TIME_INTERVAL_MS,
+      distanceInterval: REQUESTED_DISTANCE_INTERVAL_METERS,
       showsBackgroundLocationIndicator: true, // iOS blue bar
       foregroundService: {
         notificationTitle: 'SnowTrails Recording',
@@ -181,16 +178,17 @@ export async function stopTracking() {
   }
 }
 
-// Filter a new coordinate based on distance from last point
-export function shouldAddCoordinate(newCoord, lastCoord) {
-  if (!lastCoord) {
-    return true;
-  }
-  const distance = calculateDistance(
-    lastCoord.latitude,
-    lastCoord.longitude,
-    newCoord.latitude,
-    newCoord.longitude
-  );
-  return distance >= MIN_DISTANCE_METERS;
+function formatLocationSample(location) {
+  const coords = location.coords ?? {};
+  return {
+    latitude: coords.latitude,
+    longitude: coords.longitude,
+    altitude: coords.altitude,
+    accuracy: coords.accuracy,
+    horizontalAccuracy: coords.accuracy,
+    verticalAccuracy: coords.altitudeAccuracy,
+    altitudeAccuracy: coords.altitudeAccuracy,
+    speed: coords.speed,
+    timestamp: location.timestamp,
+  };
 }
