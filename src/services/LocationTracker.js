@@ -180,7 +180,7 @@ export async function startTracking() {
 
   try {
     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
-      accuracy: Location.Accuracy.BestForNavigation,
+      accuracy: Location.Accuracy.Highest,
       timeInterval: REQUESTED_TIME_INTERVAL_MS,
       distanceInterval: REQUESTED_DISTANCE_INTERVAL_METERS,
       showsBackgroundLocationIndicator: true, // iOS blue bar
