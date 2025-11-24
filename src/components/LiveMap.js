@@ -16,7 +16,7 @@ import {
   startTracking,
   stopTracking,
   subscribeToLocationUpdates,
-  shouldAddCoordinate,
+  prepareCoordinateForRecording,
   calculateTotalDistance,
   calculateElevationGain,
   formatDistance,
@@ -80,6 +80,7 @@ function LiveMap() {
   // Recording state
   const [recordingState, setRecordingState] = useState(RecordingStateEnum.IDLE);
   const [coordinates, setCoordinates] = useState([]);
+  const [latestLocation, setLatestLocation] = useState(null);
   const [distance, setDistance] = useState(0);
   const [elevationGain, setElevationGain] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -151,13 +152,19 @@ function LiveMap() {
   // Handle new location updates for recording
   const handleLocationUpdate = useCallback(
     (location) => {
+      setLatestLocation(location);
+
       if (recordingState !== RecordingStateEnum.RECORDING) return;
 
       setCoordinates((prev) => {
         const lastCoord = prev.length > 0 ? prev[prev.length - 1] : null;
+        const { shouldAdd, coordinate } = prepareCoordinateForRecording(
+          location,
+          lastCoord
+        );
 
-        if (shouldAddCoordinate(location, lastCoord)) {
-          const newCoords = [...prev, location];
+        if (shouldAdd) {
+          const newCoords = [...prev, coordinate];
           setDistance(calculateTotalDistance(newCoords));
           setElevationGain(calculateElevationGain(newCoords));
           return newCoords;
@@ -531,6 +538,7 @@ function LiveMap() {
             await stopTracking();
             setRecordingState(RecordingStateEnum.IDLE);
             setCoordinates([]);
+            setLatestLocation(null);
             setDistance(0);
             setElevationGain(0);
             setElapsedTime(0);
@@ -543,15 +551,20 @@ function LiveMap() {
   };
 
   // Convert coordinates to GeoJSON format for Mapbox
+  const displayCoordinates =
+    recordingState === RecordingStateEnum.RECORDING && latestLocation
+      ? [...coordinates, latestLocation]
+      : coordinates;
+
   const routeGeoJSON = {
     type: 'Feature',
     geometry: {
       type: 'LineString',
-      coordinates: coordinates.map((coord) => [coord.longitude, coord.latitude]),
+      coordinates: displayCoordinates.map((coord) => [coord.longitude, coord.latitude]),
     },
   };
 
-  const hasRoute = coordinates.length > 1;
+  const hasRoute = displayCoordinates.length > 1;
   const markerImages = getMarkerImages();
   const longitudeDeltaStr = longitudeDelta.toFixed(5);
   const isRecordingActive = recordingState !== RecordingStateEnum.IDLE;
