@@ -418,6 +418,17 @@ function LiveMap() {
 
   // Recording handlers
   const handleStartRecording = async () => {
+    // Don't allow recording if user is outside map bounds
+    if (!isUserInBounds) {
+      Toast.show({
+        type: 'info',
+        text1: 'Outside map area',
+        text2: 'Recording is only available within the trail area',
+        position: 'bottom',
+      });
+      return;
+    }
+
     const permResult = await requestBackgroundPermissions();
     if (!permResult.granted) {
       Alert.alert(
