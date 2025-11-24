@@ -58,8 +58,5 @@
         "listUnknownPackages": false
       }
     }
-  },
-  "private": true,
-  "name": "SnowTrails",
-  "version": "2.0.0"
+  }
 }
