@@ -60,6 +60,5 @@
     }
   },
   "private": true,
-  "name": "SnowTrails",
-  "version": "2.0.0"
+  "name": "SnowTrails"
 }
