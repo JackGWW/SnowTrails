@@ -58,7 +58,5 @@
         "listUnknownPackages": false
       }
     }
-  },
-  "private": true,
-  "name": "SnowTrails"
+  }
 }
