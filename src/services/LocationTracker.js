@@ -108,6 +108,10 @@ if (!TaskManager.isTaskDefined(LOCATION_TASK_NAME)) {
             longitude: location.coords.longitude,
             altitude: location.coords.altitude,
             timestamp: location.timestamp,
+            accuracy: location.coords.accuracy,
+            horizontalAccuracy: location.coords.accuracy,
+            verticalAccuracy: location.coords.altitudeAccuracy,
+            altitudeAccuracy: location.coords.altitudeAccuracy,
           });
         });
       }
