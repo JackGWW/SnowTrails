@@ -574,7 +574,7 @@ function LiveMap() {
         />
 
         <Mapbox.UserLocation
-          visible={true}
+          visible={false}
           onUpdate={(location) => updateCurrentLocation(location)}
         />
 
