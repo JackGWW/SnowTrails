@@ -39,6 +39,11 @@ const RecordingStateEnum = {
   PAUSED: 'paused',
 };
 
+const MAP_BOUNDS = {
+  northEast: { latitude: 44.539, longitude: -80.328 },
+  southWest: { latitude: 44.507, longitude: -80.398 }
+};
+
 // Format time with smart hours display
 function formatTime(seconds) {
   const hrs = Math.floor(seconds / 3600);
@@ -61,6 +66,7 @@ function LiveMap() {
   const [currentLongitude, setCurrentLongitude] = useState(-80.352);
   const [is3DMode, setIs3DMode] = useState(false);
   const [isUserInBounds, setIsUserInBounds] = useState(false);
+  const [boundsOverrideEnabled, setBoundsOverrideEnabled] = useState(false);
 
   // Location tracking mode: 'off' | 'follow' | 'compass'
   const [locationMode, setLocationMode] = useState('off');
@@ -89,24 +95,25 @@ function LiveMap() {
   const pausedTimeRef = useRef(0);
   const timerRef = useRef(null);
   const unsubscribeRef = useRef(null);
+  const legendTapCountRef = useRef(0);
+  const legendTapTimeoutRef = useRef(null);
 
   // Static data
   const coordinateMapping = useRef(require('../../data/coordinate_mapping.json')).current;
   const trailMapping = useRef(require('../../data/trail_mapping.json')).current;
 
-  const mapBounds = {
-    northEast: { latitude: 44.539, longitude: -80.328 },
-    southWest: { latitude: 44.507, longitude: -80.398 }
-  };
-
   const isWithinBounds = useCallback((lat, lon) => {
+    if (boundsOverrideEnabled) {
+      return true;
+    }
+
     return (
-      lat >= mapBounds.southWest.latitude &&
-      lat <= mapBounds.northEast.latitude &&
-      lon >= mapBounds.southWest.longitude &&
-      lon <= mapBounds.northEast.longitude
+      lat >= MAP_BOUNDS.southWest.latitude &&
+      lat <= MAP_BOUNDS.northEast.latitude &&
+      lon >= MAP_BOUNDS.southWest.longitude &&
+      lon <= MAP_BOUNDS.northEast.longitude
     );
-  }, []);
+  }, [boundsOverrideEnabled]);
 
   // Animate stats panel based on recording state
   useEffect(() => {
@@ -174,6 +181,14 @@ function LiveMap() {
       }
     };
   }, [recordingState, handleLocationUpdate]);
+
+  useEffect(() => {
+    return () => {
+      if (legendTapTimeoutRef.current) {
+        clearTimeout(legendTapTimeoutRef.current);
+      }
+    };
+  }, []);
 
 
   const enableLocationPermissions = async () => {
@@ -373,6 +388,30 @@ function LiveMap() {
       cameraRef.current.setCamera({
         pitch: newMode ? 45 : 0,
         animationDuration: 500,
+      });
+    }
+  };
+
+  const handleLegendPress = () => {
+    legendTapCountRef.current += 1;
+
+    if (legendTapTimeoutRef.current) {
+      clearTimeout(legendTapTimeoutRef.current);
+    }
+
+    legendTapTimeoutRef.current = setTimeout(() => {
+      legendTapCountRef.current = 0;
+    }, 800);
+
+    if (legendTapCountRef.current >= 3 && !boundsOverrideEnabled) {
+      legendTapCountRef.current = 0;
+      setBoundsOverrideEnabled(true);
+      setIsUserInBounds(true);
+      Toast.show({
+        type: 'success',
+        text1: 'Bounds disabled',
+        text2: 'Map area checks are now off for testing',
+        position: 'bottom',
       });
     }
   };
@@ -628,13 +667,17 @@ function LiveMap() {
       </Mapbox.MapView>
 
       {/* Top left, trail rating legend */}
-      <View style={[styles.legendContainer, { top: 12 + insets.top }]}>
+      <TouchableOpacity
+        style={[styles.legendContainer, { top: 12 + insets.top }]}
+        activeOpacity={1}
+        onPress={handleLegendPress}
+      >
         <Image
           source={require("../../assets/legend.png")}
           style={styles.legend}
           contentFit="contain"
         />
-      </View>
+      </TouchableOpacity>
 
       {/* Right side buttons */}
       <Animated.View style={[styles.rightButtonsContainer, { bottom: 24, transform: [{ translateY: buttonsTranslateY }] }]}>
