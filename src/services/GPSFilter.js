@@ -91,17 +91,19 @@ export class GPSFilter {
     this.lastRecorded = null;
     this.lastDisplay = null;
     this.altitudeDriftDisplay = 0;
+    this.altitudeDriftRecorded = 0;
   }
 
   reset(anchor = null) {
     this.lastRecorded = anchor;
     this.lastDisplay = anchor;
     this.altitudeDriftDisplay = 0;
+    this.altitudeDriftRecorded = 0;
   }
 
   smoothAltitude(previousAlt, newAlt, channel, accuracy = null) {
     const driftKey =
-      channel === 'display' ? 'altitudeDriftDisplay' : 'altitudeDriftDisplay';
+      channel === 'display' ? 'altitudeDriftDisplay' : 'altitudeDriftRecorded';
 
     if (newAlt == null) {
       return previousAlt ?? null;
@@ -130,11 +132,15 @@ export class GPSFilter {
         this[driftKey] = 0;
         return previousAlt + committed;
       }
-      return previousAlt + diff * 0.35;
+      // Preserve more altitude for recorded channel to maintain cumulative gain
+      const smallChangeFactor = channel === 'recorded' ? 0.75 : 0.35;
+      return previousAlt + diff * smallChangeFactor;
     }
 
     this[driftKey] = 0;
-    return previousAlt + diff * 0.75;
+    // Preserve more altitude for recorded channel to maintain cumulative gain
+    const largeChangeFactor = channel === 'recorded' ? 0.95 : 0.75;
+    return previousAlt + diff * largeChangeFactor;
   }
 
   processSample(location) {
@@ -170,13 +176,25 @@ export class GPSFilter {
     }
 
     const heading = calculateBearing(this.lastRecorded, candidateDisplay);
+
+    // Smooth altitude separately for recorded channel to preserve cumulative gain
+    const verticalAccuracy =
+      normalized.verticalAccuracy ??
+      normalized.altitudeAccuracy ??
+      normalized.accuracy ??
+      null;
+
+    const recordedAltitude = this.smoothAltitude(
+      this.lastRecorded?.altitude ?? null,
+      normalized.altitude,
+      'recorded',
+      verticalAccuracy
+    );
+
     const smoothedRecorded = {
       ...candidateDisplay,
       heading,
-      altitude:
-        candidateDisplay.altitude ??
-        normalized.altitude ??
-        this.lastRecorded.altitude,
+      altitude: recordedAltitude ?? this.lastRecorded.altitude,
     };
 
     this.lastRecorded = smoothedRecorded;
