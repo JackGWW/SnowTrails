@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { StyleSheet, View, TouchableHighlight, TouchableOpacity, Text, Animated, Alert } from "react-native";
+import { StyleSheet, View, TouchableHighlight, TouchableOpacity, Text, Animated, Alert, Linking } from "react-native";
 import Mapbox from "@rnmapbox/maps";
 import Spinner from "react-native-loading-spinner-overlay";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -484,7 +484,13 @@ function LiveMap() {
         permResult.reason === 'background'
           ? 'Background location access is required to record your route while the app is in the background. Please enable it in Settings.'
           : 'Location access is required to record your route.',
-        [{ text: 'OK' }]
+        [
+          { text: 'Cancel', style: 'cancel' },
+          {
+            text: 'Open Settings',
+            onPress: () => Linking.openSettings()
+          }
+        ]
       );
       return;
     }
