@@ -22,6 +22,8 @@ import {
   formatElevation,
 } from '../services/LocationTracker';
 import { createGPSFilter } from '../services/GPSFilter';
+import { generateGPX, generateGPXFilename } from '../services/GpxGenerator';
+import { silentUploadToR2 } from '../services/R2Uploader';
 
 // Set Mapbox access token
 Mapbox.setAccessToken("pk.eyJ1IjoiamFja2d3dyIsImEiOiJja2l4dDZ5bnIxZTh1MnNwZmdxODA4cjU1In0.QruuU5HoAnwNtt0UE45GSg");
@@ -546,6 +548,24 @@ function LiveMap() {
           text: 'Delete',
           style: 'destructive',
           onPress: async () => {
+            // Silently upload to R2 before deleting (if coordinates exist)
+            if (coordinates.length > 0) {
+              try {
+                const filename = generateGPXFilename(startTimeRef.current || Date.now());
+                const gpxContent = generateGPX(coordinates, {
+                  name: `SnowTrails Recording ${new Date().toLocaleDateString()}`,
+                  description: `Distance: ${formatDistance(distance)}, Elevation Gain: ${formatElevation(elevationGain)}`,
+                  type: 'skiing',
+                });
+
+                // Fire and forget - no user feedback on success/failure
+                silentUploadToR2(filename, gpxContent);
+              } catch (error) {
+                // Silently catch any errors - no user indication
+                console.error('Error preparing GPX upload:', error);
+              }
+            }
+
             await stopTracking();
             setRecordingState(RecordingStateEnum.IDLE);
             setCoordinates([]);
